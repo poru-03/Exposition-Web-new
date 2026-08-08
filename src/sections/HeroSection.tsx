@@ -2,7 +2,15 @@ import ContactButton from '../components/ContactButton';
 import FadeIn from '../components/FadeIn';
 import Magnet from '../components/Magnet';
 
-const NAV_LINKS = ['About', 'Price', 'Projects', 'Contact'];
+const NAV_LINKS = [
+  { name: 'About', href: '#about' },
+  { name: 'Timeline', href: '#timeline' },
+  { name: 'Events', href: '#techevent-hub' },
+  { name: 'Speakers', href: '#keynote-speakers' },
+  { name: 'Reviews', href: '#reviews' },
+  { name: 'Services', href: '#price' },
+  { name: 'Projects', href: '#projects' },
+];
 
 const PORTRAIT_SRC =
   'https://shrug-person-78902957.figma.site/_components/v2/d24c01ad3a56fc65e942a1f501eb73db42d7cf9a/Rectangle_40443.81459862.png';
@@ -21,11 +29,11 @@ export default function HeroSection() {
       >
         {NAV_LINKS.map((link) => (
           <a
-            key={link}
-            href={`#${link.toLowerCase()}`}
+            key={link.name}
+            href={link.href}
             className="transition-opacity duration-200 hover:opacity-70"
           >
-            {link}
+            {link.name}
           </a>
         ))}
       </FadeIn>
