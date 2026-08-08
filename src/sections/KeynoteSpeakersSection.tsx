@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { Mic2, ExternalLink } from 'lucide-react';
+import { Mic2, ArrowRight } from 'lucide-react';
+
 import FadeIn from '../components/FadeIn';
 import { CircularTestimonials, Testimonial } from '@/components/ui/circular-testimonials';
+import { Marquee } from '@/components/ui/3d-testimonails';
 
 export type KeynoteSpeaker = {
   id: string;
@@ -16,7 +17,7 @@ export type KeynoteSpeaker = {
   highlight?: string;
 };
 
-export const KEYNOTE_SPEAKERS: KeynoteSpeaker[] = [
+export const ROW1_SPEAKERS: KeynoteSpeaker[] = [
   {
     id: 'speaker-1',
     name: 'Dhanika Perera',
@@ -25,49 +26,45 @@ export const KEYNOTE_SPEAKERS: KeynoteSpeaker[] = [
     issue: 'Issue 07',
     image: '/resources/speakers/dhanika perera.png',
     category: 'Tech & AI',
-    tags: ['Entrepreneurship', 'Tech Innovation', 'Mobile Platforms'],
-    quote:
-      'Disrupting ecosystems through digital engineering platforms and empowering millions with accessible native tech products.',
+    tags: ['Tech Innovation', 'Digital Platforms'],
+    quote: 'Disrupting ecosystems through digital engineering and native technology products.',
     highlight: 'Featured Innovator',
   },
   {
     id: 'speaker-2',
     name: 'Deepal Sooriyaarachchi',
-    title: 'Leading Corporate Leader & Management Consultant',
-    company: 'Strategic Perspectives / Former MD AVIVA NDB',
+    title: 'Management Consultant & Author',
+    company: 'Former Managing Director, AVIVA NDB',
     issue: 'Issue 20',
     image: '/resources/speakers/deepal sooriyarachchi.png',
     category: 'Corporate Leadership',
-    tags: ['Leadership', 'Strategy', 'Governance'],
-    quote:
-      'Sustaining corporate governance and unlocking human potential in volatile, rapidly evolving international markets.',
+    tags: ['Leadership', 'Corporate Strategy'],
+    quote: 'Sustaining corporate governance and unlocking human potential in volatile markets.',
     highlight: 'Keynote Address',
   },
   {
     id: 'speaker-3',
     name: 'Peter De Almeida',
-    title: 'Technology Visionary & Executive Leader',
+    title: 'Technology Visionary & Executive',
     company: 'Managing Director / CEO, N-able',
     issue: 'Issue 17',
     image: '/resources/speakers/peterdealmeida.png',
     category: 'Tech & AI',
-    tags: ['Digital Transformation', 'Enterprise Tech', 'Disruption'],
-    quote:
-      'Transforming enterprise architectures and digital cultures through fearless creative software thinking.',
-    highlight: 'Industrial Forum Leader',
+    tags: ['Enterprise Tech', 'Digital Shift'],
+    quote: 'Transforming enterprise architectures through fearless creative software thinking.',
+    highlight: 'Industrial Leader',
   },
   {
     id: 'speaker-4',
-    name: 'Dian Gomes',
-    title: 'Global Business Leader & Motivational Icon',
-    company: 'Former Managing Director, MAS Holdings',
-    issue: 'Issue 18',
-    image: '/resources/speakers/dian gomez.png',
-    category: 'Corporate Leadership',
-    tags: ['Global Leadership', 'High Performance', 'Culture'],
-    quote:
-      'Championing relentless high-performance team cultures and building internationally competitive enterprise powerhouses.',
-    highlight: 'Executive Spotlight',
+    name: 'Dr. Harsha Subasinghe',
+    title: 'Founder & CEO, CodeGen International',
+    company: 'Creator of Vega Innovations',
+    issue: 'Issue 19',
+    image: '/resources/speakers/harsha.png',
+    category: 'Tech & AI',
+    tags: ['AI Engines', 'EV Engineering', 'Innovation'],
+    quote: 'Building world-class AI engines and pioneering supercars from South Asia.',
+    highlight: 'Deep Tech Pioneer',
   },
   {
     id: 'speaker-5',
@@ -77,10 +74,9 @@ export const KEYNOTE_SPEAKERS: KeynoteSpeaker[] = [
     issue: 'Issue 16',
     image: '/resources/speakers/kanchana.png',
     category: 'Innovation',
-    tags: ['EdTech', 'Digital Publishing', 'Startup Scaling'],
-    quote:
-      'Empowering digital literacy and democratizing knowledge distribution through next-generation reading platforms.',
-    highlight: 'Innovation Pioneer',
+    tags: ['EdTech', 'Digital Publishing'],
+    quote: 'Empowering digital literacy and democratizing knowledge distribution globally.',
+    highlight: 'EdTech Lead',
   },
   {
     id: 'speaker-6',
@@ -90,63 +86,162 @@ export const KEYNOTE_SPEAKERS: KeynoteSpeaker[] = [
     issue: 'Issue 15',
     image: '/resources/speakers/ananda handunge.png',
     category: 'Corporate Leadership',
-    tags: ['Industrial Tech', 'Energy Systems', 'Industry 4.0'],
-    quote:
-      'Leading technological advancement and bold digital transformation initiatives that redefine foundational industries.',
+    tags: ['Energy Systems', 'Industry 4.0'],
+    quote: 'Leading technological advancement and bold digital transformation across industries.',
     highlight: 'Industry Pioneer',
   },
+];
+
+export const ROW2_SPEAKERS: KeynoteSpeaker[] = [
   {
     id: 'speaker-7',
+    name: 'Dian Gomes',
+    title: 'Global Business Leader & Icon',
+    company: 'Former Managing Director, MAS Holdings',
+    issue: 'Issue 18',
+    image: '/resources/speakers/dian gomez.png',
+    category: 'Corporate Leadership',
+    tags: ['High Performance', 'Global Brands'],
+    quote: 'Championing relentless high-performance team cultures and international competitiveness.',
+    highlight: 'Executive Spotlight',
+  },
+  {
+    id: 'speaker-8',
     name: 'Sushena Ranatunga',
-    title: 'Software Engineering Leader & Global Executive',
+    title: 'Software Engineering Leader',
     company: 'Director / Co-Founder, Creative Software',
     issue: 'Issue 15',
     image: '/resources/speakers/upendra pieris.png',
     category: 'Tech & AI',
-    tags: ['Software Engineering', 'Global Teams', 'Nordic Tech'],
-    quote:
-      'Architecting resilient enterprise software solutions and scaling world-class engineering teams across continents.',
+    tags: ['Global Engineering', 'Nordic Tech'],
+    quote: 'Architecting resilient software systems and scaling world-class engineering teams.',
     highlight: 'Tech Keynote',
   },
   {
-    id: 'speaker-8',
+    id: 'speaker-9',
     name: 'Santhush Weeraman',
-    title: 'Creative Industry Entrepreneur & Producer',
-    company: 'Co-Founder, BNS & Saregama Music Labs',
+    title: 'Creative Industry Entrepreneur',
+    company: 'Co-Founder, BNS & Saregama Labs',
     issue: 'Issue 12',
     image: '/resources/speakers/santhush.png',
     category: 'Creative Arts',
-    tags: ['Creative Industries', 'Media Tech', 'Sonic Production'],
-    quote:
-      'Fusing cutting-edge multimedia production technology with authentic cultural storytelling and modern artistry.',
-    highlight: 'Creative Arts Lead',
+    tags: ['Sonic Tech', 'Media Arts'],
+    quote: 'Fusing cutting-edge multimedia production with authentic cultural depth and storytelling.',
+    highlight: 'Creative Lead',
+  },
+  {
+    id: 'speaker-10',
+    name: 'Mr. Saman Perera',
+    title: 'Chief Information Officer, Mobitel',
+    company: 'Telecom Architecture Specialist',
+    issue: 'Issue 14',
+    image: '/resources/speakers/saman perera.png',
+    category: 'Tech & AI',
+    tags: ['5G Networks', 'Cloud Telecom'],
+    quote: 'Deploying next-generation cellular infrastructure and enterprise data networks.',
+    highlight: 'Telecom Pioneer',
+  },
+  {
+    id: 'speaker-11',
+    name: 'Mrs. Dilani Alagaratnam',
+    title: 'President, HR & Legal, John Keells',
+    company: 'Corporate Governance Executive',
+    issue: 'Issue 16',
+    image: '/resources/speakers/dilani alagarathnan.png',
+    category: 'Corporate Leadership',
+    tags: ['Corporate Law', 'Executive HR'],
+    quote: 'Cultivating sustainable corporate governance and future-ready talent architectures.',
+    highlight: 'Corporate Leader',
+  },
+  {
+    id: 'speaker-12',
+    name: 'Mr. Lasantha Wickramasinghe',
+    title: 'Managing Director, TechLead International',
+    company: 'Fintech & Enterprise Systems',
+    issue: 'Issue 17',
+    image: '/resources/speakers/lasantha.png',
+    category: 'Innovation',
+    tags: ['FinTech', 'Cloud Architecture'],
+    quote: 'Scaling mission-critical banking and fintech infrastructure across international hubs.',
+    highlight: 'Fintech Lead',
   },
 ];
 
-const TESTIMONIALS_DATA: Testimonial[] = KEYNOTE_SPEAKERS.map((speaker) => ({
+const ALL_SPEAKERS = [...ROW1_SPEAKERS, ...ROW2_SPEAKERS];
+
+const TESTIMONIALS_DATA: Testimonial[] = ALL_SPEAKERS.slice(0, 6).map((speaker) => ({
   name: speaker.name,
   designation: `${speaker.title} • ${speaker.company}`,
   quote: speaker.quote,
   src: speaker.image,
 }));
 
-const CATEGORIES = ['All', 'Tech & AI', 'Corporate Leadership', 'Innovation', 'Creative Arts'] as const;
+function SpeakerLandscapeCard({ speaker }: { speaker: KeynoteSpeaker }) {
+  return (
+    <div className="group relative w-[320px] sm:w-[380px] md:w-[420px] h-[210px] sm:h-[230px] rounded-3xl overflow-hidden border border-[#D7E2EA]/15 bg-[#141414]/95 shadow-[0_20px_50px_rgba(0,0,0,0.85)] p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:border-white/40 hover:scale-[1.02] shrink-0">
+      {/* Background Subtle Gradient & Image Watermark */}
+      <div className="absolute right-0 top-0 bottom-0 w-1/2 opacity-25 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none overflow-hidden">
+        <img
+          src={speaker.image}
+          alt={speaker.name}
+          className="w-full h-full object-cover object-top filter brightness-110 contrast-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#141414] via-[#141414]/60 to-transparent" />
+      </div>
+
+      {/* Top Bar: Issue Badge & Highlight */}
+      <div className="relative z-10 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <span className="rounded-full border border-white/20 bg-white/10 px-2.5 py-0.5 text-[0.65rem] font-mono font-bold uppercase tracking-wider text-[#D7E2EA]">
+            {speaker.issue}
+          </span>
+          <span className="text-[0.65rem] font-semibold uppercase tracking-wider text-indigo-400">
+            {speaker.category}
+          </span>
+        </div>
+
+        {speaker.highlight && (
+          <span className="text-[0.65rem] font-mono text-white/40 uppercase tracking-widest hidden sm:inline-block">
+            {speaker.highlight}
+          </span>
+        )}
+      </div>
+
+      {/* Center Body: Speaker Name & Quote */}
+      <div className="relative z-10 space-y-1.5 pr-14">
+        <h4 className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-tight text-[#D7E2EA] group-hover:text-white transition-colors truncate">
+          {speaker.name}
+        </h4>
+        <p className="text-xs font-medium text-white/50 truncate">
+          {speaker.title}
+        </p>
+        <p className="text-xs text-[#D7E2EA]/75 font-light line-clamp-2 leading-relaxed mt-1">
+          &ldquo;{speaker.quote}&rdquo;
+        </p>
+      </div>
+
+      {/* Bottom Footer: Company & Action Link */}
+      <div className="relative z-10 flex items-center justify-between pt-2 border-t border-white/10">
+        <span className="text-[0.65rem] font-mono text-white/40 truncate max-w-[200px]">
+          {speaker.company}
+        </span>
+        <div className="flex items-center gap-1 text-[0.7rem] font-semibold text-white/70 group-hover:text-white group-hover:translate-x-1 transition-all">
+          <span>Profile</span>
+          <ArrowRight className="h-3 w-3" />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function KeynoteSpeakersSection() {
-  const [activeCategory, setActiveCategory] = useState<string>('All');
-
-  const filteredSpeakers =
-    activeCategory === 'All'
-      ? KEYNOTE_SPEAKERS
-      : KEYNOTE_SPEAKERS.filter((s) => s.category === activeCategory);
-
   return (
     <section
       id="keynote-speakers"
-      className="relative z-10 min-h-screen bg-transparent px-5 py-24 sm:px-8 md:px-10 md:py-32"
+      className="relative z-10 min-h-screen bg-transparent py-24 sm:py-32 overflow-hidden w-full"
     >
       {/* Section Header */}
-      <div className="flex flex-col items-center justify-center text-center mb-16 sm:mb-20">
+      <div className="flex flex-col items-center justify-center text-center mb-16 sm:mb-20 px-5 sm:px-8">
         <FadeIn
           as="span"
           delay={0}
@@ -174,115 +269,85 @@ export default function KeynoteSpeakersSection() {
           className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light"
         >
           Distinguished technology visionaries, corporate icons, and creative pioneers who
-          have headlined the Exposition symposium and shaped the technological landscape.
+          have headlined the Exposition symposium and shaped the global technological landscape.
         </FadeIn>
       </div>
 
-      <div className="mx-auto max-w-6xl space-y-16">
-        {/* ================= 1. CIRCULAR TESTIMONIALS INTEGRATION ================= */}
-        <FadeIn delay={0.25} y={30}>
-          <div className="bg-transparent border-none p-0 flex flex-col items-center justify-center shadow-none">
-            <div className="flex items-center gap-2 mb-4 self-start">
-              <span className="h-2 w-2 rounded-full bg-indigo-400 animate-pulse" />
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D7E2EA]/60">
-                Voices that fueled our vision
-              </span>
-            </div>
+      <div className="space-y-16 sm:space-y-20">
+        
+        {/* ================= 1. CIRCULAR TESTIMONIALS 3D SPOTLIGHT ================= */}
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <FadeIn delay={0.25} y={30}>
+            <div className="bg-transparent border-none p-0 flex flex-col items-center justify-center shadow-none">
+              <div className="flex items-center gap-2 mb-4 self-start">
+                <span className="h-2 w-2 rounded-full bg-indigo-400 animate-pulse" />
+                <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D7E2EA]/60">
+                  Featured Voices Spotlight
+                </span>
+              </div>
 
-            <div className="w-full flex justify-center">
-              <CircularTestimonials
-                testimonials={TESTIMONIALS_DATA}
-                autoplay={true}
-                colors={{
-                  name: '#D7E2EA',
-                  designation: '#94a3b8',
-                  testimony: '#cbd5e1',
-                  arrowBackground: '#1e1e1e',
-                  arrowForeground: '#f1f1f7',
-                  arrowHoverBackground: '#6366f1',
-                }}
-                fontSizes={{
-                  name: 'clamp(1.5rem, 2.5vw, 2.2rem)',
-                  designation: '0.95rem',
-                  quote: 'clamp(1rem, 1.4vw, 1.25rem)',
-                }}
-              />
+              <div className="w-full flex justify-center">
+                <CircularTestimonials
+                  testimonials={TESTIMONIALS_DATA}
+                  autoplay={true}
+                  colors={{
+                    name: '#D7E2EA',
+                    designation: '#94a3b8',
+                    testimony: '#cbd5e1',
+                    arrowBackground: '#1e1e1e',
+                    arrowForeground: '#f1f1f7',
+                    arrowHoverBackground: '#6366f1',
+                  }}
+                  fontSizes={{
+                    name: 'clamp(1.5rem, 2.5vw, 2.2rem)',
+                    designation: '0.95rem',
+                    quote: 'clamp(1rem, 1.4vw, 1.25rem)',
+                  }}
+                />
+              </div>
             </div>
-          </div>
-        </FadeIn>
+          </FadeIn>
+        </div>
 
-        {/* ================= 2. ALL SPEAKERS ROSTER WITH FILTERS ================= */}
-        <div className="space-y-8 pt-6">
-          <div className="flex flex-wrap items-center justify-between gap-4 pb-2">
-            <h4 className="text-lg sm:text-xl font-bold uppercase tracking-tight text-[#D7E2EA]">
-              All Keynote Speakers ({filteredSpeakers.length})
-            </h4>
-
-            <div className="flex flex-wrap gap-2">
-              {CATEGORIES.map((cat) => {
-                const isSelected = activeCategory === cat;
-                return (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(cat)}
-                    className={`rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-200 ${
-                      isSelected
-                        ? 'bg-white text-black shadow-md'
-                        : 'bg-[#181818] text-[#D7E2EA]/70 hover:text-white border border-white/10 hover:bg-[#222]'
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                );
-              })}
-            </div>
+        {/* ================= 2. DUAL-ROW HORIZONTAL MARQUEE ANIMATION (FROM SCREENSHOT) ================= */}
+        <div className="relative w-full overflow-hidden space-y-6 pt-4">
+          <div className="flex items-center justify-between px-6 sm:px-12 max-w-7xl mx-auto">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D7E2EA]/60 flex items-center gap-2">
+              <span className="size-2 rounded-full bg-emerald-400" />
+              All Keynote Speakers Roster ({ALL_SPEAKERS.length})
+            </span>
+            <span className="text-[0.65rem] font-mono text-white/40 uppercase tracking-wider hidden sm:inline-block">
+              Hover to pause stream
+            </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {filteredSpeakers.map((speaker, index) => (
-              <FadeIn key={speaker.id} delay={index * 0.06} y={20}>
-                <div className="group relative overflow-hidden rounded-3xl border border-[#D7E2EA]/15 bg-[#141414]/90 p-5 transition-all duration-300 backdrop-blur-xl hover:border-[#D7E2EA]/40 hover:bg-[#191919]">
-                  {/* Speaker Image Thumbnail */}
-                  <div className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden mb-4 bg-[#1a1a1a]">
-                    <img
-                      src={speaker.image}
-                      alt={speaker.name}
-                      className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105 filter brightness-105"
-                      onError={(e) => {
-                        (e.target as HTMLElement).style.display = 'none';
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C]/80 via-transparent to-transparent" />
+          {/* Row 1 Marquee (Moving Left) */}
+          <div className="relative w-full overflow-hidden flex items-center">
+            <Marquee pauseOnHover repeat={3} className="[--duration:40s] [--gap:1.5rem]">
+              {ROW1_SPEAKERS.map((speaker) => (
+                <SpeakerLandscapeCard key={speaker.id} speaker={speaker} />
+              ))}
+            </Marquee>
 
-                    <span className="absolute top-3 left-3 rounded-full border border-white/20 bg-[#0C0C0C]/80 px-2.5 py-0.5 text-[0.65rem] font-mono font-bold text-white backdrop-blur-md">
-                      {speaker.issue}
-                    </span>
-                  </div>
+            {/* Side Fade Vignettes */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-36 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-36 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10" />
+          </div>
 
-                  {/* Speaker Info */}
-                  <div className="space-y-1">
-                    <span className="text-[0.65rem] font-mono uppercase tracking-wider text-[#D7E2EA]/50 block">
-                      {speaker.category}
-                    </span>
-                    <h5 className="text-base sm:text-lg font-bold uppercase tracking-tight text-[#D7E2EA] group-hover:text-white transition-colors line-clamp-1">
-                      {speaker.name}
-                    </h5>
-                    <p className="text-xs text-[#D7E2EA]/70 font-light line-clamp-2 leading-relaxed">
-                      {speaker.title}
-                    </p>
-                  </div>
+          {/* Row 2 Marquee (Moving Right - Reverse) */}
+          <div className="relative w-full overflow-hidden flex items-center">
+            <Marquee pauseOnHover reverse repeat={3} className="[--duration:45s] [--gap:1.5rem]">
+              {ROW2_SPEAKERS.map((speaker) => (
+                <SpeakerLandscapeCard key={speaker.id} speaker={speaker} />
+              ))}
+            </Marquee>
 
-                  <div className="mt-4 flex items-center justify-between pt-3 border-t border-white/5">
-                    <span className="text-[0.65rem] font-medium text-[#D7E2EA]/40 uppercase tracking-wider">
-                      {speaker.company}
-                    </span>
-                    <ExternalLink className="h-3.5 w-3.5 text-[#D7E2EA]/40 group-hover:text-white transition-colors" />
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
+            {/* Side Fade Vignettes */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-36 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-36 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10" />
           </div>
         </div>
+
       </div>
     </section>
   );
