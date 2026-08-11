@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
 import { Marquee } from '@/components/ui/3d-testimonails';
-import FadeIn from '../components/FadeIn';
+import ScrollReveal from '../components/ScrollReveal';
 import {
   Sparkles,
   Star,
@@ -287,40 +287,27 @@ export default function ReviewsSection() {
       {/* ================= FOREGROUND: Title, Spotlight Card & Stats (Floating Over Marquee) ================= */}
       <div className="relative z-10 flex flex-col items-center justify-center w-full">
         {/* Section Header */}
-        <div className="flex flex-col items-center justify-center text-center mb-12 sm:mb-16 px-[5%]">
-          <FadeIn
-            as="span"
-            delay={0}
-            y={20}
-            className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md"
-          >
+        <ScrollReveal className="flex flex-col items-center justify-center text-center mb-12 sm:mb-16 px-[5%]">
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md">
             <Sparkles className="h-3.5 w-3.5 text-[#D7E2EA]" />
             Community Voices & Success Stories
-          </FadeIn>
+          </span>
 
-          <FadeIn
-            as="h2"
-            delay={0.1}
-            y={40}
+          <h2
             className="hero-heading text-center font-black uppercase leading-none tracking-tight text-[#D7E2EA]"
             style={{ fontSize: 'clamp(2.2rem, 6.5vw, 84px)' }}
           >
             Reviews & Voices
-          </FadeIn>
+          </h2>
 
-          <FadeIn
-            as="p"
-            delay={0.2}
-            y={20}
-            className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light"
-          >
+          <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light">
             Industry leaders, tech pioneers, and academic visionaries sharing their transformative
             experiences and endorsements from the Exposition ecosystem.
-          </FadeIn>
-        </div>
+          </p>
+        </ScrollReveal>
 
         {/* Spotlight Card in Middle of Review Section */}
-        <div className="w-full max-w-5xl px-[5%] my-6 sm:my-10 flex flex-col items-center">
+        <ScrollReveal delay={0.15} className="w-full max-w-5xl px-[5%] my-6 sm:my-10 flex flex-col items-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeFeatured.id}
@@ -442,10 +429,10 @@ export default function ReviewsSection() {
               <ChevronRight className="size-5" />
             </button>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Stats Counter Row */}
-        <FadeIn delay={0.3} y={20} className="w-full max-w-6xl mt-12 px-5 sm:px-8">
+        <ScrollReveal delay={0.25} y={20} className="w-full max-w-6xl mt-12 px-5 sm:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center border-t border-[#D7E2EA]/10 pt-10">
             <div className="p-4 rounded-2xl bg-[#141414]/80 border border-white/5 backdrop-blur-md">
               <h3 className="text-3xl sm:text-4xl font-black text-[#D7E2EA]">20+</h3>
@@ -464,7 +451,7 @@ export default function ReviewsSection() {
               <p className="text-xs font-mono uppercase tracking-widest text-[#D7E2EA]/50 mt-1">Published Issues</p>
             </div>
           </div>
-        </FadeIn>
+        </ScrollReveal>
       </div>
     </section>
   );

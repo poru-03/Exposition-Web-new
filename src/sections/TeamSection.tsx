@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users,
   ChevronLeft,
@@ -7,7 +8,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { FaLinkedinIn, FaWhatsapp } from 'react-icons/fa6';
-import FadeIn from '../components/FadeIn';
+import ScrollReveal from '../components/ScrollReveal';
 import { Button } from '@/components/ui/button';
 
 export type TeamMember = {
@@ -260,39 +261,26 @@ export default function TeamSection() {
       className="relative z-10 min-h-screen bg-transparent px-[5%] py-24 md:py-32 overflow-hidden w-full"
     >
       {/* Section Header */}
-      <div className="flex flex-col items-center justify-center text-center mb-16 sm:mb-20">
-        <FadeIn
-          as="span"
-          delay={0}
-          y={20}
-          className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md"
-        >
+      <ScrollReveal className="flex flex-col items-center justify-center text-center mb-16 sm:mb-20">
+        <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md">
           <Users className="h-3.5 w-3.5 text-indigo-400" />
           The Visionaries Behind Exposition
-        </FadeIn>
+        </span>
 
-        <FadeIn
-          as="h2"
-          delay={0.1}
-          y={40}
+        <h2
           className="hero-heading text-center font-black uppercase leading-none tracking-tight text-[#D7E2EA]"
           style={{ fontSize: 'clamp(2.2rem, 6.5vw, 84px)' }}
         >
           Our Team
-        </FadeIn>
+        </h2>
 
-        <FadeIn
-          as="p"
-          delay={0.2}
-          y={20}
-          className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light"
-        >
+        <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light">
           Meet the dedicated committee of 18 leaders, editors, creatives, and technical pioneers from the
           Department of Industrial Management (MIT), University of Kelaniya driving the 21st Edition.
-        </FadeIn>
+        </p>
 
         {/* Department Filter Pills */}
-        <FadeIn delay={0.25} y={20} className="mt-8 flex flex-wrap items-center justify-center gap-2">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
           {(['All', 'Leadership', 'Editorial', 'Tech & Creative', 'Corporate & Ops'] as const).map((dept) => (
             <button
               key={dept}
@@ -306,15 +294,21 @@ export default function TeamSection() {
               {dept}
             </button>
           ))}
-        </FadeIn>
-      </div>
+        </div>
+      </ScrollReveal>
 
       {/* ================= 3D PERSPECTIVE FEATURE CAROUSEL SHOWCASE ================= */}
-      <div
-        className="mx-auto max-w-7xl relative my-8"
-        onMouseEnter={() => setIsAutoPlaying(false)}
-        onMouseLeave={() => setIsAutoPlaying(true)}
-      >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeDepartment}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -16 }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          className="mx-auto max-w-7xl relative my-8"
+          onMouseEnter={() => setIsAutoPlaying(false)}
+          onMouseLeave={() => setIsAutoPlaying(true)}
+        >
         <div className="relative w-full h-[460px] sm:h-[500px] md:h-[540px] flex items-center justify-center">
           {/* 3D Carousel Wrapper */}
           <div className="relative w-full h-full flex items-center justify-center [perspective:1200px]">
@@ -457,7 +451,8 @@ export default function TeamSection() {
             />
           ))}
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </AnimatePresence>
+  </section>
   );
 }

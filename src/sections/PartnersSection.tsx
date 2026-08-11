@@ -9,7 +9,7 @@ import {
   Send,
   Sparkles,
 } from 'lucide-react';
-import FadeIn from '../components/FadeIn';
+import ScrollReveal from '../components/ScrollReveal';
 
 export type PartnerTier = 'Platinum' | 'Gold' | 'Silver' | 'Bronze';
 
@@ -169,7 +169,11 @@ function getTierBadgeStyles(tier: PartnerTier) {
 
 function VerticalPartnerCard({ partner }: { partner: Partner }) {
   return (
-    <div className="group relative w-[160px] sm:w-[175px] md:w-[190px] h-[220px] sm:h-[240px] rounded-[24px] overflow-hidden border border-[#D7E2EA]/15 bg-[#151515] shadow-[0_20px_45px_rgba(0,0,0,0.85)] p-3.5 sm:p-4 flex flex-col justify-between items-center text-center transition-all duration-300 hover:border-white/40 hover:scale-[1.04] hover:bg-[#181818] shrink-0">
+    <motion.div
+      whileHover={{ scale: 1.06 }}
+      transition={{ duration: 0.25 }}
+      className="group relative w-[160px] sm:w-[175px] md:w-[190px] h-[220px] sm:h-[240px] rounded-[24px] overflow-hidden border border-[#D7E2EA]/15 bg-[#151515] shadow-[0_20px_45px_rgba(0,0,0,0.85)] p-3.5 sm:p-4 flex flex-col justify-between items-center text-center transition-all duration-300 hover:border-white/40 hover:bg-[#181818] shrink-0"
+    >
       {/* Top: Tier Badge + Circular Emblem */}
       <div className="flex flex-col items-center w-full space-y-2">
         {/* Tier Badge */}
@@ -200,7 +204,7 @@ function VerticalPartnerCard({ partner }: { partner: Partner }) {
           {partner.category}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -259,39 +263,26 @@ export default function PartnersSection() {
       className="relative z-10 bg-transparent py-24 sm:py-32 overflow-hidden w-full"
     >
       {/* Section Header */}
-      <div className="flex flex-col items-center justify-center text-center mb-14 sm:mb-18 px-[5%]">
-        <FadeIn
-          as="span"
-          delay={0}
-          y={20}
-          className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md"
-        >
+      <ScrollReveal className="flex flex-col items-center justify-center text-center mb-14 sm:mb-18 px-[5%]">
+        <span className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md">
           <Handshake className="h-3.5 w-3.5 text-[#D7E2EA]" />
           Partner With Us
-        </FadeIn>
+        </span>
 
-        <FadeIn
-          as="h2"
-          delay={0.1}
-          y={40}
+        <h2
           className="hero-heading text-center font-black uppercase leading-none tracking-tight text-[#D7E2EA]"
           style={{ fontSize: 'clamp(2.2rem, 6.5vw, 84px)' }}
         >
           Our Partners
-        </FadeIn>
+        </h2>
 
-        <FadeIn
-          as="p"
-          delay={0.2}
-          y={20}
-          className="mt-5 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light"
-        >
+        <p className="mt-5 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light">
           Partner with us to empower the next generation of technological leaders and visionary innovators.
           Join our ecosystem of 15 industry collaborators across Platinum, Gold, Silver, and Bronze tiers.
-        </FadeIn>
+        </p>
 
         {/* CTA Buttons: Download Partnership Guide & Become a Partner */}
-        <FadeIn delay={0.25} y={20} className="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <button
             onClick={handleDownloadGuide}
             className="inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/25 bg-[#181818]/90 px-6 py-2.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#D7E2EA] shadow-xl backdrop-blur-md hover:bg-white hover:text-black hover:border-white transition-all duration-300"
@@ -307,12 +298,12 @@ export default function PartnersSection() {
             <FileText className="h-4 w-4" />
             <span>Become a Partner</span>
           </button>
-        </FadeIn>
-      </div>
+        </div>
+      </ScrollReveal>
 
       {/* ================= DUAL-ROW SCROLL-DRIVEN PARALLAX STREAM (ALL 15 PARTNERS) ================= */}
       <div className="relative w-full overflow-hidden space-y-6 pt-2">
-        <div className="flex items-center justify-between px-[5%] max-w-7xl mx-auto mb-2">
+        <ScrollReveal delay={0.15} className="flex items-center justify-between px-[5%] max-w-7xl mx-auto mb-2">
           <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D7E2EA]/60 flex items-center gap-2">
             <span className="size-2 rounded-full bg-indigo-400" />
             Corporate & Strategic Network ({ALL_PARTNERS.length} Partners)
@@ -320,7 +311,7 @@ export default function PartnersSection() {
           <span className="text-[0.65rem] font-mono text-white/40 uppercase tracking-wider hidden sm:inline-block">
             Scroll-reactive parallax stream
           </span>
-        </div>
+        </ScrollReveal>
 
         {/* Row 1: Flows Left-to-Right on scroll down (Platinum & Gold) */}
         <div className="relative w-full overflow-hidden flex items-center">

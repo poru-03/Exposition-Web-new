@@ -1,4 +1,5 @@
 import BackgroundFaceParallax from './components/BackgroundFaceParallax';
+import ScrollProgressBar from './components/ScrollProgressBar';
 import AboutSection from './sections/AboutSection';
 import FooterSection from './sections/FooterSection';
 import HeroSection from './sections/HeroSection';
@@ -14,6 +15,7 @@ import TimelineSection from './sections/TimelineSection';
 export default function App() {
   return (
     <main className="relative min-h-screen bg-[#0C0C0C]" style={{ overflowX: 'clip' }}>
+      <ScrollProgressBar />
       <BackgroundFaceParallax />
       <HeroSection />
       <AboutSection />

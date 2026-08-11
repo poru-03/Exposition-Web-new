@@ -8,7 +8,8 @@ import {
   MessageCircleQuestion,
   Send,
 } from 'lucide-react';
-import FadeIn from '../components/FadeIn';
+import ScrollReveal from '../components/ScrollReveal';
+import { StaggerContainer, StaggerCard } from '../components/StaggerReveal';
 
 export type FAQItem = {
   id: string;
@@ -125,39 +126,26 @@ export default function QASection() {
       className="relative z-10 rounded-t-[40px] bg-white px-[5%] py-20 sm:rounded-t-[50px] sm:py-24 md:rounded-t-[60px] md:py-32 text-[#0C0C0C]"
     >
       {/* Section Header */}
-      <div className="flex flex-col items-center justify-center text-center mb-14 sm:mb-18 max-w-4xl mx-auto">
-        <FadeIn
-          as="span"
-          delay={0}
-          y={20}
-          className="mb-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-black/75 backdrop-blur-md"
-        >
+      <ScrollReveal className="flex flex-col items-center justify-center text-center mb-14 sm:mb-18 max-w-4xl mx-auto">
+        <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-black/75 backdrop-blur-md">
           <MessageCircleQuestion className="h-3.5 w-3.5 text-indigo-600" />
           Everything You Need to Know
-        </FadeIn>
+        </span>
 
-        <FadeIn
-          as="h2"
-          delay={0.1}
-          y={40}
+        <h2
           className="hero-heading text-center font-black uppercase leading-none tracking-tight text-[#0C0C0C]"
           style={{ fontSize: 'clamp(2rem, 5.5vw, 76px)' }}
         >
           Frequently Asked Questions
-        </FadeIn>
+        </h2>
 
-        <FadeIn
-          as="p"
-          delay={0.2}
-          y={20}
-          className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-black/70 font-light"
-        >
+        <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-black/70 font-light">
           Explore comprehensive answers regarding symposium registration, hackathon tracks,
           keynote streams, magazine publications, and corporate partnerships for Exposition 21st Edition.
-        </FadeIn>
+        </p>
 
         {/* Search Input Bar */}
-        <FadeIn delay={0.25} y={20} className="w-full max-w-xl mt-8">
+        <div className="w-full max-w-xl mt-8">
           <div className="relative flex items-center w-full">
             <Search className="absolute left-4 size-4 text-black/40 pointer-events-none" />
             <input
@@ -176,10 +164,10 @@ export default function QASection() {
               </button>
             )}
           </div>
-        </FadeIn>
+        </div>
 
         {/* Category Filter Pills */}
-        <FadeIn delay={0.3} y={20} className="mt-6 flex flex-wrap items-center justify-center gap-2">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
           {(['All', 'General', 'Competitions', 'Speakers & Magazine', 'Partnerships'] as const).map(
             (cat) => (
               <button
@@ -195,8 +183,8 @@ export default function QASection() {
               </button>
             )
           )}
-        </FadeIn>
-      </div>
+        </div>
+      </ScrollReveal>
 
       {/* ================= ACCORDION QUESTIONS LIST ================= */}
       <div className="mx-auto max-w-4xl space-y-4">
@@ -209,88 +197,91 @@ export default function QASection() {
             </p>
           </div>
         ) : (
-          filteredFAQs.map((faq) => {
-            const isOpen = openId === faq.id;
-            return (
-              <div
-                key={faq.id}
-                className={`rounded-2xl sm:rounded-3xl border transition-all duration-300 overflow-hidden ${
-                  isOpen
-                    ? 'border-black/20 bg-black/[0.02] shadow-sm'
-                    : 'border-black/10 bg-transparent hover:border-black/25'
-                }`}
-              >
-                {/* Accordion Header Button */}
-                <button
-                  onClick={() => toggleFAQ(faq.id)}
-                  className="w-full text-left p-5 sm:p-7 flex items-center justify-between gap-4 cursor-pointer"
-                >
-                  <div className="flex items-start sm:items-center gap-3 sm:gap-6 min-w-0">
-                    <span className="font-mono text-sm sm:text-base font-bold text-black/40 tabular-nums shrink-0 pt-0.5 sm:pt-0">
-                      {faq.number}
-                    </span>
-                    <div className="space-y-1">
-                      <span className="text-[0.65rem] font-mono font-semibold uppercase tracking-widest text-indigo-600">
-                        {faq.category}
-                      </span>
-                      <h3 className="text-sm sm:text-base md:text-lg font-bold text-black leading-snug">
-                        {faq.question}
-                      </h3>
-                    </div>
-                  </div>
-
+          <StaggerContainer staggerChildren={0.06} className="space-y-4">
+            {filteredFAQs.map((faq) => {
+              const isOpen = openId === faq.id;
+              return (
+                <StaggerCard key={faq.id}>
                   <div
-                    className={`size-8 sm:size-9 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 border ${
+                    className={`rounded-2xl sm:rounded-3xl border transition-all duration-300 overflow-hidden ${
                       isOpen
-                        ? 'rotate-180 bg-black text-white border-black'
-                        : 'bg-black/5 text-black/60 border-black/10 hover:border-black/30'
+                        ? 'border-black/20 bg-black/[0.02] shadow-sm'
+                        : 'border-black/10 bg-transparent hover:border-black/25'
                     }`}
                   >
-                    <ChevronDown className="size-4" />
-                  </div>
-                </button>
-
-                {/* Accordion Content Body */}
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      key={`content-${faq.id}`}
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.28, ease: 'easeOut' }}
-                      className="overflow-hidden"
+                    {/* Accordion Header Button */}
+                    <button
+                      onClick={() => toggleFAQ(faq.id)}
+                      className="w-full text-left p-5 sm:p-7 flex items-center justify-between gap-4 cursor-pointer"
                     >
-                      <div className="px-5 sm:px-7 pb-6 sm:pb-7 pt-1 border-t border-black/10 space-y-4">
-                        <p className="text-xs sm:text-sm md:text-base text-black/75 leading-relaxed font-light pl-6 sm:pl-10">
-                          {faq.answer}
-                        </p>
-
-                        {faq.highlights && (
-                          <div className="flex flex-wrap items-center gap-2 pl-6 sm:pl-10 pt-2">
-                            {faq.highlights.map((highlight, hIdx) => (
-                              <span
-                                key={hIdx}
-                                className="inline-flex items-center gap-1 rounded-md bg-black/5 border border-black/10 px-2.5 py-1 text-[0.68rem] font-medium text-black/80"
-                              >
-                                <Sparkles className="size-2.5 text-indigo-600" />
-                                {highlight}
-                              </span>
-                            ))}
-                          </div>
-                        )}
+                      <div className="flex items-start sm:items-center gap-3 sm:gap-6 min-w-0">
+                        <span className="font-mono text-sm sm:text-base font-bold text-black/40 tabular-nums shrink-0 pt-0.5 sm:pt-0">
+                          {faq.number}
+                        </span>
+                        <div className="space-y-1">
+                          <span className="text-[0.65rem] font-mono font-semibold uppercase tracking-widest text-indigo-600">
+                            {faq.category}
+                          </span>
+                          <h3 className="text-sm sm:text-base md:text-lg font-bold text-black leading-snug">
+                            {faq.question}
+                          </h3>
+                        </div>
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            );
-          })
+
+                      <div
+                        className={`size-8 sm:size-9 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 border ${
+                          isOpen
+                            ? 'rotate-180 bg-black text-white border-black'
+                            : 'bg-black/5 text-black/60 border-black/10 hover:border-black/30'
+                        }`}
+                      >
+                        <ChevronDown className="size-4" />
+                      </div>
+                    </button>
+
+                    {/* Accordion Content Body */}
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          key={`content-${faq.id}`}
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.28, ease: 'easeOut' }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-5 sm:px-7 pb-6 sm:pb-7 pt-1 border-t border-black/10 space-y-4">
+                            <p className="text-xs sm:text-sm md:text-base text-black/75 leading-relaxed font-light pl-6 sm:pl-10">
+                              {faq.answer}
+                            </p>
+
+                            {faq.highlights && (
+                              <div className="flex flex-wrap items-center gap-2 pl-6 sm:pl-10 pt-2">
+                                {faq.highlights.map((highlight, hIdx) => (
+                                  <span
+                                    key={hIdx}
+                                    className="inline-flex items-center gap-1 rounded-md bg-black/5 border border-black/10 px-2.5 py-1 text-[0.68rem] font-medium text-black/80"
+                                  >
+                                    <Sparkles className="size-2.5 text-indigo-600" />
+                                    {highlight}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </StaggerCard>
+              );
+            })}
+          </StaggerContainer>
         )}
       </div>
 
       {/* Bottom Still Have Questions Bar */}
-      <div className="mx-auto max-w-4xl mt-14 sm:mt-18 p-6 sm:p-8 rounded-3xl bg-black text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+      <ScrollReveal delay={0.2} className="mx-auto max-w-4xl mt-14 sm:mt-18 p-6 sm:p-8 rounded-3xl bg-black text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
         <div className="space-y-1.5 text-center sm:text-left">
           <h4 className="text-base sm:text-lg font-bold uppercase tracking-tight">
             Still have questions about Exposition?
@@ -307,7 +298,7 @@ export default function QASection() {
           <Send className="size-3.5 text-rose-500" />
           <span>Ask Our Team</span>
         </a>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

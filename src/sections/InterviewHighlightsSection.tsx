@@ -17,7 +17,8 @@ import {
   FaFacebookF,
   FaInstagram,
 } from 'react-icons/fa6';
-import FadeIn from '../components/FadeIn';
+import ScrollReveal from '../components/ScrollReveal';
+import { StaggerContainer, StaggerCard } from '../components/StaggerReveal';
 
 export type InterviewItem = {
   id: string;
@@ -292,37 +293,24 @@ export default function InterviewHighlightsSection() {
       className="relative z-10 min-h-screen bg-transparent px-[5%] py-24 md:py-32"
     >
       {/* Section Header */}
-      <div className="flex flex-col items-center justify-center text-center mb-16 sm:mb-20">
-        <FadeIn
-          as="span"
-          delay={0}
-          y={20}
-          className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md"
-        >
+      <ScrollReveal className="flex flex-col items-center justify-center text-center mb-16 sm:mb-20">
+        <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md">
           <Radio className="h-3.5 w-3.5 text-rose-400 animate-pulse" />
           Exposition Talks & Executive Dialogues
-        </FadeIn>
+        </span>
 
-        <FadeIn
-          as="h2"
-          delay={0.1}
-          y={40}
+        <h2
           className="hero-heading text-center font-black uppercase leading-none tracking-tight text-[#D7E2EA]"
           style={{ fontSize: 'clamp(2.2rem, 6.5vw, 84px)' }}
         >
           Interview Highlights
-        </FadeIn>
+        </h2>
 
-        <FadeIn
-          as="p"
-          delay={0.2}
-          y={20}
-          className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light"
-        >
+        <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light">
           In-depth conversations, visionary insights, and strategic perspectives from distinguished
           industry titans and innovators who headlined our exclusive Exposition interviews.
-        </FadeIn>
-      </div>
+        </p>
+      </ScrollReveal>
 
       {/* Main Two-Column Layout */}
       <div className="mx-auto max-w-7xl">
@@ -330,7 +318,7 @@ export default function InterviewHighlightsSection() {
           
           {/* ================= LEFT COLUMN: Scrollable Interviewees List (With Auto Display) ================= */}
           <div className="lg:col-span-5 flex flex-col space-y-3">
-            <div className="flex items-center justify-between px-2 pb-1">
+            <ScrollReveal delay={0.05} className="flex items-center justify-between px-2 pb-1">
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-rose-500 animate-ping" />
                 <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D7E2EA]/70">
@@ -356,88 +344,86 @@ export default function InterviewHighlightsSection() {
                   </>
                 )}
               </button>
-            </div>
+            </ScrollReveal>
 
             {/* Scrollable List Container */}
-            <div
+            <StaggerContainer
+              staggerChildren={0.06}
               className="max-h-[580px] sm:max-h-[640px] overflow-y-auto pr-2 space-y-2.5 custom-scrollbar"
-              style={{
-                scrollbarWidth: 'thin',
-                scrollbarColor: 'rgba(255,255,255,0.15) transparent',
-              }}
             >
               {INTERVIEWS_DATA.map((interview, index) => {
                 const isSelected = index === selectedIndex;
                 return (
-                  <button
-                    key={interview.id}
-                    onClick={() => {
-                      setSelectedIndex(index);
-                      setIsAutoPlaying(false);
-                    }}
-                    className={`w-full text-left rounded-2xl p-3.5 sm:p-4 transition-all duration-300 flex items-center justify-between gap-3.5 border ${
-                      isSelected
-                        ? 'bg-[#1e1e1e] border-rose-500/50 shadow-[0_10px_30px_rgba(244,63,94,0.15)] scale-[1.01]'
-                        : 'bg-[#141414]/90 border-white/10 hover:border-white/25 hover:bg-[#181818]'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3.5 min-w-0">
-                      {/* Avatar */}
-                      <div
-                        className={`size-12 sm:size-14 rounded-xl overflow-hidden shrink-0 border-2 transition-all ${
-                          isSelected ? 'border-rose-400 shadow-md' : 'border-white/10 opacity-75'
-                        }`}
-                      >
-                        <img
-                          src={interview.image}
-                          alt={interview.name}
-                          className="w-full h-full object-cover object-top filter brightness-105"
-                        />
+                  <StaggerCard key={interview.id}>
+                    <button
+                      onClick={() => {
+                        setSelectedIndex(index);
+                        setIsAutoPlaying(false);
+                      }}
+                      className={`w-full text-left rounded-2xl p-3.5 sm:p-4 transition-all duration-300 flex items-center justify-between gap-3.5 border ${
+                        isSelected
+                          ? 'bg-[#1e1e1e] border-rose-500/50 shadow-[0_10px_30px_rgba(244,63,94,0.15)] scale-[1.01]'
+                          : 'bg-[#141414]/90 border-white/10 hover:border-white/25 hover:bg-[#181818]'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3.5 min-w-0">
+                        {/* Avatar */}
+                        <div
+                          className={`size-12 sm:size-14 rounded-xl overflow-hidden shrink-0 border-2 transition-all ${
+                            isSelected ? 'border-rose-400 shadow-md' : 'border-white/10 opacity-75'
+                          }`}
+                        >
+                          <img
+                            src={interview.image}
+                            alt={interview.name}
+                            className="w-full h-full object-cover object-top filter brightness-105"
+                          />
+                        </div>
+
+                        {/* Text Info */}
+                        <div className="flex flex-col min-w-0 pr-1">
+                          <div className="flex items-center gap-2">
+                            <span
+                              className={`text-xs sm:text-sm font-bold uppercase tracking-tight truncate ${
+                                isSelected ? 'text-white' : 'text-[#D7E2EA]/85'
+                              }`}
+                            >
+                              {interview.name}
+                            </span>
+                            <span className="text-[0.62rem] font-mono px-2 py-0.5 rounded-full bg-white/10 text-white/70 shrink-0">
+                              {interview.issue}
+                            </span>
+                          </div>
+                          <p className="text-[0.72rem] text-white/50 truncate mt-0.5">
+                            {interview.position} • {interview.company}
+                          </p>
+                          <span className="text-[0.65rem] font-medium text-rose-400/90 truncate mt-0.5">
+                            {interview.category}
+                          </span>
+                        </div>
                       </div>
 
-                      {/* Text Info */}
-                      <div className="flex flex-col min-w-0 pr-1">
-                        <div className="flex items-center gap-2">
-                          <span
-                            className={`text-xs sm:text-sm font-bold uppercase tracking-tight truncate ${
-                              isSelected ? 'text-white' : 'text-[#D7E2EA]/85'
-                            }`}
-                          >
-                            {interview.name}
-                          </span>
-                          <span className="text-[0.62rem] font-mono px-2 py-0.5 rounded-full bg-white/10 text-white/70 shrink-0">
-                            {interview.issue}
-                          </span>
-                        </div>
-                        <p className="text-[0.72rem] text-white/50 truncate mt-0.5">
-                          {interview.position} • {interview.company}
-                        </p>
-                        <span className="text-[0.65rem] font-medium text-rose-400/90 truncate mt-0.5">
-                          {interview.category}
-                        </span>
+                      {/* Active Chevron / Indicator */}
+                      <div className="shrink-0">
+                        {isSelected ? (
+                          <div className="size-8 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center border border-rose-500/40">
+                            <ArrowRight className="size-4" />
+                          </div>
+                        ) : (
+                          <div className="size-8 rounded-full text-white/20 flex items-center justify-center">
+                            <ArrowRight className="size-4 opacity-40" />
+                          </div>
+                        )}
                       </div>
-                    </div>
-
-                    {/* Active Chevron / Indicator */}
-                    <div className="shrink-0">
-                      {isSelected ? (
-                        <div className="size-8 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center border border-rose-500/40">
-                          <ArrowRight className="size-4" />
-                        </div>
-                      ) : (
-                        <div className="size-8 rounded-full text-white/20 flex items-center justify-center">
-                          <ArrowRight className="size-4 opacity-40" />
-                        </div>
-                      )}
-                    </div>
-                  </button>
+                    </button>
+                  </StaggerCard>
                 );
               })}
-            </div>
+            </StaggerContainer>
           </div>
 
           {/* ================= RIGHT COLUMN: Featured Interview Showcase Display ================= */}
-          <div className="lg:col-span-7">
+          <ScrollReveal delay={0.15} y={20} className="lg:col-span-7">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeItem.id}
@@ -585,7 +571,7 @@ export default function InterviewHighlightsSection() {
                 </div>
               </motion.div>
             </AnimatePresence>
-          </div>
+          </ScrollReveal>
 
         </div>
       </div>

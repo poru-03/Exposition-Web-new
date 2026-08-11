@@ -1,5 +1,8 @@
+import { useRef } from "react"
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion"
 import { Compass, Layers, Palette, Code2, Sparkles, ArrowRight } from "lucide-react"
-import FadeIn from "@/components/FadeIn"
+import ScrollReveal from "@/components/ScrollReveal"
+import { StaggerContainer, StaggerCard } from "@/components/StaggerReveal"
 
 export const PROCESS_PHASES = [
   {
@@ -52,10 +55,18 @@ const STICKY_TOP_BASE = 96
 const TAB_MARGIN = 62
 
 export const DemoDark = () => {
+  const timelineRef = useRef<HTMLDivElement>(null)
+  const shouldReduceMotion = useReducedMotion()
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 80%", "end 20%"],
+  })
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
+
   return (
     <div className="relative w-full py-10 bg-transparent">
       {/* Intro Header */}
-      <div className="mb-20 space-y-4 max-w-3xl mx-auto text-center flex flex-col items-center px-4">
+      <ScrollReveal className="mb-20 space-y-4 max-w-3xl mx-auto text-center flex flex-col items-center px-4">
         <div className="inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#D7E2EA]/80 backdrop-blur-md">
           <Sparkles className="h-3.5 w-3.5 text-[#D7E2EA]" />
           Interactive Process Flow
@@ -70,15 +81,23 @@ export const DemoDark = () => {
           build stunning, high-performance websites that elevate your brand and
           captivate your audience.
         </p>
-      </div>
+      </ScrollReveal>
 
       {/* Vertical Sticky Stack Container */}
-      <div className="relative mx-auto max-w-5xl px-4 sm:px-8 pb-32">
-        {/* Continuous Vertical White Line running on the left */}
-        <div className="absolute left-8 sm:left-12 top-4 bottom-12 w-[2.5px] bg-gradient-to-b from-white/20 via-white/85 to-white/20 shadow-[0_0_15px_rgba(255,255,255,0.7)] rounded-full z-10" />
+      <div ref={timelineRef} className="relative mx-auto max-w-5xl px-4 sm:px-8 pb-32">
+        {/* Continuous Vertical Line Track */}
+        <div className="absolute left-8 sm:left-12 top-4 bottom-12 w-[2.5px] bg-white/15 rounded-full z-10" />
+
+        {/* Dynamic Glowing Progress Connector Line */}
+        {!shouldReduceMotion && (
+          <motion.div
+            className="absolute left-8 sm:left-12 top-4 w-[2.5px] bg-gradient-to-b from-cyan-400 via-sky-300 to-indigo-400 shadow-[0_0_18px_rgba(34,211,238,0.9)] rounded-full z-10 origin-top"
+            style={{ height: lineHeight }}
+          />
+        )}
 
         {/* Stacked Cards adding downwards with top margin headers */}
-        <div className="flex flex-col gap-12 sm:gap-16">
+        <StaggerContainer staggerChildren={0.12} className="flex flex-col gap-12 sm:gap-16">
           {PROCESS_PHASES.map((phase, index) => {
             const Icon = phase.icon
             const stickyTop = STICKY_TOP_BASE + index * TAB_MARGIN
@@ -95,7 +114,7 @@ export const DemoDark = () => {
                 </div>
 
                 {/* Sticky Card with Exposed Top Margin Header */}
-                <FadeIn delay={0} y={30} className="flex-1 w-full">
+                <StaggerCard className="flex-1 w-full">
                   <div className="group relative rounded-3xl border border-[#D7E2EA]/20 bg-[#141414]/98 shadow-[0_25px_60px_rgba(0,0,0,0.9)] backdrop-blur-2xl transition-all duration-300 hover:border-[#D7E2EA]/40 overflow-hidden">
                     {/* Top Tab Header Bar (Visible when stacked at top margin) */}
                     <div className="flex items-center justify-between gap-4 px-6 py-4 sm:px-8 sm:py-5 border-b border-[#D7E2EA]/10 bg-[#181818]/90">
@@ -151,11 +170,11 @@ export const DemoDark = () => {
                       </div>
                     </div>
                   </div>
-                </FadeIn>
+                </StaggerCard>
               </div>
             )
           })}
-        </div>
+        </StaggerContainer>
       </div>
     </div>
   )

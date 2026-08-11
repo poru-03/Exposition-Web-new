@@ -1,7 +1,7 @@
 import { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
 import { Mic2, ArrowRight } from 'lucide-react';
-import FadeIn from '../components/FadeIn';
+import ScrollReveal from '../components/ScrollReveal';
 import { CircularTestimonials, Testimonial } from '@/components/ui/circular-testimonials';
 
 export type KeynoteSpeaker = {
@@ -178,7 +178,11 @@ const TESTIMONIALS_DATA: Testimonial[] = ALL_SPEAKERS.slice(0, 6).map((speaker) 
 
 function SpeakerLandscapeCard({ speaker }: { speaker: KeynoteSpeaker }) {
   return (
-    <div className="group relative w-[360px] sm:w-[440px] md:w-[480px] h-[250px] sm:h-[270px] rounded-3xl overflow-hidden border border-[#D7E2EA]/15 bg-[#141414]/95 shadow-[0_25px_60px_rgba(0,0,0,0.9)] p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:border-white/40 hover:scale-[1.02] shrink-0">
+    <motion.div
+      whileHover={{ scale: 1.03 }}
+      transition={{ duration: 0.25 }}
+      className="group relative w-[360px] sm:w-[440px] md:w-[480px] h-[250px] sm:h-[270px] rounded-3xl overflow-hidden border border-[#D7E2EA]/15 bg-[#141414]/95 shadow-[0_25px_60px_rgba(0,0,0,0.9)] p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:border-white/40 shrink-0"
+    >
       {/* Background Speaker Photo Artwork Overlay */}
       <div className="absolute right-0 top-0 bottom-0 w-[55%] opacity-30 group-hover:opacity-45 transition-opacity duration-300 pointer-events-none overflow-hidden">
         <img
@@ -230,17 +234,20 @@ function SpeakerLandscapeCard({ speaker }: { speaker: KeynoteSpeaker }) {
           <ArrowRight className="h-3.5 w-3.5" />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 export default function KeynoteSpeakersSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start'],
   });
+
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.35, 0]);
 
   // Spring physics for responsive momentum
   const smoothProgress = useSpring(scrollYProgress, {
@@ -250,13 +257,9 @@ export default function KeynoteSpeakersSection() {
   });
 
   // Row 1: Left to Right on scroll down (-35% -> 10%)
-  // When scrolling DOWN (0 -> 1): shifts from -35% to 10% (flows Left to Right ->)
-  // When scrolling UP (1 -> 0): shifts from 10% to -35% (flows Right to Left <-)
   const x1 = useTransform(smoothProgress, [0, 1], ['-35%', '10%']);
 
   // Row 2: Right to Left on scroll down (10% -> -35%)
-  // When scrolling DOWN (0 -> 1): shifts from 10% to -35% (flows Right to Left <-)
-  // When scrolling UP (1 -> 0): shifts from -35% to 10% (flows Left to Right ->)
   const x2 = useTransform(smoothProgress, [0, 1], ['10%', '-35%']);
 
   return (
@@ -265,44 +268,42 @@ export default function KeynoteSpeakersSection() {
       ref={sectionRef}
       className="relative z-10 min-h-screen bg-transparent py-24 sm:py-32 overflow-hidden w-full"
     >
+      {/* Subtle Section Glow Pulse */}
+      {!shouldReduceMotion && (
+        <motion.div
+          className="absolute inset-0 pointer-events-none -z-10"
+          style={{
+            opacity: glowOpacity,
+            background: 'radial-gradient(circle at 50% 30%, rgba(99, 102, 241, 0.15), transparent 65%)',
+          }}
+        />
+      )}
+
       {/* Section Header */}
-      <div className="flex flex-col items-center justify-center text-center mb-16 sm:mb-20 px-[5%]">
-        <FadeIn
-          as="span"
-          delay={0}
-          y={20}
-          className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md"
-        >
+      <ScrollReveal className="flex flex-col items-center justify-center text-center mb-16 sm:mb-20 px-[5%]">
+        <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md">
           <Mic2 className="h-3.5 w-3.5 text-[#D7E2EA]" />
           Voices of Impact & Inspiration
-        </FadeIn>
+        </span>
 
-        <FadeIn
-          as="h2"
-          delay={0.1}
-          y={40}
+        <h2
           className="hero-heading text-center font-black uppercase leading-none tracking-tight text-[#D7E2EA]"
           style={{ fontSize: 'clamp(2.2rem, 6.5vw, 84px)' }}
         >
           Keynote Speakers
-        </FadeIn>
+        </h2>
 
-        <FadeIn
-          as="p"
-          delay={0.2}
-          y={20}
-          className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light"
-        >
+        <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light">
           Distinguished technology visionaries, corporate icons, and creative pioneers who
           have headlined the Exposition symposium and shaped the global technological landscape.
-        </FadeIn>
-      </div>
+        </p>
+      </ScrollReveal>
 
       <div className="space-y-16 sm:space-y-20">
         
         {/* ================= 1. CIRCULAR TESTIMONIALS 3D SPOTLIGHT ================= */}
         <div className="mx-auto max-w-6xl px-[5%]">
-          <FadeIn delay={0.25} y={30}>
+          <ScrollReveal delay={0.15} y={30}>
             <div className="bg-transparent border-none p-0 flex flex-col items-center justify-center shadow-none">
               <div className="flex items-center gap-2 mb-4 self-start">
                 <span className="h-2 w-2 rounded-full bg-indigo-400 animate-pulse" />
@@ -331,12 +332,12 @@ export default function KeynoteSpeakersSection() {
                 />
               </div>
             </div>
-          </FadeIn>
+          </ScrollReveal>
         </div>
 
         {/* ================= 2. SCROLL-DRIVEN DUAL-ROW PARALLAX STREAM ================= */}
         <div className="relative w-full overflow-hidden space-y-6 pt-4">
-          <div className="flex items-center justify-between px-[5%] max-w-7xl mx-auto">
+          <ScrollReveal delay={0.2} className="flex items-center justify-between px-[5%] max-w-7xl mx-auto">
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D7E2EA]/60 flex items-center gap-2">
               <span className="size-2 rounded-full bg-emerald-400" />
               All Keynote Speakers Roster ({ALL_SPEAKERS.length})
@@ -344,7 +345,7 @@ export default function KeynoteSpeakersSection() {
             <span className="text-[0.65rem] font-mono text-white/40 uppercase tracking-wider hidden sm:inline-block">
               Scroll-reactive parallax stream
             </span>
-          </div>
+          </ScrollReveal>
 
           {/* Row 1: Flows Left-to-Right on scroll down, Right-to-Left on scroll up */}
           <div className="relative w-full overflow-hidden flex items-center">
