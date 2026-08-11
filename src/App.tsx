@@ -1,25 +1,31 @@
+import BackgroundFaceParallax from './components/BackgroundFaceParallax';
 import AboutSection from './sections/AboutSection';
+import FooterSection from './sections/FooterSection';
 import HeroSection from './sections/HeroSection';
+import InterviewHighlightsSection from './sections/InterviewHighlightsSection';
 import KeynoteSpeakersSection from './sections/KeynoteSpeakersSection';
-import MarqueeSection from './sections/MarqueeSection';
-import ProjectsSection from './sections/ProjectsSection';
+import PartnersSection from './sections/PartnersSection';
+import QASection from './sections/QASection';
 import ReviewsSection from './sections/ReviewsSection';
-import ServicesSection from './sections/ServicesSection';
+import TeamSection from './sections/TeamSection';
 import TechEventHubSection from './sections/TechEventHubSection';
 import TimelineSection from './sections/TimelineSection';
 
 export default function App() {
   return (
-    <main className="min-h-screen bg-[#0C0C0C]" style={{ overflowX: 'clip' }}>
+    <main className="relative min-h-screen bg-[#0C0C0C]" style={{ overflowX: 'clip' }}>
+      <BackgroundFaceParallax />
       <HeroSection />
       <AboutSection />
       <TimelineSection />
       <TechEventHubSection />
       <KeynoteSpeakersSection />
+      <InterviewHighlightsSection />
       <ReviewsSection />
-      <MarqueeSection />
-      <ServicesSection />
-      <ProjectsSection />
+      <PartnersSection />
+      <TeamSection />
+      <QASection />
+      <FooterSection />
     </main>
   );
 }

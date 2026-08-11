@@ -47,7 +47,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#0C0C0C] px-5 py-20 sm:px-8 md:px-10"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#0C0C0C] px-[5%] py-20"
     >
       {DECORATIONS.map((decoration) => (
         <FadeIn
@@ -69,7 +69,7 @@ export default function AboutSection() {
             delay={0}
             y={40}
             className="hero-heading text-center font-black uppercase leading-none tracking-tight"
-            style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
+            style={{ fontSize: 'clamp(2.2rem, 6.5vw, 84px)' }}
           >
             About me
           </FadeIn>

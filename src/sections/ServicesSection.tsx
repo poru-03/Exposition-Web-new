@@ -39,14 +39,14 @@ export default function ServicesSection() {
   return (
     <section
       id="price"
-      className="relative z-10 rounded-t-[40px] bg-white px-5 py-20 sm:rounded-t-[50px] sm:px-8 sm:py-24 md:rounded-t-[60px] md:px-10 md:py-32"
+      className="relative z-10 rounded-t-[40px] bg-white px-[5%] py-20 sm:rounded-t-[50px] sm:py-24 md:rounded-t-[60px] md:py-32"
     >
       <FadeIn
         as="h2"
         delay={0}
         y={40}
         className="mb-16 text-center font-black uppercase leading-none tracking-tight text-[#0C0C0C] sm:mb-20 md:mb-28"
-        style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
+        style={{ fontSize: 'clamp(2.2rem, 6.5vw, 84px)' }}
       >
         Services
       </FadeIn>

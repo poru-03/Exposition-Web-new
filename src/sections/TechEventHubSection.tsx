@@ -5,15 +5,19 @@ import {
   Clock,
   MapPin,
   ExternalLink,
-  Globe,
   Sparkles,
   Trophy,
-  Users,
   ChevronRight,
   Share2,
   CheckCircle2,
-  Bookmark,
 } from 'lucide-react';
+import {
+  FaXTwitter,
+  FaDiscord,
+  FaGithub,
+  FaLinkedinIn,
+  FaYoutube,
+} from 'react-icons/fa6';
 import FadeIn from '../components/FadeIn';
 
 export type TechEvent = {
@@ -199,7 +203,7 @@ export default function TechEventHubSection() {
   return (
     <section
       id="techevent-hub"
-      className="relative z-10 min-h-screen bg-transparent px-5 py-24 sm:px-8 md:px-10 md:py-32"
+      className="relative z-10 min-h-screen bg-transparent px-[5%] py-24 md:py-32"
     >
       {/* Section Header */}
       <div className="flex flex-col items-center justify-center text-center mb-16 sm:mb-20">
@@ -217,7 +221,7 @@ export default function TechEventHubSection() {
           delay={0.1}
           y={40}
           className="hero-heading text-center font-black uppercase leading-none tracking-tight text-[#D7E2EA]"
-          style={{ fontSize: 'clamp(2.5rem, 9vw, 130px)' }}
+          style={{ fontSize: 'clamp(2.2rem, 6.5vw, 84px)' }}
         >
           TechEvent Hub
         </FadeIn>
@@ -406,10 +410,32 @@ export default function TechEventHubSection() {
                             href={selectedEvent.socials.twitter}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="rounded-xl border border-white/10 bg-[#1a1a1a] p-2 text-[#D7E2EA]/80 hover:text-white hover:border-white/30 hover:bg-[#252525] transition-all"
+                            className="rounded-xl border border-white/10 bg-[#1a1a1a] p-2.5 text-[#D7E2EA]/80 hover:text-white hover:border-white/40 hover:bg-black transition-all"
                             title="Twitter / X"
                           >
-                            <Globe className="h-3.5 w-3.5" />
+                            <FaXTwitter className="h-3.5 w-3.5 text-white" />
+                          </a>
+                        )}
+                        {selectedEvent.socials.linkedin && (
+                          <a
+                            href={selectedEvent.socials.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="rounded-xl border border-sky-500/20 bg-sky-500/10 p-2.5 text-sky-300 hover:text-white hover:border-sky-500 hover:bg-sky-600 transition-all"
+                            title="LinkedIn"
+                          >
+                            <FaLinkedinIn className="h-3.5 w-3.5" />
+                          </a>
+                        )}
+                        {selectedEvent.socials.youtube && (
+                          <a
+                            href={selectedEvent.socials.youtube}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="rounded-xl border border-red-500/20 bg-red-500/10 p-2.5 text-red-300 hover:text-white hover:border-red-500 hover:bg-red-600 transition-all"
+                            title="YouTube"
+                          >
+                            <FaYoutube className="h-3.5 w-3.5" />
                           </a>
                         )}
                         {selectedEvent.socials.discord && (
@@ -417,10 +443,10 @@ export default function TechEventHubSection() {
                             href={selectedEvent.socials.discord}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="rounded-xl border border-white/10 bg-[#1a1a1a] p-2 text-[#D7E2EA]/80 hover:text-white hover:border-white/30 hover:bg-[#252525] transition-all"
+                            className="rounded-xl border border-indigo-500/20 bg-indigo-500/10 p-2.5 text-indigo-300 hover:text-white hover:border-indigo-500 hover:bg-indigo-600 transition-all"
                             title="Discord Community"
                           >
-                            <Users className="h-3.5 w-3.5" />
+                            <FaDiscord className="h-3.5 w-3.5" />
                           </a>
                         )}
                         {selectedEvent.socials.github && (
@@ -428,10 +454,10 @@ export default function TechEventHubSection() {
                             href={selectedEvent.socials.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="rounded-xl border border-white/10 bg-[#1a1a1a] p-2 text-[#D7E2EA]/80 hover:text-white hover:border-white/30 hover:bg-[#252525] transition-all"
+                            className="rounded-xl border border-white/10 bg-[#1a1a1a] p-2.5 text-[#D7E2EA]/80 hover:text-white hover:border-white/40 hover:bg-[#333] transition-all"
                             title="GitHub Repo"
                           >
-                            <Bookmark className="h-3.5 w-3.5" />
+                            <FaGithub className="h-3.5 w-3.5" />
                           </a>
                         )}
                       </div>

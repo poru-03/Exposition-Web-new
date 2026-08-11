@@ -62,14 +62,14 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="relative z-10 -mt-10 rounded-t-[40px] bg-[#0C0C0C] px-5 pb-24 pt-20 sm:-mt-12 sm:rounded-t-[50px] sm:px-8 sm:pt-24 md:-mt-14 md:rounded-t-[60px] md:px-10 md:pt-32"
+      className="relative z-10 -mt-10 rounded-t-[40px] bg-[#0C0C0C] px-[5%] pb-24 pt-20 sm:-mt-12 sm:rounded-t-[50px] sm:pt-24 md:-mt-14 md:rounded-t-[60px] md:pt-32"
     >
       <FadeIn
         as="h2"
         delay={0}
         y={40}
         className="hero-heading mb-16 text-center font-black uppercase leading-none tracking-tight sm:mb-20 md:mb-28"
-        style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
+        style={{ fontSize: 'clamp(2.2rem, 6.5vw, 84px)' }}
       >
         Project
       </FadeIn>

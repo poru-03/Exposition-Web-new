@@ -225,103 +225,102 @@ export default function ReviewsSection() {
       id="reviews"
       className="relative z-10 min-h-screen bg-transparent py-20 sm:py-28 overflow-hidden w-full"
     >
-      {/* Section Header */}
-      <div className="flex flex-col items-center justify-center text-center mb-12 sm:mb-16 px-5 sm:px-8">
-        <FadeIn
-          as="span"
-          delay={0}
-          y={20}
-          className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md"
+      {/* ================= BACKGROUND: Full-Section Edge-to-Edge Marquee Flow (Visible From Top Title to Bottom) ================= */}
+      <div className="absolute inset-0 w-full h-full min-h-full overflow-hidden pointer-events-none z-0 flex items-center justify-center opacity-40">
+        <div
+          className="flex flex-row items-center gap-6 sm:gap-8 justify-center w-[160vw] max-w-none h-[160%]"
+          style={{
+            transform:
+              'translateX(-40px) translateY(0px) rotateX(14deg) rotateY(-6deg) rotateZ(10deg)',
+          }}
         >
-          <Sparkles className="h-3.5 w-3.5 text-[#D7E2EA]" />
-          Community Voices & Success Stories
-        </FadeIn>
+          {/* Column 1 (downwards) */}
+          <Marquee vertical repeat={2} className="[--duration:28s]">
+            {REVIEWS_DATA.slice(0, 5).map((review, i) => (
+              <ReviewCard key={`${review.username}-1-${i}`} {...review} />
+            ))}
+          </Marquee>
 
-        <FadeIn
-          as="h2"
-          delay={0.1}
-          y={40}
-          className="hero-heading text-center font-black uppercase leading-none tracking-tight text-[#D7E2EA]"
-          style={{ fontSize: 'clamp(2.5rem, 9vw, 130px)' }}
-        >
-          Reviews & Voices
-        </FadeIn>
+          {/* Column 2 (upwards) */}
+          <Marquee vertical reverse repeat={2} className="[--duration:34s]">
+            {REVIEWS_DATA.slice(3, 8).map((review, i) => (
+              <ReviewCard key={`${review.username}-2-${i}`} {...review} />
+            ))}
+          </Marquee>
 
-        <FadeIn
-          as="p"
-          delay={0.2}
-          y={20}
-          className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light"
-        >
-          Industry leaders, tech pioneers, and academic visionaries sharing their transformative
-          experiences and endorsements from the Exposition ecosystem.
-        </FadeIn>
-      </div>
+          {/* Column 3 (downwards) */}
+          <Marquee vertical repeat={2} className="[--duration:26s]">
+            {REVIEWS_DATA.slice(4, 9).map((review, i) => (
+              <ReviewCard key={`${review.username}-3-${i}`} {...review} />
+            ))}
+          </Marquee>
 
-      {/* Main Review Section Container with Flowing Marquee Background + Middle Spotlight Card */}
-      <div className="relative w-full overflow-hidden flex flex-col items-center justify-center min-h-[850px] py-6">
-        
-        {/* ================= BACKGROUND: Flowing 3D Marquee Stream Covering Entire Section ================= */}
-        <div className="absolute inset-0 w-full h-full min-h-full overflow-hidden pointer-events-none z-0 flex items-center justify-center opacity-40">
-          <div
-            className="flex flex-row items-center gap-6 sm:gap-8 justify-center w-[160vw] max-w-none h-[150%]"
-            style={{
-              transform:
-                'translateX(-40px) translateY(0px) rotateX(14deg) rotateY(-6deg) rotateZ(10deg)',
-            }}
-          >
-            {/* Column 1 (downwards) */}
-            <Marquee vertical repeat={3} className="[--duration:28s]">
-              {REVIEWS_DATA.slice(0, 5).map((review, i) => (
-                <ReviewCard key={`${review.username}-1-${i}`} {...review} />
-              ))}
-            </Marquee>
+          {/* Column 4 (upwards) */}
+          <Marquee vertical reverse repeat={2} className="[--duration:32s]">
+            {REVIEWS_DATA.slice(0, 6).map((review, i) => (
+              <ReviewCard key={`${review.username}-4-${i}`} {...review} />
+            ))}
+          </Marquee>
 
-            {/* Column 2 (upwards) */}
-            <Marquee vertical reverse repeat={3} className="[--duration:34s]">
-              {REVIEWS_DATA.slice(3, 8).map((review, i) => (
-                <ReviewCard key={`${review.username}-2-${i}`} {...review} />
-              ))}
-            </Marquee>
+          {/* Column 5 (downwards on large screens) */}
+          <Marquee vertical repeat={2} className="hidden lg:flex [--duration:30s]">
+            {REVIEWS_DATA.slice(2, 7).map((review, i) => (
+              <ReviewCard key={`${review.username}-5-${i}`} {...review} />
+            ))}
+          </Marquee>
 
-            {/* Column 3 (downwards) */}
-            <Marquee vertical repeat={3} className="[--duration:26s]">
-              {REVIEWS_DATA.slice(4, 9).map((review, i) => (
-                <ReviewCard key={`${review.username}-3-${i}`} {...review} />
-              ))}
-            </Marquee>
-
-            {/* Column 4 (upwards) */}
-            <Marquee vertical reverse repeat={3} className="[--duration:32s]">
-              {REVIEWS_DATA.slice(0, 6).map((review, i) => (
-                <ReviewCard key={`${review.username}-4-${i}`} {...review} />
-              ))}
-            </Marquee>
-
-            {/* Column 5 (downwards on large screens) */}
-            <Marquee vertical repeat={3} className="hidden lg:flex [--duration:30s]">
-              {REVIEWS_DATA.slice(2, 7).map((review, i) => (
-                <ReviewCard key={`${review.username}-5-${i}`} {...review} />
-              ))}
-            </Marquee>
-
-            {/* Column 6 (upwards on xl screens) */}
-            <Marquee vertical reverse repeat={3} className="hidden xl:flex [--duration:36s]">
-              {REVIEWS_DATA.slice(1, 6).map((review, i) => (
-                <ReviewCard key={`${review.username}-6-${i}`} {...review} />
-              ))}
-            </Marquee>
-          </div>
-
-          {/* Seamless Top and Bottom Fade Vignettes */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#0C0C0C] via-[#0C0C0C]/80 to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0C0C0C] via-[#0C0C0C]/80 to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10" />
+          {/* Column 6 (upwards on xl screens) */}
+          <Marquee vertical reverse repeat={2} className="hidden xl:flex [--duration:36s]">
+            {REVIEWS_DATA.slice(1, 6).map((review, i) => (
+              <ReviewCard key={`${review.username}-6-${i}`} {...review} />
+            ))}
+          </Marquee>
         </div>
 
-        {/* ================= FOREGROUND: Exact Spotlight Card in Middle of Review Section ================= */}
-        <div className="relative z-20 w-full max-w-5xl px-4 sm:px-6 my-6 sm:my-10 flex flex-col items-center">
+        {/* Seamless Edge Fade Vignettes */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-[#0C0C0C] via-[#0C0C0C]/80 to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#0C0C0C] via-[#0C0C0C]/80 to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10" />
+      </div>
+
+      {/* ================= FOREGROUND: Title, Spotlight Card & Stats (Floating Over Marquee) ================= */}
+      <div className="relative z-10 flex flex-col items-center justify-center w-full">
+        {/* Section Header */}
+        <div className="flex flex-col items-center justify-center text-center mb-12 sm:mb-16 px-[5%]">
+          <FadeIn
+            as="span"
+            delay={0}
+            y={20}
+            className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md"
+          >
+            <Sparkles className="h-3.5 w-3.5 text-[#D7E2EA]" />
+            Community Voices & Success Stories
+          </FadeIn>
+
+          <FadeIn
+            as="h2"
+            delay={0.1}
+            y={40}
+            className="hero-heading text-center font-black uppercase leading-none tracking-tight text-[#D7E2EA]"
+            style={{ fontSize: 'clamp(2.2rem, 6.5vw, 84px)' }}
+          >
+            Reviews & Voices
+          </FadeIn>
+
+          <FadeIn
+            as="p"
+            delay={0.2}
+            y={20}
+            className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light"
+          >
+            Industry leaders, tech pioneers, and academic visionaries sharing their transformative
+            experiences and endorsements from the Exposition ecosystem.
+          </FadeIn>
+        </div>
+
+        {/* Spotlight Card in Middle of Review Section */}
+        <div className="w-full max-w-5xl px-[5%] my-6 sm:my-10 flex flex-col items-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeFeatured.id}
@@ -425,11 +424,10 @@ export default function ReviewsSection() {
                 <button
                   key={idx}
                   onClick={() => setFeaturedIndex(idx)}
-                  className={`transition-all duration-300 rounded-full ${
-                    idx === featuredIndex
+                  className={`transition-all duration-300 rounded-full ${idx === featuredIndex
                       ? 'w-6 h-2.5 bg-white'
                       : 'w-2.5 h-2.5 bg-white/30 hover:bg-white/60'
-                  }`}
+                    }`}
                   aria-label={`Go to slide ${idx + 1}`}
                 />
               ))}
@@ -447,7 +445,7 @@ export default function ReviewsSection() {
         </div>
 
         {/* Stats Counter Row */}
-        <FadeIn delay={0.3} y={20} className="w-full max-w-6xl mt-12 px-5 sm:px-8 relative z-20">
+        <FadeIn delay={0.3} y={20} className="w-full max-w-6xl mt-12 px-5 sm:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center border-t border-[#D7E2EA]/10 pt-10">
             <div className="p-4 rounded-2xl bg-[#141414]/80 border border-white/5 backdrop-blur-md">
               <h3 className="text-3xl sm:text-4xl font-black text-[#D7E2EA]">20+</h3>
