@@ -1,20 +1,25 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useRef } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import {
   Calendar,
   Clock,
   MapPin,
   ExternalLink,
-  Globe,
   Sparkles,
   Trophy,
-  Users,
   ChevronRight,
   Share2,
   CheckCircle2,
-  Bookmark,
 } from 'lucide-react';
-import FadeIn from '../components/FadeIn';
+import {
+  FaXTwitter,
+  FaDiscord,
+  FaGithub,
+  FaLinkedinIn,
+  FaYoutube,
+} from 'react-icons/fa6';
+import ScrollReveal from '../components/ScrollReveal';
+import { StaggerContainer, StaggerCard } from '../components/StaggerReveal';
 
 export type TechEvent = {
   id: string;
@@ -189,55 +194,63 @@ export const TECH_EVENTS: TechEvent[] = [
 export default function TechEventHubSection() {
   const [selectedEvent, setSelectedEvent] = useState<TechEvent>(TECH_EVENTS[0]);
   const [copied, setCopied] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'center center'],
+  });
+  const glowOpacity = useTransform(scrollYProgress, [0, 1], [0, 0.35]);
 
   const handleShare = () => {
-    navigator.clipboard.writeText(selectedEvent.officialWebsite);
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(selectedEvent.officialWebsite);
+    }
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   return (
     <section
+      ref={sectionRef}
       id="techevent-hub"
-      className="relative z-10 min-h-screen bg-transparent px-5 py-24 sm:px-8 md:px-10 md:py-32"
+      className="relative z-10 min-h-screen bg-transparent px-[5%] py-24 md:py-32 overflow-hidden"
     >
+      {/* Subtle Section Glow Pulse */}
+      {!shouldReduceMotion && (
+        <motion.div
+          className="absolute inset-0 pointer-events-none -z-10"
+          style={{
+            opacity: glowOpacity,
+            background: 'radial-gradient(circle at 50% 30%, rgba(34, 211, 238, 0.12), transparent 65%)',
+          }}
+        />
+      )}
+
       {/* Section Header */}
-      <div className="flex flex-col items-center justify-center text-center mb-16 sm:mb-20">
-        <FadeIn
-          as="span"
-          delay={0}
-          y={20}
-          className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md"
-        >
+      <ScrollReveal className="flex flex-col items-center justify-center text-center mb-16 sm:mb-20">
+        <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md">
           <Sparkles className="h-3.5 w-3.5 text-[#D7E2EA]" />
           University & Innovation Network
-        </FadeIn>
-        <FadeIn
-          as="h2"
-          delay={0.1}
-          y={40}
+        </span>
+        <h2
           className="hero-heading text-center font-black uppercase leading-none tracking-tight text-[#D7E2EA]"
-          style={{ fontSize: 'clamp(2.5rem, 9vw, 130px)' }}
+          style={{ fontSize: 'clamp(2.2rem, 6.5vw, 84px)' }}
         >
           TechEvent Hub
-        </FadeIn>
-        <FadeIn
-          as="p"
-          delay={0.2}
-          y={20}
-          className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light"
-        >
+        </h2>
+        <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light">
           Discover premier hackathons, academic symposiums, and spatial computing conclaves.
           Explore live registration schedules, official portals, and upcoming events.
-        </FadeIn>
-      </div>
+        </p>
+      </ScrollReveal>
 
       {/* Split Screen Container: Left (Event Details Screen) | Right (Upcoming Events Selector) */}
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           
           {/* ================= LEFT SIDE SCREEN: Dynamic Active Event Console ================= */}
-          <div className="lg:col-span-7 sticky lg:top-24">
+          <ScrollReveal y={24} className="lg:col-span-7 sticky lg:top-24">
             <AnimatePresence mode="wait">
               <motion.div
                 key={selectedEvent.id}
@@ -406,10 +419,32 @@ export default function TechEventHubSection() {
                             href={selectedEvent.socials.twitter}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="rounded-xl border border-white/10 bg-[#1a1a1a] p-2 text-[#D7E2EA]/80 hover:text-white hover:border-white/30 hover:bg-[#252525] transition-all"
+                            className="rounded-xl border border-white/10 bg-[#1a1a1a] p-2.5 text-[#D7E2EA]/80 hover:text-white hover:border-white/40 hover:bg-black transition-all"
                             title="Twitter / X"
                           >
-                            <Globe className="h-3.5 w-3.5" />
+                            <FaXTwitter className="h-3.5 w-3.5 text-white" />
+                          </a>
+                        )}
+                        {selectedEvent.socials.linkedin && (
+                          <a
+                            href={selectedEvent.socials.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="rounded-xl border border-sky-500/20 bg-sky-500/10 p-2.5 text-sky-300 hover:text-white hover:border-sky-500 hover:bg-sky-600 transition-all"
+                            title="LinkedIn"
+                          >
+                            <FaLinkedinIn className="h-3.5 w-3.5" />
+                          </a>
+                        )}
+                        {selectedEvent.socials.youtube && (
+                          <a
+                            href={selectedEvent.socials.youtube}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="rounded-xl border border-red-500/20 bg-red-500/10 p-2.5 text-red-300 hover:text-white hover:border-red-500 hover:bg-red-600 transition-all"
+                            title="YouTube"
+                          >
+                            <FaYoutube className="h-3.5 w-3.5" />
                           </a>
                         )}
                         {selectedEvent.socials.discord && (
@@ -417,10 +452,10 @@ export default function TechEventHubSection() {
                             href={selectedEvent.socials.discord}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="rounded-xl border border-white/10 bg-[#1a1a1a] p-2 text-[#D7E2EA]/80 hover:text-white hover:border-white/30 hover:bg-[#252525] transition-all"
+                            className="rounded-xl border border-indigo-500/20 bg-indigo-500/10 p-2.5 text-indigo-300 hover:text-white hover:border-indigo-500 hover:bg-indigo-600 transition-all"
                             title="Discord Community"
                           >
-                            <Users className="h-3.5 w-3.5" />
+                            <FaDiscord className="h-3.5 w-3.5" />
                           </a>
                         )}
                         {selectedEvent.socials.github && (
@@ -428,10 +463,10 @@ export default function TechEventHubSection() {
                             href={selectedEvent.socials.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="rounded-xl border border-white/10 bg-[#1a1a1a] p-2 text-[#D7E2EA]/80 hover:text-white hover:border-white/30 hover:bg-[#252525] transition-all"
+                            className="rounded-xl border border-white/10 bg-[#1a1a1a] p-2.5 text-[#D7E2EA]/80 hover:text-white hover:border-white/40 hover:bg-[#333] transition-all"
                             title="GitHub Repo"
                           >
-                            <Bookmark className="h-3.5 w-3.5" />
+                            <FaGithub className="h-3.5 w-3.5" />
                           </a>
                         )}
                       </div>
@@ -451,89 +486,91 @@ export default function TechEventHubSection() {
                 </div>
               </motion.div>
             </AnimatePresence>
-          </div>
+          </ScrollReveal>
 
           {/* ================= RIGHT SIDE SCREEN: Next Coming Event List ================= */}
           <div className="lg:col-span-5 space-y-4">
-            <div className="flex items-center justify-between pb-2">
+            <ScrollReveal delay={0.1} className="flex items-center justify-between pb-2">
               <span className="text-xs font-mono uppercase tracking-widest text-[#D7E2EA]/60 font-semibold">
                 Upcoming Event Schedule ({TECH_EVENTS.length})
               </span>
               <span className="text-[0.65rem] font-bold uppercase tracking-wider text-[#D7E2EA]/40">
                 Click to preview details
               </span>
-            </div>
+            </ScrollReveal>
 
-            <div className="flex flex-col gap-3.5">
-              {TECH_EVENTS.map((event, index) => {
+            <StaggerContainer staggerChildren={0.08} className="flex flex-col gap-3.5">
+              {TECH_EVENTS.map((event) => {
                 const isSelected = selectedEvent.id === event.id;
                 return (
-                  <FadeIn key={event.id} delay={index * 0.08} y={20}>
-                    <button
-                      onClick={() => setSelectedEvent(event)}
-                      className={`group relative w-full text-left rounded-2xl border p-4 sm:p-5 transition-all duration-300 backdrop-blur-xl ${
-                        isSelected
-                          ? 'border-[#D7E2EA]/60 bg-[#1c1c1c] shadow-[0_10px_30px_rgba(0,0,0,0.8)]'
-                          : 'border-white/10 bg-[#121212]/80 hover:border-white/25 hover:bg-[#181818]'
-                      }`}
-                    >
-                      <div className="flex items-start justify-between gap-3">
-                        {/* Number Badge + Title */}
-                        <div className="flex items-start gap-3.5 flex-1 min-w-0">
-                          <div
-                            className={`rounded-xl size-8 sm:size-9 shrink-0 font-black text-xs flex items-center justify-center transition-colors ${
-                              isSelected
-                                ? 'bg-white text-black shadow-md'
-                                : 'bg-[#222222] text-[#D7E2EA]/70 border border-white/10 group-hover:bg-[#2c2c2c]'
-                            }`}
-                          >
-                            {event.number}
-                          </div>
-
-                          <div className="flex-1 min-w-0">
-                            <span className="text-[0.65rem] font-mono uppercase tracking-wider text-[#D7E2EA]/50 block truncate">
-                              {event.university}
-                            </span>
-                            <h4
-                              className={`text-sm sm:text-base font-bold uppercase leading-snug tracking-tight transition-colors line-clamp-2 ${
-                                isSelected ? 'text-white' : 'text-[#D7E2EA]/90 group-hover:text-white'
+                  <StaggerCard key={event.id}>
+                    <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
+                      <button
+                        onClick={() => setSelectedEvent(event)}
+                        className={`group relative w-full text-left rounded-2xl border p-4 sm:p-5 transition-all duration-300 backdrop-blur-xl ${
+                          isSelected
+                            ? 'border-[#D7E2EA]/60 bg-[#1c1c1c] shadow-[0_10px_30px_rgba(0,0,0,0.8)]'
+                            : 'border-white/10 bg-[#121212]/80 hover:border-white/25 hover:bg-[#181818]'
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          {/* Number Badge + Title */}
+                          <div className="flex items-start gap-3.5 flex-1 min-w-0">
+                            <div
+                              className={`rounded-xl size-8 sm:size-9 shrink-0 font-black text-xs flex items-center justify-center transition-colors ${
+                                isSelected
+                                  ? 'bg-white text-black shadow-md'
+                                  : 'bg-[#222222] text-[#D7E2EA]/70 border border-white/10 group-hover:bg-[#2c2c2c]'
                               }`}
                             >
-                              {event.title}
-                            </h4>
+                              {event.number}
+                            </div>
+
+                            <div className="flex-1 min-w-0">
+                              <span className="text-[0.65rem] font-mono uppercase tracking-wider text-[#D7E2EA]/50 block truncate">
+                                {event.university}
+                              </span>
+                              <h4
+                                className={`text-sm sm:text-base font-bold uppercase leading-snug tracking-tight transition-colors line-clamp-2 ${
+                                  isSelected ? 'text-white' : 'text-[#D7E2EA]/90 group-hover:text-white'
+                                }`}
+                              >
+                                {event.title}
+                              </h4>
+                            </div>
+                          </div>
+
+                          {/* Arrow Trigger */}
+                          <div
+                            className={`rounded-full p-1.5 transition-transform shrink-0 ${
+                              isSelected
+                                ? 'bg-white text-black rotate-90 sm:rotate-0'
+                                : 'text-[#D7E2EA]/40 group-hover:text-white group-hover:translate-x-1'
+                            }`}
+                          >
+                            <ChevronRight className="h-4 w-4" />
                           </div>
                         </div>
 
-                        {/* Arrow Trigger */}
-                        <div
-                          className={`rounded-full p-1.5 transition-transform shrink-0 ${
-                            isSelected
-                              ? 'bg-white text-black rotate-90 sm:rotate-0'
-                              : 'text-[#D7E2EA]/40 group-hover:text-white group-hover:translate-x-1'
-                          }`}
-                        >
-                          <ChevronRight className="h-4 w-4" />
-                        </div>
-                      </div>
+                        {/* Event Mini Meta Footer */}
+                        <div className="mt-3.5 flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-white/5">
+                          <div className="flex items-center gap-2 text-[0.7rem] text-[#D7E2EA]/60">
+                            <Clock className="h-3 w-3 text-indigo-400" />
+                            <span>{event.duration}</span>
+                          </div>
 
-                      {/* Event Mini Meta Footer */}
-                      <div className="mt-3.5 flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-white/5">
-                        <div className="flex items-center gap-2 text-[0.7rem] text-[#D7E2EA]/60">
-                          <Clock className="h-3 w-3 text-indigo-400" />
-                          <span>{event.duration}</span>
+                          <span
+                            className={`rounded-full px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-wider border ${event.statusColor}`}
+                          >
+                            {event.status}
+                          </span>
                         </div>
-
-                        <span
-                          className={`rounded-full px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-wider border ${event.statusColor}`}
-                        >
-                          {event.status}
-                        </span>
-                      </div>
-                    </button>
-                  </FadeIn>
+                      </button>
+                    </motion.div>
+                  </StaggerCard>
                 );
               })}
-            </div>
+            </StaggerContainer>
           </div>
 
         </div>
