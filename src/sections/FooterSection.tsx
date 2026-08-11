@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Check } from 'lucide-react';
 import {
   FaLinkedinIn,
@@ -89,6 +90,7 @@ export default function FooterSection({
   creditText = 'Faculty of Science, University of Kelaniya',
   showBadge = true,
 }: FooterSectionProps) {
+  const shouldReduceMotion = useReducedMotion();
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -120,8 +122,14 @@ export default function FooterSection({
           </div>
         </div>
 
-        {/* Top Content Row: 'Get started today' & CTA Button */}
-        <div className="relative z-10 mx-auto max-w-7xl px-[5%] py-10 sm:py-14 md:py-18 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        {/* Top Content Row: 'Get started today' & CTA Button (Smooth Slide-Up) */}
+        <motion.div
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          className="relative z-10 mx-auto max-w-7xl px-[5%] py-10 sm:py-14 md:py-18 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 will-change-transform"
+        >
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-white">
             {topHeading}
           </h2>
@@ -138,13 +146,19 @@ export default function FooterSection({
               <ArrowRight className="size-4 sm:size-5 transition-transform duration-200 group-hover:translate-x-1" />
             </span>
           </a>
-        </div>
+        </motion.div>
       </div>
 
       {/* ================= 2. MAIN FOOTER CONTENT ================= */}
       <div className="mx-auto max-w-7xl px-[5%] pt-10 sm:pt-14 md:pt-16 pb-8 space-y-10 sm:space-y-12">
-        {/* Giant Brand Row: Orange Bars forming "E" connected directly to "xposition" */}
-        <div className="space-y-3">
+        {/* Giant Brand Row: Orange Bars forming "E" connected directly to "xposition" (Slide-Up) */}
+        <motion.div
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 45 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.85, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="space-y-3 will-change-transform"
+        >
           <div className="flex items-center flex-wrap">
             <h1
               className="flex items-center text-5xl sm:text-7xl md:text-8xl lg:text-[9.5rem] font-bold tracking-tighter text-white leading-none lowercase"
@@ -181,12 +195,18 @@ export default function FooterSection({
           <p className="text-sm sm:text-base md:text-lg text-neutral-400 font-light max-w-md pt-1 leading-relaxed">
             {tagline}
           </p>
-        </div>
+        </motion.div>
 
-        {/* Info Grid: CONTACT US | BADGE SEAL | STAY UP TO DATE */}
+        {/* Info Grid: CONTACT US | BADGE SEAL | STAY UP TO DATE (Staggered Slide-Up) */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-6 items-start pt-2">
           {/* CONTACT US */}
-          <div className="md:col-span-4 space-y-3">
+          <motion.div
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-30px' }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="md:col-span-4 space-y-3 will-change-transform"
+          >
             <h3 className="text-[0.7rem] font-mono uppercase tracking-[0.25em] text-neutral-400 font-semibold">
               CONTACT US
             </h3>
@@ -223,11 +243,17 @@ export default function FooterSection({
                 );
               })}
             </div>
-          </div>
+          </motion.div>
 
           {/* CENTER CIRCULAR SEAL / BADGE */}
           {showBadge && (
-            <div className="md:col-span-3 flex justify-start md:justify-center items-center py-2">
+            <motion.div
+              initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.88, y: shouldReduceMotion ? 0 : 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true, margin: '-30px' }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="md:col-span-3 flex justify-start md:justify-center items-center py-2 will-change-transform"
+            >
               <div className="relative size-20 sm:size-24 rounded-full border border-neutral-700 bg-gradient-to-br from-[#1c1c1c] to-[#0d0d0d] flex flex-col items-center justify-center p-2 text-center shadow-lg group hover:border-[#FF4D00]/50 transition-colors">
                 <div className="absolute inset-1 rounded-full border border-dashed border-neutral-600/50" />
                 <span className="text-[0.62rem] sm:text-[0.7rem] font-mono font-bold tracking-widest text-white uppercase block leading-tight">
@@ -240,11 +266,17 @@ export default function FooterSection({
                   FACULTY OF SCIENCE
                 </span>
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* STAY UP TO DATE NEWSLETTER */}
-          <div className="md:col-span-5 space-y-3">
+          <motion.div
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-30px' }}
+            transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="md:col-span-5 space-y-3 will-change-transform"
+          >
             <h3 className="text-[0.7rem] font-mono uppercase tracking-[0.25em] text-neutral-400 font-semibold">
               STAY UP TO DATE
             </h3>
@@ -272,12 +304,18 @@ export default function FooterSection({
                 )}
               </button>
             </form>
-          </div>
+          </motion.div>
         </div>
 
-        {/* ================= 3. NAVIGATION LINKS BAR ================= */}
+        {/* ================= 3. NAVIGATION LINKS BAR (Smooth Slide-Up) ================= */}
         {/* DESKTOP VIEW: 1 Single Horizontal Row */}
-        <div className="hidden md:flex border-y border-neutral-800/90 py-4 justify-between items-center text-xs font-mono tracking-widest text-neutral-300 overflow-x-auto">
+        <motion.div
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-20px' }}
+          transition={{ duration: 0.75, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="hidden md:flex border-y border-neutral-800/90 py-4 justify-between items-center text-xs font-mono tracking-widest text-neutral-300 overflow-x-auto will-change-transform"
+        >
           {DEFAULT_NAV_LINKS.map((link) => (
             <a
               key={link.name}
@@ -287,10 +325,16 @@ export default function FooterSection({
               {link.name}
             </a>
           ))}
-        </div>
+        </motion.div>
 
         {/* MOBILE VIEW: 2-Column Grid (Exact layout from Image 2) */}
-        <div className="grid md:hidden grid-cols-2 gap-y-4 gap-x-6 border-y border-neutral-800/90 py-5 text-xs font-mono tracking-widest text-neutral-300">
+        <motion.div
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-20px' }}
+          transition={{ duration: 0.75, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="grid md:hidden grid-cols-2 gap-y-4 gap-x-6 border-y border-neutral-800/90 py-5 text-xs font-mono tracking-widest text-neutral-300 will-change-transform"
+        >
           <div className="space-y-3.5">
             <a href="#about" className="block hover:text-[#FF4D00] transition-colors">
               ABOUT
@@ -325,10 +369,16 @@ export default function FooterSection({
               TERMS
             </a>
           </div>
-        </div>
+        </motion.div>
 
-        {/* ================= 4. BASELINE COPYRIGHT ROW & SOCIAL ICONS ================= */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[0.72rem] text-neutral-500 font-light pt-1">
+        {/* ================= 4. BASELINE COPYRIGHT ROW & SOCIAL ICONS (Smooth Slide-Up) ================= */}
+        <motion.div
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-20px' }}
+          transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[0.72rem] text-neutral-500 font-light pt-1 will-change-transform"
+        >
           <p>{copyrightText}</p>
 
           <div className="flex items-center gap-4">
@@ -353,7 +403,7 @@ export default function FooterSection({
             <span className="text-neutral-700 hidden sm:inline">•</span>
             <p className="text-neutral-400 font-mono text-[0.7rem]">{creditText}</p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );
