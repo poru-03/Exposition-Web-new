@@ -13,7 +13,7 @@ export default function TimelineSection() {
           as="span"
           delay={0}
           y={20}
-          className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#D7E2EA]/60 sm:text-sm"
+          className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#9A9A9A] sm:text-sm"
         >
           My Creative Journey & Process
         </FadeIn>
@@ -21,8 +21,8 @@ export default function TimelineSection() {
           as="h2"
           delay={0.1}
           y={40}
-          className="hero-heading text-center font-black uppercase leading-none tracking-tight text-[#D7E2EA]"
-          style={{ fontSize: 'clamp(2.2rem, 6.5vw, 84px)' }}
+          className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
+          style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}
         >
           Timeline
         </FadeIn>

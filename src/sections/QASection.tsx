@@ -128,13 +128,13 @@ export default function QASection() {
       {/* Section Header */}
       <ScrollReveal className="flex flex-col items-center justify-center text-center mb-14 sm:mb-18 max-w-4xl mx-auto">
         <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-black/75 backdrop-blur-md">
-          <MessageCircleQuestion className="h-3.5 w-3.5 text-indigo-600" />
+          <MessageCircleQuestion className="h-3.5 w-3.5 text-[#B8894F]" />
           Everything You Need to Know
         </span>
 
         <h2
-          className="hero-heading text-center font-black uppercase leading-none tracking-tight text-[#0C0C0C]"
-          style={{ fontSize: 'clamp(2rem, 5.5vw, 76px)' }}
+          className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
+          style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}
         >
           Frequently Asked Questions
         </h2>
@@ -173,11 +173,10 @@ export default function QASection() {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 border ${
-                  activeCategory === cat
-                    ? 'bg-black text-white border-black shadow-md'
-                    : 'bg-black/5 text-black/60 border-transparent hover:border-black/20 hover:text-black'
-                }`}
+                className={`rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 border ${activeCategory === cat
+                  ? 'bg-black text-white border-black shadow-md'
+                  : 'bg-black/5 text-black/60 border-transparent hover:border-black/20 hover:text-black'
+                  }`}
               >
                 {cat}
               </button>
@@ -203,11 +202,10 @@ export default function QASection() {
               return (
                 <StaggerCard key={faq.id}>
                   <div
-                    className={`rounded-2xl sm:rounded-3xl border transition-all duration-300 overflow-hidden ${
-                      isOpen
-                        ? 'border-black/20 bg-black/[0.02] shadow-sm'
-                        : 'border-black/10 bg-transparent hover:border-black/25'
-                    }`}
+                    className={`rounded-2xl sm:rounded-3xl border transition-all duration-300 overflow-hidden ${isOpen
+                      ? 'border-black/20 bg-black/[0.02] shadow-sm'
+                      : 'border-black/10 bg-transparent hover:border-black/25'
+                      }`}
                   >
                     {/* Accordion Header Button */}
                     <button
@@ -219,7 +217,7 @@ export default function QASection() {
                           {faq.number}
                         </span>
                         <div className="space-y-1">
-                          <span className="text-[0.65rem] font-mono font-semibold uppercase tracking-widest text-indigo-600">
+                          <span className="text-[0.65rem] font-mono font-semibold uppercase tracking-widest text-[#B8894F]">
                             {faq.category}
                           </span>
                           <h3 className="text-sm sm:text-base md:text-lg font-bold text-black leading-snug">
@@ -229,11 +227,10 @@ export default function QASection() {
                       </div>
 
                       <div
-                        className={`size-8 sm:size-9 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 border ${
-                          isOpen
-                            ? 'rotate-180 bg-black text-white border-black'
-                            : 'bg-black/5 text-black/60 border-black/10 hover:border-black/30'
-                        }`}
+                        className={`size-8 sm:size-9 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 border ${isOpen
+                          ? 'rotate-180 bg-black text-white border-black'
+                          : 'bg-black/5 text-black/60 border-black/10 hover:border-black/30'
+                          }`}
                       >
                         <ChevronDown className="size-4" />
                       </div>
@@ -262,7 +259,7 @@ export default function QASection() {
                                     key={hIdx}
                                     className="inline-flex items-center gap-1 rounded-md bg-black/5 border border-black/10 px-2.5 py-1 text-[0.68rem] font-medium text-black/80"
                                   >
-                                    <Sparkles className="size-2.5 text-indigo-600" />
+                                    <Sparkles className="size-2.5 text-[#B8894F]" />
                                     {highlight}
                                   </span>
                                 ))}
@@ -286,16 +283,16 @@ export default function QASection() {
           <h4 className="text-base sm:text-lg font-bold uppercase tracking-tight">
             Still have questions about Exposition?
           </h4>
-          <p className="text-xs sm:text-sm text-white/60 font-light">
+          <p className="text-xs sm:text-sm text-[#9A9A9A] font-light">
             Our organizing committee is here to assist you with any inquiries or delegate requirements.
           </p>
         </div>
 
         <a
           href="mailto:exposition@kln.ac.lk"
-          className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-xs sm:text-sm font-bold uppercase tracking-wider text-black hover:bg-[#D7E2EA] hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all shrink-0"
+          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#B8894F] to-[#E8C896] px-6 py-3 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0C0C0C] hover:brightness-110 shadow-[0_0_20px_rgba(184,137,79,0.3)] transition-all shrink-0"
         >
-          <Send className="size-3.5 text-rose-500" />
+          <Send className="size-3.5 text-[#0C0C0C]" />
           <span>Ask Our Team</span>
         </a>
       </ScrollReveal>

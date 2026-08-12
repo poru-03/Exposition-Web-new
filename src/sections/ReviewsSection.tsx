@@ -171,7 +171,7 @@ function ReviewCard({
   tagline,
 }: (typeof REVIEWS_DATA)[number]) {
   return (
-    <Card className="w-[270px] sm:w-[300px] rounded-2xl border border-[#D7E2EA]/15 bg-[#151515]/95 shadow-xl hover:border-[#D7E2EA]/35 transition-colors duration-200">
+    <Card className="w-[270px] sm:w-[300px] rounded-2xl border border-white/10 bg-[#151515]/95 shadow-xl hover:border-[#B8894F]/35 transition-colors duration-200">
       <CardContent className="p-4 sm:p-5 flex flex-col justify-between h-full">
         <div>
           <div className="flex items-center gap-3">
@@ -181,18 +181,18 @@ function ReviewCard({
             </Avatar>
             <div className="flex flex-col min-w-0">
               <div className="flex items-center gap-1.5">
-                <span className="text-xs sm:text-sm font-bold text-[#D7E2EA] truncate">{name}</span>
+                <span className="text-xs sm:text-sm font-bold text-white truncate">{name}</span>
                 <span className="text-[0.65rem] shrink-0">{country}</span>
               </div>
-              <p className="text-[0.65rem] font-mono text-[#D7E2EA]/50 truncate">{username}</p>
+              <p className="text-[0.65rem] font-mono text-[#9A9A9A] truncate">{username}</p>
             </div>
           </div>
 
-          <p className="mt-2 text-[0.65rem] font-semibold uppercase tracking-wider text-indigo-400/90 truncate">
+          <p className="mt-2 text-[0.65rem] font-semibold uppercase tracking-wider text-[#E8C896] truncate">
             {tagline}
           </p>
 
-          <blockquote className="mt-2.5 text-xs text-[#D7E2EA]/80 font-light leading-relaxed">
+          <blockquote className="mt-2.5 text-xs text-[#9A9A9A] font-light leading-relaxed">
             &ldquo;{body}&rdquo;
           </blockquote>
         </div>
@@ -288,19 +288,19 @@ export default function ReviewsSection() {
       <div className="relative z-10 flex flex-col items-center justify-center w-full">
         {/* Section Header */}
         <ScrollReveal className="flex flex-col items-center justify-center text-center mb-12 sm:mb-16 px-[5%]">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md">
-            <Sparkles className="h-3.5 w-3.5 text-[#D7E2EA]" />
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#B8894F]/30 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#E8C896] backdrop-blur-md">
+            <Sparkles className="h-3.5 w-3.5 text-[#E8C896]" />
             Community Voices & Success Stories
           </span>
 
           <h2
-            className="hero-heading text-center font-black uppercase leading-none tracking-tight text-[#D7E2EA]"
-            style={{ fontSize: 'clamp(2.2rem, 6.5vw, 84px)' }}
+            className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
+            style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}
           >
             Reviews & Voices
           </h2>
 
-          <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light">
+          <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#9A9A9A] font-light">
             Industry leaders, tech pioneers, and academic visionaries sharing their transformative
             experiences and endorsements from the Exposition ecosystem.
           </p>
@@ -335,10 +335,10 @@ export default function ReviewsSection() {
                   <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
                     {activeFeatured.name}
                   </h3>
-                  <p className="text-xs sm:text-sm font-medium text-white/50">
+                  <p className="text-xs sm:text-sm font-medium text-[#9A9A9A]">
                     {activeFeatured.title}
                   </p>
-                  <p className="mt-4 text-xs sm:text-sm md:text-base text-white/80 font-light leading-relaxed">
+                  <p className="mt-4 text-xs sm:text-sm md:text-base text-white/85 font-light leading-relaxed">
                     {activeFeatured.quote}
                   </p>
                 </div>
@@ -350,7 +350,7 @@ export default function ReviewsSection() {
                       href={activeFeatured.socials.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="size-11 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:bg-[#D7E2EA] hover:scale-110 transition-all duration-200"
+                      className="size-11 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:bg-[#E8C896] hover:scale-110 transition-all duration-200"
                       aria-label="GitHub Profile"
                     >
                       <Github className="size-5" />
@@ -361,7 +361,7 @@ export default function ReviewsSection() {
                       href={activeFeatured.socials.twitter}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="size-11 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:bg-[#D7E2EA] hover:scale-110 transition-all duration-200"
+                      className="size-11 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:bg-[#E8C896] hover:scale-110 transition-all duration-200"
                       aria-label="Twitter Profile"
                     >
                       <Twitter className="size-5" />
@@ -372,7 +372,7 @@ export default function ReviewsSection() {
                       href={activeFeatured.socials.youtube}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="size-11 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:bg-[#D7E2EA] hover:scale-110 transition-all duration-200"
+                      className="size-11 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:bg-[#E8C896] hover:scale-110 transition-all duration-200"
                       aria-label="YouTube Channel"
                     >
                       <Youtube className="size-5" />
@@ -383,7 +383,7 @@ export default function ReviewsSection() {
                       href={activeFeatured.socials.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="size-11 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:bg-[#D7E2EA] hover:scale-110 transition-all duration-200"
+                      className="size-11 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:bg-[#E8C896] hover:scale-110 transition-all duration-200"
                       aria-label="LinkedIn Profile"
                     >
                       <Linkedin className="size-5" />
@@ -412,8 +412,8 @@ export default function ReviewsSection() {
                   key={idx}
                   onClick={() => setFeaturedIndex(idx)}
                   className={`transition-all duration-300 rounded-full ${idx === featuredIndex
-                      ? 'w-6 h-2.5 bg-white'
-                      : 'w-2.5 h-2.5 bg-white/30 hover:bg-white/60'
+                    ? 'w-6 h-2.5 bg-[#E8C896]'
+                    : 'w-2.5 h-2.5 bg-white/30 hover:bg-white/60'
                     }`}
                   aria-label={`Go to slide ${idx + 1}`}
                 />
@@ -431,24 +431,24 @@ export default function ReviewsSection() {
           </div>
         </ScrollReveal>
 
-        {/* Stats Counter Row */}
+        {/* Stats Counter Row (Silver Gradient Numerals Accent) */}
         <ScrollReveal delay={0.25} y={20} className="w-full max-w-6xl mt-12 px-5 sm:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center border-t border-[#D7E2EA]/10 pt-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center border-t border-white/10 pt-10">
             <div className="p-4 rounded-2xl bg-[#141414]/80 border border-white/5 backdrop-blur-md">
-              <h3 className="text-3xl sm:text-4xl font-black text-[#D7E2EA]">20+</h3>
-              <p className="text-xs font-mono uppercase tracking-widest text-[#D7E2EA]/50 mt-1">Years of Legacy</p>
+              <h3 className="text-3xl sm:text-4xl font-black text-silver-gradient">20+</h3>
+              <p className="text-xs font-mono uppercase tracking-widest text-[#9A9A9A] mt-1">Years of Legacy</p>
             </div>
             <div className="p-4 rounded-2xl bg-[#141414]/80 border border-white/5 backdrop-blur-md">
-              <h3 className="text-3xl sm:text-4xl font-black text-[#D7E2EA]">5+</h3>
-              <p className="text-xs font-mono uppercase tracking-widest text-[#D7E2EA]/50 mt-1">Tech Segments</p>
+              <h3 className="text-3xl sm:text-4xl font-black text-silver-gradient">5+</h3>
+              <p className="text-xs font-mono uppercase tracking-widest text-[#9A9A9A] mt-1">Tech Segments</p>
             </div>
             <div className="p-4 rounded-2xl bg-[#141414]/80 border border-white/5 backdrop-blur-md">
-              <h3 className="text-3xl sm:text-4xl font-black text-[#D7E2EA]">100+</h3>
-              <p className="text-xs font-mono uppercase tracking-widest text-[#D7E2EA]/50 mt-1">Corporate Partners</p>
+              <h3 className="text-3xl sm:text-4xl font-black text-silver-gradient">100+</h3>
+              <p className="text-xs font-mono uppercase tracking-widest text-[#9A9A9A] mt-1">Corporate Partners</p>
             </div>
             <div className="p-4 rounded-2xl bg-[#141414]/80 border border-white/5 backdrop-blur-md">
-              <h3 className="text-3xl sm:text-4xl font-black text-[#D7E2EA]">20+</h3>
-              <p className="text-xs font-mono uppercase tracking-widest text-[#D7E2EA]/50 mt-1">Published Issues</p>
+              <h3 className="text-3xl sm:text-4xl font-black text-silver-gradient">20+</h3>
+              <p className="text-xs font-mono uppercase tracking-widest text-[#9A9A9A] mt-1">Published Issues</p>
             </div>
           </div>
         </ScrollReveal>

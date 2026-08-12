@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Brand Backgrounds */
+  --bg-primary: #0C0C0C;
+  --bg-deep: #050505;
+
+  /* Gold Gradient (for headline/display text & key CTAs) */
+  --gold-gradient-start: #B8894F;
+  --gold-gradient-end: #E8C896;
+  --gold-gradient: linear-gradient(135deg, #B8894F 0%, #E8C896 100%);
+  --gold-gradient-v: linear-gradient(180deg, #E8C896 0%, #B8894F 100%);
+
+  /* Gold Stroke & Border Accents */
+  --gold-border: rgba(184, 137, 79, 0.4);
+  --gold-border-subtle: rgba(184, 137, 79, 0.2);
+  --gold-border-glow: rgba(232, 200, 150, 0.6);
+  --gold-accent: #E8C896;
+  --gold-bronze: #B8894F;
+
+  /* Silver/Metallic Gradient (Secondary accent for numerals & contrast text) */
+  --silver-gradient-start: #D8D8D8;
+  --silver-gradient-mid: #FFFFFF;
+  --silver-gradient-end: #B0B0B0;
+  --silver-gradient: linear-gradient(180deg, #D8D8D8 0%, #FFFFFF 50%, #B0B0B0 100%);
+
+  /* Primary White (Names, main headings) */
+  --text-primary-white: #FFFFFF;
+
+  /* Muted Gray (Secondary/supporting text, captions, roles, footer fine print) */
+  --text-muted-gray: #9A9A9A;
+  --text-muted-gray-hover: #D8D8D8;
+}
+
 *,
 *::before,
 *::after {
@@ -22,17 +54,63 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.hero-heading {
-  background: linear-gradient(180deg, #646973 0%, #bbccd7 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+@layer utilities {
+  .hero-heading {
+    background: linear-gradient(135deg, #B8894F 0%, #E8C896 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .section-title {
+    font-size: clamp(2.4rem, 5.5vw, 76px);
+    line-height: 1;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #B8894F 0%, #E8C896 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gold-gradient-v {
+    background: linear-gradient(180deg, #E8C896 0%, #B8894F 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-silver-gradient {
+    background: linear-gradient(180deg, #D8D8D8 0%, #FFFFFF 50%, #B0B0B0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-brand-muted {
+    color: var(--text-muted-gray, #9A9A9A);
+  }
+
+  .border-gold-accent {
+    border-color: var(--gold-border, rgba(184, 137, 79, 0.4));
+  }
+
+  .border-gold-accent-subtle {
+    border-color: var(--gold-border-subtle, rgba(184, 137, 79, 0.2));
+  }
 }
+
 
 @keyframes marquee {
   from {
     transform: translate3d(0, 0, 0);
   }
+
   to {
     transform: translate3d(calc(-100% - var(--gap, 1rem)), 0, 0);
   }
@@ -42,6 +120,7 @@ body {
   from {
     transform: translate3d(0, 0, 0);
   }
+
   to {
     transform: translate3d(0, calc(-100% - var(--gap, 1rem)), 0);
   }
@@ -60,5 +139,3 @@ body {
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
 }
-
-

@@ -20,6 +20,7 @@ import {
 } from 'react-icons/fa6';
 import ScrollReveal from '../components/ScrollReveal';
 import { StaggerContainer, StaggerCard } from '../components/StaggerReveal';
+import TiltCard3D from '../components/TiltCard3D';
 
 export type TechEvent = {
   id: string;
@@ -64,7 +65,7 @@ export const TECH_EVENTS: TechEvent[] = [
     prizePool: '$65,000 + Silicon Valley Venture Fast-Track',
     teamSize: '2 - 4 Members',
     status: 'Registration Open',
-    statusColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+    statusColor: 'bg-[#B8894F]/10 text-[#E8C896] border-[#B8894F]/40',
     officialWebsite: 'https://stanford.edu/events/ai-3d-hackathon-2026',
     coverImage:
       'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop',
@@ -93,7 +94,7 @@ export const TECH_EVENTS: TechEvent[] = [
     prizePool: '$45,000 Hardware Research Grants',
     teamSize: '1 - 4 Members',
     status: 'Closing Soon',
-    statusColor: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+    statusColor: 'bg-[#B8894F]/15 text-[#E8C896] border-[#B8894F]/50',
     officialWebsite: 'https://mit.edu/robotics-summit-2026',
     coverImage:
       'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1200&auto=format&fit=crop',
@@ -121,7 +122,7 @@ export const TECH_EVENTS: TechEvent[] = [
     prizePool: '$35,000 Design Fellowships & Grants',
     teamSize: '2 - 3 Members',
     status: 'Featured',
-    statusColor: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30',
+    statusColor: 'bg-[#B8894F]/10 text-[#E8C896] border-[#B8894F]/40',
     officialWebsite: 'https://ethz.ch/cyberspatial-2026',
     coverImage:
       'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop',
@@ -149,7 +150,7 @@ export const TECH_EVENTS: TechEvent[] = [
     prizePool: '$50,000 Research Grants & Fellowships',
     teamSize: 'Individual / Team of 2',
     status: 'Upcoming',
-    statusColor: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+    statusColor: 'bg-white/5 text-[#9A9A9A] border-white/15',
     officialWebsite: 'https://cam.ac.uk/quantum-challenge-2026',
     coverImage:
       'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1200&auto=format&fit=crop',
@@ -176,7 +177,7 @@ export const TECH_EVENTS: TechEvent[] = [
     prizePool: '$30,000 Publisher Backing & Steam Showcase',
     teamSize: '1 - 5 Members',
     status: 'Upcoming',
-    statusColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
+    statusColor: 'bg-white/5 text-[#9A9A9A] border-white/15',
     officialWebsite: 'https://etc.cmu.edu/xr-gamefest-2026',
     coverImage:
       'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200&auto=format&fit=crop',
@@ -214,7 +215,7 @@ export default function TechEventHubSection() {
     <section
       ref={sectionRef}
       id="techevent-hub"
-      className="relative z-10 min-h-screen bg-transparent px-[5%] py-24 md:py-32 overflow-hidden"
+      className="relative z-10 min-h-screen lg:h-screen w-full flex flex-col justify-center bg-transparent px-[4%] sm:px-[5%] py-4 sm:py-6 lg:py-6 overflow-hidden"
     >
       {/* Subtle Section Glow Pulse */}
       {!shouldReduceMotion && (
@@ -222,46 +223,45 @@ export default function TechEventHubSection() {
           className="absolute inset-0 pointer-events-none -z-10"
           style={{
             opacity: glowOpacity,
-            background: 'radial-gradient(circle at 50% 30%, rgba(34, 211, 238, 0.12), transparent 65%)',
+            background: 'radial-gradient(circle at 50% 30%, rgba(184, 137, 79, 0.12), transparent 65%)',
           }}
         />
       )}
 
       {/* Section Header */}
-      <ScrollReveal className="flex flex-col items-center justify-center text-center mb-16 sm:mb-20">
-        <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md">
-          <Sparkles className="h-3.5 w-3.5 text-[#D7E2EA]" />
+      <ScrollReveal className="flex flex-col items-center justify-center text-center mb-3 sm:mb-4 lg:mb-5">
+        <span className="mb-1.5 inline-flex items-center gap-2 rounded-full border border-[#B8894F]/30 bg-[#161616]/70 px-3.5 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-[#E8C896] backdrop-blur-md">
+          <Sparkles className="h-3 w-3 text-[#E8C896]" />
           University & Innovation Network
         </span>
         <h2
-          className="hero-heading text-center font-black uppercase leading-none tracking-tight text-[#D7E2EA]"
-          style={{ fontSize: 'clamp(2.2rem, 6.5vw, 84px)' }}
+          className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
+          style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}
         >
           TechEvent Hub
         </h2>
-        <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light">
+        <p className="mt-1 max-w-2xl text-center text-xs sm:text-sm leading-snug text-[#9A9A9A] font-light">
           Discover premier hackathons, academic symposiums, and spatial computing conclaves.
-          Explore live registration schedules, official portals, and upcoming events.
         </p>
       </ScrollReveal>
 
       {/* Split Screen Container: Left (Event Details Screen) | Right (Upcoming Events Selector) */}
-      <div className="mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-          
+      <div className="mx-auto max-w-7xl w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-start">
+
           {/* ================= LEFT SIDE SCREEN: Dynamic Active Event Console ================= */}
-          <ScrollReveal y={24} className="lg:col-span-7 sticky lg:top-24">
+          <ScrollReveal y={16} className="lg:col-span-7">
             <AnimatePresence mode="wait">
               <motion.div
                 key={selectedEvent.id}
-                initial={{ opacity: 0, y: 20, scale: 0.98 }}
+                initial={{ opacity: 0, y: 15, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -20, scale: 0.98 }}
-                transition={{ duration: 0.35, ease: 'easeOut' }}
-                className="relative overflow-hidden rounded-[32px] border border-[#D7E2EA]/20 bg-[#141414]/95 shadow-[0_25px_60px_rgba(0,0,0,0.9)] backdrop-blur-2xl"
+                exit={{ opacity: 0, y: -15, scale: 0.98 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+                className="relative overflow-hidden rounded-[24px] sm:rounded-[28px] border border-white/15 bg-[#141414]/95 shadow-[0_25px_60px_rgba(0,0,0,0.9)] backdrop-blur-2xl max-h-[calc(100vh-160px)] flex flex-col"
               >
                 {/* Event Hero Cover Image */}
-                <div className="relative h-56 sm:h-72 w-full overflow-hidden">
+                <div className="relative h-28 sm:h-36 lg:h-40 w-full shrink-0 overflow-hidden">
                   <img
                     src={selectedEvent.coverImage}
                     alt={selectedEvent.title}
@@ -270,9 +270,9 @@ export default function TechEventHubSection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-[#141414]/50 to-transparent" />
 
                   {/* Badges on Cover */}
-                  <div className="absolute top-5 left-5 right-5 flex items-center justify-between gap-3">
+                  <div className="absolute top-3.5 left-4 right-4 flex items-center justify-between gap-3">
                     <span
-                      className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1 text-xs font-bold uppercase tracking-wider backdrop-blur-md ${selectedEvent.statusColor}`}
+                      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-0.5 text-[0.65rem] font-bold uppercase tracking-wider backdrop-blur-md ${selectedEvent.statusColor}`}
                     >
                       <span className="h-1.5 w-1.5 rounded-full bg-current animate-pulse" />
                       {selectedEvent.status}
@@ -280,109 +280,109 @@ export default function TechEventHubSection() {
 
                     <button
                       onClick={handleShare}
-                      className="rounded-full bg-[#141414]/80 p-2 text-[#D7E2EA] border border-white/15 backdrop-blur-md transition-colors hover:bg-white hover:text-black"
+                      className="rounded-full bg-[#141414]/80 p-1.5 text-[#E8C896] border border-white/15 backdrop-blur-md transition-colors hover:bg-white hover:text-black cursor-pointer"
                       title="Share / Copy Link"
                     >
                       {copied ? (
-                        <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                        <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
                       ) : (
-                        <Share2 className="h-4 w-4" />
+                        <Share2 className="h-3.5 w-3.5" />
                       )}
                     </button>
                   </div>
 
                   {/* University Label on Image Bottom */}
-                  <div className="absolute bottom-4 left-6 right-6">
-                    <span className="text-xs font-mono uppercase tracking-widest text-[#D7E2EA]/80 bg-[#0C0C0C]/80 px-3 py-1 rounded-lg border border-white/10 backdrop-blur-md">
+                  <div className="absolute bottom-3 left-4 right-4">
+                    <span className="text-[0.65rem] font-mono uppercase tracking-widest text-[#9A9A9A] bg-[#0C0C0C]/80 px-2.5 py-0.5 rounded-md border border-white/10 backdrop-blur-md">
                       {selectedEvent.university}
                     </span>
                   </div>
                 </div>
 
-                {/* Event Core Details Body */}
-                <div className="p-6 sm:p-8 space-y-6">
+                {/* Event Core Details Body (Scrollable if needed on small screens) */}
+                <div className="p-4 sm:p-5 space-y-3 overflow-y-auto custom-scrollbar flex-1">
                   {/* Title & Tagline */}
                   <div>
-                    <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#D7E2EA] leading-tight">
+                    <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight text-white leading-tight">
                       {selectedEvent.title}
                     </h3>
-                    <p className="mt-2 text-xs sm:text-sm font-medium text-[#D7E2EA]/60 leading-relaxed">
+                    <p className="mt-1 text-xs font-medium text-[#9A9A9A] leading-snug">
                       {selectedEvent.tagline}
                     </p>
                   </div>
 
                   {/* Meta Details Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
                     {/* Registration Start */}
-                    <div className="flex items-start gap-3 rounded-2xl border border-white/10 bg-[#181818]/90 p-3.5">
-                      <div className="p-2 rounded-xl bg-white/5 text-[#D7E2EA] shrink-0">
-                        <Calendar className="h-4 w-4 text-indigo-300" />
+                    <div className="flex items-center gap-2.5 rounded-xl border border-white/10 bg-[#181818]/90 p-2.5">
+                      <div className="p-1.5 rounded-lg bg-white/5 text-[#E8C896] shrink-0">
+                        <Calendar className="h-3.5 w-3.5 text-[#E8C896]" />
                       </div>
-                      <div>
-                        <span className="text-[0.65rem] font-bold uppercase tracking-wider text-[#D7E2EA]/50 block">
+                      <div className="min-w-0">
+                        <span className="text-[0.6rem] font-bold uppercase tracking-wider text-[#9A9A9A] block">
                           Registration Start
                         </span>
-                        <span className="text-xs sm:text-sm font-semibold text-[#D7E2EA]">
+                        <span className="text-xs font-semibold text-white truncate block">
                           {selectedEvent.regStartDate}
                         </span>
                       </div>
                     </div>
 
                     {/* Registration Closing */}
-                    <div className="flex items-start gap-3 rounded-2xl border border-white/10 bg-[#181818]/90 p-3.5">
-                      <div className="p-2 rounded-xl bg-white/5 text-[#D7E2EA] shrink-0">
-                        <Clock className="h-4 w-4 text-amber-300" />
+                    <div className="flex items-center gap-2.5 rounded-xl border border-white/10 bg-[#181818]/90 p-2.5">
+                      <div className="p-1.5 rounded-lg bg-white/5 text-[#B8894F] shrink-0">
+                        <Clock className="h-3.5 w-3.5 text-[#B8894F]" />
                       </div>
-                      <div>
-                        <span className="text-[0.65rem] font-bold uppercase tracking-wider text-[#D7E2EA]/50 block">
+                      <div className="min-w-0">
+                        <span className="text-[0.6rem] font-bold uppercase tracking-wider text-[#9A9A9A] block">
                           Closing Date
                         </span>
-                        <span className="text-xs sm:text-sm font-semibold text-[#D7E2EA]">
+                        <span className="text-xs font-semibold text-white truncate block">
                           {selectedEvent.regCloseDate}
                         </span>
                       </div>
                     </div>
 
                     {/* Event Duration */}
-                    <div className="flex items-start gap-3 rounded-2xl border border-white/10 bg-[#181818]/90 p-3.5">
-                      <div className="p-2 rounded-xl bg-white/5 text-[#D7E2EA] shrink-0">
-                        <Sparkles className="h-4 w-4 text-cyan-300" />
+                    <div className="flex items-center gap-2.5 rounded-xl border border-white/10 bg-[#181818]/90 p-2.5">
+                      <div className="p-1.5 rounded-lg bg-white/5 text-[#E8C896] shrink-0">
+                        <Sparkles className="h-3.5 w-3.5 text-[#E8C896]" />
                       </div>
-                      <div>
-                        <span className="text-[0.65rem] font-bold uppercase tracking-wider text-[#D7E2EA]/50 block">
-                          Event Duration
+                      <div className="min-w-0">
+                        <span className="text-[0.6rem] font-bold uppercase tracking-wider text-[#9A9A9A] block">
+                          Duration
                         </span>
-                        <span className="text-xs sm:text-sm font-semibold text-[#D7E2EA]">
+                        <span className="text-xs font-semibold text-white truncate block">
                           {selectedEvent.duration}
                         </span>
                       </div>
                     </div>
 
                     {/* Prize Pool / Rewards */}
-                    <div className="flex items-start gap-3 rounded-2xl border border-white/10 bg-[#181818]/90 p-3.5">
-                      <div className="p-2 rounded-xl bg-white/5 text-[#D7E2EA] shrink-0">
-                        <Trophy className="h-4 w-4 text-emerald-300" />
+                    <div className="flex items-center gap-2.5 rounded-xl border border-white/10 bg-[#181818]/90 p-2.5">
+                      <div className="p-1.5 rounded-lg bg-white/5 text-[#E8C896] shrink-0">
+                        <Trophy className="h-3.5 w-3.5 text-[#E8C896]" />
                       </div>
-                      <div>
-                        <span className="text-[0.65rem] font-bold uppercase tracking-wider text-[#D7E2EA]/50 block">
+                      <div className="min-w-0">
+                        <span className="text-[0.6rem] font-bold uppercase tracking-wider text-[#9A9A9A] block">
                           Prize Pool & Grants
                         </span>
-                        <span className="text-xs sm:text-sm font-semibold text-[#D7E2EA]">
+                        <span className="text-xs font-semibold text-white truncate block">
                           {selectedEvent.prizePool}
                         </span>
                       </div>
                     </div>
 
                     {/* Venue */}
-                    <div className="sm:col-span-2 flex items-start gap-3 rounded-2xl border border-white/10 bg-[#181818]/90 p-3.5">
-                      <div className="p-2 rounded-xl bg-white/5 text-[#D7E2EA] shrink-0">
-                        <MapPin className="h-4 w-4 text-rose-300" />
+                    <div className="sm:col-span-2 flex items-center gap-2.5 rounded-xl border border-white/10 bg-[#181818]/90 p-2.5">
+                      <div className="p-1.5 rounded-lg bg-white/5 text-[#E8C896] shrink-0">
+                        <MapPin className="h-3.5 w-3.5 text-[#E8C896]" />
                       </div>
-                      <div>
-                        <span className="text-[0.65rem] font-bold uppercase tracking-wider text-[#D7E2EA]/50 block">
+                      <div className="min-w-0">
+                        <span className="text-[0.6rem] font-bold uppercase tracking-wider text-[#9A9A9A] block">
                           Venue & Location
                         </span>
-                        <span className="text-xs sm:text-sm font-semibold text-[#D7E2EA]">
+                        <span className="text-xs font-semibold text-white truncate block">
                           {selectedEvent.venue}
                         </span>
                       </div>
@@ -390,39 +390,27 @@ export default function TechEventHubSection() {
                   </div>
 
                   {/* Description */}
-                  <p className="text-xs sm:text-sm leading-relaxed text-[#D7E2EA]/75 font-light">
+                  <p className="text-xs leading-relaxed text-[#9A9A9A] font-light line-clamp-2 sm:line-clamp-3">
                     {selectedEvent.description}
                   </p>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 pt-1">
-                    {selectedEvent.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-lg bg-[#222222] px-2.5 py-1 text-[0.7rem] font-medium text-[#D7E2EA]/70 border border-white/5"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-
                   {/* Socials & Official Website Action Bar */}
-                  <div className="pt-4 border-t border-[#D7E2EA]/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="pt-3 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
                     {/* Social Media Links */}
-                    <div className="flex items-center gap-3 w-full sm:w-auto">
-                      <span className="text-[0.7rem] font-bold uppercase tracking-wider text-[#D7E2EA]/50 shrink-0">
+                    <div className="flex items-center gap-2.5 w-full sm:w-auto">
+                      <span className="text-[0.65rem] font-bold uppercase tracking-wider text-[#9A9A9A] shrink-0">
                         Community:
                       </span>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5">
                         {selectedEvent.socials.twitter && (
                           <a
                             href={selectedEvent.socials.twitter}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="rounded-xl border border-white/10 bg-[#1a1a1a] p-2.5 text-[#D7E2EA]/80 hover:text-white hover:border-white/40 hover:bg-black transition-all"
+                            className="rounded-lg border border-white/10 bg-[#1a1a1a] p-2 text-[#9A9A9A] hover:text-white hover:border-[#B8894F]/40 hover:bg-black transition-all"
                             title="Twitter / X"
                           >
-                            <FaXTwitter className="h-3.5 w-3.5 text-white" />
+                            <FaXTwitter className="h-3 w-3 text-white" />
                           </a>
                         )}
                         {selectedEvent.socials.linkedin && (
@@ -430,10 +418,10 @@ export default function TechEventHubSection() {
                             href={selectedEvent.socials.linkedin}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="rounded-xl border border-sky-500/20 bg-sky-500/10 p-2.5 text-sky-300 hover:text-white hover:border-sky-500 hover:bg-sky-600 transition-all"
+                            className="rounded-lg border border-white/10 bg-[#1a1a1a] p-2 text-[#9A9A9A] hover:text-white hover:border-[#B8894F]/40 hover:bg-black transition-all"
                             title="LinkedIn"
                           >
-                            <FaLinkedinIn className="h-3.5 w-3.5" />
+                            <FaLinkedinIn className="h-3 w-3" />
                           </a>
                         )}
                         {selectedEvent.socials.youtube && (
@@ -441,10 +429,10 @@ export default function TechEventHubSection() {
                             href={selectedEvent.socials.youtube}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="rounded-xl border border-red-500/20 bg-red-500/10 p-2.5 text-red-300 hover:text-white hover:border-red-500 hover:bg-red-600 transition-all"
+                            className="rounded-lg border border-white/10 bg-[#1a1a1a] p-2 text-[#9A9A9A] hover:text-white hover:border-[#B8894F]/40 hover:bg-black transition-all"
                             title="YouTube"
                           >
-                            <FaYoutube className="h-3.5 w-3.5" />
+                            <FaYoutube className="h-3 w-3" />
                           </a>
                         )}
                         {selectedEvent.socials.discord && (
@@ -452,10 +440,10 @@ export default function TechEventHubSection() {
                             href={selectedEvent.socials.discord}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="rounded-xl border border-indigo-500/20 bg-indigo-500/10 p-2.5 text-indigo-300 hover:text-white hover:border-indigo-500 hover:bg-indigo-600 transition-all"
+                            className="rounded-lg border border-white/10 bg-[#1a1a1a] p-2 text-[#9A9A9A] hover:text-white hover:border-[#B8894F]/40 hover:bg-black transition-all"
                             title="Discord Community"
                           >
-                            <FaDiscord className="h-3.5 w-3.5" />
+                            <FaDiscord className="h-3 w-3" />
                           </a>
                         )}
                         {selectedEvent.socials.github && (
@@ -463,24 +451,24 @@ export default function TechEventHubSection() {
                             href={selectedEvent.socials.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="rounded-xl border border-white/10 bg-[#1a1a1a] p-2.5 text-[#D7E2EA]/80 hover:text-white hover:border-white/40 hover:bg-[#333] transition-all"
+                            className="rounded-lg border border-white/10 bg-[#1a1a1a] p-2 text-[#9A9A9A] hover:text-white hover:border-[#B8894F]/40 hover:bg-black transition-all"
                             title="GitHub Repo"
                           >
-                            <FaGithub className="h-3.5 w-3.5" />
+                            <FaGithub className="h-3 w-3" />
                           </a>
                         )}
                       </div>
                     </div>
 
-                    {/* Official Website Link CTA */}
+                    {/* Official Website Link CTA (Gold Gradient Pill CTA) */}
                     <a
                       href={selectedEvent.officialWebsite}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[#D7E2EA] px-6 py-3 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0C0C0C] transition-all duration-200 hover:bg-white hover:shadow-[0_0_25px_rgba(215,226,234,0.4)]"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 rounded-full bg-gradient-to-r from-[#B8894F] to-[#E8C896] px-5 py-2 text-xs font-bold uppercase tracking-wider text-[#0C0C0C] shadow-[0_0_20px_rgba(184,137,79,0.3)] transition-all duration-200 hover:brightness-110 hover:shadow-[0_0_30px_rgba(184,137,79,0.5)] shrink-0 cursor-pointer"
                     >
                       <span>Official Website</span>
-                      <ExternalLink className="h-4 w-4" />
+                      <ExternalLink className="h-3.5 w-3.5" />
                     </a>
                   </div>
                 </div>
@@ -489,84 +477,85 @@ export default function TechEventHubSection() {
           </ScrollReveal>
 
           {/* ================= RIGHT SIDE SCREEN: Next Coming Event List ================= */}
-          <div className="lg:col-span-5 space-y-4">
-            <ScrollReveal delay={0.1} className="flex items-center justify-between pb-2">
-              <span className="text-xs font-mono uppercase tracking-widest text-[#D7E2EA]/60 font-semibold">
+          <div className="lg:col-span-5 flex flex-col max-h-[calc(100vh-160px)]">
+            <ScrollReveal delay={0.1} className="flex items-center justify-between pb-2 shrink-0">
+              <span className="text-[0.7rem] font-mono uppercase tracking-widest text-[#9A9A9A] font-semibold">
                 Upcoming Event Schedule ({TECH_EVENTS.length})
               </span>
-              <span className="text-[0.65rem] font-bold uppercase tracking-wider text-[#D7E2EA]/40">
-                Click to preview details
+              <span className="text-[0.6rem] font-bold uppercase tracking-wider text-[#9A9A9A]/60">
+                Click to preview
               </span>
             </ScrollReveal>
 
-            <StaggerContainer staggerChildren={0.08} className="flex flex-col gap-3.5">
+            <StaggerContainer
+              staggerChildren={0.06}
+              className="flex flex-col gap-2.5 overflow-y-auto pr-1.5 custom-scrollbar flex-1"
+            >
               {TECH_EVENTS.map((event) => {
                 const isSelected = selectedEvent.id === event.id;
                 return (
                   <StaggerCard key={event.id}>
-                    <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
-                      <button
-                        onClick={() => setSelectedEvent(event)}
-                        className={`group relative w-full text-left rounded-2xl border p-4 sm:p-5 transition-all duration-300 backdrop-blur-xl ${
-                          isSelected
-                            ? 'border-[#D7E2EA]/60 bg-[#1c1c1c] shadow-[0_10px_30px_rgba(0,0,0,0.8)]'
-                            : 'border-white/10 bg-[#121212]/80 hover:border-white/25 hover:bg-[#181818]'
-                        }`}
-                      >
-                        <div className="flex items-start justify-between gap-3">
-                          {/* Number Badge + Title */}
-                          <div className="flex items-start gap-3.5 flex-1 min-w-0">
-                            <div
-                              className={`rounded-xl size-8 sm:size-9 shrink-0 font-black text-xs flex items-center justify-center transition-colors ${
-                                isSelected
-                                  ? 'bg-white text-black shadow-md'
-                                  : 'bg-[#222222] text-[#D7E2EA]/70 border border-white/10 group-hover:bg-[#2c2c2c]'
-                              }`}
-                            >
-                              {event.number}
-                            </div>
-
-                            <div className="flex-1 min-w-0">
-                              <span className="text-[0.65rem] font-mono uppercase tracking-wider text-[#D7E2EA]/50 block truncate">
-                                {event.university}
-                              </span>
-                              <h4
-                                className={`text-sm sm:text-base font-bold uppercase leading-snug tracking-tight transition-colors line-clamp-2 ${
-                                  isSelected ? 'text-white' : 'text-[#D7E2EA]/90 group-hover:text-white'
-                                }`}
-                              >
-                                {event.title}
-                              </h4>
-                            </div>
-                          </div>
-
-                          {/* Arrow Trigger */}
-                          <div
-                            className={`rounded-full p-1.5 transition-transform shrink-0 ${
-                              isSelected
-                                ? 'bg-white text-black rotate-90 sm:rotate-0'
-                                : 'text-[#D7E2EA]/40 group-hover:text-white group-hover:translate-x-1'
+                    <TiltCard3D maxTilt={6} depth={8} scaleOnHover={1.01}>
+                      <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
+                        <button
+                          onClick={() => setSelectedEvent(event)}
+                          className={`group relative w-full text-left rounded-2xl border p-3 sm:p-3.5 transition-all duration-300 backdrop-blur-xl cursor-pointer ${isSelected
+                            ? 'border-[#B8894F]/60 bg-[#1c1c1c] shadow-[0_10px_30px_rgba(0,0,0,0.8)]'
+                            : 'border-white/10 bg-[#121212]/80 hover:border-[#B8894F]/30 hover:bg-[#181818]'
                             }`}
-                          >
-                            <ChevronRight className="h-4 w-4" />
-                          </div>
-                        </div>
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            {/* Number Badge + Title */}
+                            <div className="flex items-start gap-3 flex-1 min-w-0">
+                              <div
+                                className={`rounded-xl size-7 sm:size-8 shrink-0 font-black text-xs flex items-center justify-center transition-colors ${isSelected
+                                  ? 'bg-gradient-to-br from-[#B8894F] to-[#E8C896] text-[#0C0C0C] shadow-md'
+                                  : 'bg-[#222222] text-silver-gradient border border-white/10 group-hover:bg-[#2c2c2c]'
+                                  }`}
+                              >
+                                {event.number}
+                              </div>
 
-                        {/* Event Mini Meta Footer */}
-                        <div className="mt-3.5 flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-white/5">
-                          <div className="flex items-center gap-2 text-[0.7rem] text-[#D7E2EA]/60">
-                            <Clock className="h-3 w-3 text-indigo-400" />
-                            <span>{event.duration}</span>
+                              <div className="flex-1 min-w-0">
+                                <span className="text-[0.6rem] font-mono uppercase tracking-wider text-[#9A9A9A] block truncate">
+                                  {event.university}
+                                </span>
+                                <h4
+                                  className={`text-xs sm:text-sm font-bold uppercase leading-snug tracking-tight transition-colors line-clamp-1 ${isSelected ? 'text-white' : 'text-white/85 group-hover:text-white'
+                                    }`}
+                                >
+                                  {event.title}
+                                </h4>
+                              </div>
+                            </div>
+
+                            {/* Arrow Trigger */}
+                            <div
+                              className={`rounded-full p-1 transition-transform shrink-0 ${isSelected
+                                ? 'bg-white text-black rotate-90 sm:rotate-0'
+                                : 'text-[#9A9A9A] group-hover:text-white group-hover:translate-x-1'
+                                }`}
+                            >
+                              <ChevronRight className="h-3.5 w-3.5" />
+                            </div>
                           </div>
 
-                          <span
-                            className={`rounded-full px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-wider border ${event.statusColor}`}
-                          >
-                            {event.status}
-                          </span>
-                        </div>
-                      </button>
-                    </motion.div>
+                          {/* Event Mini Meta Footer */}
+                          <div className="mt-2 flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-white/5">
+                            <div className="flex items-center gap-1.5 text-[0.65rem] text-[#9A9A9A]">
+                              <Clock className="h-2.5 w-2.5 text-[#B8894F]" />
+                              <span>{event.duration}</span>
+                            </div>
+
+                            <span
+                              className={`rounded-full px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-wider border ${event.statusColor}`}
+                            >
+                              {event.status}
+                            </span>
+                          </div>
+                        </button>
+                      </motion.div>
+                    </TiltCard3D>
                   </StaggerCard>
                 );
               })}

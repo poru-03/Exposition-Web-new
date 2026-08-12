@@ -67,16 +67,16 @@ export const DemoDark = () => {
     <div className="relative w-full py-10 bg-transparent">
       {/* Intro Header */}
       <ScrollReveal className="mb-20 space-y-4 max-w-3xl mx-auto text-center flex flex-col items-center px-4">
-        <div className="inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#D7E2EA]/80 backdrop-blur-md">
-          <Sparkles className="h-3.5 w-3.5 text-[#D7E2EA]" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-[#B8894F]/30 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#E8C896] backdrop-blur-md">
+          <Sparkles className="h-3.5 w-3.5 text-[#E8C896]" />
           Interactive Process Flow
         </div>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight uppercase text-[#D7E2EA] leading-tight">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight uppercase text-white leading-tight">
           Planning your project
           <br />
-          <span className="text-[#D7E2EA]/60 font-light">development journey</span>
+          <span className="text-[#9A9A9A] font-light">development journey</span>
         </h2>
-        <p className="max-w-[56ch] text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70">
+        <p className="max-w-[56ch] text-sm sm:text-base leading-relaxed text-[#9A9A9A]">
           We blend creative 3D design with cutting-edge frontend development to
           build stunning, high-performance websites that elevate your brand and
           captivate your audience.
@@ -91,7 +91,7 @@ export const DemoDark = () => {
         {/* Dynamic Glowing Progress Connector Line */}
         {!shouldReduceMotion && (
           <motion.div
-            className="absolute left-8 sm:left-12 top-4 w-[2.5px] bg-gradient-to-b from-cyan-400 via-sky-300 to-indigo-400 shadow-[0_0_18px_rgba(34,211,238,0.9)] rounded-full z-10 origin-top"
+            className="absolute left-8 sm:left-12 top-4 w-[2.5px] bg-gradient-to-b from-[#B8894F] via-[#E8C896] to-white shadow-[0_0_18px_rgba(184,137,79,0.7)] rounded-full z-10 origin-top"
             style={{ height: lineHeight }}
           />
         )}
@@ -115,36 +115,36 @@ export const DemoDark = () => {
 
                 {/* Sticky Card with Exposed Top Margin Header */}
                 <StaggerCard className="flex-1 w-full">
-                  <div className="group relative rounded-3xl border border-[#D7E2EA]/20 bg-[#141414]/98 shadow-[0_25px_60px_rgba(0,0,0,0.9)] backdrop-blur-2xl transition-all duration-300 hover:border-[#D7E2EA]/40 overflow-hidden">
+                  <div className="group relative rounded-3xl border border-white/10 bg-[#141414]/98 shadow-[0_25px_60px_rgba(0,0,0,0.9)] backdrop-blur-2xl transition-all duration-300 hover:border-[#B8894F]/40 overflow-hidden">
                     {/* Top Tab Header Bar (Visible when stacked at top margin) */}
-                    <div className="flex items-center justify-between gap-4 px-6 py-4 sm:px-8 sm:py-5 border-b border-[#D7E2EA]/10 bg-[#181818]/90">
+                    <div className="flex items-center justify-between gap-4 px-6 py-4 sm:px-8 sm:py-5 border-b border-white/10 bg-[#181818]/90">
                       <div className="flex items-center gap-3 sm:gap-4">
-                        <div className="rounded-full size-8 sm:size-9 bg-[#222222] border border-[#D7E2EA]/25 text-xs sm:text-sm font-black flex justify-center items-center text-[#D7E2EA] shadow-[0_0_12px_rgba(215,226,234,0.15)] shrink-0">
+                        <div className="rounded-full size-8 sm:size-9 bg-[#222222] border border-white/15 text-xs sm:text-sm font-black flex justify-center items-center text-silver-gradient shadow-[0_0_12px_rgba(216,216,216,0.15)] shrink-0">
                           {phase.number}
                         </div>
                         <div className="flex flex-col sm:flex-row sm:items-center sm:gap-3">
-                          <h3 className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-tight text-[#D7E2EA]">
+                          <h3 className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-tight text-white">
                             {phase.title}
                           </h3>
-                          <span className="text-[0.65rem] sm:text-xs font-semibold uppercase tracking-wider text-[#D7E2EA]/50">
+                          <span className="text-[0.65rem] sm:text-xs font-semibold uppercase tracking-wider text-[#9A9A9A]">
                             {phase.subtitle}
                           </span>
                         </div>
                       </div>
 
                       <div className="flex items-center gap-2">
-                        <Icon className="h-4 w-4 sm:h-5 sm:w-5 text-[#D7E2EA]/70" />
+                        <Icon className="h-4 w-4 sm:h-5 sm:w-5 text-[#E8C896]/80" />
                       </div>
                     </div>
 
                     {/* Card Body Content */}
                     <div className="p-6 sm:p-8 md:p-10 space-y-6">
-                      <p className="text-[#D7E2EA]/80 text-sm sm:text-base md:text-lg leading-relaxed font-light max-w-2xl">
+                      <p className="text-[#9A9A9A] text-sm sm:text-base md:text-lg leading-relaxed font-light max-w-2xl">
                         {phase.description}
                       </p>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 items-center pt-2">
-                        <div className="relative overflow-hidden rounded-2xl border border-[#D7E2EA]/10 h-36 sm:h-44">
+                        <div className="relative overflow-hidden rounded-2xl border border-white/10 h-36 sm:h-44">
                           <img
                             src={phase.image}
                             alt={phase.title}
@@ -155,13 +155,13 @@ export const DemoDark = () => {
                         </div>
 
                         <div className="flex flex-col gap-2.5">
-                          <span className="text-xs font-bold uppercase tracking-wider text-[#D7E2EA]/60">
+                          <span className="text-xs font-bold uppercase tracking-wider text-[#9A9A9A]">
                             Key Deliverables
                           </span>
-                          <ul className="space-y-2 text-xs sm:text-sm text-[#D7E2EA]/85">
+                          <ul className="space-y-2 text-xs sm:text-sm text-white/85">
                             {phase.deliverables.map((item) => (
                               <li key={item} className="flex items-center gap-2.5">
-                                <ArrowRight className="h-3.5 w-3.5 text-[#D7E2EA]/60 shrink-0" />
+                                <ArrowRight className="h-3.5 w-3.5 text-[#E8C896] shrink-0" />
                                 <span>{item}</span>
                               </li>
                             ))}
