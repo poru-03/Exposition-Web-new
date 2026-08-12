@@ -21,7 +21,7 @@ import {
 } from 'react-icons/fa6';
 import ScrollReveal from '../components/ScrollReveal';
 import { StaggerContainer, StaggerCard } from '../components/StaggerReveal';
-import Testimonials, { TestimonialCardProps } from '@/components/ui/twitter-testimonial-cards';
+import { Testimonial } from '@/components/ui/testimonial';
 
 export type InterviewItem = {
   id: string;
@@ -183,52 +183,9 @@ export const INTERVIEWS_DATA: InterviewItem[] = [
 export default function InterviewHighlightsSection() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [viewMode, setViewMode] = useState<'profile' | 'social_stack'>('social_stack');
+  const [viewMode, setViewMode] = useState<'profile' | 'testimonial_card'>('testimonial_card');
 
   const activeItem = INTERVIEWS_DATA[selectedIndex];
-
-  // Generate 3 Twitter cards based on selected index and adjacent interviewees
-  const twitterCards: TestimonialCardProps[] = [
-    {
-      className:
-        "[grid-area:stack] hover:-translate-y-6 before:absolute before:w-[100%] before:outline-1 before:rounded-2xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-[#0C0C0C]/60 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-500 hover:grayscale-0 before:left-0 before:top-0",
-      avatar: INTERVIEWS_DATA[selectedIndex].image,
-      username: INTERVIEWS_DATA[selectedIndex].name,
-      handle: INTERVIEWS_DATA[selectedIndex].handle,
-      content: INTERVIEWS_DATA[selectedIndex].quote,
-      date: `${INTERVIEWS_DATA[selectedIndex].issue} • Exposition`,
-      verified: true,
-      likes: INTERVIEWS_DATA[selectedIndex].likes,
-      retweets: INTERVIEWS_DATA[selectedIndex].retweets,
-      tweetUrl: 'https://x.com',
-    },
-    {
-      className:
-        "[grid-area:stack] translate-x-6 sm:translate-x-10 translate-y-5 sm:translate-y-8 hover:-translate-y-1 before:absolute before:w-[100%] before:outline-1 before:rounded-2xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-[#0C0C0C]/60 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-500 hover:grayscale-0 before:left-0 before:top-0",
-      avatar: INTERVIEWS_DATA[(selectedIndex + 1) % INTERVIEWS_DATA.length].image,
-      username: INTERVIEWS_DATA[(selectedIndex + 1) % INTERVIEWS_DATA.length].name,
-      handle: INTERVIEWS_DATA[(selectedIndex + 1) % INTERVIEWS_DATA.length].handle,
-      content: INTERVIEWS_DATA[(selectedIndex + 1) % INTERVIEWS_DATA.length].quote,
-      date: `${INTERVIEWS_DATA[(selectedIndex + 1) % INTERVIEWS_DATA.length].issue} • Exposition`,
-      verified: true,
-      likes: INTERVIEWS_DATA[(selectedIndex + 1) % INTERVIEWS_DATA.length].likes,
-      retweets: INTERVIEWS_DATA[(selectedIndex + 1) % INTERVIEWS_DATA.length].retweets,
-      tweetUrl: 'https://x.com',
-    },
-    {
-      className:
-        "[grid-area:stack] translate-x-12 sm:translate-x-20 translate-y-10 sm:translate-y-16 hover:translate-y-6 sm:hover:translate-y-8",
-      avatar: INTERVIEWS_DATA[(selectedIndex + 2) % INTERVIEWS_DATA.length].image,
-      username: INTERVIEWS_DATA[(selectedIndex + 2) % INTERVIEWS_DATA.length].name,
-      handle: INTERVIEWS_DATA[(selectedIndex + 2) % INTERVIEWS_DATA.length].handle,
-      content: INTERVIEWS_DATA[(selectedIndex + 2) % INTERVIEWS_DATA.length].quote,
-      date: `${INTERVIEWS_DATA[(selectedIndex + 2) % INTERVIEWS_DATA.length].issue} • Exposition`,
-      verified: true,
-      likes: INTERVIEWS_DATA[(selectedIndex + 2) % INTERVIEWS_DATA.length].likes,
-      retweets: INTERVIEWS_DATA[(selectedIndex + 2) % INTERVIEWS_DATA.length].retweets,
-      tweetUrl: 'https://x.com',
-    },
-  ];
 
   // Auto-cycle through interviewees one by one
   useEffect(() => {
@@ -267,15 +224,15 @@ export default function InterviewHighlightsSection() {
         {/* View Mode Switcher Pills */}
         <div className="mt-2.5 flex items-center justify-center gap-1.5 p-1 rounded-full border border-white/15 bg-black/60 backdrop-blur-lg">
           <button
-            onClick={() => setViewMode('social_stack')}
+            onClick={() => setViewMode('testimonial_card')}
             className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
-              viewMode === 'social_stack'
+              viewMode === 'testimonial_card'
                 ? 'bg-gradient-to-r from-[#B8894F] to-[#E8C896] text-black shadow-md'
                 : 'text-[#9A9A9A] hover:text-white hover:bg-white/5'
             }`}
           >
-            <Layers className="size-3" />
-            <span>X / Twitter Stack</span>
+            <Quote className="size-3" />
+            <span>Classic Card</span>
           </button>
 
           <button
@@ -399,27 +356,28 @@ export default function InterviewHighlightsSection() {
             </StaggerContainer>
           </div>
 
-          {/* ================= RIGHT COLUMN: Twitter Cards Stack or Executive Profile ================= */}
+          {/* ================= RIGHT COLUMN: Testimonial Card or Executive Profile ================= */}
           <ScrollReveal delay={0.15} y={16} className="lg:col-span-7 flex flex-col items-center justify-center">
             <AnimatePresence mode="wait">
-              {viewMode === 'social_stack' ? (
-                /* ================= TWITTER / X STACKED TESTIMONIAL CARDS ================= */
+              {viewMode === 'testimonial_card' ? (
                 <motion.div
-                  key={`social-${selectedIndex}`}
+                  key={`testimonial-${activeItem.id}`}
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.35, ease: 'easeOut' }}
-                  className="w-full flex flex-col items-center justify-center py-4"
+                  className="w-full flex flex-col items-center justify-center py-4 h-full"
                 >
-                  <div className="flex items-center gap-2 mb-3 self-center sm:self-start">
-                    <span className="h-2 w-2 rounded-full bg-[#E8C896] animate-pulse" />
-                    <span className="text-[0.68rem] font-mono font-bold uppercase tracking-widest text-[#9A9A9A]">
-                      Executive Thought Leadership Quotes (Hover / Tap to Expand)
-                    </span>
+                  <div className="w-full relative rounded-3xl overflow-hidden border border-white/15 bg-[#141414]/95 p-6 sm:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.9)]">
+                    <Testimonial
+                      companyLogo={<Building className="size-8 text-[#E8C896]" />}
+                      quote={activeItem.quote}
+                      authorName={activeItem.name}
+                      authorPosition={`${activeItem.position}, ${activeItem.company}`}
+                      authorImage={activeItem.image}
+                      className="text-white [&_.text-foreground]:text-white [&_.text-muted-foreground]:text-[#E8C896] [&_.text-foreground\\/40]:text-[#9A9A9A]"
+                    />
                   </div>
-
-                  <Testimonials cards={twitterCards} />
                 </motion.div>
               ) : (
                 /* ================= EXECUTIVE PROFILE SHOWCASE ================= */
