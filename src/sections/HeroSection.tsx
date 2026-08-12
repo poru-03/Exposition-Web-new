@@ -4,18 +4,6 @@ import FadeIn from '../components/FadeIn';
 import Magnet from '../components/Magnet';
 import VaporizeTextCycle, { Tag } from '@/components/ui/vapour-text-effect';
 
-const NAV_LINKS = [
-  { name: 'About', href: '#about' },
-  { name: 'Timeline', href: '#timeline' },
-  { name: 'Events', href: '#techevent-hub' },
-  { name: 'Speakers', href: '#keynote-speakers' },
-  { name: 'Interviews', href: '#interviews' },
-  { name: 'Reviews', href: '#reviews' },
-  { name: 'Partners', href: '#partners' },
-  { name: 'Team', href: '#team' },
-  { name: 'FAQ', href: '#faq' },
-];
-
 const PORTRAIT_SRC =
   'https://shrug-person-78902957.figma.site/_components/v2/d24c01ad3a56fc65e942a1f501eb73db42d7cf9a/Rectangle_40443.81459862.png';
 
@@ -43,22 +31,8 @@ export default function HeroSection() {
       className="relative flex h-screen flex-col bg-[#0C0C0C]"
       style={{ overflowX: 'clip' }}
     >
-      <FadeIn
-        as="nav"
-        delay={0}
-        y={-20}
-        className="relative z-20 flex w-full items-center justify-between px-[5%] pt-6 text-sm font-medium uppercase tracking-wider text-[#D7E2EA] md:pt-8 md:text-lg lg:text-[1.4rem]"
-      >
-        {NAV_LINKS.map((link) => (
-          <a
-            key={link.name}
-            href={link.href}
-            className="transition-opacity duration-200 hover:opacity-70"
-          >
-            {link.name}
-          </a>
-        ))}
-      </FadeIn>
+      {/* Top Navbar Spacer */}
+      <div className="relative z-20 w-full px-[5%] pt-6 md:pt-8 h-12 md:h-16 pointer-events-none" />
 
       {/* Hero Title with Vapour Particle Text Cycle Effect */}
       <div className="relative z-20 w-full overflow-hidden mt-4 sm:mt-2 md:-mt-2 flex items-center justify-center min-h-[120px] sm:min-h-[160px] md:min-h-[200px] lg:min-h-[230px] px-[5%]">
@@ -74,7 +48,7 @@ export default function HeroSection() {
               fontSize: fontSize,
               fontWeight: 900,
             }}
-            color="rgb(255, 255, 255)"
+            color="rgb(232, 200, 150)"
             spread={5}
             density={5}
             animation={{
@@ -111,7 +85,7 @@ export default function HeroSection() {
           as="p"
           delay={0.35}
           y={20}
-          className="max-w-[160px] font-light uppercase leading-snug tracking-wide text-[#D7E2EA] sm:max-w-[220px] md:max-w-[260px]"
+          className="max-w-[160px] font-light uppercase leading-snug tracking-wide text-[#9A9A9A] sm:max-w-[220px] md:max-w-[260px]"
           style={{ fontSize: 'clamp(0.75rem, 1.4vw, 1.5rem)' }}
         >
           the premier technology symposium & magazine by mit department, university of kelaniya

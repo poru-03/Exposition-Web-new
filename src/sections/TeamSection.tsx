@@ -262,19 +262,19 @@ export default function TeamSection() {
     >
       {/* Section Header */}
       <ScrollReveal className="flex flex-col items-center justify-center text-center mb-16 sm:mb-20">
-        <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md">
-          <Users className="h-3.5 w-3.5 text-indigo-400" />
+        <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#B8894F]/30 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#E8C896] backdrop-blur-md">
+          <Users className="h-3.5 w-3.5 text-[#E8C896]" />
           The Visionaries Behind Exposition
         </span>
 
         <h2
-          className="hero-heading text-center font-black uppercase leading-none tracking-tight text-[#D7E2EA]"
-          style={{ fontSize: 'clamp(2.2rem, 6.5vw, 84px)' }}
+          className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
+          style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}
         >
           Our Team
         </h2>
 
-        <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light">
+        <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#9A9A9A] font-light">
           Meet the dedicated committee of 18 leaders, editors, creatives, and technical pioneers from the
           Department of Industrial Management (MIT), University of Kelaniya driving the 21st Edition.
         </p>
@@ -285,11 +285,10 @@ export default function TeamSection() {
             <button
               key={dept}
               onClick={() => setActiveDepartment(dept)}
-              className={`rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 border ${
-                activeDepartment === dept
-                  ? 'bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.4)]'
-                  : 'bg-[#161616] text-[#D7E2EA]/60 border-white/10 hover:border-white/30 hover:text-white'
-              }`}
+              className={`rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 border ${activeDepartment === dept
+                ? 'bg-gradient-to-r from-[#B8894F] to-[#E8C896] text-black border-transparent shadow-[0_0_20px_rgba(184,137,79,0.3)]'
+                : 'bg-[#161616] text-[#9A9A9A] border-white/10 hover:border-[#B8894F]/30 hover:text-white'
+                }`}
             >
               {dept}
             </button>
@@ -309,150 +308,149 @@ export default function TeamSection() {
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
         >
-        <div className="relative w-full h-[460px] sm:h-[500px] md:h-[540px] flex items-center justify-center">
-          {/* 3D Carousel Wrapper */}
-          <div className="relative w-full h-full flex items-center justify-center [perspective:1200px]">
-            {filteredMembers.map((member, index) => {
-              const total = filteredMembers.length;
-              const offset = index - currentIndex;
-              let pos = (offset + total) % total;
-              if (pos > Math.floor(total / 2)) {
-                pos = pos - total;
-              }
+          <div className="relative w-full h-[460px] sm:h-[500px] md:h-[540px] flex items-center justify-center">
+            {/* 3D Carousel Wrapper */}
+            <div className="relative w-full h-full flex items-center justify-center [perspective:1200px]">
+              {filteredMembers.map((member, index) => {
+                const total = filteredMembers.length;
+                const offset = index - currentIndex;
+                let pos = (offset + total) % total;
+                if (pos > Math.floor(total / 2)) {
+                  pos = pos - total;
+                }
 
-              const isCenter = pos === 0;
-              const isAdjacent = Math.abs(pos) === 1;
-              const isSecondAdjacent = Math.abs(pos) === 2;
+                const isCenter = pos === 0;
+                const isAdjacent = Math.abs(pos) === 1;
+                const isSecondAdjacent = Math.abs(pos) === 2;
 
-              return (
-                <div
-                  key={member.id}
-                  onClick={() => setCurrentIndex(index)}
-                  className="absolute w-[260px] sm:w-[300px] md:w-[340px] h-[430px] sm:h-[470px] md:h-[500px] transition-all duration-500 ease-out cursor-pointer rounded-3xl overflow-hidden border border-white/15 bg-[#141414]/95 shadow-[0_20px_60px_rgba(0,0,0,0.9)] flex flex-col justify-between"
-                  style={{
-                    transform: `
+                return (
+                  <div
+                    key={member.id}
+                    onClick={() => setCurrentIndex(index)}
+                    className="absolute w-[260px] sm:w-[300px] md:w-[340px] h-[430px] sm:h-[470px] md:h-[500px] transition-all duration-500 ease-out cursor-pointer rounded-3xl overflow-hidden border border-white/15 bg-[#141414]/95 shadow-[0_20px_60px_rgba(0,0,0,0.9)] flex flex-col justify-between"
+                    style={{
+                      transform: `
                       translateX(${pos * 48}%) 
                       scale(${isCenter ? 1 : isAdjacent ? 0.85 : isSecondAdjacent ? 0.7 : 0.5})
                       rotateY(${pos * -12}deg)
                       translateZ(${isCenter ? 40 : 0}px)
                     `,
-                    zIndex: isCenter ? 20 : isAdjacent ? 10 : isSecondAdjacent ? 5 : 1,
-                    opacity: isCenter ? 1 : isAdjacent ? 0.45 : isSecondAdjacent ? 0.2 : 0,
-                    filter: isCenter ? 'blur(0px)' : 'blur(3px)',
-                    visibility: Math.abs(pos) > 2 ? 'hidden' : 'visible',
-                  }}
-                >
-                  {/* Member Photo */}
-                  <div className="relative h-[60%] w-full overflow-hidden">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-[#141414]/30 to-transparent" />
+                      zIndex: isCenter ? 20 : isAdjacent ? 10 : isSecondAdjacent ? 5 : 1,
+                      opacity: isCenter ? 1 : isAdjacent ? 0.45 : isSecondAdjacent ? 0.2 : 0,
+                      filter: isCenter ? 'blur(0px)' : 'blur(3px)',
+                      visibility: Math.abs(pos) > 2 ? 'hidden' : 'visible',
+                    }}
+                  >
+                    {/* Member Photo */}
+                    <div className="relative h-[60%] w-full overflow-hidden">
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-[#141414]/30 to-transparent" />
 
-                    {/* Department Tag */}
-                    <div className="absolute top-3 left-3">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-black/70 border border-white/20 px-2.5 py-1 text-[0.62rem] font-mono uppercase tracking-wider text-white backdrop-blur-md">
-                        <Sparkles className="size-2.5 text-indigo-400" />
-                        {member.department}
-                      </span>
+                      {/* Department Tag */}
+                      <div className="absolute top-3 left-3">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-black/70 border border-[#B8894F]/30 px-2.5 py-1 text-[0.62rem] font-mono uppercase tracking-wider text-[#E8C896] backdrop-blur-md">
+                          <Sparkles className="size-2.5 text-[#E8C896]" />
+                          {member.department}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Member Details */}
+                    <div className="p-5 flex flex-col justify-between flex-1">
+                      <div>
+                        <h3 className="text-base sm:text-lg font-black uppercase tracking-tight text-white line-clamp-1">
+                          {member.name}
+                        </h3>
+                        <p className="text-xs sm:text-sm font-medium text-[#E8C896] line-clamp-1 mt-0.5">
+                          {member.position}
+                        </p>
+                      </div>
+
+                      {/* Social & Contact Links (Email, LinkedIn, WhatsApp) */}
+                      <div className="pt-3 border-t border-white/10 flex items-center justify-between gap-2">
+                        {/* Email Link */}
+                        <a
+                          href={`mailto:${member.email}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-white/5 border border-white/10 py-2 text-[0.68rem] font-semibold text-white/80 hover:bg-white hover:text-black hover:border-white transition-all"
+                          title="Send Email"
+                        >
+                          <Mail className="size-3.5 text-[#E8C896]" />
+                          <span className="hidden sm:inline">Email</span>
+                        </a>
+
+                        {/* LinkedIn Link */}
+                        <a
+                          href={member.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-sky-500/10 border border-sky-500/30 py-2 text-[0.68rem] font-semibold text-sky-200 hover:bg-sky-500 hover:text-white transition-all"
+                          title="LinkedIn Profile"
+                        >
+                          <FaLinkedinIn className="size-3.5 text-sky-400" />
+                          <span className="hidden sm:inline">LinkedIn</span>
+                        </a>
+
+                        {/* WhatsApp Link */}
+                        <a
+                          href={member.whatsapp}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 py-2 text-[0.68rem] font-semibold text-emerald-200 hover:bg-emerald-500 hover:text-white transition-all"
+                          title="WhatsApp Chat"
+                        >
+                          <FaWhatsapp className="size-3.5 text-emerald-400" />
+                          <span className="hidden sm:inline">WhatsApp</span>
+                        </a>
+                      </div>
                     </div>
                   </div>
+                );
+              })}
+            </div>
 
-                  {/* Member Details */}
-                  <div className="p-5 flex flex-col justify-between flex-1">
-                    <div>
-                      <h3 className="text-base sm:text-lg font-black uppercase tracking-tight text-white line-clamp-1">
-                        {member.name}
-                      </h3>
-                      <p className="text-xs sm:text-sm font-medium text-indigo-300 line-clamp-1 mt-0.5">
-                        {member.position}
-                      </p>
-                    </div>
+            {/* Previous & Next Navigation Buttons */}
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 rounded-full h-11 w-11 z-30 bg-[#161616]/80 border-white/20 text-white hover:bg-white hover:text-black hover:border-white transition-all backdrop-blur-md"
+              onClick={handlePrev}
+              aria-label="Previous Team Member"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </Button>
 
-                    {/* Social & Contact Links (Email, LinkedIn, WhatsApp) */}
-                    <div className="pt-3 border-t border-white/10 flex items-center justify-between gap-2">
-                      {/* Email Link */}
-                      <a
-                        href={`mailto:${member.email}`}
-                        onClick={(e) => e.stopPropagation()}
-                        className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-white/5 border border-white/10 py-2 text-[0.68rem] font-semibold text-white/80 hover:bg-white hover:text-black hover:border-white transition-all"
-                        title="Send Email"
-                      >
-                        <Mail className="size-3.5 text-rose-400" />
-                        <span className="hidden sm:inline">Email</span>
-                      </a>
-
-                      {/* LinkedIn Link */}
-                      <a
-                        href={member.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-sky-500/10 border border-sky-500/30 py-2 text-[0.68rem] font-semibold text-sky-200 hover:bg-sky-500 hover:text-white transition-all"
-                        title="LinkedIn Profile"
-                      >
-                        <FaLinkedinIn className="size-3.5 text-sky-400" />
-                        <span className="hidden sm:inline">LinkedIn</span>
-                      </a>
-
-                      {/* WhatsApp Link */}
-                      <a
-                        href={member.whatsapp}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 py-2 text-[0.68rem] font-semibold text-emerald-200 hover:bg-emerald-500 hover:text-white transition-all"
-                        title="WhatsApp Chat"
-                      >
-                        <FaWhatsapp className="size-3.5 text-emerald-400" />
-                        <span className="hidden sm:inline">WhatsApp</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 rounded-full h-11 w-11 z-30 bg-[#161616]/80 border-white/20 text-white hover:bg-white hover:text-black hover:border-white transition-all backdrop-blur-md"
+              onClick={handleNext}
+              aria-label="Next Team Member"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </Button>
           </div>
 
-          {/* Previous & Next Navigation Buttons */}
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 rounded-full h-11 w-11 z-30 bg-[#161616]/80 border-white/20 text-white hover:bg-white hover:text-black hover:border-white transition-all backdrop-blur-md"
-            onClick={handlePrev}
-            aria-label="Previous Team Member"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </Button>
-
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 rounded-full h-11 w-11 z-30 bg-[#161616]/80 border-white/20 text-white hover:bg-white hover:text-black hover:border-white transition-all backdrop-blur-md"
-            onClick={handleNext}
-            aria-label="Next Team Member"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </Button>
-        </div>
-
-        {/* Carousel Pagination Dots */}
-        <div className="flex items-center justify-center gap-2 mt-4">
-          {filteredMembers.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentIndex(i)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === currentIndex ? 'w-8 bg-indigo-400' : 'w-2 bg-white/20 hover:bg-white/40'
-              }`}
-              aria-label={`Go to team member ${i + 1}`}
-            />
-          ))}
-        </div>
-      </motion.div>
-    </AnimatePresence>
-  </section>
+          {/* Carousel Pagination Dots */}
+          <div className="flex items-center justify-center gap-2 mt-4">
+            {filteredMembers.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentIndex(i)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? 'w-8 bg-[#E8C896]' : 'w-2 bg-white/20 hover:bg-white/40'
+                  }`}
+                aria-label={`Go to team member ${i + 1}`}
+              />
+            ))}
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </section>
   );
 }

@@ -181,7 +181,7 @@ function SpeakerLandscapeCard({ speaker }: { speaker: KeynoteSpeaker }) {
     <motion.div
       whileHover={{ scale: 1.03 }}
       transition={{ duration: 0.25 }}
-      className="group relative w-[360px] sm:w-[440px] md:w-[480px] h-[250px] sm:h-[270px] rounded-3xl overflow-hidden border border-[#D7E2EA]/15 bg-[#141414]/95 shadow-[0_25px_60px_rgba(0,0,0,0.9)] p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:border-white/40 shrink-0"
+      className="group relative w-[360px] sm:w-[440px] md:w-[480px] h-[250px] sm:h-[270px] rounded-3xl overflow-hidden border border-white/15 bg-[#141414]/95 shadow-[0_25px_60px_rgba(0,0,0,0.9)] p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:border-[#B8894F]/40 shrink-0"
     >
       {/* Background Speaker Photo Artwork Overlay */}
       <div className="absolute right-0 top-0 bottom-0 w-[55%] opacity-30 group-hover:opacity-45 transition-opacity duration-300 pointer-events-none overflow-hidden">
@@ -196,16 +196,16 @@ function SpeakerLandscapeCard({ speaker }: { speaker: KeynoteSpeaker }) {
       {/* Top Header Row: Issue Badge & Category Tag */}
       <div className="relative z-10 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[0.7rem] font-mono font-bold uppercase tracking-wider text-[#D7E2EA]">
+          <span className="rounded-full border border-[#B8894F]/30 bg-[#B8894F]/10 px-3 py-1 text-[0.7rem] font-mono font-bold uppercase tracking-wider text-[#E8C896]">
             {speaker.issue}
           </span>
-          <span className="text-[0.7rem] font-semibold uppercase tracking-wider text-indigo-400">
+          <span className="text-[0.7rem] font-semibold uppercase tracking-wider text-[#E8C896]">
             {speaker.category}
           </span>
         </div>
 
         {speaker.highlight && (
-          <span className="text-[0.65rem] font-mono text-white/40 uppercase tracking-widest hidden sm:inline-block">
+          <span className="text-[0.65rem] font-mono text-[#9A9A9A] uppercase tracking-widest hidden sm:inline-block">
             {speaker.highlight}
           </span>
         )}
@@ -213,23 +213,23 @@ function SpeakerLandscapeCard({ speaker }: { speaker: KeynoteSpeaker }) {
 
       {/* Main Content Body */}
       <div className="relative z-10 space-y-1.5 pr-12 sm:pr-16">
-        <h4 className="text-lg sm:text-xl md:text-2xl font-black uppercase tracking-tight text-[#D7E2EA] group-hover:text-white transition-colors truncate">
+        <h4 className="text-lg sm:text-xl md:text-2xl font-black uppercase tracking-tight text-white group-hover:text-[#E8C896] transition-colors truncate">
           {speaker.name}
         </h4>
-        <p className="text-xs sm:text-sm font-medium text-white/50 truncate">
+        <p className="text-xs sm:text-sm font-medium text-[#9A9A9A] truncate">
           {speaker.title}
         </p>
-        <p className="text-xs sm:text-sm text-[#D7E2EA]/75 font-light line-clamp-2 leading-relaxed mt-1">
+        <p className="text-xs sm:text-sm text-white/80 font-light line-clamp-2 leading-relaxed mt-1">
           &ldquo;{speaker.quote}&rdquo;
         </p>
       </div>
 
       {/* Bottom Footer: Company Affiliation + Action Button */}
       <div className="relative z-10 flex items-center justify-between pt-3 border-t border-white/10">
-        <span className="text-[0.7rem] font-mono text-white/50 truncate max-w-[220px]">
+        <span className="text-[0.7rem] font-mono text-[#9A9A9A] truncate max-w-[220px]">
           {speaker.company}
         </span>
-        <div className="flex items-center gap-1.5 text-xs font-semibold text-white/80 group-hover:text-white group-hover:translate-x-1 transition-all">
+        <div className="flex items-center gap-1.5 text-xs font-semibold text-[#E8C896] group-hover:text-white group-hover:translate-x-1 transition-all">
           <span>Explore</span>
           <ArrowRight className="h-3.5 w-3.5" />
         </div>
@@ -274,40 +274,40 @@ export default function KeynoteSpeakersSection() {
           className="absolute inset-0 pointer-events-none -z-10"
           style={{
             opacity: glowOpacity,
-            background: 'radial-gradient(circle at 50% 30%, rgba(99, 102, 241, 0.15), transparent 65%)',
+            background: 'radial-gradient(circle at 50% 30%, rgba(184, 137, 79, 0.12), transparent 65%)',
           }}
         />
       )}
 
       {/* Section Header */}
       <ScrollReveal className="flex flex-col items-center justify-center text-center mb-16 sm:mb-20 px-[5%]">
-        <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md">
-          <Mic2 className="h-3.5 w-3.5 text-[#D7E2EA]" />
+        <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#B8894F]/30 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#E8C896] backdrop-blur-md">
+          <Mic2 className="h-3.5 w-3.5 text-[#E8C896]" />
           Voices of Impact & Inspiration
         </span>
 
         <h2
-          className="hero-heading text-center font-black uppercase leading-none tracking-tight text-[#D7E2EA]"
-          style={{ fontSize: 'clamp(2.2rem, 6.5vw, 84px)' }}
+          className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
+          style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}
         >
           Keynote Speakers
         </h2>
 
-        <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light">
+        <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#9A9A9A] font-light">
           Distinguished technology visionaries, corporate icons, and creative pioneers who
           have headlined the Exposition symposium and shaped the global technological landscape.
         </p>
       </ScrollReveal>
 
       <div className="space-y-16 sm:space-y-20">
-        
+
         {/* ================= 1. CIRCULAR TESTIMONIALS 3D SPOTLIGHT ================= */}
         <div className="mx-auto max-w-6xl px-[5%]">
           <ScrollReveal delay={0.15} y={30}>
             <div className="bg-transparent border-none p-0 flex flex-col items-center justify-center shadow-none">
               <div className="flex items-center gap-2 mb-4 self-start">
-                <span className="h-2 w-2 rounded-full bg-indigo-400 animate-pulse" />
-                <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D7E2EA]/60">
+                <span className="h-2 w-2 rounded-full bg-[#E8C896] animate-pulse" />
+                <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#9A9A9A]">
                   Featured Voices Spotlight
                 </span>
               </div>
@@ -317,12 +317,12 @@ export default function KeynoteSpeakersSection() {
                   testimonials={TESTIMONIALS_DATA}
                   autoplay={true}
                   colors={{
-                    name: '#D7E2EA',
-                    designation: '#94a3b8',
-                    testimony: '#cbd5e1',
+                    name: '#FFFFFF',
+                    designation: '#9A9A9A',
+                    testimony: '#D5D5D5',
                     arrowBackground: '#1e1e1e',
-                    arrowForeground: '#f1f1f7',
-                    arrowHoverBackground: '#6366f1',
+                    arrowForeground: '#E8C896',
+                    arrowHoverBackground: '#B8894F',
                   }}
                   fontSizes={{
                     name: 'clamp(1.5rem, 2.5vw, 2.2rem)',
@@ -338,11 +338,11 @@ export default function KeynoteSpeakersSection() {
         {/* ================= 2. SCROLL-DRIVEN DUAL-ROW PARALLAX STREAM ================= */}
         <div className="relative w-full overflow-hidden space-y-6 pt-4">
           <ScrollReveal delay={0.2} className="flex items-center justify-between px-[5%] max-w-7xl mx-auto">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D7E2EA]/60 flex items-center gap-2">
-              <span className="size-2 rounded-full bg-emerald-400" />
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#9A9A9A] flex items-center gap-2">
+              <span className="size-2 rounded-full bg-[#E8C896]" />
               All Keynote Speakers Roster ({ALL_SPEAKERS.length})
             </span>
-            <span className="text-[0.65rem] font-mono text-white/40 uppercase tracking-wider hidden sm:inline-block">
+            <span className="text-[0.65rem] font-mono text-[#9A9A9A]/60 uppercase tracking-wider hidden sm:inline-block">
               Scroll-reactive parallax stream
             </span>
           </ScrollReveal>

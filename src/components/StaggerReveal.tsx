@@ -25,7 +25,7 @@ export function StaggerContainer({
       variants={container}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.1 }}
+      viewport={{ once: true, amount: 0.05, margin: '0px 0px -30px 0px' }}
     >
       {children}
     </motion.div>
@@ -36,8 +36,8 @@ export function StaggerCard({ children, className }: { children: ReactNode; clas
   const reducedMotion = useReducedMotion();
 
   const item = {
-    hidden: reducedMotion ? { opacity: 1 } : { opacity: 0, y: 28, scale: 0.97 },
-    show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: EASE } },
+    hidden: reducedMotion ? { opacity: 1 } : { opacity: 0, y: 24, scale: 0.98 },
+    show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: EASE } },
   };
 
   return (

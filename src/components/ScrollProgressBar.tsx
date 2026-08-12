@@ -12,7 +12,7 @@ export default function ScrollProgressBar() {
     >
       <div
         className="h-full w-full"
-        style={{ background: 'linear-gradient(90deg, #FF4D00 0%, #a855f7 50%, #22d3ee 100%)' }}
+        style={{ background: 'linear-gradient(90deg, #B8894F 0%, #E8C896 50%, #FFFFFF 100%)' }}
       />
     </motion.div>
   );

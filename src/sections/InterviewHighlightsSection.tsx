@@ -294,19 +294,19 @@ export default function InterviewHighlightsSection() {
     >
       {/* Section Header */}
       <ScrollReveal className="flex flex-col items-center justify-center text-center mb-16 sm:mb-20">
-        <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/20 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D7E2EA]/80 backdrop-blur-md">
-          <Radio className="h-3.5 w-3.5 text-rose-400 animate-pulse" />
+        <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#B8894F]/30 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#E8C896] backdrop-blur-md">
+          <Radio className="h-3.5 w-3.5 text-[#E8C896] animate-pulse" />
           Exposition Talks & Executive Dialogues
         </span>
 
         <h2
-          className="hero-heading text-center font-black uppercase leading-none tracking-tight text-[#D7E2EA]"
-          style={{ fontSize: 'clamp(2.2rem, 6.5vw, 84px)' }}
+          className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
+          style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}
         >
           Interview Highlights
         </h2>
 
-        <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#D7E2EA]/70 font-light">
+        <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#9A9A9A] font-light">
           In-depth conversations, visionary insights, and strategic perspectives from distinguished
           industry titans and innovators who headlined our exclusive Exposition interviews.
         </p>
@@ -315,13 +315,13 @@ export default function InterviewHighlightsSection() {
       {/* Main Two-Column Layout */}
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-          
+
           {/* ================= LEFT COLUMN: Scrollable Interviewees List (With Auto Display) ================= */}
           <div className="lg:col-span-5 flex flex-col space-y-3">
             <ScrollReveal delay={0.05} className="flex items-center justify-between px-2 pb-1">
               <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-rose-500 animate-ping" />
-                <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D7E2EA]/70">
+                <span className="h-2 w-2 rounded-full bg-[#E8C896] animate-ping" />
+                <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#9A9A9A]">
                   Featured Leaders ({INTERVIEWS_DATA.length})
                 </span>
               </div>
@@ -329,7 +329,7 @@ export default function InterviewHighlightsSection() {
               {/* Autoplay Pause / Play Toggle */}
               <button
                 onClick={() => setIsAutoPlaying((prev) => !prev)}
-                className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.68rem] font-mono font-medium text-white/60 hover:text-white hover:border-white/30 transition-all"
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.68rem] font-mono font-medium text-[#9A9A9A] hover:text-white hover:border-white/30 transition-all"
                 title={isAutoPlaying ? 'Pause Auto Display' : 'Resume Auto Display'}
               >
                 {isAutoPlaying ? (
@@ -360,18 +360,16 @@ export default function InterviewHighlightsSection() {
                         setSelectedIndex(index);
                         setIsAutoPlaying(false);
                       }}
-                      className={`w-full text-left rounded-2xl p-3.5 sm:p-4 transition-all duration-300 flex items-center justify-between gap-3.5 border ${
-                        isSelected
-                          ? 'bg-[#1e1e1e] border-rose-500/50 shadow-[0_10px_30px_rgba(244,63,94,0.15)] scale-[1.01]'
-                          : 'bg-[#141414]/90 border-white/10 hover:border-white/25 hover:bg-[#181818]'
-                      }`}
+                      className={`w-full text-left rounded-2xl p-3.5 sm:p-4 transition-all duration-300 flex items-center justify-between gap-3.5 border ${isSelected
+                        ? 'bg-[#1e1e1e] border-[#B8894F]/60 shadow-[0_10px_30px_rgba(184,137,79,0.15)] scale-[1.01]'
+                        : 'bg-[#141414]/90 border-white/10 hover:border-[#B8894F]/30 hover:bg-[#181818]'
+                        }`}
                     >
                       <div className="flex items-center gap-3.5 min-w-0">
                         {/* Avatar */}
                         <div
-                          className={`size-12 sm:size-14 rounded-xl overflow-hidden shrink-0 border-2 transition-all ${
-                            isSelected ? 'border-rose-400 shadow-md' : 'border-white/10 opacity-75'
-                          }`}
+                          className={`size-12 sm:size-14 rounded-xl overflow-hidden shrink-0 border-2 transition-all ${isSelected ? 'border-[#E8C896] shadow-md' : 'border-white/10 opacity-75'
+                            }`}
                         >
                           <img
                             src={interview.image}
@@ -384,20 +382,19 @@ export default function InterviewHighlightsSection() {
                         <div className="flex flex-col min-w-0 pr-1">
                           <div className="flex items-center gap-2">
                             <span
-                              className={`text-xs sm:text-sm font-bold uppercase tracking-tight truncate ${
-                                isSelected ? 'text-white' : 'text-[#D7E2EA]/85'
-                              }`}
+                              className={`text-xs sm:text-sm font-bold uppercase tracking-tight truncate ${isSelected ? 'text-white' : 'text-white/85'
+                                }`}
                             >
                               {interview.name}
                             </span>
-                            <span className="text-[0.62rem] font-mono px-2 py-0.5 rounded-full bg-white/10 text-white/70 shrink-0">
+                            <span className="text-[0.62rem] font-mono px-2 py-0.5 rounded-full border border-[#B8894F]/30 bg-[#B8894F]/10 text-[#E8C896] shrink-0">
                               {interview.issue}
                             </span>
                           </div>
-                          <p className="text-[0.72rem] text-white/50 truncate mt-0.5">
+                          <p className="text-[0.72rem] text-[#9A9A9A] truncate mt-0.5">
                             {interview.position} • {interview.company}
                           </p>
-                          <span className="text-[0.65rem] font-medium text-rose-400/90 truncate mt-0.5">
+                          <span className="text-[0.65rem] font-medium text-[#E8C896] truncate mt-0.5">
                             {interview.category}
                           </span>
                         </div>
@@ -406,7 +403,7 @@ export default function InterviewHighlightsSection() {
                       {/* Active Chevron / Indicator */}
                       <div className="shrink-0">
                         {isSelected ? (
-                          <div className="size-8 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center border border-rose-500/40">
+                          <div className="size-8 rounded-full bg-[#B8894F]/20 text-[#E8C896] flex items-center justify-center border border-[#B8894F]/40">
                             <ArrowRight className="size-4" />
                           </div>
                         ) : (
@@ -431,7 +428,7 @@ export default function InterviewHighlightsSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.35, ease: 'easeOut' }}
-                className="relative rounded-[32px] overflow-hidden border border-[#D7E2EA]/15 bg-[#141414]/95 p-6 sm:p-8 lg:p-9 shadow-[0_30px_70px_rgba(0,0,0,0.9)] flex flex-col justify-between"
+                className="relative rounded-[32px] overflow-hidden border border-white/15 bg-[#141414]/95 p-6 sm:p-8 lg:p-9 shadow-[0_30px_70px_rgba(0,0,0,0.9)] flex flex-col justify-between"
               >
                 {/* Background Artwork Watermark */}
                 <div className="absolute right-0 top-0 bottom-0 w-[50%] opacity-15 pointer-events-none overflow-hidden">
@@ -446,16 +443,16 @@ export default function InterviewHighlightsSection() {
                 {/* Top Row: Tag, Issue Pill, Duration & Live Indicator */}
                 <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-white/10">
                   <div className="flex items-center gap-2">
-                    <span className="rounded-full border border-rose-500/40 bg-rose-500/10 px-3 py-1 text-xs font-mono font-bold uppercase tracking-wider text-rose-300">
+                    <span className="rounded-full border border-[#B8894F]/40 bg-[#B8894F]/10 px-3 py-1 text-xs font-mono font-bold uppercase tracking-wider text-[#E8C896]">
                       {activeItem.issue} Special
                     </span>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-white/60">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-[#9A9A9A]">
                       {activeItem.category}
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2 text-xs font-mono text-white/50 bg-white/5 px-3 py-1 rounded-full border border-white/10">
-                    <Video className="size-3.5 text-rose-400" />
+                  <div className="flex items-center gap-2 text-xs font-mono text-[#9A9A9A] bg-white/5 px-3 py-1 rounded-full border border-white/10">
+                    <Video className="size-3.5 text-[#E8C896]" />
                     <span>{activeItem.duration}</span>
                   </div>
                 </div>
@@ -463,7 +460,7 @@ export default function InterviewHighlightsSection() {
                 {/* Main Profile Info & Photo */}
                 <div className="relative z-10 my-6 flex flex-col sm:flex-row items-start sm:items-center gap-6">
                   {/* High-Res Portrait Frame */}
-                  <div className="relative size-28 sm:size-32 rounded-2xl overflow-hidden border-2 border-rose-400/40 shadow-2xl shrink-0 group">
+                  <div className="relative size-28 sm:size-32 rounded-2xl overflow-hidden border-2 border-[#E8C896]/40 shadow-2xl shrink-0 group">
                     <img
                       src={activeItem.image}
                       alt={activeItem.name}
@@ -471,7 +468,7 @@ export default function InterviewHighlightsSection() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute bottom-2 left-2 flex items-center gap-1 text-[0.62rem] font-mono font-bold text-white bg-black/60 px-2 py-0.5 rounded-md backdrop-blur-sm">
-                      <Sparkles className="size-2.5 text-amber-400" />
+                      <Sparkles className="size-2.5 text-[#E8C896]" />
                       Key Voice
                     </div>
                   </div>
@@ -481,11 +478,11 @@ export default function InterviewHighlightsSection() {
                     <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white">
                       {activeItem.name}
                     </h3>
-                    <div className="flex items-center gap-2 text-sm sm:text-base font-semibold text-rose-300">
+                    <div className="flex items-center gap-2 text-sm sm:text-base font-semibold text-[#E8C896]">
                       <User className="size-4 text-white/40 shrink-0" />
                       <span className="truncate">{activeItem.position}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-white/60">
+                    <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-[#9A9A9A]">
                       <Building className="size-4 text-white/40 shrink-0" />
                       <span className="truncate">{activeItem.company}</span>
                     </div>
@@ -494,22 +491,22 @@ export default function InterviewHighlightsSection() {
 
                 {/* Quote / Takeaway Card */}
                 <div className="relative z-10 rounded-2xl bg-black/40 border border-white/10 p-5 mb-6">
-                  <Quote className="size-5 text-rose-400/60 mb-2" />
-                  <blockquote className="text-sm sm:text-base text-[#D7E2EA]/90 font-light leading-relaxed italic">
+                  <Quote className="size-5 text-[#E8C896]/70 mb-2" />
+                  <blockquote className="text-sm sm:text-base text-white/90 font-light leading-relaxed italic">
                     &ldquo;{activeItem.quote}&rdquo;
                   </blockquote>
                 </div>
 
                 {/* Topics Pills */}
                 <div className="relative z-10 space-y-2 mb-6">
-                  <span className="text-[0.7rem] font-mono uppercase tracking-wider text-white/40">
+                  <span className="text-[0.7rem] font-mono uppercase tracking-wider text-[#9A9A9A]">
                     Core Discussion Tracks
                   </span>
                   <div className="flex flex-wrap gap-2">
                     {activeItem.topics.map((topic, i) => (
                       <span
                         key={i}
-                        className="rounded-xl border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80"
+                        className="rounded-xl border border-white/10 bg-white/5 px-3 py-1 text-xs text-[#9A9A9A]"
                       >
                         #{topic}
                       </span>
@@ -519,19 +516,19 @@ export default function InterviewHighlightsSection() {
 
                 {/* Social & Broadcast Links Group */}
                 <div className="relative z-10 pt-5 border-t border-white/10 space-y-3">
-                  <span className="text-xs font-mono uppercase tracking-wider text-white/50 block">
+                  <span className="text-xs font-mono uppercase tracking-wider text-[#9A9A9A] block">
                     Watch & Explore Interview Across Platforms
                   </span>
 
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                    {/* YouTube Button */}
+                    {/* YouTube Watch Button */}
                     <a
                       href={activeItem.socials.youtube}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 rounded-xl bg-red-600/20 border border-red-500/40 px-3 py-2.5 text-xs font-bold text-red-200 hover:bg-red-600 hover:text-white hover:shadow-[0_0_20px_rgba(239,68,68,0.5)] transition-all"
+                      className="flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 px-3 py-2.5 text-xs font-bold text-[#9A9A9A] hover:bg-[#B8894F]/15 hover:text-[#E8C896] hover:border-[#B8894F]/40 transition-all"
                     >
-                      <FaYoutube className="size-4" />
+                      <FaYoutube className="size-4 text-[#E8C896]" />
                       <span>YouTube</span>
                     </a>
 
@@ -540,9 +537,9 @@ export default function InterviewHighlightsSection() {
                       href={activeItem.socials.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 rounded-xl bg-sky-600/20 border border-sky-500/40 px-3 py-2.5 text-xs font-bold text-sky-200 hover:bg-sky-600 hover:text-white hover:shadow-[0_0_20px_rgba(14,165,233,0.5)] transition-all"
+                      className="flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 px-3 py-2.5 text-xs font-bold text-[#9A9A9A] hover:bg-[#B8894F]/15 hover:text-[#E8C896] hover:border-[#B8894F]/40 transition-all"
                     >
-                      <FaLinkedinIn className="size-4" />
+                      <FaLinkedinIn className="size-4 text-[#E8C896]" />
                       <span>LinkedIn</span>
                     </a>
 
@@ -551,9 +548,9 @@ export default function InterviewHighlightsSection() {
                       href={activeItem.socials.facebook}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 rounded-xl bg-blue-600/20 border border-blue-500/40 px-3 py-2.5 text-xs font-bold text-blue-200 hover:bg-blue-600 hover:text-white hover:shadow-[0_0_20px_rgba(37,99,235,0.5)] transition-all"
+                      className="flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 px-3 py-2.5 text-xs font-bold text-[#9A9A9A] hover:bg-[#B8894F]/15 hover:text-[#E8C896] hover:border-[#B8894F]/40 transition-all"
                     >
-                      <FaFacebookF className="size-3.5" />
+                      <FaFacebookF className="size-3.5 text-[#E8C896]" />
                       <span>Facebook</span>
                     </a>
 
@@ -562,9 +559,9 @@ export default function InterviewHighlightsSection() {
                       href={activeItem.socials.instagram}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 rounded-xl bg-pink-600/20 border border-pink-500/40 px-3 py-2.5 text-xs font-bold text-pink-200 hover:bg-pink-600 hover:text-white hover:shadow-[0_0_20px_rgba(236,72,153,0.5)] transition-all"
+                      className="flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 px-3 py-2.5 text-xs font-bold text-[#9A9A9A] hover:bg-[#B8894F]/15 hover:text-[#E8C896] hover:border-[#B8894F]/40 transition-all"
                     >
-                      <FaInstagram className="size-4" />
+                      <FaInstagram className="size-4 text-[#E8C896]" />
                       <span>Instagram</span>
                     </a>
                   </div>
