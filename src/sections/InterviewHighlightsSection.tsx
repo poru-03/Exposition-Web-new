@@ -12,6 +12,7 @@ import {
   User,
   Layers,
   FileText,
+  MessageSquareQuote,
 } from 'lucide-react';
 import {
   FaYoutube,
@@ -22,6 +23,7 @@ import {
 import ScrollReveal from '../components/ScrollReveal';
 import { StaggerContainer, StaggerCard } from '../components/StaggerReveal';
 import Testimonials, { TestimonialCardProps } from '@/components/ui/twitter-testimonial-cards';
+import { Testimonial } from '@/components/ui/testimonial';
 
 export type InterviewItem = {
   id: string;
@@ -183,7 +185,7 @@ export const INTERVIEWS_DATA: InterviewItem[] = [
 export default function InterviewHighlightsSection() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [viewMode, setViewMode] = useState<'profile' | 'social_stack'>('social_stack');
+  const [viewMode, setViewMode] = useState<'social_stack' | 'editorial' | 'profile'>('social_stack');
 
   const activeItem = INTERVIEWS_DATA[selectedIndex];
 
@@ -265,10 +267,10 @@ export default function InterviewHighlightsSection() {
         </p>
 
         {/* View Mode Switcher Pills */}
-        <div className="mt-2.5 flex items-center justify-center gap-1.5 p-1 rounded-full border border-white/15 bg-black/60 backdrop-blur-lg">
+        <div className="mt-2.5 flex flex-wrap items-center justify-center gap-1.5 p-1 rounded-full border border-white/15 bg-black/60 backdrop-blur-lg">
           <button
             onClick={() => setViewMode('social_stack')}
-            className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+            className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
               viewMode === 'social_stack'
                 ? 'bg-gradient-to-r from-[#B8894F] to-[#E8C896] text-black shadow-md'
                 : 'text-[#9A9A9A] hover:text-white hover:bg-white/5'
@@ -279,8 +281,20 @@ export default function InterviewHighlightsSection() {
           </button>
 
           <button
+            onClick={() => setViewMode('editorial')}
+            className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+              viewMode === 'editorial'
+                ? 'bg-gradient-to-r from-[#B8894F] to-[#E8C896] text-black shadow-md'
+                : 'text-[#9A9A9A] hover:text-white hover:bg-white/5'
+            }`}
+          >
+            <MessageSquareQuote className="size-3" />
+            <span>Editorial Quote</span>
+          </button>
+
+          <button
             onClick={() => setViewMode('profile')}
-            className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+            className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
               viewMode === 'profile'
                 ? 'bg-white text-black shadow-md'
                 : 'text-[#9A9A9A] hover:text-white hover:bg-white/5'
@@ -410,9 +424,9 @@ export default function InterviewHighlightsSection() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.35, ease: 'easeOut' }}
-                  className="w-full flex flex-col items-center justify-center py-4"
+                  className="w-full flex flex-col items-center justify-center py-2"
                 >
-                  <div className="flex items-center gap-2 mb-3 self-center sm:self-start">
+                  <div className="flex items-center gap-2 mb-2 self-center sm:self-start">
                     <span className="h-2 w-2 rounded-full bg-[#E8C896] animate-pulse" />
                     <span className="text-[0.68rem] font-mono font-bold uppercase tracking-widest text-[#9A9A9A]">
                       Executive Thought Leadership Quotes (Hover / Tap to Expand)
@@ -420,6 +434,51 @@ export default function InterviewHighlightsSection() {
                   </div>
 
                   <Testimonials cards={twitterCards} />
+                </motion.div>
+              ) : viewMode === 'editorial' ? (
+                /* ================= EDITORIAL HIGHLIGHTED TESTIMONIAL SPOTLIGHT ================= */
+                <motion.div
+                  key={`editorial-${activeItem.id}`}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                  className="w-full relative rounded-3xl overflow-hidden border border-white/15 bg-[#141414]/95 p-4 sm:p-6 shadow-[0_25px_60px_rgba(0,0,0,0.9)] backdrop-blur-2xl flex flex-col justify-center items-center"
+                >
+                  {/* Subtle Background Glow */}
+                  <div className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 w-64 h-32 bg-[#B8894F]/15 rounded-full blur-3xl" />
+
+                  <Testimonial
+                    quote={activeItem.quote}
+                    highlightedText={
+                      activeItem.quote.includes('empathy')
+                        ? 'cultural empathy'
+                        : activeItem.quote.includes('curiosity')
+                        ? 'engineering curiosity'
+                        : activeItem.quote.includes('mindfulness')
+                        ? 'mindfulness'
+                        : activeItem.quote.includes('championship mindset')
+                        ? 'championship mindset'
+                        : activeItem.quote.includes('unlearning')
+                        ? 'unlearning obsolete habits'
+                        : 'engineering transparency'
+                    }
+                    authorName={activeItem.name}
+                    authorPosition={`${activeItem.position}, ${activeItem.company} • ${activeItem.issue}`}
+                    authorImage={activeItem.image}
+                  />
+
+                  {/* Discussion Track Badges */}
+                  <div className="flex flex-wrap items-center justify-center gap-1.5 pt-2 border-t border-white/10 w-full">
+                    {activeItem.topics.map((t, i) => (
+                      <span
+                        key={i}
+                        className="rounded-lg bg-white/5 border border-white/10 px-2 py-0.5 text-[0.62rem] font-mono text-[#9A9A9A]"
+                      >
+                        #{t}
+                      </span>
+                    ))}
+                  </div>
                 </motion.div>
               ) : (
                 /* ================= EXECUTIVE PROFILE SHOWCASE ================= */
