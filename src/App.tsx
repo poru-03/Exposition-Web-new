@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
-import BackgroundFaceParallax from './components/BackgroundFaceParallax';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import Navbar from './components/Navbar';
 import AboutSection from './sections/AboutSection';
@@ -54,7 +53,6 @@ export default function App() {
     <main className="relative min-h-screen bg-[#0C0C0C] w-full" style={{ overflowX: 'clip' }}>
       <ScrollProgressBar />
       <Navbar />
-      <BackgroundFaceParallax />
       <HeroSection />
       <AboutSection />
       <TimelineSection />

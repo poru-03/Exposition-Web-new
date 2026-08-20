@@ -27,6 +27,8 @@ export type VaporizeTextCycleProps = {
   direction?: "left-to-right" | "right-to-left";
   alignment?: "left" | "center" | "right";
   tag?: Tag;
+  spotlightPositions?: number[];
+  lightsOn?: boolean;
 };
 
 type Particle = {
@@ -77,6 +79,8 @@ export default function VaporizeTextCycle({
   direction = "left-to-right",
   alignment = "center",
   tag = Tag.H1,
+  spotlightPositions,
+  lightsOn = true,
 }: VaporizeTextCycleProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -196,19 +200,7 @@ export default function VaporizeTextCycle({
 
         case "fadingIn": {
           fadeOpacityRef.current += (deltaTime * 1000) / animationDurations.FADE_IN_DURATION;
-          const currentFade = Math.min(fadeOpacityRef.current, 1);
-          const len = particlesRef.current.length;
-
-          for (let i = 0; i < len; i++) {
-            const p = particlesRef.current[i];
-            p.x = p.originalX;
-            p.y = p.originalY;
-            const opacity = currentFade * p.originalAlpha;
-            if (opacity > 0.01) {
-              ctx.fillStyle = `rgba(${p.r},${p.g},${p.b},${opacity})`;
-              ctx.fillRect(p.x, p.y, p.size, p.size);
-            }
-          }
+          renderParticles(ctx, particlesRef.current, spotlightPositions, lightsOn);
 
           if (fadeOpacityRef.current >= 1) {
             setAnimationState("waiting");
@@ -222,7 +214,7 @@ export default function VaporizeTextCycle({
         }
 
         case "waiting": {
-          renderParticles(ctx, particlesRef.current);
+          renderParticles(ctx, particlesRef.current, spotlightPositions, lightsOn);
           break;
         }
       }
@@ -245,6 +237,8 @@ export default function VaporizeTextCycle({
     animationDurations.FADE_IN_DURATION,
     animationDurations.WAIT_DURATION,
     animationDurations.VAPORIZE_DURATION,
+    spotlightPositions,
+    lightsOn,
   ]);
 
   useEffect(() => {
@@ -434,9 +428,8 @@ const renderCanvas = ({
   canvas.height = Math.floor(height);
 
   const fontSize = parseInt(framerProps.font?.fontSize?.replace("px", "") || "70");
-  const font = `${framerProps.font?.fontWeight ?? 900} ${fontSize}px ${
-    framerProps.font?.fontFamily ?? "sans-serif"
-  }`;
+  const font = `${framerProps.font?.fontWeight ?? 900} ${fontSize}px ${framerProps.font?.fontFamily ?? "sans-serif"
+    }`;
   const parsedColor = parseColorRGB(framerProps.color ?? "rgb(255, 255, 255)");
 
   let textX: number;
@@ -623,17 +616,84 @@ const updateParticles = (
   return allParticlesVaporized;
 };
 
+function getSpotlightGradientColor(
+  p: Particle,
+  canvasWidth: number,
+  canvasHeight: number,
+  spots: number[],
+  lightsOn: boolean
+) {
+  const xRatio = p.x / (canvasWidth || 1000);
+  const yRatio = p.y / (canvasHeight || 300);
+
+  let maxBeam = 0;
+  for (let s = 0; s < spots.length; s++) {
+    const dist = Math.abs(xRatio - spots[s]);
+    if (dist < 0.12) {
+      const beam = Math.pow(1 - dist / 0.12, 1.5);
+      if (beam > maxBeam) {
+        maxBeam = beam;
+      }
+    }
+  }
+
+  const activeBeam = lightsOn ? maxBeam : maxBeam * 0.12;
+
+  if (activeBeam <= 0.01) {
+    return `rgba(50,50,55,${(p.opacity * 0.18).toFixed(2)})`;
+  }
+
+  // Gradient transition: Core White-Gold -> Champagne Gold -> Warm Bronze -> Dark Charcoal
+  let r: number, g: number, b: number;
+  if (activeBeam > 0.7) {
+    const t = (activeBeam - 0.7) / 0.3;
+    r = Math.round(232 + (255 - 232) * t);
+    g = Math.round(200 + (245 - 200) * t);
+    b = Math.round(150 + (220 - 150) * t);
+  } else if (activeBeam > 0.3) {
+    const t = (activeBeam - 0.3) / 0.4;
+    r = Math.round(184 + (232 - 184) * t);
+    g = Math.round(137 + (200 - 137) * t);
+    b = Math.round(79 + (150 - 79) * t);
+  } else {
+    const t = activeBeam / 0.3;
+    r = Math.round(50 + (184 - 50) * t);
+    g = Math.round(50 + (137 - 50) * t);
+    b = Math.round(55 + (79 - 55) * t);
+  }
+
+  // Vertical gradient tint
+  const yShift = (0.5 - yRatio) * 15;
+  r = Math.min(255, Math.max(0, Math.round(r + yShift)));
+  g = Math.min(255, Math.max(0, Math.round(g + yShift)));
+  b = Math.min(255, Math.max(0, Math.round(b + yShift)));
+
+  const opacity = p.opacity * (0.18 + 0.82 * activeBeam);
+  return `rgba(${r},${g},${b},${opacity.toFixed(2)})`;
+}
+
 // ------------------------------------------------------------ //
-// RENDER PARTICLES (Solid Pure White When Stationary + Sand Dust When Dispersing)
+// RENDER PARTICLES (With Dynamic Spotlight Radial & Vertical Gradient)
 // ------------------------------------------------------------ //
-const renderParticles = (ctx: CanvasRenderingContext2D, particles: Particle[]) => {
+const renderParticles = (
+  ctx: CanvasRenderingContext2D,
+  particles: Particle[],
+  spotlightPositions?: number[],
+  lightsOn: boolean = true
+) => {
   const len = particles.length;
+  const canvasWidth = ctx.canvas.width || 1000;
+  const canvasHeight = ctx.canvas.height || 300;
+  const spots = spotlightPositions && spotlightPositions.length > 0 ? spotlightPositions : null;
 
   for (let i = 0; i < len; i++) {
     const p = particles[i];
     if (p.opacity > 0.01) {
-      ctx.fillStyle = `rgba(${p.r},${p.g},${p.b},${p.opacity})`;
-      // Seamless solid tile when stationary; fine 1px point dust when vaporizing
+      if (spots) {
+        ctx.fillStyle = getSpotlightGradientColor(p, canvasWidth, canvasHeight, spots, lightsOn);
+      } else {
+        ctx.fillStyle = `rgba(${p.r},${p.g},${p.b},${p.opacity})`;
+      }
       const drawSize = p.speed === 0 ? p.size : 1;
       ctx.fillRect(p.x, p.y, drawSize, drawSize);
     }

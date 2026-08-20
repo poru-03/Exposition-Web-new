@@ -546,12 +546,6 @@ export default function TechEventHubSection() {
                               <Clock className="h-2.5 w-2.5 text-[#B8894F]" />
                               <span>{event.duration}</span>
                             </div>
-
-                            <span
-                              className={`rounded-full px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-wider border ${event.statusColor}`}
-                            >
-                              {event.status}
-                            </span>
                           </div>
                         </button>
                       </motion.div>
