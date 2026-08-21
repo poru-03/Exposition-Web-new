@@ -123,7 +123,7 @@ export default function QASection() {
   return (
     <section
       id="faq"
-      className="relative z-10 rounded-[40px] bg-white px-[5%] py-20 sm:rounded-[50px] sm:py-24 md:rounded-[60px] md:py-32 text-[#0C0C0C] shadow-[0_30px_70px_-15px_rgba(0,0,0,0.8)]"
+      className="relative z-10 rounded-t-[40px] bg-white px-[5%] py-20 sm:rounded-t-[50px] sm:py-24 md:rounded-t-[60px] md:py-32 text-[#0C0C0C]"
     >
       {/* Section Header */}
       <ScrollReveal className="flex flex-col items-center justify-center text-center mb-14 sm:mb-18 max-w-4xl mx-auto">
