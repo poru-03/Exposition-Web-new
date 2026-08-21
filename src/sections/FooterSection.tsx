@@ -2,7 +2,7 @@ import { useEffect, useRef, forwardRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Handshake, ArrowUp } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 import {
   FaLinkedinIn,
   FaFacebookF,
@@ -239,10 +239,15 @@ export default function FooterSection({
           <MagneticButton
             as="a"
             href="#partners"
-            className="btn-metallic-gold-shine group gap-2.5 rounded-full px-7 sm:px-9 py-3 sm:py-3.5 text-xs font-semibold uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(184,137,79,0.3)] hover:shadow-[0_0_35px_rgba(184,137,79,0.5)] shrink-0"
+            className="btn-metallic-gold-shine group gap-2.5 rounded-full px-7 sm:px-9 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-[0_0_25px_rgba(184,137,79,0.3)] hover:shadow-[0_0_35px_rgba(184,137,79,0.5)] shrink-0"
           >
             <span>Explore Partnership Opportunities</span>
-            <Handshake className="size-4 transition-transform duration-200 group-hover:scale-110" />
+            <img
+              src="/handshake.png"
+              alt="Handshake"
+              className="size-4 sm:size-4.5 object-contain transition-transform duration-200 group-hover:scale-110 select-none"
+              draggable={false}
+            />
           </MagneticButton>
         </motion.div>
       </div>
