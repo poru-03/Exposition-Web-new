@@ -2,14 +2,12 @@ import { useEffect, useRef, forwardRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Handshake, ArrowUp } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 import {
   FaLinkedinIn,
   FaFacebookF,
   FaInstagram,
   FaYoutube,
-  FaXTwitter,
-  FaWhatsapp,
 } from 'react-icons/fa6';
 import { cn } from '@/lib/utils';
 
@@ -64,16 +62,6 @@ export const SOCIAL_LINKS = [
     name: 'YouTube',
     href: 'https://www.youtube.com/@expositionmagazine',
     icon: FaYoutube,
-  },
-  {
-    name: 'X (Twitter)',
-    href: 'https://x.com/exposition_uok',
-    icon: FaXTwitter,
-  },
-  {
-    name: 'WhatsApp',
-    href: 'https://wa.me/94771234560',
-    icon: FaWhatsapp,
   },
 ];
 
@@ -190,7 +178,7 @@ export default function FooterSection({
       if (giantTextRef.current) {
         gsap.fromTo(
           giantTextRef.current,
-          { y: '8vh', scale: 0.85, opacity: 0 },
+          { y: '5vh', scale: 0.88, opacity: 0 },
           {
             y: '0vh',
             scale: 1,
@@ -217,23 +205,23 @@ export default function FooterSection({
   return (
     <footer
       ref={footerRef}
-      className="relative w-full bg-[#050505] text-[#9A9A9A] overflow-hidden select-none"
+      className="relative w-full bg-black text-[#9A9A9A] overflow-hidden select-none"
     >
       {/* Ambient Breathing Gold Aurora Glow & Background Tech Grid */}
-      <div className="footer-aurora absolute left-1/2 top-1/2 h-[60vh] w-[80vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[90px] pointer-events-none z-0" />
+      <div className="footer-aurora absolute left-1/2 top-1/2 h-[50vh] w-[75vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[90px] pointer-events-none z-0" />
       <div className="footer-bg-grid absolute inset-0 z-0 pointer-events-none" />
 
       {/* Giant Parallax Background Outlined Text */}
       <div
         ref={giantTextRef}
-        className="footer-giant-bg-text absolute -bottom-[3vh] left-1/2 -translate-x-1/2 whitespace-nowrap z-0 pointer-events-none select-none"
+        className="footer-giant-bg-text absolute -bottom-[1vh] left-1/2 -translate-x-1/2 w-screen text-center whitespace-nowrap z-0 pointer-events-none select-none"
       >
         EXPOSITION
       </div>
 
-      {/* ================= 1. DIAGONAL SLEEK MARQUEE STRIP ================= */}
-      <div className="relative z-10 w-full overflow-hidden border-y border-[#B8894F]/20 bg-[#0C0C0C]/80 backdrop-blur-md py-3.5 shadow-2xl -rotate-1 scale-105 my-2">
-        <div className="flex w-max animate-footer-scroll-marquee text-[0.7rem] md:text-xs font-mono font-bold tracking-[0.25em] text-[#B8894F] uppercase">
+      {/* ================= 1. STRAIGHT MARQUEE STRIP ================= */}
+      <div className="relative z-10 w-full overflow-hidden border-y border-[#B8894F]/20 bg-[#0C0C0C]/80 backdrop-blur-md py-2.5 shadow-xl">
+        <div className="flex w-max animate-footer-scroll-marquee text-[0.68rem] md:text-xs font-mono font-bold tracking-[0.25em] text-[#B8894F] uppercase">
           <SymposiumMarqueeTrack />
           <SymposiumMarqueeTrack />
         </div>
@@ -242,56 +230,39 @@ export default function FooterSection({
       {/* ================= 2. TOP HEADER SECTION (PARTNERSHIP CTA) ================= */}
       <div className="relative z-10 w-full border-b border-neutral-800/80">
         <motion.div
-          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 35 }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 25 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-10 mx-auto max-w-7xl px-[5%] py-10 sm:py-12 flex items-center justify-center will-change-transform"
+          viewport={{ once: true, margin: '-30px' }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          className="relative z-10 mx-auto max-w-7xl px-[5%] py-4 sm:py-5 flex items-center justify-center will-change-transform"
         >
           <MagneticButton
             as="a"
             href="#partners"
-            className="btn-metallic-gold-shine group gap-2.5 rounded-full px-9 py-4 text-xs sm:text-sm font-semibold uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(184,137,79,0.3)] hover:shadow-[0_0_35px_rgba(184,137,79,0.5)] shrink-0"
+            className="btn-metallic-gold-shine group gap-3 rounded-full px-8 sm:px-10 py-3.5 sm:py-4 text-xs sm:text-sm font-bold tracking-wide transition-all shadow-[0_0_25px_rgba(184,137,79,0.35)] hover:shadow-[0_0_35px_rgba(184,137,79,0.55)] shrink-0"
           >
             <span>Explore Partnership Opportunities</span>
-            <Handshake className="size-4 sm:size-5 transition-transform duration-200 group-hover:scale-110" />
+            <img
+              src="/handshake.png"
+              alt="Handshake"
+              className="size-6 sm:size-7 object-contain transition-transform duration-200 group-hover:scale-115 select-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+              draggable={false}
+            />
           </MagneticButton>
         </motion.div>
       </div>
 
       {/* ================= 3. MAIN FOOTER CONTENT ================= */}
-      <div className="relative z-10 mx-auto max-w-7xl px-[5%] pt-10 sm:pt-14 md:pt-16 pb-8 space-y-10 sm:space-y-12">
-        {/* Brand Logo & Tagline (Slide-Up) */}
-        <motion.div
-          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 45 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.85, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="space-y-3.5 will-change-transform"
-        >
-          <div className="flex items-center">
-            <img
-              src="/ExpoLogo.png"
-              alt="Exposition Logo"
-              className="h-auto w-[180px] sm:w-[230px] md:w-[260px] select-none drop-shadow-[0_0_20px_rgba(184,137,79,0.25)]"
-              draggable={false}
-            />
-          </div>
-
-          {/* Subtitle / Tagline below logo */}
-          <p className="text-sm sm:text-base md:text-lg text-[#9A9A9A] font-light max-w-md pt-1 leading-relaxed">
-            {tagline}
-          </p>
-        </motion.div>
-
-        {/* Info Row: CONTACT US & Social Icons (Slide-Up) */}
-        <div className="pt-2">
+      <div className="relative z-10 mx-auto max-w-7xl px-[5%] pt-6 sm:pt-8 pb-5 space-y-6 sm:space-y-7">
+        {/* 2-Column Responsive Layout: Contact on Left, Brand on Right */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-start justify-between">
+          {/* LEFT COLUMN: Contact Us & Social Icons */}
           <motion.div
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 35 }}
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-30px' }}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-3.5 will-change-transform max-w-md"
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="space-y-3 will-change-transform max-w-md"
           >
             <h3 className="text-[0.7rem] font-mono uppercase tracking-[0.25em] text-[#E8C896] font-semibold">
               CONTACT US
@@ -301,7 +272,7 @@ export default function FooterSection({
                 <p key={idx}>{line}</p>
               ))}
             </div>
-            <p className="pt-1">
+            <p className="pt-0.5">
               <a
                 href={`mailto:${contactEmail}`}
                 className="text-xs sm:text-sm text-white hover:text-[#E8C896] transition-colors"
@@ -310,8 +281,8 @@ export default function FooterSection({
               </a>
             </p>
 
-            {/* Social Media Links in Contact Column with 3D Magnetic Effect & Glass Pill styling */}
-            <div className="pt-2 flex items-center gap-2.5 flex-wrap">
+            {/* Social Media Links with 3D Magnetic Effect & Glass Pill styling */}
+            <div className="pt-1.5 flex items-center gap-2.5 flex-wrap">
               {SOCIAL_LINKS.map((social) => {
                 const Icon = social.icon;
                 return (
@@ -323,7 +294,7 @@ export default function FooterSection({
                     rel="noopener noreferrer"
                     title={social.name}
                     aria-label={social.name}
-                    className="size-9 rounded-full footer-glass-pill text-[#9A9A9A] hover:text-white hover:border-[#E8C896] transition-all"
+                    className="size-8.5 rounded-full footer-glass-pill text-[#9A9A9A] hover:text-white hover:border-[#E8C896] transition-all p-2"
                   >
                     <Icon className="size-3.5" />
                   </MagneticButton>
@@ -331,16 +302,39 @@ export default function FooterSection({
               })}
             </div>
           </motion.div>
+
+          {/* RIGHT COLUMN: Brand Logo & Tagline */}
+          <motion.div
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-30px' }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="space-y-2.5 md:flex md:flex-col md:items-end md:text-right will-change-transform"
+          >
+            <div className="flex items-center md:justify-end">
+              <img
+                src="/ExpoLogo.png"
+                alt="Exposition Logo"
+                className="h-auto w-[160px] sm:w-[200px] md:w-[220px] select-none drop-shadow-[0_0_20px_rgba(184,137,79,0.25)]"
+                draggable={false}
+              />
+            </div>
+
+            {/* Subtitle / Tagline below logo */}
+            <p className="text-xs sm:text-sm md:text-base text-[#9A9A9A] font-light max-w-md leading-relaxed md:text-right">
+              {tagline}
+            </p>
+          </motion.div>
         </div>
 
-        {/* ================= 4. NAVIGATION LINKS BAR (Smooth Slide-Up) ================= */}
+        {/* ================= 4. NAVIGATION LINKS BAR ================= */}
         {/* DESKTOP VIEW: 1 Single Horizontal Row */}
         <motion.div
-          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 25 }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-20px' }}
-          transition={{ duration: 0.75, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden md:flex border-y border-neutral-800/90 py-4 justify-between items-center text-xs font-mono tracking-widest text-[#9A9A9A] overflow-x-auto will-change-transform"
+          transition={{ duration: 0.65, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="hidden md:flex border-y border-neutral-800/90 py-3 justify-between items-center text-xs font-mono tracking-widest text-[#9A9A9A] overflow-x-auto will-change-transform"
         >
           {DEFAULT_NAV_LINKS.map((link) => (
             <a
@@ -355,13 +349,13 @@ export default function FooterSection({
 
         {/* MOBILE VIEW: 2-Column Grid */}
         <motion.div
-          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 25 }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-20px' }}
-          transition={{ duration: 0.75, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="grid md:hidden grid-cols-2 gap-y-4 gap-x-6 border-y border-neutral-800/90 py-5 text-xs font-mono tracking-widest text-[#9A9A9A] will-change-transform"
+          transition={{ duration: 0.65, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="grid md:hidden grid-cols-2 gap-y-3 gap-x-6 border-y border-neutral-800/90 py-4 text-xs font-mono tracking-widest text-[#9A9A9A] will-change-transform"
         >
-          <div className="space-y-3.5">
+          <div className="space-y-2.5">
             <a href="#about" className="block hover:text-[#E8C896] transition-colors">
               ABOUT
             </a>
@@ -378,7 +372,7 @@ export default function FooterSection({
               PRIVACY
             </a>
           </div>
-          <div className="space-y-3.5">
+          <div className="space-y-2.5">
             <a href="#timeline" className="block hover:text-[#E8C896] transition-colors">
               TIMELINE
             </a>
@@ -399,34 +393,15 @@ export default function FooterSection({
 
         {/* ================= 5. BASELINE COPYRIGHT ROW & BACK-TO-TOP ================= */}
         <motion.div
-          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-20px' }}
-          transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[0.72rem] text-[#9A9A9A] font-light pt-1 will-change-transform"
+          transition={{ duration: 0.6, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[0.72rem] text-[#9A9A9A] font-light pt-0.5 will-change-transform"
         >
           <p>{copyrightText}</p>
 
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              {SOCIAL_LINKS.map((social) => {
-                const Icon = social.icon;
-                return (
-                  <a
-                    key={`bottom-${social.name}`}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title={social.name}
-                    aria-label={social.name}
-                    className="text-[#9A9A9A] hover:text-[#E8C896] transition-colors"
-                  >
-                    <Icon className="size-3.5" />
-                  </a>
-                );
-              })}
-            </div>
-            <span className="text-neutral-700 hidden sm:inline">•</span>
+          <div className="flex items-center gap-3">
             <p className="text-[#9A9A9A] font-mono text-[0.7rem]">{creditText}</p>
             <span className="text-neutral-700 hidden sm:inline">•</span>
             
@@ -446,3 +421,4 @@ export default function FooterSection({
     </footer>
   );
 }
+
