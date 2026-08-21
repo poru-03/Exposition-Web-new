@@ -71,7 +71,7 @@ export default function App() {
       </div>
 
       {/* Background Sticky Reveal Footer */}
-      <div className="sticky bottom-0 z-0 w-full">
+      <div className="sticky bottom-0 z-0 w-full bg-black">
         <FooterSection />
       </div>
     </main>

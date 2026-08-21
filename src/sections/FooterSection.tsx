@@ -205,7 +205,7 @@ export default function FooterSection({
   return (
     <footer
       ref={footerRef}
-      className="relative w-full bg-[#050505] text-[#9A9A9A] overflow-hidden select-none"
+      className="relative w-full bg-black text-[#9A9A9A] overflow-hidden select-none"
     >
       {/* Ambient Breathing Gold Aurora Glow & Background Tech Grid */}
       <div className="footer-aurora absolute left-1/2 top-1/2 h-[50vh] w-[75vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[90px] pointer-events-none z-0" />
@@ -239,13 +239,13 @@ export default function FooterSection({
           <MagneticButton
             as="a"
             href="#partners"
-            className="btn-metallic-gold-shine group gap-2.5 rounded-full px-7 sm:px-9 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-[0_0_25px_rgba(184,137,79,0.3)] hover:shadow-[0_0_35px_rgba(184,137,79,0.5)] shrink-0"
+            className="btn-metallic-gold-shine group gap-3 rounded-full px-8 sm:px-10 py-3.5 sm:py-4 text-xs sm:text-sm font-bold tracking-wide transition-all shadow-[0_0_25px_rgba(184,137,79,0.35)] hover:shadow-[0_0_35px_rgba(184,137,79,0.55)] shrink-0"
           >
             <span>Explore Partnership Opportunities</span>
             <img
               src="/handshake.png"
               alt="Handshake"
-              className="size-4 sm:size-4.5 object-contain transition-transform duration-200 group-hover:scale-110 select-none"
+              className="size-6 sm:size-7 object-contain transition-transform duration-200 group-hover:scale-115 select-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
               draggable={false}
             />
           </MagneticButton>
