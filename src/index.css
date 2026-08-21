@@ -284,7 +284,7 @@ body {
 
 /* Giant Background Parallax Text Masking */
 .footer-giant-bg-text {
-  font-size: clamp(4rem, 20vw, 24vw);
+  font-size: clamp(3rem, 13vw, 15vw);
   line-height: 0.75;
   font-weight: 900;
   letter-spacing: -0.04em;
