@@ -284,13 +284,13 @@ body {
 
 /* Giant Background Parallax Text Masking */
 .footer-giant-bg-text {
-  font-size: clamp(3rem, 13vw, 15vw);
-  line-height: 0.75;
+  font-size: clamp(4.5rem, 18.5vw, 20.5vw);
+  line-height: 0.72;
   font-weight: 900;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.03em;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(184, 137, 79, 0.15);
-  background: linear-gradient(180deg, rgba(232, 200, 150, 0.12) 0%, transparent 65%);
+  -webkit-text-stroke: 1.2px rgba(184, 137, 79, 0.22);
+  background: linear-gradient(180deg, rgba(232, 200, 150, 0.18) 0%, rgba(184, 137, 79, 0.06) 45%, transparent 75%);
   -webkit-background-clip: text;
   background-clip: text;
 }

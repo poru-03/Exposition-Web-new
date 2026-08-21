@@ -214,7 +214,7 @@ export default function FooterSection({
       {/* Giant Parallax Background Outlined Text */}
       <div
         ref={giantTextRef}
-        className="footer-giant-bg-text absolute -bottom-[1.5vh] left-1/2 -translate-x-1/2 whitespace-nowrap z-0 pointer-events-none select-none"
+        className="footer-giant-bg-text absolute -bottom-[1vh] left-1/2 -translate-x-1/2 w-screen text-center whitespace-nowrap z-0 pointer-events-none select-none"
       >
         EXPOSITION
       </div>
