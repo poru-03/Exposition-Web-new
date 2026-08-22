@@ -55,17 +55,25 @@ export default function App() {
       <ScrollProgressBar />
       <Navbar />
       <BackgroundFaceParallax />
-      <HeroSection />
-      <AboutSection />
-      <TimelineSection />
-      <TechEventHubSection />
-      <KeynoteSpeakersSection />
-      <InterviewHighlightsSection />
-      <ReviewsSection />
-      <PartnersSection />
-      <TeamSection />
-      <QASection />
-      <FooterSection />
+
+      {/* Foreground Content Stack */}
+      <div className="relative z-10 w-full bg-[#0C0C0C]">
+        <HeroSection />
+        <AboutSection />
+        <TimelineSection />
+        <TechEventHubSection />
+        <KeynoteSpeakersSection />
+        <InterviewHighlightsSection />
+        <ReviewsSection />
+        <PartnersSection />
+        <TeamSection />
+        <QASection />
+      </div>
+
+      {/* Background Sticky Reveal Footer */}
+      <div className="sticky bottom-0 z-0 w-full bg-black">
+        <FooterSection />
+      </div>
     </main>
   );
 }
