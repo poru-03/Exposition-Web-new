@@ -1,29 +1,22 @@
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const LOGO_SRC = '/ExpoLogo.png';
 
 export default function BackgroundFaceParallax() {
   const { scrollYProgress } = useScroll();
 
-  // Silky smooth spring physics for responsive inertia
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 85,
-    damping: 26,
-    restDelta: 0.001,
-  });
+  // Drift downward through the page
+  const y = useTransform(scrollYProgress, [0, 1], ['-2vh', '45vh']);
 
-  // Gracefully drifts downward through the entire page as you scroll
-  const y = useTransform(smoothProgress, [0, 1], ['-2vh', '50vh']);
-
-  // Low visibility watermark across the entire web site (emerges past hero)
+  // Visibility watermark
   const opacity = useTransform(
-    smoothProgress,
+    scrollYProgress,
     [0, 0.08, 0.5, 0.85, 1],
     [0, 0.14, 0.12, 0.10, 0.08]
   );
 
-  // Subtle organic scaling as user navigates down
-  const scale = useTransform(smoothProgress, [0, 0.5, 1], [0.95, 1.05, 0.98]);
+  // Subtle organic scaling
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1.05, 0.98]);
 
   return (
     <div
@@ -32,7 +25,7 @@ export default function BackgroundFaceParallax() {
     >
       <motion.div
         style={{ y, opacity, scale }}
-        className="w-[280px] sm:w-[380px] md:w-[500px] lg:w-[640px] xl:w-[740px] max-w-[85vw] will-change-transform"
+        className="w-[280px] sm:w-[380px] md:w-[500px] lg:w-[640px] xl:w-[740px] max-w-[85vw] transform-gpu will-change-transform"
       >
         <img
           src={LOGO_SRC}

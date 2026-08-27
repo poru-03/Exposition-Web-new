@@ -266,7 +266,7 @@ export default function KeynoteSpeakersSection() {
     <section
       id="keynote-speakers"
       ref={sectionRef}
-      className="relative z-10 min-h-screen bg-transparent py-24 sm:py-32 overflow-hidden w-full"
+      className="relative z-10 min-h-screen bg-transparent px-[5%] py-14 sm:py-20 md:py-24 overflow-hidden w-full"
     >
       {/* Subtle Section Glow Pulse */}
       {!shouldReduceMotion && (
@@ -294,8 +294,7 @@ export default function KeynoteSpeakersSection() {
         </h2>
 
         <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#9A9A9A] font-light">
-          Distinguished technology visionaries, corporate icons, and creative pioneers who
-          have headlined the Exposition symposium and shaped the global technological landscape.
+          Meet the distinguished industry leaders who have been featured through Exposition. Their insights, experiences, and vision continue to inspire meaningful conversations and shape the future of industry and innovation.
         </p>
       </ScrollReveal>
 

@@ -258,7 +258,7 @@ export default function TeamSection() {
   return (
     <section
       id="team"
-      className="relative z-10 min-h-screen bg-transparent px-[5%] py-24 md:py-32 overflow-hidden w-full"
+      className="relative z-10 min-h-screen bg-transparent px-[5%] py-14 sm:py-20 md:py-24 overflow-hidden w-full"
     >
       {/* Section Header */}
       <ScrollReveal className="flex flex-col items-center justify-center text-center mb-16 sm:mb-20">
@@ -274,9 +274,13 @@ export default function TeamSection() {
           Our Team
         </h2>
 
-        <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#9A9A9A] font-light">
-          Meet the dedicated committee of 18 leaders, editors, creatives, and technical pioneers from the
-          Department of Industrial Management (MIT), University of Kelaniya driving the 21st Edition.
+        <p className="mt-2 text-base sm:text-lg font-semibold uppercase tracking-widest text-[#E8C896]">
+          Meet the team behind Exposition Issue 22.
+        </p>
+
+        <p className="mt-4 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#9A9A9A] font-light">
+          Meet the dedicated committee of leaders, editors, creatives, and technical pioneers from the
+          Department of Industrial Management (MIT), University of Kelaniya driving the 22nd Edition.
         </p>
 
         {/* Department Filter Pills */}

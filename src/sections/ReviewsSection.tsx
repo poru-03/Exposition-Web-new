@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
 import { Marquee } from '@/components/ui/3d-testimonails';
 import ScrollReveal from '../components/ScrollReveal';
+import { SocialTooltip, SocialItem } from '@/components/ui/social-media';
 import {
   Sparkles,
   Star,
@@ -223,7 +224,7 @@ export default function ReviewsSection() {
   return (
     <section
       id="reviews"
-      className="relative z-10 min-h-screen bg-transparent py-20 sm:py-28 overflow-hidden w-full"
+      className="relative z-10 min-h-screen bg-transparent px-[5%] py-14 sm:py-20 md:py-24 overflow-hidden w-full"
     >
       {/* ================= BACKGROUND: Full-Section Edge-to-Edge Marquee Flow (Visible From Top Title to Bottom) ================= */}
       <div className="absolute inset-0 w-full h-full min-h-full overflow-hidden pointer-events-none z-0 flex items-center justify-center opacity-40">
@@ -300,7 +301,11 @@ export default function ReviewsSection() {
             Reviews & Voices
           </h2>
 
-          <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#9A9A9A] font-light">
+          <p className="mt-2 text-base sm:text-lg font-semibold uppercase tracking-widest text-[#E8C896]">
+            Our success stories
+          </p>
+
+          <p className="mt-4 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#9A9A9A] font-light">
             Industry leaders, tech pioneers, and academic visionaries sharing their transformative
             experiences and endorsements from the Exposition ecosystem.
           </p>
@@ -343,52 +348,55 @@ export default function ReviewsSection() {
                   </p>
                 </div>
 
-                {/* Circular Social Icons */}
-                <div className="flex items-center gap-3 pt-6 mt-4 border-t border-white/10">
-                  {activeFeatured.socials.github && (
-                    <a
-                      href={activeFeatured.socials.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="size-11 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:bg-[#E8C896] hover:scale-110 transition-all duration-200"
-                      aria-label="GitHub Profile"
-                    >
-                      <Github className="size-5" />
-                    </a>
-                  )}
-                  {activeFeatured.socials.twitter && (
-                    <a
-                      href={activeFeatured.socials.twitter}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="size-11 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:bg-[#E8C896] hover:scale-110 transition-all duration-200"
-                      aria-label="Twitter Profile"
-                    >
-                      <Twitter className="size-5" />
-                    </a>
-                  )}
-                  {activeFeatured.socials.youtube && (
-                    <a
-                      href={activeFeatured.socials.youtube}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="size-11 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:bg-[#E8C896] hover:scale-110 transition-all duration-200"
-                      aria-label="YouTube Channel"
-                    >
-                      <Youtube className="size-5" />
-                    </a>
-                  )}
-                  {activeFeatured.socials.linkedin && (
-                    <a
-                      href={activeFeatured.socials.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="size-11 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:bg-[#E8C896] hover:scale-110 transition-all duration-200"
-                      aria-label="LinkedIn Profile"
-                    >
-                      <Linkedin className="size-5" />
-                    </a>
-                  )}
+                {/* Circular Social Icons using SocialTooltip */}
+                <div className="pt-6 mt-4 border-t border-white/10">
+                  {(() => {
+                    const reviewSocialItems: SocialItem[] = [];
+                    if (activeFeatured.socials.github) {
+                      reviewSocialItems.push({
+                        href: activeFeatured.socials.github,
+                        ariaLabel: 'GitHub',
+                        tooltip: 'GitHub',
+                        color: '#333333',
+                        icon: <Github className="size-5" />,
+                      });
+                    }
+                    if (activeFeatured.socials.twitter) {
+                      reviewSocialItems.push({
+                        href: activeFeatured.socials.twitter,
+                        ariaLabel: 'Twitter',
+                        tooltip: 'Twitter',
+                        color: '#1da1f2',
+                        icon: <Twitter className="size-5" />,
+                      });
+                    }
+                    if (activeFeatured.socials.youtube) {
+                      reviewSocialItems.push({
+                        href: activeFeatured.socials.youtube,
+                        ariaLabel: 'YouTube',
+                        tooltip: 'YouTube',
+                        color: '#ff0000',
+                        icon: <Youtube className="size-5" />,
+                      });
+                    }
+                    if (activeFeatured.socials.linkedin) {
+                      reviewSocialItems.push({
+                        href: activeFeatured.socials.linkedin,
+                        ariaLabel: 'LinkedIn',
+                        tooltip: 'LinkedIn',
+                        color: '#0077b5',
+                        icon: <Linkedin className="size-5" />,
+                      });
+                    }
+                    return (
+                      <SocialTooltip
+                        items={reviewSocialItems}
+                        containerSizeClass="w-11 h-11"
+                        iconSizeClass="w-5 h-5"
+                        className="justify-start gap-3"
+                      />
+                    );
+                  })()}
                 </div>
               </div>
             </motion.div>

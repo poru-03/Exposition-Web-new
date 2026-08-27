@@ -21,6 +21,7 @@ import {
 import ScrollReveal from '../components/ScrollReveal';
 import { StaggerContainer, StaggerCard } from '../components/StaggerReveal';
 import TiltCard3D from '../components/TiltCard3D';
+import { SocialTooltip, SocialItem } from '@/components/ui/social-media';
 
 export type TechEvent = {
   id: string;
@@ -215,7 +216,7 @@ export default function TechEventHubSection() {
     <section
       ref={sectionRef}
       id="techevent-hub"
-      className="relative z-10 min-h-screen lg:h-screen w-full flex flex-col justify-center bg-transparent px-[4%] sm:px-[5%] py-4 sm:py-6 lg:py-6 overflow-hidden"
+      className="relative z-10 min-h-screen w-full flex flex-col justify-center bg-transparent px-[5%] py-14 sm:py-20 md:py-24 overflow-hidden"
     >
       {/* Subtle Section Glow Pulse */}
       {!shouldReduceMotion && (
@@ -397,67 +398,67 @@ export default function TechEventHubSection() {
                   {/* Socials & Official Website Action Bar */}
                   <div className="pt-3 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
                     {/* Social Media Links */}
-                    <div className="flex items-center gap-2.5 w-full sm:w-auto">
+                    {/* Social Media Links using SocialTooltip */}
+                    <div className="flex items-center gap-2 w-full sm:w-auto">
                       <span className="text-[0.65rem] font-bold uppercase tracking-wider text-[#9A9A9A] shrink-0">
                         Community:
                       </span>
-                      <div className="flex items-center gap-1.5">
-                        {selectedEvent.socials.twitter && (
-                          <a
-                            href={selectedEvent.socials.twitter}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="rounded-lg border border-white/10 bg-[#1a1a1a] p-2 text-[#9A9A9A] hover:text-white hover:border-[#B8894F]/40 hover:bg-black transition-all"
-                            title="Twitter / X"
-                          >
-                            <FaXTwitter className="h-3 w-3 text-white" />
-                          </a>
-                        )}
-                        {selectedEvent.socials.linkedin && (
-                          <a
-                            href={selectedEvent.socials.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="rounded-lg border border-white/10 bg-[#1a1a1a] p-2 text-[#9A9A9A] hover:text-white hover:border-[#B8894F]/40 hover:bg-black transition-all"
-                            title="LinkedIn"
-                          >
-                            <FaLinkedinIn className="h-3 w-3" />
-                          </a>
-                        )}
-                        {selectedEvent.socials.youtube && (
-                          <a
-                            href={selectedEvent.socials.youtube}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="rounded-lg border border-white/10 bg-[#1a1a1a] p-2 text-[#9A9A9A] hover:text-white hover:border-[#B8894F]/40 hover:bg-black transition-all"
-                            title="YouTube"
-                          >
-                            <FaYoutube className="h-3 w-3" />
-                          </a>
-                        )}
-                        {selectedEvent.socials.discord && (
-                          <a
-                            href={selectedEvent.socials.discord}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="rounded-lg border border-white/10 bg-[#1a1a1a] p-2 text-[#9A9A9A] hover:text-white hover:border-[#B8894F]/40 hover:bg-black transition-all"
-                            title="Discord Community"
-                          >
-                            <FaDiscord className="h-3 w-3" />
-                          </a>
-                        )}
-                        {selectedEvent.socials.github && (
-                          <a
-                            href={selectedEvent.socials.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="rounded-lg border border-white/10 bg-[#1a1a1a] p-2 text-[#9A9A9A] hover:text-white hover:border-[#B8894F]/40 hover:bg-black transition-all"
-                            title="GitHub Repo"
-                          >
-                            <FaGithub className="h-3 w-3" />
-                          </a>
-                        )}
-                      </div>
+                      {(() => {
+                        const eventSocialItems: SocialItem[] = [];
+                        if (selectedEvent.socials.twitter) {
+                          eventSocialItems.push({
+                            href: selectedEvent.socials.twitter,
+                            ariaLabel: 'Twitter / X',
+                            tooltip: 'Twitter / X',
+                            color: '#1da1f2',
+                            icon: <FaXTwitter className="h-3 w-3" />,
+                          });
+                        }
+                        if (selectedEvent.socials.linkedin) {
+                          eventSocialItems.push({
+                            href: selectedEvent.socials.linkedin,
+                            ariaLabel: 'LinkedIn',
+                            tooltip: 'LinkedIn',
+                            color: '#0077b5',
+                            icon: <FaLinkedinIn className="h-3 w-3" />,
+                          });
+                        }
+                        if (selectedEvent.socials.youtube) {
+                          eventSocialItems.push({
+                            href: selectedEvent.socials.youtube,
+                            ariaLabel: 'YouTube',
+                            tooltip: 'YouTube',
+                            color: '#ff0000',
+                            icon: <FaYoutube className="h-3 w-3" />,
+                          });
+                        }
+                        if (selectedEvent.socials.discord) {
+                          eventSocialItems.push({
+                            href: selectedEvent.socials.discord,
+                            ariaLabel: 'Discord',
+                            tooltip: 'Discord',
+                            color: '#5865f2',
+                            icon: <FaDiscord className="h-3 w-3" />,
+                          });
+                        }
+                        if (selectedEvent.socials.github) {
+                          eventSocialItems.push({
+                            href: selectedEvent.socials.github,
+                            ariaLabel: 'GitHub',
+                            tooltip: 'GitHub',
+                            color: '#333333',
+                            icon: <FaGithub className="h-3 w-3" />,
+                          });
+                        }
+                        return (
+                          <SocialTooltip
+                            items={eventSocialItems}
+                            containerSizeClass="w-7 h-7 sm:w-8 sm:h-8"
+                            iconSizeClass="w-3.5 h-3.5"
+                            className="gap-1.5"
+                          />
+                        );
+                      })()}
                     </div>
 
                     {/* Official Website Link CTA (Gold Gradient Pill CTA) */}

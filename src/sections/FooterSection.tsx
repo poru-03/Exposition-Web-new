@@ -11,6 +11,8 @@ import {
 } from 'react-icons/fa6';
 import { cn } from '@/lib/utils';
 
+import { SocialTooltip, SocialItem } from '@/components/ui/social-media';
+
 // Register ScrollTrigger safely in browser environment
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -30,7 +32,8 @@ export interface FooterSectionProps {
 
 export const DEFAULT_NAV_LINKS = [
   { name: 'ABOUT', href: '#about' },
-  { name: 'TIMELINE', href: '#timeline' },
+  { name: 'INITIATIVES', href: '#timeline' },
+  { name: 'ELITE 10', href: '/elite-10', isRoute: true },
   { name: 'EVENTS', href: '#techevent-hub' },
   { name: 'SPEAKERS', href: '#keynote-speakers' },
   { name: 'INTERVIEWS', href: '#interviews' },
@@ -38,30 +41,36 @@ export const DEFAULT_NAV_LINKS = [
   { name: 'PARTNERS', href: '#partners' },
   { name: 'TEAM', href: '#team' },
   { name: 'FAQ', href: '#faq' },
-  { name: 'PRIVACY', href: '#privacy' },
-  { name: 'TERMS', href: '#terms' },
 ];
 
-export const SOCIAL_LINKS = [
+export const FOOTER_SOCIAL_ITEMS: SocialItem[] = [
   {
-    name: 'LinkedIn',
     href: 'https://www.linkedin.com/company/exposition-magazine/',
-    icon: FaLinkedinIn,
+    ariaLabel: 'LinkedIn',
+    tooltip: 'LinkedIn',
+    color: '#0077b5',
+    icon: <FaLinkedinIn className="size-4" />,
   },
   {
-    name: 'Facebook',
     href: 'https://www.facebook.com/Exposition.uok/',
-    icon: FaFacebookF,
+    ariaLabel: 'Facebook',
+    tooltip: 'Facebook',
+    color: '#1877f2',
+    icon: <FaFacebookF className="size-4" />,
   },
   {
-    name: 'Instagram',
     href: 'https://www.instagram.com/exposition_magazine/',
-    icon: FaInstagram,
+    ariaLabel: 'Instagram',
+    tooltip: 'Instagram',
+    color: '#e4405f',
+    icon: <FaInstagram className="size-4" />,
   },
   {
-    name: 'YouTube',
     href: 'https://www.youtube.com/@expositionmagazine',
-    icon: FaYoutube,
+    ariaLabel: 'YouTube',
+    tooltip: 'YouTube',
+    color: '#ff0000',
+    icon: <FaYoutube className="size-4" />,
   },
 ];
 
@@ -281,25 +290,9 @@ export default function FooterSection({
               </a>
             </p>
 
-            {/* Social Media Links with 3D Magnetic Effect & Glass Pill styling */}
-            <div className="pt-1.5 flex items-center gap-2.5 flex-wrap">
-              {SOCIAL_LINKS.map((social) => {
-                const Icon = social.icon;
-                return (
-                  <MagneticButton
-                    as="a"
-                    key={social.name}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title={social.name}
-                    aria-label={social.name}
-                    className="size-8.5 rounded-full footer-glass-pill text-[#9A9A9A] hover:text-white hover:border-[#E8C896] transition-all p-2"
-                  >
-                    <Icon className="size-3.5" />
-                  </MagneticButton>
-                );
-              })}
+            {/* Social Media Links with Brand Hover Fill & Tooltips */}
+            <div className="pt-1.5">
+              <SocialTooltip items={FOOTER_SOCIAL_ITEMS} className="justify-start gap-2.5" />
             </div>
           </motion.div>
 
@@ -340,6 +333,13 @@ export default function FooterSection({
             <a
               key={link.name}
               href={link.href}
+              onClick={(e) => {
+                if (link.isRoute) {
+                  e.preventDefault();
+                  window.history.pushState({}, '', link.href);
+                  window.dispatchEvent(new Event('popstate'));
+                }
+              }}
               className="hover:text-[#E8C896] transition-colors whitespace-nowrap px-1"
             >
               {link.name}
@@ -404,7 +404,7 @@ export default function FooterSection({
           <div className="flex items-center gap-3">
             <p className="text-[#9A9A9A] font-mono text-[0.7rem]">{creditText}</p>
             <span className="text-neutral-700 hidden sm:inline">•</span>
-            
+
             {/* Magnetic Back-to-Top Button */}
             <MagneticButton
               as="button"
