@@ -34,6 +34,7 @@ export const DEFAULT_NAV_LINKS = [
   { name: 'EVENTS', href: '#techevent-hub' },
   { name: 'SPEAKERS', href: '#keynote-speakers' },
   { name: 'INTERVIEWS', href: '#interviews' },
+  { name: 'GALLERY', href: '#gallery' },
   { name: 'REVIEWS', href: '#reviews' },
   { name: 'PARTNERS', href: '#partners' },
   { name: 'TEAM', href: '#team' },
