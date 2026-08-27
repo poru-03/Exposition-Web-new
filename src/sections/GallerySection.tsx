@@ -115,8 +115,8 @@ const SLOT_POSITIONS: SlotPosition[] = [
   { top: 4, left: 3, width: 31, height: 54, z: 2 },
   { top: 0, left: 29, width: 26, height: 42, z: 4 },
   { top: 6, left: 52, width: 30, height: 50, z: 1 },
-  { top: 48, left: 10, width: 34, height: 50, z: 5 },
-  { top: 44, left: 61, width: 35, height: 54, z: 3 },
+  { top: 52, left: 24, width: 32, height: 46, z: 5 },
+  { top: 54, left: 64, width: 33, height: 44, z: 3 },
 ];
 
 const PARTICLES: Array<{ x: string; y: string; size: number; duration: number; delay: number }> = [
@@ -232,9 +232,15 @@ function AmbientField({ reduceMotion }: { reduceMotion: boolean }) {
   );
 }
 
-function TileCaption({ name }: { name: string }) {
+function TileCaption({ name, attached = true }: { name: string; attached?: boolean }) {
   return (
-    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex h-[25%] items-end bg-gradient-to-t from-black/80 to-transparent px-3 pb-3 sm:px-4 sm:pb-4">
+    <div
+      className={
+        attached
+          ? 'pointer-events-none absolute inset-x-0 bottom-0 z-10 flex h-[25%] items-end bg-gradient-to-t from-black/80 to-transparent px-3 pb-3 sm:px-4 sm:pb-4'
+          : 'pointer-events-none flex h-full w-full items-end bg-gradient-to-t from-black/80 to-transparent px-3 pb-3 sm:px-4 sm:pb-4'
+      }
+    >
       <p
         className="w-full font-black uppercase leading-tight text-[#E8C896]"
         style={{
@@ -253,10 +259,12 @@ function GalleryTile({
   item,
   onOpen,
   reduceMotion,
+  showCaption = true,
 }: {
   item: GalleryItem;
   onOpen: () => void;
   reduceMotion: boolean;
+  showCaption?: boolean;
 }) {
   return (
     <motion.button
@@ -276,7 +284,7 @@ function GalleryTile({
         draggable={false}
         className="h-full w-full object-cover"
       />
-      <TileCaption name={item.name} />
+      {showCaption ? <TileCaption name={item.name} /> : null}
     </motion.button>
   );
 }
@@ -368,7 +376,7 @@ function DesktopCollage({
 }) {
   return (
     <div
-      className="relative mx-auto w-full max-w-[1560px]"
+      className="relative mx-auto w-full max-w-[1560px] isolate"
       style={{ height: 'min(86vh, 840px)', minHeight: '620px', perspective: '1200px' }}
     >
       {SLOT_POSITIONS.map((slot, slotIndex) => {
@@ -413,7 +421,42 @@ function DesktopCollage({
                   item={item}
                   onOpen={() => onOpen(slotIndex)}
                   reduceMotion={reduceMotion}
+                  showCaption={false}
                 />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        );
+      })}
+      {SLOT_POSITIONS.map((slot, slotIndex) => {
+        const item = items[slotIndex];
+        if (!item) return null;
+
+        return (
+          <div
+            key={`caption-slot-${slotIndex}`}
+            className="pointer-events-none absolute"
+            style={{
+              top: `${slot.top + slot.height * 0.75}%`,
+              left: `${slot.left}%`,
+              width: `${slot.width}%`,
+              height: `${slot.height * 0.25}%`,
+              zIndex: 40 + slot.z,
+            }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`${showingBackSet ? 'back' : 'front'}-caption-${item.id}`}
+                className="h-full w-full"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: reduceMotion ? 0.2 : 0.35,
+                  delay: reduceMotion ? 0 : slotIndex * 0.05,
+                }}
+              >
+                <TileCaption name={item.name} attached={false} />
               </motion.div>
             </AnimatePresence>
           </div>
