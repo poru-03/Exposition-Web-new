@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import { BookOpen } from 'lucide-react';
 import AnimatedText from '../components/AnimatedText';
 import ContactButton from '../components/ContactButton';
 import FadeIn from '../components/FadeIn';
-import { MagazineViewer } from '../components/ui/magazine-viewer';
 
 const PAST_MAGAZINES = [
   {
@@ -25,6 +23,15 @@ const PAST_MAGAZINES = [
     coverImg: '/magazines/issue-19-cover.jpg',
   },
   {
+    issueNum: '20',
+    issueLabel: 'ISSUE 20',
+    year: '2024',
+    readerUrl: '/magazine-reader?issue=20',
+    title: 'EXPOSITION ISSUE 20 — 2024 EDITION',
+    pdfUrl: '/magazines/Exposition-Issue-20.pdf',
+    coverImg: '/magazines/issue-20-cover.jpg',
+  },
+  {
     issueNum: '21',
     issueLabel: 'ISSUE 21',
     year: '2025',
@@ -36,8 +43,6 @@ const PAST_MAGAZINES = [
 ];
 
 export default function AboutSection() {
-  const [activeMag, setActiveMag] = useState<(typeof PAST_MAGAZINES)[0] | null>(null);
-
   return (
     <section
       id="about"
@@ -129,16 +134,6 @@ export default function AboutSection() {
           <ContactButton label="Contact Us" />
         </FadeIn>
       </div>
-
-      {/* Book-Style Magazine Viewer Modal */}
-      {activeMag && (
-        <MagazineViewer
-          pdfUrl={activeMag.pdfUrl}
-          issueLabel={activeMag.issueLabel}
-          title={activeMag.title}
-          onClose={() => setActiveMag(null)}
-        />
-      )}
     </section>
   );
 }

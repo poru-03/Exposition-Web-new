@@ -105,15 +105,13 @@ body {
   }
 
   .text-metallic-gold-shine {
-    background: linear-gradient(
-      120deg,
-      #b4872d 0%,
-      #ebc369 25%,
-      #ffe6a0 45%,
-      #ebc369 55%,
-      #b4872d 80%,
-      #b4872d 100%
-    );
+    background: linear-gradient(120deg,
+        #b4872d 0%,
+        #ebc369 25%,
+        #ffe6a0 45%,
+        #ebc369 55%,
+        #b4872d 80%,
+        #b4872d 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -122,15 +120,13 @@ body {
   }
 
   .text-metallic-silver-shine {
-    background: linear-gradient(
-      120deg,
-      #8c8c91 0%,
-      #d2d2d5 25%,
-      #ffffff 45%,
-      #d2d2d5 55%,
-      #8c8c91 80%,
-      #8c8c91 100%
-    );
+    background: linear-gradient(120deg,
+        #8c8c91 0%,
+        #d2d2d5 25%,
+        #ffffff 45%,
+        #d2d2d5 55%,
+        #8c8c91 80%,
+        #8c8c91 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -152,12 +148,10 @@ body {
     left: -50%;
     width: 30%;
     height: 100%;
-    background: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.65) 50%,
-      rgba(255, 255, 255, 0) 100%
-    );
+    background: linear-gradient(to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.65) 50%,
+        rgba(255, 255, 255, 0) 100%);
     transform: skewX(-25deg);
     animation: btn-shine 4s ease-in-out infinite;
   }
@@ -202,6 +196,7 @@ body {
   0% {
     background-position: 200% center;
   }
+
   100% {
     background-position: -200% center;
   }
@@ -211,9 +206,11 @@ body {
   0% {
     left: -60%;
   }
+
   30% {
     left: 140%;
   }
+
   100% {
     left: 140%;
   }
@@ -224,13 +221,25 @@ body {
    ========================================================================= */
 
 @keyframes footer-breathe {
-  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-  100% { transform: translate(-50%, -50%) scale(1.12); opacity: 0.9; }
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1.12);
+    opacity: 0.9;
+  }
 }
 
 @keyframes footer-scroll-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-footer-breathe {
@@ -244,7 +253,7 @@ body {
 /* Theme-adaptive Grid Background */
 .footer-bg-grid {
   background-size: 50px 50px;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(184, 137, 79, 0.08) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(184, 137, 79, 0.08) 1px, transparent 1px);
   mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
@@ -253,21 +262,19 @@ body {
 
 /* Theme-adaptive Amber / Gold Aurora Glow */
 .footer-aurora {
-  background: radial-gradient(
-    circle at 50% 50%, 
-    rgba(184, 137, 79, 0.22) 0%, 
-    rgba(232, 200, 150, 0.12) 40%, 
-    transparent 70%
-  );
+  background: radial-gradient(circle at 50% 50%,
+      rgba(184, 137, 79, 0.22) 0%,
+      rgba(232, 200, 150, 0.12) 40%,
+      transparent 70%);
 }
 
 /* Glass Pill Theming for Footers */
 .footer-glass-pill {
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-  box-shadow: 
-      0 10px 30px -10px rgba(0, 0, 0, 0.7), 
-      inset 0 1px 1px rgba(232, 200, 150, 0.25), 
-      inset 0 -1px 2px rgba(0, 0, 0, 0.8);
+  box-shadow:
+    0 10px 30px -10px rgba(0, 0, 0, 0.7),
+    inset 0 1px 1px rgba(232, 200, 150, 0.25),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.8);
   border: 1px solid rgba(184, 137, 79, 0.25);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -277,9 +284,9 @@ body {
 .footer-glass-pill:hover {
   background: linear-gradient(145deg, rgba(184, 137, 79, 0.18) 0%, rgba(232, 200, 150, 0.06) 100%);
   border-color: rgba(232, 200, 150, 0.5);
-  box-shadow: 
-      0 20px 40px -10px rgba(184, 137, 79, 0.35), 
-      inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 20px 40px -10px rgba(184, 137, 79, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4);
 }
 
 /* Giant Background Parallax Text Masking */
@@ -293,4 +300,19 @@ body {
   background: linear-gradient(180deg, rgba(232, 200, 150, 0.18) 0%, rgba(184, 137, 79, 0.06) 45%, transparent 75%);
   -webkit-background-clip: text;
   background-clip: text;
+}
+
+/* Custom Scrollbar Utility - Hide browser default scrollbars smoothly */
+.custom-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+  width: 0px;
+  height: 0px;
 }

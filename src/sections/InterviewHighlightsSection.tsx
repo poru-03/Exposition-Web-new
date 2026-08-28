@@ -1,26 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Video,
-  Play,
-  Pause,
   ArrowRight,
-  Sparkles,
-  Quote,
   Radio,
   Building,
-  User,
-  FileText,
 } from 'lucide-react';
-import {
-  FaYoutube,
-  FaLinkedinIn,
-  FaFacebookF,
-  FaInstagram,
-} from 'react-icons/fa6';
 import ScrollReveal from '../components/ScrollReveal';
 import { StaggerContainer, StaggerCard } from '../components/StaggerReveal';
-import { Testimonial } from '@/components/ui/testimonial';
 
 export type InterviewItem = {
   id: string;
@@ -182,7 +168,6 @@ export const INTERVIEWS_DATA: InterviewItem[] = [
 export default function InterviewHighlightsSection() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [viewMode, setViewMode] = useState<'profile' | 'testimonial_card'>('testimonial_card');
 
   const activeItem = INTERVIEWS_DATA[selectedIndex];
 
@@ -219,33 +204,6 @@ export default function InterviewHighlightsSection() {
         <p className="mt-1 max-w-2xl text-center text-xs sm:text-sm leading-snug text-[#9A9A9A] font-light">
           Insights from accomplished professionals and industry leaders who are driving change and shaping the future of their respective industries.
         </p>
-
-        {/* View Mode Switcher Pills */}
-        <div className="mt-2.5 flex items-center justify-center gap-1.5 p-1 rounded-full border border-white/15 bg-black/60 backdrop-blur-lg">
-          <button
-            onClick={() => setViewMode('testimonial_card')}
-            className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
-              viewMode === 'testimonial_card'
-                ? 'bg-gradient-to-r from-[#B8894F] to-[#E8C896] text-black shadow-md'
-                : 'text-[#9A9A9A] hover:text-white hover:bg-white/5'
-            }`}
-          >
-            <Quote className="size-3" />
-            <span>Classic Card</span>
-          </button>
-
-          <button
-            onClick={() => setViewMode('profile')}
-            className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
-              viewMode === 'profile'
-                ? 'bg-white text-black shadow-md'
-                : 'text-[#9A9A9A] hover:text-white hover:bg-white/5'
-            }`}
-          >
-            <FileText className="size-3" />
-            <span>Executive Profile</span>
-          </button>
-        </div>
       </ScrollReveal>
 
       {/* Main Two-Column Layout */}
@@ -261,25 +219,6 @@ export default function InterviewHighlightsSection() {
                   Featured Leaders ({INTERVIEWS_DATA.length})
                 </span>
               </div>
-
-              {/* Autoplay Pause / Play Toggle */}
-              <button
-                onClick={() => setIsAutoPlaying((prev) => !prev)}
-                className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[0.62rem] font-mono font-medium text-[#9A9A9A] hover:text-white hover:border-white/30 transition-all cursor-pointer"
-                title={isAutoPlaying ? 'Pause Auto Display' : 'Resume Auto Display'}
-              >
-                {isAutoPlaying ? (
-                  <>
-                    <Pause className="size-2.5 text-emerald-400" />
-                    <span>Auto-Cycling</span>
-                  </>
-                ) : (
-                  <>
-                    <Play className="size-2.5 text-amber-400" />
-                    <span>Paused</span>
-                  </>
-                )}
-              </button>
             </ScrollReveal>
 
             {/* List Container */}
@@ -296,18 +235,16 @@ export default function InterviewHighlightsSection() {
                         setSelectedIndex(index);
                         setIsAutoPlaying(false);
                       }}
-                      className={`w-full text-left rounded-2xl p-2.5 sm:p-3 transition-all duration-300 flex items-center justify-between gap-3 border cursor-pointer ${
-                        isSelected
-                          ? 'bg-[#1e1e1e] border-[#B8894F]/60 shadow-[0_10px_25px_rgba(184,137,79,0.15)] scale-[1.01]'
-                          : 'bg-[#141414]/90 border-white/10 hover:border-[#B8894F]/30 hover:bg-[#181818]'
-                      }`}
+                      className={`w-full text-left rounded-2xl p-2.5 sm:p-3 transition-all duration-300 flex items-center justify-between gap-3 border cursor-pointer ${isSelected
+                        ? 'bg-[#1e1e1e] border-[#B8894F]/60 shadow-[0_10px_25px_rgba(184,137,79,0.15)] scale-[1.01]'
+                        : 'bg-[#141414]/90 border-white/10 hover:border-[#B8894F]/30 hover:bg-[#181818]'
+                        }`}
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         {/* Avatar */}
                         <div
-                          className={`size-10 sm:size-11 rounded-xl overflow-hidden shrink-0 border-2 transition-all ${
-                            isSelected ? 'border-[#E8C896] shadow-md' : 'border-white/10 opacity-75'
-                          }`}
+                          className={`size-10 sm:size-11 rounded-xl overflow-hidden shrink-0 border-2 transition-all ${isSelected ? 'border-[#E8C896] shadow-md' : 'border-white/10 opacity-75'
+                            }`}
                         >
                           <img
                             src={interview.image}
@@ -318,20 +255,17 @@ export default function InterviewHighlightsSection() {
 
                         {/* Text Info */}
                         <div className="flex flex-col min-w-0 pr-1">
-                          <div className="flex items-center gap-2">
-                            <span
-                              className={`text-xs sm:text-sm font-bold uppercase tracking-tight truncate ${
-                                isSelected ? 'text-white' : 'text-white/85'
+                          <h4
+                            className={`text-xs sm:text-sm font-bold uppercase tracking-tight truncate ${isSelected ? 'text-white' : 'text-white/85'
                               }`}
-                            >
-                              {interview.name}
-                            </span>
-                            <span className="text-[0.58rem] font-mono px-1.5 py-0.2 rounded-full border border-[#B8894F]/30 bg-[#B8894F]/10 text-[#E8C896] shrink-0">
-                              {interview.issue}
-                            </span>
-                          </div>
+                          >
+                            {interview.name}
+                          </h4>
                           <p className="text-[0.68rem] text-[#9A9A9A] truncate mt-0.5">
                             {interview.position} • {interview.company}
+                          </p>
+                          <p className="text-[0.65rem] font-mono font-bold text-[#E8C896] uppercase tracking-wider mt-0.5">
+                            {interview.issue}
                           </p>
                         </div>
                       </div>
@@ -355,173 +289,66 @@ export default function InterviewHighlightsSection() {
             </StaggerContainer>
           </div>
 
-          {/* ================= RIGHT COLUMN: Testimonial Card or Executive Profile ================= */}
+          {/* ================= RIGHT COLUMN: Testimonial Spotlight Card ================= */}
           <ScrollReveal delay={0.15} y={16} className="lg:col-span-7 flex flex-col items-center justify-center">
             <AnimatePresence mode="wait">
-              {viewMode === 'testimonial_card' ? (
-                <motion.div
-                  key={`testimonial-${activeItem.id}`}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.35, ease: 'easeOut' }}
-                  className="w-full flex flex-col items-center justify-center py-4 h-full"
-                >
-                  <div className="w-full relative rounded-3xl overflow-hidden border border-white/15 bg-[#141414]/95 p-6 sm:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.9)]">
-                    <Testimonial
-                      companyLogo={<Building className="size-8 text-[#E8C896]" />}
-                      quote={activeItem.quote}
-                      authorName={activeItem.name}
-                      authorPosition={`${activeItem.position}, ${activeItem.company}`}
-                      authorImage={activeItem.image}
-                      className="text-white [&_.text-foreground]:text-white [&_.text-muted-foreground]:text-[#E8C896] [&_.text-foreground\\/40]:text-[#9A9A9A]"
-                    />
-                  </div>
-                </motion.div>
-              ) : (
-                /* ================= EXECUTIVE PROFILE SHOWCASE ================= */
-                <motion.div
-                  key={`profile-${activeItem.id}`}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.3, ease: 'easeOut' }}
-                  className="w-full relative rounded-3xl overflow-hidden border border-white/15 bg-[#141414]/95 p-4 sm:p-5 shadow-[0_25px_60px_rgba(0,0,0,0.9)] flex flex-col justify-between"
-                >
-                  {/* Background Artwork Watermark */}
-                  <div className="absolute right-0 top-0 bottom-0 w-[45%] opacity-15 pointer-events-none overflow-hidden">
-                    <img
-                      src={activeItem.image}
-                      alt={activeItem.name}
-                      className="w-full h-full object-cover object-top filter contrast-125"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#141414] via-[#141414]/80 to-transparent" />
-                  </div>
+              <motion.div
+                key={`testimonial-${activeItem.id}`}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+                className="w-full flex flex-col items-center justify-center py-4 h-full"
+              >
+                  <div className="group relative w-full rounded-3xl overflow-hidden border border-white/15 bg-[#121215]/95 p-6 sm:p-10 shadow-[0_30px_70px_rgba(0,0,0,0.95)] flex flex-col justify-between min-h-[380px]">
+                    {/* Animated Gold Corner Glow Radial Gradient */}
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-[radial-gradient(ellipse_at_top_right,rgba(232,200,150,0.30)_0%,rgba(184,137,79,0.12)_40%,transparent_75%)] animate-corner-glow pointer-events-none" />
 
-                  {/* Top Row: Tag, Issue Pill, Duration & Live Indicator */}
-                  <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-white/10">
-                    <div className="flex items-center gap-2">
-                      <span className="rounded-full border border-[#B8894F]/40 bg-[#B8894F]/10 px-2.5 py-0.5 text-[0.65rem] font-mono font-bold uppercase tracking-wider text-[#E8C896]">
-                        {activeItem.issue} Special
+                    {/* Card Content Overlay */}
+                    <div className="relative z-10 flex flex-col items-center text-center space-y-4">
+                      {/* Company Icon on Top */}
+                      <div className="p-3 rounded-2xl bg-black/60 border border-[#B8894F]/40 text-[#E8C896] backdrop-blur-md shadow-lg">
+                        <Building className="size-8 text-[#E8C896]" />
+                      </div>
+
+                      {/* Rounded Person Portrait Image below Top Icon */}
+                      <div className="size-20 sm:size-24 rounded-full overflow-hidden border-2 border-[#E8C896] shadow-xl shrink-0 group-hover:scale-105 transition-transform duration-500">
+                        <img
+                          src={activeItem.image}
+                          alt={activeItem.name}
+                          className="w-full h-full object-cover object-top"
+                        />
+                      </div>
+
+                      {/* Issue Number in Golden Font directly below Image */}
+                      <span className="text-xs font-mono font-extrabold uppercase tracking-widest text-[#E8C896] -mt-1">
+                        {activeItem.issue}
                       </span>
-                      <span className="text-[0.68rem] font-semibold uppercase tracking-wider text-[#9A9A9A]">
+
+                      {/* Name and Position directly below Icon, Portrait & Issue */}
+                      <div className="space-y-1 max-w-lg">
+                        <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white drop-shadow-md">
+                          {activeItem.name}
+                        </h3>
+                        <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#E8C896]">
+                          {activeItem.position} • {activeItem.company}
+                        </p>
+                      </div>
+
+                      {/* Quote Text below Name & Position */}
+                      <blockquote className="mt-2 max-w-xl text-sm sm:text-base md:text-lg text-white/90 font-light leading-relaxed italic bg-black/40 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-white/10 shadow-inner">
+                        &ldquo;{activeItem.quote}&rdquo;
+                      </blockquote>
+                    </div>
+
+                    {/* Bottom Tagline */}
+                    <div className="relative z-10 flex items-center justify-end pt-4 mt-4 border-t border-white/10 text-xs font-mono text-[#9A9A9A]">
+                      <span className="text-[0.68rem] uppercase font-semibold tracking-wider text-[#E8C896]">
                         {activeItem.category}
                       </span>
                     </div>
-
-                    <div className="flex items-center gap-2 text-xs font-mono text-[#9A9A9A] bg-white/5 px-2.5 py-0.5 rounded-full border border-white/10">
-                      <Video className="size-3 text-[#E8C896]" />
-                      <span>{activeItem.duration}</span>
-                    </div>
-                  </div>
-
-                  {/* Main Profile Info & Photo */}
-                  <div className="relative z-10 my-3 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                    {/* High-Res Portrait Frame */}
-                    <div className="relative size-20 sm:size-24 rounded-2xl overflow-hidden border-2 border-[#E8C896]/40 shadow-xl shrink-0 group">
-                      <img
-                        src={activeItem.image}
-                        alt={activeItem.name}
-                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                      <div className="absolute bottom-1.5 left-1.5 flex items-center gap-1 text-[0.55rem] font-mono font-bold text-white bg-black/60 px-1.5 py-0.5 rounded-md backdrop-blur-sm">
-                        <Sparkles className="size-2 text-[#E8C896]" />
-                        Key Voice
-                      </div>
-                    </div>
-
-                    {/* Name, Company & Position */}
-                    <div className="space-y-1 flex-1 min-w-0">
-                      <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight text-white">
-                        {activeItem.name}
-                      </h3>
-                      <div className="flex items-center gap-1.5 text-xs font-semibold text-[#E8C896]">
-                        <User className="size-3.5 text-white/40 shrink-0" />
-                        <span className="truncate">{activeItem.position}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5 text-[0.72rem] font-medium text-[#9A9A9A]">
-                        <Building className="size-3.5 text-white/40 shrink-0" />
-                        <span className="truncate">{activeItem.company}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Quote / Takeaway Card */}
-                  <div className="relative z-10 rounded-xl bg-black/40 border border-white/10 p-3 mb-3">
-                    <Quote className="size-4 text-[#E8C896]/70 mb-1" />
-                    <blockquote className="text-xs sm:text-sm text-white/90 font-light leading-relaxed italic">
-                      &ldquo;{activeItem.quote}&rdquo;
-                    </blockquote>
-                  </div>
-
-                  {/* Topics Pills */}
-                  <div className="relative z-10 space-y-1.5 mb-3">
-                    <span className="text-[0.62rem] font-mono uppercase tracking-wider text-[#9A9A9A]">
-                      Core Discussion Tracks
-                    </span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {activeItem.topics.map((topic, i) => (
-                        <span
-                          key={i}
-                          className="rounded-lg border border-white/10 bg-white/5 px-2 py-0.5 text-[0.65rem] text-[#9A9A9A]"
-                        >
-                          #{topic}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Social & Broadcast Links Group */}
-                  <div className="relative z-10 pt-2.5 border-t border-white/10 space-y-2">
-                    <span className="text-[0.65rem] font-mono uppercase tracking-wider text-[#9A9A9A] block">
-                      Watch & Explore Interview Across Platforms
-                    </span>
-
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                      <a
-                        href={activeItem.socials.youtube}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-1.5 rounded-xl bg-white/5 border border-white/10 px-2 py-1.5 text-xs font-bold text-[#9A9A9A] hover:bg-[#B8894F]/15 hover:text-[#E8C896] hover:border-[#B8894F]/40 transition-all"
-                      >
-                        <FaYoutube className="size-3.5 text-[#E8C896]" />
-                        <span>YouTube</span>
-                      </a>
-
-                      <a
-                        href={activeItem.socials.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-1.5 rounded-xl bg-white/5 border border-white/10 px-2 py-1.5 text-xs font-bold text-[#9A9A9A] hover:bg-[#B8894F]/15 hover:text-[#E8C896] hover:border-[#B8894F]/40 transition-all"
-                      >
-                        <FaLinkedinIn className="size-3.5 text-[#E8C896]" />
-                        <span>LinkedIn</span>
-                      </a>
-
-                      <a
-                        href={activeItem.socials.facebook}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-1.5 rounded-xl bg-white/5 border border-white/10 px-2 py-1.5 text-xs font-bold text-[#9A9A9A] hover:bg-[#B8894F]/15 hover:text-[#E8C896] hover:border-[#B8894F]/40 transition-all"
-                      >
-                        <FaFacebookF className="size-3 text-[#E8C896]" />
-                        <span>Facebook</span>
-                      </a>
-
-                      <a
-                        href={activeItem.socials.instagram}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-1.5 rounded-xl bg-white/5 border border-white/10 px-2 py-1.5 text-xs font-bold text-[#9A9A9A] hover:bg-[#B8894F]/15 hover:text-[#E8C896] hover:border-[#B8894F]/40 transition-all"
-                      >
-                        <FaInstagram className="size-3.5 text-[#E8C896]" />
-                        <span>Instagram</span>
-                      </a>
-                    </div>
                   </div>
                 </motion.div>
-              )}
             </AnimatePresence>
           </ScrollReveal>
 

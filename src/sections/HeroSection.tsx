@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { FaLinkedinIn, FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa6';
 import ContactButton from '../components/ContactButton';
 import FadeIn from '../components/FadeIn';
 import Magnet from '../components/Magnet';
 import { SocialTooltip, SocialItem } from '../components/ui/social-media';
+import { HeroBackground } from '../components/ui/hero-background';
 
 const HERO_SOCIAL_ITEMS: SocialItem[] = [
   {
@@ -39,22 +39,16 @@ const HERO_SOCIAL_ITEMS: SocialItem[] = [
 
 export default function HeroSection() {
   const [fontSize, setFontSize] = useState('85px');
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const texts = [
-    { text: 'Exposition', className: 'text-metallic-gold-shine' },
-    { text: '21st Edition', className: 'text-metallic-silver-shine' },
-  ];
 
   useEffect(() => {
     const updateSize = () => {
       const w = window.innerWidth;
       if (w < 640) {
-        setFontSize(`${Math.max(32, Math.floor(w * 0.095))}px`);
+        setFontSize(`${Math.max(36, Math.floor(w * 0.1))}px`);
       } else if (w < 1024) {
-        setFontSize(`${Math.max(52, Math.floor(w * 0.08))}px`);
+        setFontSize(`${Math.max(56, Math.floor(w * 0.085))}px`);
       } else {
-        setFontSize(`${Math.min(115, Math.floor(w * 0.072))}px`);
+        setFontSize(`${Math.min(125, Math.floor(w * 0.08))}px`);
       }
     };
     updateSize();
@@ -62,71 +56,58 @@ export default function HeroSection() {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % texts.length);
-    }, 3500);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section
       className="relative flex h-screen flex-col bg-[#0C0C0C]"
       style={{ overflowX: 'clip' }}
     >
+      {/* Animated Magazine Covers & Gold Ambient Background */}
+      <HeroBackground />
+
       {/* Top Navbar Spacer */}
       <div className="relative z-20 w-full px-[5%] pt-6 md:pt-8 h-12 md:h-16 pointer-events-none" />
 
-      {/* Hero Title with Solid Text Slide Transition Effect */}
-      <div className="relative z-20 w-full overflow-hidden mt-2 flex items-center justify-center min-h-[100px] sm:min-h-[130px] md:min-h-[160px] px-[5%]">
-        <AnimatePresence mode="wait">
-          <motion.h1
-            key={currentIndex}
-            initial={{ x: -80, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: 80, opacity: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      {/* Primary Wordmark & Subtitle Lockup */}
+      <div className="relative z-20 w-full flex flex-col items-center justify-center my-auto px-[5%]">
+        <FadeIn delay={0.2} y={30} className="flex flex-col items-center justify-center text-center">
+          <h1
             style={{
               fontFamily: 'Times New Roman, Georgia, serif',
               fontSize: fontSize,
               fontWeight: 900,
             }}
-            className={`w-full text-center ${texts[currentIndex].className}`}
+            className="text-metallic-gold-shine tracking-tight drop-shadow-[0_10px_35px_rgba(0,0,0,0.9)]"
           >
-            {texts[currentIndex].text}
-          </motion.h1>
-        </AnimatePresence>
-      </div>
+            Exposition
+          </h1>
+          <p className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base font-mono font-bold tracking-[0.3em] uppercase text-[#E8C896] drop-shadow-md">
+            21ST EDITION
+          </p>
+        </FadeIn>
 
-      {/* Center Exposition Logo + Social Links Stack wrapped in Magnet */}
-      <div className="relative z-20 flex flex-col items-center justify-center my-auto px-[5%]">
+        {/* Social Links Row */}
         <Magnet
-          padding={180}
-          strength={3.5}
+          padding={120}
+          strength={3}
           activeTransition="transform 0.3s ease-out"
           inactiveTransition="transform 0.6s ease-in-out"
-          wrapperClassName="flex flex-col items-center justify-center w-[220px] sm:w-[280px] md:w-[320px] lg:w-[360px]"
+          wrapperClassName="flex items-center justify-center mt-6 sm:mt-8"
         >
-          <FadeIn delay={0.6} y={30} className="w-full flex justify-center">
-            <img
-              src="/ExpoLogo.png"
-              alt="Exposition 21st Edition"
-              className="h-auto w-full select-none drop-shadow-[0_0_25px_rgba(184,137,79,0.3)]"
-              draggable={false}
-            />
-          </FadeIn>
-
-          {/* Social Media Links below Exposition Logo moving together with cursor */}
-          <FadeIn delay={0.75} y={20} className="mt-5 sm:mt-6">
+          <FadeIn delay={0.4} y={20}>
             <SocialTooltip
               items={HERO_SOCIAL_ITEMS}
-              borderClass="border-0"
+              borderClass="border border-[#B8894F]/30"
               iconColorClass="text-[#E8C896] group-hover:text-[#0C0C0C]"
-              containerSizeClass="w-12 h-12 sm:w-[50px] sm:h-[50px] bg-[#161616]/90"
-              iconSizeClass="w-6 h-6"
+              containerSizeClass="w-11 h-11 sm:w-12 sm:h-12 bg-black/80 backdrop-blur-md"
+              iconSizeClass="w-5 h-5"
             />
           </FadeIn>
         </Magnet>
+
+        {/* Subtle Gold Divider Line */}
+        <FadeIn delay={0.45} y={10} className="w-full max-w-xs mt-8 sm:mt-10">
+          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#C9A25F]/40 to-transparent" />
+        </FadeIn>
       </div>
 
       {/* Bottom Bar: Contact Us Button on Right */}
