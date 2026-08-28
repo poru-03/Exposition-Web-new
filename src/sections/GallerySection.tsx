@@ -232,7 +232,7 @@ function AmbientField({ reduceMotion }: { reduceMotion: boolean }) {
   );
 }
 
-function TileCaption({ name, attached = true }: { name: string; attached?: boolean }) {
+function TileCaption({ name: string; attached?: boolean }) {
   return (
     <div
       className={
