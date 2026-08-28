@@ -200,7 +200,7 @@ export default function InterviewHighlightsSection() {
   return (
     <section
       id="interviews"
-      className="relative z-10 min-h-screen lg:h-screen lg:max-h-[105vh] w-full flex flex-col justify-center bg-transparent px-[4%] sm:px-[5%] py-4 sm:py-6 lg:py-6 overflow-hidden"
+      className="relative z-10 min-h-screen w-full flex flex-col justify-center bg-transparent px-[5%] py-14 sm:py-20 md:py-24 overflow-hidden"
     >
       {/* Section Header */}
       <ScrollReveal className="flex flex-col items-center justify-center text-center mb-3 sm:mb-4 lg:mb-5">
@@ -217,7 +217,7 @@ export default function InterviewHighlightsSection() {
         </h2>
 
         <p className="mt-1 max-w-2xl text-center text-xs sm:text-sm leading-snug text-[#9A9A9A] font-light">
-          In-depth conversations and strategic perspectives from distinguished industry leaders.
+          Insights from accomplished professionals and industry leaders who are driving change and shaping the future of their respective industries.
         </p>
 
         {/* View Mode Switcher Pills */}

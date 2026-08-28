@@ -1,58 +1,114 @@
 import { useRef } from "react"
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion"
-import { Compass, Layers, Palette, Code2, Sparkles, ArrowRight } from "lucide-react"
+import {
+  Radio,
+  Trophy,
+  Globe,
+  Users,
+  Briefcase,
+  BookOpen,
+  Sparkles,
+  ArrowRight,
+  ExternalLink,
+} from "lucide-react"
 import ScrollReveal from "@/components/ScrollReveal"
 import { StaggerContainer, StaggerCard } from "@/components/StaggerReveal"
 
-export const PROCESS_PHASES = [
+export type PhaseItem = {
+  id: string;
+  number: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  image: string;
+  icon: any;
+  deliverables: string[];
+  isElite10?: boolean;
+};
+
+export const PROCESS_PHASES: PhaseItem[] = [
   {
     id: "process-1",
     number: "01",
-    title: "Research and Analysis",
-    subtitle: "Discovery & Market Insights",
+    title: "Voices of Vision (Podcast Series)",
+    subtitle: "Industry Voices & Insights",
     description:
-      "With your vision in mind, we enter the Research and Analysis phase. Here, we examine your competitors, industry trends, and user preferences. This informed approach ensures your website stands out and provides an excellent user experience.",
-    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop",
-    icon: Compass,
-    deliverables: ["Brand Benchmarking", "Audience Persona Mapping", "3D Style Direction"],
+      "A curated podcast series featuring industry leaders, entrepreneurs and academics sharing the insights, experiences, and perspectives that define modern professional thinking.",
+    image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=800&auto=format&fit=crop",
+    icon: Radio,
+    deliverables: ["Industry Voices", "Expert Insights", "Real Stories"],
   },
   {
     id: "process-2",
     number: "02",
-    title: "Wireframing and Prototyping",
-    subtitle: "Spatial UX & Architecture",
+    title: "Elite 10",
+    subtitle: "Undergraduate Recognition Program",
     description:
-      "We move on to Wireframing and Prototyping, where we create skeletal representations of your website's pages. These visual blueprints allow us to test and refine the user experience before diving into high-fidelity design.",
-    image: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=800&auto=format&fit=crop",
-    icon: Layers,
-    deliverables: ["Interactive Wireframes", "Spatial Motion Flow", "UX Architecture"],
+      "Sri Lanka's first undergraduate recognition and development program, identifying 10 exceptional undergraduates from universities across the country.",
+    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop",
+    icon: Trophy,
+    deliverables: ["Top Talent", "National Recognition"],
+    isElite10: true,
   },
   {
     id: "process-3",
     number: "03",
-    title: "Design Creation",
-    subtitle: "3D Visuals & Identity",
+    title: "University Tech Events Hub",
+    subtitle: "Innovation Network & Hackathons",
     description:
-      "Now, it's time for the Design Creation phase. Our talented designers bring your vision to life. We focus on aesthetics, ensuring your website not only looks stunning but also aligns perfectly with your brand identity.",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop",
-    icon: Palette,
-    deliverables: ["Photorealistic 3D Assets", "Color & Typography Systems", "Dynamic Motion Graphics"],
+      "A live digital platform aggregating university-level tech events across Sri Lanka including hackathons, robotics competitions, and innovation challenges, all in one place.",
+    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop",
+    icon: Globe,
+    deliverables: ["Hackathons", "Robotics Competitions", "Innovation Challenges"],
   },
   {
     id: "process-4",
     number: "04",
-    title: "Development and Testing",
-    subtitle: "Performance & Launch",
+    title: "Industrial Forum",
+    subtitle: "Thought Leadership & Expert Dialogue",
     description:
-      "In the Development and Testing phase, our skilled developers turn designs into a fully functional website. Rigorous testing ensures everything works seamlessly, providing an exceptional user experience across all devices.",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop",
-    icon: Code2,
-    deliverables: ["WebGL / 3D Integration", "Responsive Animations", "Cross-Browser Optimization"],
+      "A high-impact thought leadership event bringing together industry experts, academics, and students in insightful conversations and real perspectives that equip the next generation for an evolving future.",
+    image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=800&auto=format&fit=crop",
+    icon: Users,
+    deliverables: ["Expert Dialogue", "Industry Insights", "Future Thinking"],
+  },
+  {
+    id: "process-5",
+    number: "05",
+    title: "Industrial Week & Career Fair",
+    subtitle: "Recruitment & Corporate Networking",
+    description:
+      "A dedicated recruitment platform where top companies meet motivated undergraduates and fresh graduates from faculties across the University of Kelaniya.",
+    image: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?q=80&w=800&auto=format&fit=crop",
+    icon: Briefcase,
+    deliverables: ["Career Opportunities", "Industry Connections"],
+  },
+  {
+    id: "process-6",
+    number: "06",
+    title: "Exposition Magazine",
+    subtitle: "Premier Business & IT Publication",
+    description:
+      "Sri Lanka's premier university business magazine, bridging the worlds of IT and Management while connecting undergraduates with industry, ideas, and opportunity.",
+    image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=800&auto=format&fit=crop",
+    icon: BookOpen,
+    deliverables: ["IT & Management", "University Publication", "Industry Bridge"],
+  },
+  {
+    id: "process-7",
+    number: "07",
+    title: "Exposition Magazine Launch",
+    subtitle: "Official Issue 22 Unveiling",
+    description:
+      "The closing event of Industrial Week and the official launch of Exposition Issue 22.",
+    image: "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=800&auto=format&fit=crop",
+    icon: Sparkles,
+    deliverables: ["Issue 22 Launch", "Closing Ceremony", "Grand Unveiling"],
   },
 ]
 
-const STICKY_TOP_BASE = 96
-const TAB_MARGIN = 62
+const STICKY_TOP_BASE = 80
+const TAB_MARGIN = 48
 
 export const DemoDark = () => {
   const timelineRef = useRef<HTMLDivElement>(null)
@@ -69,17 +125,12 @@ export const DemoDark = () => {
       <ScrollReveal className="mb-20 space-y-4 max-w-3xl mx-auto text-center flex flex-col items-center px-4">
         <div className="inline-flex items-center gap-2 rounded-full border border-[#B8894F]/30 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#E8C896] backdrop-blur-md">
           <Sparkles className="h-3.5 w-3.5 text-[#E8C896]" />
-          Interactive Process Flow
+          INTERACTIVE PROCESS FLOW
         </div>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight uppercase text-white leading-tight">
-          Planning your project
-          <br />
-          <span className="text-[#9A9A9A] font-light">development journey</span>
-        </h2>
         <p className="max-w-[56ch] text-sm sm:text-base leading-relaxed text-[#9A9A9A]">
-          We blend creative 3D design with cutting-edge frontend development to
-          build stunning, high-performance websites that elevate your brand and
-          captivate your audience.
+          Exposition is built around a series of initiatives that are
+          thoughtfully designed to encourage knowledge sharing, industry
+          engagement, and professional development.
         </p>
       </ScrollReveal>
 
@@ -154,9 +205,9 @@ export const DemoDark = () => {
                           <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C]/80 via-transparent to-transparent" />
                         </div>
 
-                        <div className="flex flex-col gap-2.5">
+                        <div className="flex flex-col gap-3">
                           <span className="text-xs font-bold uppercase tracking-wider text-[#9A9A9A]">
-                            Key Deliverables
+                            Key Highlights
                           </span>
                           <ul className="space-y-2 text-xs sm:text-sm text-white/85">
                             {phase.deliverables.map((item) => (
@@ -166,6 +217,23 @@ export const DemoDark = () => {
                               </li>
                             ))}
                           </ul>
+
+                          {phase.isElite10 && (
+                            <div className="pt-2">
+                              <a
+                                href="/elite-10"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  window.history.pushState({}, '', '/elite-10');
+                                  window.dispatchEvent(new Event('popstate'));
+                                }}
+                                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#B8894F] to-[#E8C896] px-5 py-2 text-xs font-bold uppercase tracking-wider text-[#0C0C0C] shadow-[0_0_20px_rgba(184,137,79,0.3)] transition-all hover:scale-105 cursor-pointer"
+                              >
+                                <span>Explore Elite 10</span>
+                                <ExternalLink className="h-3.5 w-3.5" />
+                              </a>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
