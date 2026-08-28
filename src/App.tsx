@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 import BackgroundFaceParallax from './components/BackgroundFaceParallax';
@@ -16,6 +16,8 @@ import ReviewsSection from './sections/ReviewsSection';
 import TeamSection from './sections/TeamSection';
 import TechEventHubSection from './sections/TechEventHubSection';
 import TimelineSection from './sections/TimelineSection';
+import Elite10Page from './pages/Elite10Page';
+import MagazineReaderPage from './pages/MagazineReaderPage';
 
 declare global {
   interface Window {
@@ -24,15 +26,31 @@ declare global {
 }
 
 export default function App() {
+  const [currentPath, setCurrentPath] = useState(
+    typeof window !== 'undefined' ? window.location.pathname : '/'
+  );
+
   useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    window.addEventListener('popstate', handleLocationChange);
+    return () => window.removeEventListener('popstate', handleLocationChange);
+  }, []);
+
+  useEffect(() => {
+    if (currentPath === '/elite-10' || currentPath.startsWith('/magazine-reader')) return;
+
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 0.9,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 0.95,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.2,
+      syncTouch: false,
     });
 
     window.__lenis = lenis;
@@ -49,7 +67,15 @@ export default function App() {
       lenis.destroy();
       delete window.__lenis;
     };
-  }, []);
+  }, [currentPath]);
+
+  if (currentPath === '/elite-10') {
+    return <Elite10Page />;
+  }
+
+  if (currentPath.startsWith('/magazine-reader')) {
+    return <MagazineReaderPage />;
+  }
 
   return (
     <main className="relative min-h-screen bg-[#0C0C0C] w-full" style={{ overflowX: 'clip' }}>

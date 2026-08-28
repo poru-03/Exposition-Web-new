@@ -347,7 +347,7 @@ export default function PartnersSection() {
   return (
     <section
       id="partners"
-      className="relative z-10 bg-transparent py-20 sm:py-28 overflow-hidden w-full"
+      className="relative z-10 bg-transparent px-[5%] py-14 sm:py-20 md:py-24 overflow-hidden w-full"
     >
       {/* Section Header */}
       <ScrollReveal className="flex flex-col items-center justify-center text-center mb-10 sm:mb-14 px-[5%] max-w-5xl mx-auto">

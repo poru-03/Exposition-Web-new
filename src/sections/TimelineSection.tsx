@@ -5,7 +5,7 @@ export default function TimelineSection() {
   return (
     <section
       id="timeline"
-      className="relative z-10 min-h-screen bg-transparent px-[5%] py-20 md:py-28"
+      className="relative z-10 min-h-screen bg-transparent px-[5%] py-14 sm:py-20 md:py-24"
     >
       {/* Header */}
       <div className="flex flex-col items-center justify-center text-center mb-12 sm:mb-16">
@@ -15,7 +15,7 @@ export default function TimelineSection() {
           y={20}
           className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#9A9A9A] sm:text-sm"
         >
-          My Creative Journey & Process
+          Exposition Event Universe
         </FadeIn>
         <FadeIn
           as="h2"
@@ -24,7 +24,7 @@ export default function TimelineSection() {
           className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
           style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}
         >
-          Timeline
+          Our Initiatives
         </FadeIn>
       </div>
 
