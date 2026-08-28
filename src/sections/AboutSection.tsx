@@ -10,7 +10,7 @@ const PAST_MAGAZINES = [
     year: '2021',
     readerUrl: '/magazine-reader?issue=18',
     title: 'EXPOSITION ISSUE 18 — 2021 EDITION',
-    pdfUrl: '/magazines/Exposition-Issue-18.pdf',
+    pdfUrl: '/resources/Exposition past magazines/Exposition Issue 18.pdf',
     coverImg: '/magazines/issue-18-cover.jpg',
   },
   {
@@ -19,7 +19,7 @@ const PAST_MAGAZINES = [
     year: '2023',
     readerUrl: '/magazine-reader?issue=19',
     title: 'EXPOSITION ISSUE 19 — 2023 EDITION',
-    pdfUrl: '/magazines/Exposition-Issue-19.pdf',
+    pdfUrl: '/resources/Exposition past magazines/Exposition Issue 19.pdf',
     coverImg: '/magazines/issue-19-cover.jpg',
   },
   {
@@ -37,7 +37,7 @@ const PAST_MAGAZINES = [
     year: '2025',
     readerUrl: '/magazine-reader?issue=21',
     title: 'EXPOSITION ISSUE 21 — 2025 EDITION',
-    pdfUrl: '/magazines/Exposition-Issue-21.pdf',
+    pdfUrl: '/resources/Exposition past magazines/Exposition Issue 21.pdf',
     coverImg: '/magazines/issue-21-cover.jpg',
   },
 ];

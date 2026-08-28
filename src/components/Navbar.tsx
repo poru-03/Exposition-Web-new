@@ -7,6 +7,7 @@ export const NAV_LINKS = [
   { name: 'Events', href: '#techevent-hub' },
   { name: 'Speakers', href: '#keynote-speakers' },
   { name: 'Interviews', href: '#interviews' },
+  { name: 'Gallery', href: '#gallery' },
   { name: 'Reviews', href: '#reviews' },
   { name: 'Partners', href: '#partners' },
   { name: 'Team', href: '#team' },

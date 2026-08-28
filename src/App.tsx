@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import AboutSection from './sections/AboutSection';
 import FooterSection from './sections/FooterSection';
 import HeroSection from './sections/HeroSection';
+import GallerySection from './sections/GallerySection';
 import InterviewHighlightsSection from './sections/InterviewHighlightsSection';
 import KeynoteSpeakersSection from './sections/KeynoteSpeakersSection';
 import PartnersSection from './sections/PartnersSection';
@@ -114,6 +115,7 @@ export default function App() {
         <TechEventHubSection />
         <KeynoteSpeakersSection />
         <InterviewHighlightsSection />
+        <GallerySection />
         <ReviewsSection />
         <PartnersSection />
         <TeamSection />
@@ -130,7 +132,3 @@ export default function App() {
     </main>
   );
 }
-
-
-
-
