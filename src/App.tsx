@@ -24,6 +24,18 @@ declare global {
   }
 }
 
+import {
+  Home,
+  Info,
+  Calendar,
+  Mic,
+  MessageSquareQuote,
+  Star,
+  Handshake,
+  Users,
+} from 'lucide-react';
+import MobileNav, { NavItem } from './components/ui/mobile-nav';
+
 export default function App() {
   const [currentPath, setCurrentPath] = useState(
     typeof window !== 'undefined' ? window.location.pathname : '/'
@@ -68,6 +80,18 @@ export default function App() {
     };
   }, [currentPath]);
 
+  // Mobile Navigation Section Links Configuration (4 items per side)
+  const mobileNavItems: NavItem[] = [
+    { id: 'hero', label: 'Home', href: '#hero', icon: Home },
+    { id: 'about', label: 'About', href: '#about', icon: Info },
+    { id: 'techevent-hub', label: 'Events', href: '#techevent-hub', icon: Calendar },
+    { id: 'keynote-speakers', label: 'Speakers', href: '#keynote-speakers', icon: Mic },
+    { id: 'interviews', label: 'Interviews', href: '#interviews', icon: MessageSquareQuote },
+    { id: 'reviews', label: 'Reviews', href: '#reviews', icon: Star },
+    { id: 'partners', label: 'Partners', href: '#partners', icon: Handshake },
+    { id: 'team', label: 'Team', href: '#team', icon: Users },
+  ];
+
   if (currentPath === '/elite-10') {
     return <Elite10Page />;
   }
@@ -100,6 +124,9 @@ export default function App() {
       <div className="sticky bottom-0 z-0 w-full bg-black">
         <FooterSection />
       </div>
+
+      {/* Mobile Floating Bottom Nav Bar */}
+      <MobileNav items={mobileNavItems} />
     </main>
   );
 }

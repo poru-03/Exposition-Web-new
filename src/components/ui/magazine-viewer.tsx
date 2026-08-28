@@ -31,13 +31,21 @@ export function usePdfPages(pdfUrl: string, initialPages?: string[]) {
   } else if (pdfUrl.includes('19')) {
     issueNum = '19';
     totalCount = 94;
+  } else if (pdfUrl.includes('20')) {
+    issueNum = '20';
+    totalCount = 0; // Pre-extracted images not available for issue 20
+  } else if (pdfUrl.includes('21')) {
+    issueNum = '21';
+    totalCount = 102;
   }
 
-  // Pre-extracted full page array fallback
-  const staticFullPages = Array.from(
-    { length: totalCount },
-    (_, i) => `/magazines/pages/issue-${issueNum}-page-${i + 1}.jpg`
-  );
+  // Pre-extracted full page array fallback (minimum 2 pages for HTMLFlipBook layout compatibility)
+  const staticFullPages = totalCount > 0
+    ? Array.from(
+        { length: totalCount },
+        (_, i) => `/magazines/pages/issue-${issueNum}-page-${i + 1}.jpg`
+      )
+    : [`/magazines/issue-${issueNum}-cover.jpg`, `/magazines/issue-${issueNum}-cover.jpg`];
 
   const [pages, setPages] = useState<string[]>(() => pdfPageCache.get(pdfUrl) || initialPages || staticFullPages);
   const [isLoading, setIsLoading] = useState<boolean>(!pdfPageCache.has(pdfUrl) && (!pages || pages.length === 0));
@@ -54,15 +62,21 @@ export function usePdfPages(pdfUrl: string, initialPages?: string[]) {
       return;
     }
 
+    setPages(initialPages || staticFullPages);
+    setIsLoading(true);
+    setError(null);
+
     let isCancelled = false;
 
     async function loadPdfPages() {
       try {
-        setIsLoading(true);
-        setError(null);
         setLoadingProgress('Loading magazine PDF document...');
 
-        const loadingTask = pdfjsLib.getDocument({ url: pdfUrl });
+        const loadingTask = pdfjsLib.getDocument({
+          url: pdfUrl,
+          disableRange: true,
+          disableStream: true,
+        });
         const pdf = await loadingTask.promise;
         const totalPages = pdf.numPages;
 
@@ -152,22 +166,67 @@ export function MagazineViewer({
 }: MagazineViewerProps) {
   const flipBookRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const bookContainerRef = useRef<HTMLDivElement>(null);
 
   const [currentPage, setCurrentPage] = useState(0);
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [bookDimensions, setBookDimensions] = useState({ width: 560, height: 750 });
   const isCooldownRef = useRef(false);
 
   const { pages, isLoading, loadingProgress, error } = usePdfPages(pdfUrl, initialPages);
 
-  // Responsive mobile screen check
+  // Responsive size & aspect ratio calculation
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+
+      if (bookContainerRef.current) {
+        const rect = bookContainerRef.current.getBoundingClientRect();
+        // Give minimal padding around the book to fill full height available
+        const availHeight = Math.max(300, rect.height - 12);
+        const availWidth = Math.max(300, rect.width - 24);
+
+        // Aspect ratio of a single page (standard A4/Magazine format ~ 1:1.414 -> width/height ratio = 0.707)
+        const pageAspectRatio = 1 / 1.414;
+
+        // For desktop two-page spread: aspect ratio is 2 * pageAspectRatio
+        // For mobile single page: aspect ratio is pageAspectRatio
+        const spreadRatio = mobile ? pageAspectRatio : pageAspectRatio * 2;
+
+        // Height-first sizing: fill full height
+        let calculatedHeight = availHeight;
+        let calculatedWidth = calculatedHeight * spreadRatio;
+
+        // If calculated width exceeds available width, clamp width and adjust height accordingly
+        if (calculatedWidth > availWidth) {
+          calculatedWidth = availWidth;
+          calculatedHeight = calculatedWidth / spreadRatio;
+        }
+
+        // For HTMLFlipBook, page width is single-page width
+        const singlePageWidth = mobile ? calculatedWidth : calculatedWidth / 2;
+
+        setBookDimensions({
+          width: Math.floor(singlePageWidth),
+          height: Math.floor(calculatedHeight),
+        });
+      }
     };
+
     handleResize();
+
+    const resizeObserver = new ResizeObserver(handleResize);
+    if (bookContainerRef.current) {
+      resizeObserver.observe(bookContainerRef.current);
+    }
+
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   // Handle ESC key to close modal
@@ -243,40 +302,77 @@ export function MagazineViewer({
   const totalPages = pages.length;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/94 backdrop-blur-2xl p-1 sm:p-3 md:p-4 overflow-hidden animate-fadeIn select-none">
-      {/* Modal Card Container */}
-      <div className="relative flex flex-col items-center w-[98vw] max-w-[1450px] h-[95vh] max-h-[1080px] bg-[#0C0C0C] border border-[#B8894F]/40 rounded-2xl shadow-[0_30px_90px_rgba(0,0,0,0.98)] overflow-hidden">
+    <div className="fixed inset-0 z-[100] flex flex-col h-screen w-screen bg-[#050508] overflow-hidden animate-fadeIn select-none">
+      {/* Animated Ambient Background (Pure CSS Gradient & Floating Glow) */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        {/* Animated Gradient Mesh */}
+        <div className="absolute -inset-[50%] opacity-40 bg-[radial-gradient(circle_at_50%_50%,rgba(184,137,79,0.25),transparent_60%),radial-gradient(circle_at_20%_20%,rgba(232,200,150,0.15),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(184,137,79,0.15),transparent_50%)] animate-[spin_40s_linear_infinite]" />
         
-        {/* Modal Header Bar */}
-        <div className="flex items-center justify-between w-full px-5 py-3.5 border-b border-white/10 bg-[#121212] z-30">
-          <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1.5 px-3 py-1 text-xs font-black uppercase tracking-wider text-[#E8C896] bg-black/80 rounded-md border border-[#B8894F]/50 shadow-md">
-              <BookOpen className="w-3.5 h-3.5" />
-              {issueLabel}
+        {/* Slow Pulsing Amber Ambient Light Orbs */}
+        <div className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] bg-[#B8894F]/10 rounded-full blur-[120px] animate-[pulse_12s_ease-in-out_infinite]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[45vw] h-[45vw] max-w-[550px] max-h-[550px] bg-[#E8C896]/10 rounded-full blur-[140px] animate-[pulse_16s_ease-in-out_infinite_2s]" />
+      </div>
+
+      {/* Header Bar - Full Width Overlay */}
+      <div className="relative flex items-center justify-between w-full px-5 py-3.5 border-b border-white/10 bg-black/60 backdrop-blur-xl z-30 shrink-0">
+        <div className="flex items-center gap-3">
+          <span className="flex items-center gap-1.5 px-3 py-1 text-xs font-black uppercase tracking-wider text-[#E8C896] bg-black/80 rounded-md border border-[#B8894F]/50 shadow-md">
+            <BookOpen className="w-3.5 h-3.5" />
+            {issueLabel}
+          </span>
+          <h3 className="text-xs sm:text-sm md:text-base font-extrabold text-white uppercase tracking-wider truncate max-w-xs sm:max-w-md md:max-w-lg">
+            {title}
+          </h3>
+
+          {/* Page Counter Indicator in Header */}
+          <div className="hidden sm:flex items-center gap-2 ml-2 px-3 py-1 bg-black/60 border border-white/10 rounded-full text-xs font-mono text-[#9A9A9A]">
+            <span className="w-2 h-2 rounded-full bg-[#B8894F] animate-pulse" />
+            <span className="text-[#E8C896] font-semibold">
+              {totalPages === 0
+                ? 'Loading Pages...'
+                : isMobile
+                  ? `Page ${currentPage + 1} of ${totalPages}`
+                  : currentPage === 0
+                    ? `Page 1 of ${totalPages} (Cover)`
+                    : `Pages ${currentPage} - ${Math.min(currentPage + 1, totalPages)} of ${totalPages}`}
             </span>
-            <h3 className="text-xs sm:text-sm md:text-base font-extrabold text-white uppercase tracking-wider truncate max-w-xs sm:max-w-md md:max-w-lg">
-              {title}
-            </h3>
           </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <a
+            href={pdfUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            download
+            className="flex items-center gap-2 px-3 py-1.5 text-xs font-mono uppercase tracking-wider text-[#E8C896] bg-black/80 hover:bg-[#B8894F] hover:text-black border border-[#B8894F]/50 rounded-lg transition-all shadow-md active:scale-95"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Download Raw PDF</span>
+            <span className="sm:hidden">Download</span>
+          </a>
 
           <button
             type="button"
             onClick={onClose}
-            className="p-2 text-white/70 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#E8C896]/50 rounded-full transition-all shadow-md active:scale-95"
+            className="p-2 text-white/70 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#E8C896]/50 rounded-full transition-all shadow-md active:scale-95 cursor-pointer"
             aria-label="Close magazine viewer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
+      </div>
 
-        {/* Book Workspace Container */}
-        <div
-          ref={containerRef}
-          className="relative flex-1 flex items-center justify-center w-full p-2 sm:p-4 md:p-6 overflow-hidden bg-[#060606] cursor-grab active:cursor-grabbing"
-        >
+      {/* Book Workspace Container - Takes All Available Vertical Height directly on screen */}
+      <div
+        ref={containerRef}
+        className="relative flex-1 flex items-center justify-center w-full overflow-hidden z-10 cursor-grab active:cursor-grabbing py-1 px-4 md:px-6"
+      >
+        {/* Ref box to measure exact available container bounds */}
+        <div ref={bookContainerRef} className="relative w-full h-full flex items-center justify-center">
           {/* Loading Overlay */}
           {isLoading && pages.length === 0 && (
-            <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md gap-4">
+            <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/80 backdrop-blur-md gap-4 rounded-xl">
               <Loader2 className="w-10 h-10 text-[#E8C896] animate-spin" />
               <div className="flex flex-col items-center gap-1 text-center">
                 <span className="text-sm font-bold uppercase tracking-widest text-[#E8C896]">
@@ -305,9 +401,8 @@ export function MagazineViewer({
           {/* Scroll Hint Overlay */}
           {!isLoading && pages.length > 0 && (
             <div
-              className={`absolute top-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 px-5 py-2.5 bg-black/85 border border-[#B8894F]/60 rounded-full text-[#E8C896] text-xs font-mono uppercase tracking-widest shadow-2xl backdrop-blur-md transition-all duration-500 pointer-events-none ${
-                hasScrolled ? 'opacity-0 scale-95' : 'opacity-100 animate-bounce'
-              }`}
+              className={`absolute top-4 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 px-5 py-2.5 bg-black/85 border border-[#B8894F]/60 rounded-full text-[#E8C896] text-xs font-mono uppercase tracking-widest shadow-2xl backdrop-blur-md transition-all duration-500 pointer-events-none ${hasScrolled ? 'opacity-0 scale-95' : 'opacity-100 animate-bounce'
+                }`}
             >
               <MousePointer className="w-4 h-4 animate-pulse text-[#E8C896]" />
               <span>Scroll to turn pages</span>
@@ -319,29 +414,26 @@ export function MagazineViewer({
             <button
               type="button"
               onClick={handlePrevPage}
-              className="absolute left-3 sm:left-6 z-30 p-3 text-[#E8C896] bg-black/75 hover:bg-black border border-[#B8894F]/40 hover:border-[#E8C896] rounded-full backdrop-blur-md transition-all shadow-2xl hover:scale-110 active:scale-95"
+              className="absolute left-2 sm:left-6 z-30 p-3 text-[#E8C896] bg-black/75 hover:bg-black border border-[#B8894F]/40 hover:border-[#E8C896] rounded-full backdrop-blur-md transition-all shadow-2xl hover:scale-110 active:scale-95 cursor-pointer"
               aria-label="Previous Page"
             >
               <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
             </button>
           )}
 
-          {/* Center Book View with Book Spine Effect */}
+          {/* Center Book View with Dynamic Dimensions & Spine Effect */}
           {pages.length > 0 && (
-            <div className="relative flex items-center justify-center max-w-full max-h-full py-1">
-              {/* Book Spine Shadow Gutter (Two-page Spread Desktop Gutter) */}
-              <div className="absolute left-1/2 top-0 bottom-0 w-12 -translate-x-1/2 bg-gradient-to-r from-transparent via-black/50 to-transparent pointer-events-none z-20 hidden md:block rounded-full" />
+            <div className="relative flex items-center justify-center">
+              {/* Book Spine Shadow Gutter */}
+              <div className="absolute left-1/2 top-0 bottom-0 w-10 -translate-x-1/2 bg-gradient-to-r from-transparent via-black/60 to-transparent pointer-events-none z-20 hidden md:block rounded-full" />
 
               {/* @ts-ignore */}
               <HTMLFlipBook
+                key={`${bookDimensions.width}-${bookDimensions.height}`}
                 ref={flipBookRef}
-                width={560}
-                height={750}
-                size="stretch"
-                minWidth={320}
-                maxWidth={720}
-                minHeight={450}
-                maxHeight={960}
+                width={bookDimensions.width}
+                height={bookDimensions.height}
+                size="fixed"
                 maxShadowOpacity={0.65}
                 drawShadow={true}
                 showCover={true}
@@ -376,44 +468,17 @@ export function MagazineViewer({
             <button
               type="button"
               onClick={handleNextPage}
-              className="absolute right-3 sm:right-6 z-30 p-3 text-[#E8C896] bg-black/75 hover:bg-black border border-[#B8894F]/40 hover:border-[#E8C896] rounded-full backdrop-blur-md transition-all shadow-2xl hover:scale-110 active:scale-95"
+              className="absolute right-2 sm:right-6 z-30 p-3 text-[#E8C896] bg-black/75 hover:bg-black border border-[#B8894F]/40 hover:border-[#E8C896] rounded-full backdrop-blur-md transition-all shadow-2xl hover:scale-110 active:scale-95 cursor-pointer"
               aria-label="Next Page"
             >
               <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
             </button>
           )}
         </div>
-
-        {/* Modal Footer Bar */}
-        <div className="flex items-center justify-between w-full px-6 py-3.5 border-t border-white/10 bg-[#121212] text-xs font-mono text-[#9A9A9A] z-30">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#B8894F] animate-pulse" />
-            <span className="text-[#E8C896] font-semibold">
-              {totalPages === 0
-                ? 'Loading Pages...'
-                : isMobile
-                ? `Page ${currentPage + 1} of ${totalPages}`
-                : currentPage === 0
-                ? `Page 1 of ${totalPages} (Cover)`
-                : `Pages ${currentPage} - ${Math.min(currentPage + 1, totalPages)} of ${totalPages}`}
-            </span>
-          </div>
-
-          <a
-            href={pdfUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            download
-            className="flex items-center gap-2 px-3.5 py-1.5 text-xs font-mono uppercase tracking-wider text-[#E8C896] bg-black/80 hover:bg-[#B8894F] hover:text-black border border-[#B8894F]/50 rounded-lg transition-all shadow-md active:scale-95"
-          >
-            <Download className="w-3.5 h-3.5" />
-            <span>Download Raw PDF</span>
-          </a>
-        </div>
-
       </div>
     </div>
   );
 }
 
 export default MagazineViewer;
+

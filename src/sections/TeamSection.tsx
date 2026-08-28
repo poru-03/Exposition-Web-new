@@ -10,6 +10,7 @@ import {
 import { FaLinkedinIn, FaWhatsapp } from 'react-icons/fa6';
 import ScrollReveal from '../components/ScrollReveal';
 import { Button } from '@/components/ui/button';
+import { SocialTooltip } from '@/components/ui/social-media';
 
 export type TeamMember = {
   id: string;
@@ -374,44 +375,36 @@ export default function TeamSection() {
                         </p>
                       </div>
 
-                      {/* Social & Contact Links (Email, LinkedIn, WhatsApp) */}
-                      <div className="pt-3 border-t border-white/10 flex items-center justify-between gap-2">
-                        {/* Email Link */}
-                        <a
-                          href={`mailto:${member.email}`}
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-white/5 border border-white/10 py-2 text-[0.68rem] font-semibold text-white/80 hover:bg-white hover:text-black hover:border-white transition-all"
-                          title="Send Email"
-                        >
-                          <Mail className="size-3.5 text-[#E8C896]" />
-                          <span className="hidden sm:inline">Email</span>
-                        </a>
-
-                        {/* LinkedIn Link */}
-                        <a
-                          href={member.linkedin}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-sky-500/10 border border-sky-500/30 py-2 text-[0.68rem] font-semibold text-sky-200 hover:bg-sky-500 hover:text-white transition-all"
-                          title="LinkedIn Profile"
-                        >
-                          <FaLinkedinIn className="size-3.5 text-sky-400" />
-                          <span className="hidden sm:inline">LinkedIn</span>
-                        </a>
-
-                        {/* WhatsApp Link */}
-                        <a
-                          href={member.whatsapp}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 py-2 text-[0.68rem] font-semibold text-emerald-200 hover:bg-emerald-500 hover:text-white transition-all"
-                          title="WhatsApp Chat"
-                        >
-                          <FaWhatsapp className="size-3.5 text-emerald-400" />
-                          <span className="hidden sm:inline">WhatsApp</span>
-                        </a>
+                      {/* Social & Contact Links using SocialTooltip */}
+                      <div className="pt-3 border-t border-white/10 flex items-center justify-center">
+                        <SocialTooltip
+                          items={[
+                            {
+                              href: `mailto:${member.email}`,
+                              ariaLabel: 'Email',
+                              tooltip: 'Email',
+                              color: '#E8C896',
+                              icon: <Mail className="size-4" />,
+                            },
+                            {
+                              href: member.linkedin,
+                              ariaLabel: 'LinkedIn',
+                              tooltip: 'LinkedIn',
+                              color: '#0077b5',
+                              icon: <FaLinkedinIn className="size-4" />,
+                            },
+                            {
+                              href: member.whatsapp,
+                              ariaLabel: 'WhatsApp',
+                              tooltip: 'WhatsApp',
+                              color: '#25d366',
+                              icon: <FaWhatsapp className="size-4" />,
+                            },
+                          ]}
+                          containerSizeClass="w-9 h-9"
+                          iconSizeClass="size-4"
+                          className="gap-2.5"
+                        />
                       </div>
                     </div>
                   </div>

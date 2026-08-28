@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import { BookOpen } from 'lucide-react';
 import AnimatedText from '../components/AnimatedText';
 import ContactButton from '../components/ContactButton';
 import FadeIn from '../components/FadeIn';
-import { MagazineViewer } from '../components/ui/magazine-viewer';
 
 const PAST_MAGAZINES = [
   {
@@ -12,7 +10,7 @@ const PAST_MAGAZINES = [
     year: '2021',
     readerUrl: '/magazine-reader?issue=18',
     title: 'EXPOSITION ISSUE 18 — 2021 EDITION',
-    pdfUrl: '/Resources/Exposition past magazines/Exposition Issue 18.pdf',
+    pdfUrl: '/magazines/Exposition-Issue-18.pdf',
     coverImg: '/magazines/issue-18-cover.jpg',
   },
   {
@@ -21,8 +19,17 @@ const PAST_MAGAZINES = [
     year: '2023',
     readerUrl: '/magazine-reader?issue=19',
     title: 'EXPOSITION ISSUE 19 — 2023 EDITION',
-    pdfUrl: '/Resources/Exposition past magazines/Exposition Issue 19.pdf',
+    pdfUrl: '/magazines/Exposition-Issue-19.pdf',
     coverImg: '/magazines/issue-19-cover.jpg',
+  },
+  {
+    issueNum: '20',
+    issueLabel: 'ISSUE 20',
+    year: '2024',
+    readerUrl: '/magazine-reader?issue=20',
+    title: 'EXPOSITION ISSUE 20 — 2024 EDITION',
+    pdfUrl: '/magazines/Exposition-Issue-20.pdf',
+    coverImg: '/magazines/issue-20-cover.jpg',
   },
   {
     issueNum: '21',
@@ -30,14 +37,12 @@ const PAST_MAGAZINES = [
     year: '2025',
     readerUrl: '/magazine-reader?issue=21',
     title: 'EXPOSITION ISSUE 21 — 2025 EDITION',
-    pdfUrl: '/Resources/Exposition past magazines/Exposition Issue 21.pdf',
+    pdfUrl: '/magazines/Exposition-Issue-21.pdf',
     coverImg: '/magazines/issue-21-cover.jpg',
   },
 ];
 
 export default function AboutSection() {
-  const [activeMag, setActiveMag] = useState<(typeof PAST_MAGAZINES)[0] | null>(null);
-
   return (
     <section
       id="about"
@@ -129,16 +134,6 @@ export default function AboutSection() {
           <ContactButton label="Contact Us" />
         </FadeIn>
       </div>
-
-      {/* Book-Style Magazine Viewer Modal */}
-      {activeMag && (
-        <MagazineViewer
-          pdfUrl={activeMag.pdfUrl}
-          issueLabel={activeMag.issueLabel}
-          title={activeMag.title}
-          onClose={() => setActiveMag(null)}
-        />
-      )}
     </section>
   );
 }
