@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Handshake,
   Download,
   FileText,
   X,
@@ -351,11 +350,6 @@ export default function PartnersSection() {
     >
       {/* Section Header */}
       <ScrollReveal className="flex flex-col items-center justify-center text-center mb-10 sm:mb-14 px-[5%] max-w-5xl mx-auto">
-        <span className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#B8894F]/30 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#E8C896] backdrop-blur-md">
-          <Handshake className="h-3.5 w-3.5 text-[#E8C896]" />
-          Partner With Us
-        </span>
-
         <h2
           className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
           style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}

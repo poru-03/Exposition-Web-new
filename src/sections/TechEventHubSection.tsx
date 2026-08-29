@@ -230,11 +230,7 @@ export default function TechEventHubSection() {
       )}
 
       {/* Section Header */}
-      <ScrollReveal className="flex flex-col items-center justify-center text-center mb-3 sm:mb-4 lg:mb-5">
-        <span className="mb-1.5 inline-flex items-center gap-2 rounded-full border border-[#B8894F]/30 bg-[#161616]/70 px-3.5 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-[#E8C896] backdrop-blur-md">
-          <Sparkles className="h-3 w-3 text-[#E8C896]" />
-          University & Innovation Network
-        </span>
+      <ScrollReveal className="flex flex-col items-center justify-center text-center mb-6 sm:mb-8 lg:mb-10">
         <h2
           className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
           style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}
