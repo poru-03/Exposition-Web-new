@@ -5,7 +5,6 @@ import {
   ChevronDown,
   Sparkles,
   Search,
-  MessageCircleQuestion,
   Send,
 } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
@@ -127,11 +126,6 @@ export default function QASection() {
     >
       {/* Section Header */}
       <ScrollReveal className="flex flex-col items-center justify-center text-center mb-14 sm:mb-18 max-w-4xl mx-auto">
-        <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-black/75 backdrop-blur-md">
-          <MessageCircleQuestion className="h-3.5 w-3.5 text-[#B8894F]" />
-          Everything You Need to Know
-        </span>
-
         <h2
           className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
           style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}

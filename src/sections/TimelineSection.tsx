@@ -10,16 +10,8 @@ export default function TimelineSection() {
       {/* Header */}
       <div className="flex flex-col items-center justify-center text-center mb-12 sm:mb-16">
         <FadeIn
-          as="span"
-          delay={0}
-          y={20}
-          className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#9A9A9A] sm:text-sm"
-        >
-          Exposition Event Universe
-        </FadeIn>
-        <FadeIn
           as="h2"
-          delay={0.1}
+          delay={0}
           y={40}
           className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
           style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}

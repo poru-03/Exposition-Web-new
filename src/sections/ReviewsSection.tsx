@@ -6,7 +6,6 @@ import { Marquee } from '@/components/ui/3d-testimonails';
 import ScrollReveal from '../components/ScrollReveal';
 import { SocialTooltip, SocialItem } from '@/components/ui/social-media';
 import {
-  Sparkles,
   Star,
   ChevronLeft,
   ChevronRight,
@@ -289,11 +288,6 @@ export default function ReviewsSection() {
       <div className="relative z-10 flex flex-col items-center justify-center w-full">
         {/* Section Header */}
         <ScrollReveal className="flex flex-col items-center justify-center text-center mb-12 sm:mb-16 px-[5%]">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#B8894F]/30 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#E8C896] backdrop-blur-md">
-            <Sparkles className="h-3.5 w-3.5 text-[#E8C896]" />
-            Community Voices & Success Stories
-          </span>
-
           <h2
             className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
             style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}

@@ -168,16 +168,8 @@ function GalleryHeading() {
   return (
     <div className="relative z-10 mx-auto mb-7 flex w-full max-w-[1560px] flex-col items-center px-4 text-center sm:mb-8 md:mb-9 md:px-6">
       <FadeIn
-        as="span"
-        delay={0}
-        y={20}
-        className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-gold-gradient sm:text-sm"
-      >
-        Moments from past editions
-      </FadeIn>
-      <FadeIn
         as="h2"
-        delay={0.1}
+        delay={0}
         y={40}
         className="hero-heading section-title font-black uppercase leading-none tracking-tight"
         style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}
