@@ -4,7 +4,7 @@ export default function Curtain({ scrollYProgress }: { scrollYProgress: MotionVa
   // Translate from 0 to -100% (left) and 100% (right) between 0 and 0.6 scroll progress
   const leftX = useTransform(scrollYProgress, [0, 0.6], ['0%', '-100%']);
   const rightX = useTransform(scrollYProgress, [0, 0.6], ['0%', '100%']);
-  
+
   return (
     <div className="pointer-events-none absolute inset-0 z-40 flex overflow-hidden">
       {/* Left Panel */}
@@ -17,7 +17,7 @@ export default function Curtain({ scrollYProgress }: { scrollYProgress: MotionVa
         {/* Edge highlight */}
         <div className="absolute right-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-gold-accent to-transparent opacity-80"></div>
       </motion.div>
-      
+
       {/* Right Panel */}
       <motion.div
         style={{ x: rightX }}
