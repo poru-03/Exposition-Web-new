@@ -10,6 +10,9 @@ export type KeynoteSpeaker = {
   title: string;
   company: string;
   issue: string;
+  issueLabel?: string;
+  subtitle?: string;
+  description?: string;
   image: string;
   category: 'Tech & AI' | 'Corporate Leadership' | 'Creative Arts' | 'Innovation';
   tags: string[];
@@ -19,162 +22,189 @@ export type KeynoteSpeaker = {
 
 export const ROW1_SPEAKERS: KeynoteSpeaker[] = [
   {
-    id: 'speaker-1',
-    name: 'Dhanika Perera',
-    title: 'Serial Entrepreneur & Platform Innovator',
-    company: 'Founder & CEO, Bhasha / Helakuru',
-    issue: 'Issue 07',
-    image: '/resources/speakers/dhanika perera.png',
-    category: 'Tech & AI',
-    tags: ['Tech Innovation', 'Digital Platforms'],
-    quote: 'Disrupting ecosystems through digital engineering platforms and empowering millions with native tech.',
-    highlight: 'Featured Innovator',
-  },
-  {
-    id: 'speaker-2',
-    name: 'Deepal Sooriyaarachchi',
-    title: 'Management Consultant & Author',
-    company: 'Former Managing Director, AVIVA NDB',
+    id: 'speaker-issue-20',
+    name: 'Deepal Sooriyarachchi',
+    title: 'Leading Corporate Leader',
+    company: 'Management Consultant & Author, Former MD - AVIVA NDB',
     issue: 'Issue 20',
-    image: '/resources/speakers/deepal sooriyarachchi.png',
+    issueLabel: 'Issue 20',
+    image: '/speakers/deepal-sooriyarachchi.png',
     category: 'Corporate Leadership',
-    tags: ['Leadership', 'Corporate Strategy'],
+    tags: ['Corporate Governance', 'Strategic Management'],
     quote: 'Sustaining corporate governance and unlocking human potential in volatile, evolving global markets.',
     highlight: 'Keynote Address',
   },
   {
-    id: 'speaker-3',
-    name: 'Peter De Almeida',
-    title: 'Technology Visionary & Executive',
-    company: 'Managing Director / CEO, N-able',
-    issue: 'Issue 17',
-    image: '/resources/speakers/peterdealmeida.png',
-    category: 'Tech & AI',
-    tags: ['Enterprise Tech', 'Digital Shift'],
-    quote: 'Transforming enterprise architectures and digital cultures through fearless creative software thinking.',
-    highlight: 'Industrial Leader',
-  },
-  {
-    id: 'speaker-4',
-    name: 'Dr. Harsha Subasinghe',
-    title: 'Founder & CEO, CodeGen International',
-    company: 'Creator of Vega Innovations & AI Engines',
+    id: 'speaker-issue-19',
+    name: 'Dian Gomes',
+    title: 'Business Magnate & Philanthropist',
+    subtitle: 'Former Group Director - MAS Holdings',
+    company: 'Former Group Director, MAS Holdings',
+    description: 'Influential figure in Sri Lankan business and apparel industry.',
     issue: 'Issue 19',
-    image: '/resources/speakers/harsha.png',
-    category: 'Tech & AI',
-    tags: ['AI Engines', 'EV Engineering', 'Innovation'],
-    quote: 'Building world-class AI engines and pioneering high-performance electric supercars from South Asia.',
-    highlight: 'Deep Tech Pioneer',
-  },
-  {
-    id: 'speaker-5',
-    name: 'Kanchana Priyakantha',
-    title: 'Co-Founder & CEO, KReader / KBooks',
-    company: 'EdTech Pioneer & Digital Publisher',
-    issue: 'Issue 16',
-    image: '/resources/speakers/kanchana.png',
-    category: 'Innovation',
-    tags: ['EdTech', 'Digital Publishing'],
-    quote: 'Empowering digital literacy and democratizing knowledge distribution across modern interactive channels.',
-    highlight: 'EdTech Lead',
-  },
-  {
-    id: 'speaker-6',
-    name: 'W.K.H. Wegapitiya',
-    title: 'Technology Leader & Industrial Pioneer',
-    company: 'Chairman, LAUGFS Holdings',
-    issue: 'Issue 15',
-    image: '/resources/speakers/ananda handunge.png',
+    issueLabel: 'Issue 19',
+    image: '/speakers/dian-gomes.png',
     category: 'Corporate Leadership',
-    tags: ['Energy Systems', 'Industry 4.0'],
-    quote: 'Leading technological advancement and bold digital transformation initiatives that redefine core industries.',
-    highlight: 'Industry Pioneer',
+    tags: ['Business Development', 'Leadership', 'Apparel Industry'],
+    quote: 'Influential figure in Sri Lankan business and apparel industry, championing high-performance team cultures.',
+    highlight: 'Featured Keynote',
+  },
+  {
+    id: 'speaker-issue-18',
+    name: 'Peter De Almeida',
+    title: 'Tech Solutions Innovator & Dynamic Leader',
+    company: 'Managing Director / CEO, N-able',
+    issue: 'Issue 18',
+    issueLabel: 'Issue 18',
+    image: '/speakers/peter-de-almeida.png',
+    category: 'Tech & AI',
+    tags: ['Enterprise Tech', 'Digital Transformation'],
+    quote: 'Transforming enterprise architectures and digital cultures through fearless creative software thinking.',
+    highlight: 'Tech Solutions Innovator',
+  },
+  {
+    id: 'speaker-issue-17',
+    name: 'Dhanika Perera',
+    title: 'Tech Innovator & Entrepreneur',
+    company: 'Founder & CEO, Bhasha / Helakuru',
+    issue: 'Issue 17',
+    issueLabel: 'Issue 17',
+    image: '/speakers/dhanika-perera.png',
+    category: 'Tech & AI',
+    tags: ['Tech Innovation', 'Digital Platforms'],
+    quote: 'Disrupting ecosystems through digital engineering platforms and empowering millions with native tech.',
+    highlight: 'Tech Innovator',
+  },
+  {
+    id: 'speaker-issue-16',
+    name: 'W.K.H. Wegapitiya',
+    title: 'Energy Visionary & Conglomerate Leader',
+    company: 'Chairman, LAUGFS Holdings',
+    issue: 'Issue 16',
+    issueLabel: 'Issue 16',
+    image: '/speakers/w-k-h-wegapitiya.png',
+    category: 'Corporate Leadership',
+    tags: ['Energy Vision', 'Conglomerate Leadership'],
+    quote: 'Leading technological advancement and bold industrial transformation initiatives that redefine core industries.',
+    highlight: 'Energy Visionary',
+  },
+  {
+    id: 'speaker-issue-15',
+    name: 'Sushena Ranatunga',
+    title: 'Technology Leader & Innovation Specialist',
+    company: 'Director / Co-Founder, Creative Software',
+    issue: 'Issue 15',
+    issueLabel: 'Issue 15',
+    image: '/speakers/sushena-ranatunga.png',
+    category: 'Tech & AI',
+    tags: ['Software Engineering', 'Innovation Strategy'],
+    quote: 'Architecting resilient enterprise software solutions and scaling world-class engineering teams across borders.',
+    highlight: 'Tech Keynote',
   },
 ];
 
 export const ROW2_SPEAKERS: KeynoteSpeaker[] = [
   {
-    id: 'speaker-7',
-    name: 'Dian Gomes',
-    title: 'Global Business Leader & Motivational Icon',
-    company: 'Former Managing Director, MAS Holdings',
-    issue: 'Issue 18',
-    image: '/resources/speakers/dian gomez.png',
-    category: 'Corporate Leadership',
-    tags: ['High Performance', 'Global Brands'],
-    quote: 'Championing relentless high-performance team cultures and building internationally competitive enterprise powerhouses.',
-    highlight: 'Executive Spotlight',
-  },
-  {
-    id: 'speaker-8',
-    name: 'Sushena Ranatunga',
-    title: 'Software Engineering Leader',
-    company: 'Director / Co-Founder, Creative Software',
-    issue: 'Issue 15',
-    image: '/resources/speakers/upendra pieris.png',
-    category: 'Tech & AI',
-    tags: ['Global Engineering', 'Nordic Tech'],
-    quote: 'Architecting resilient enterprise software solutions and scaling world-class engineering teams across continents.',
-    highlight: 'Tech Keynote',
-  },
-  {
-    id: 'speaker-9',
-    name: 'Santhush Weeraman',
-    title: 'Creative Industry Entrepreneur & Producer',
-    company: 'Co-Founder, BNS & Saregama Music Labs',
-    issue: 'Issue 12',
-    image: '/resources/speakers/santhush.png',
-    category: 'Creative Arts',
-    tags: ['Sonic Tech', 'Media Arts'],
-    quote: 'Fusing cutting-edge multimedia production technology with authentic cultural storytelling and modern artistry.',
-    highlight: 'Creative Lead',
-  },
-  {
-    id: 'speaker-10',
-    name: 'Mr. Saman Perera',
-    title: 'Chief Information Officer, Mobitel',
-    company: 'Telecom Architecture Specialist',
+    id: 'speaker-issue-14',
+    name: 'Mangala Karunarathne',
+    title: 'Economic Strategist & Policy Expert',
+    company: 'Founder & CEO, Calcey Technologies',
     issue: 'Issue 14',
-    image: '/resources/speakers/saman perera.png',
-    category: 'Tech & AI',
-    tags: ['5G Networks', 'Cloud Telecom'],
-    quote: 'Deploying next-generation cellular infrastructure, 5G testbeds, and enterprise distributed data pipelines.',
-    highlight: 'Telecom Pioneer',
-  },
-  {
-    id: 'speaker-11',
-    name: 'Mrs. Dilani Alagaratnam',
-    title: 'President, HR & Legal, John Keells Holdings',
-    company: 'Corporate Governance Executive',
-    issue: 'Issue 16',
-    image: '/resources/speakers/dilani alagarathnan.png',
-    category: 'Corporate Leadership',
-    tags: ['Corporate Law', 'Executive HR'],
-    quote: 'Cultivating sustainable corporate governance frameworks and building future-ready talent architectures.',
-    highlight: 'Corporate Leader',
-  },
-  {
-    id: 'speaker-12',
-    name: 'Mr. Lasantha Wickramasinghe',
-    title: 'Managing Director, TechLead International',
-    company: 'Fintech & Enterprise Systems',
-    issue: 'Issue 17',
-    image: '/resources/speakers/lasantha.png',
+    issueLabel: 'Issue 14',
+    image: '/speakers/mangala-karunarathne.png',
     category: 'Innovation',
-    tags: ['FinTech', 'Cloud Architecture'],
-    quote: 'Scaling mission-critical banking and fintech infrastructure across international technological hubs.',
-    highlight: 'Fintech Lead',
+    tags: ['Economic Policy', 'Global Tech Services'],
+    quote: 'Unlocking high-value knowledge services and driving economic growth through global technology integration.',
+    highlight: 'Economic Strategist',
+  },
+  {
+    id: 'speaker-issue-13',
+    name: 'Lakmini Wijesundara',
+    title: 'Sustainability Expert & Corporate Leader',
+    company: 'Co-Founder & CEO, IronOne Technologies & BoardPAC',
+    issue: 'Issue 13',
+    issueLabel: 'Issue 13',
+    image: '/speakers/lakmini-wijesundara.png',
+    category: 'Corporate Leadership',
+    tags: ['Sustainability', 'Global Enterprise Software'],
+    quote: 'Pioneering global SaaS governance solutions and driving sustainable enterprise digital transformation.',
+    highlight: 'Sustainability Expert',
+  },
+  {
+    id: 'speaker-issue-12',
+    name: 'Meril Fernando',
+    title: 'Tea Industry Icon & Entrepreneur',
+    company: 'Founder, Dilmah Tea',
+    issue: 'Issue 12',
+    issueLabel: 'Issue 12',
+    image: '/speakers/meril-fernando.png',
+    category: 'Corporate Leadership',
+    tags: ['Tea Industry Icon', 'Ethical Business'],
+    quote: 'Building an authentic global brand founded on uncompromising integrity, highest quality, and human kindness.',
+    highlight: 'Tea Industry Icon',
+  },
+  {
+    id: 'speaker-issue-11',
+    name: 'Ranjith Pandithage',
+    title: 'Chairman & Strategic Business Pioneer',
+    company: 'Chairman / Managing Director, DIMO',
+    issue: 'Issue 11',
+    issueLabel: 'Issue 11',
+    image: '/speakers/ranjith-pandithage.png',
+    category: 'Corporate Leadership',
+    tags: ['Strategic Growth', 'Engineering Excellence'],
+    quote: 'Spearheading diversification, engineering excellence, and multi-sector industrial advancement across Sri Lanka.',
+    highlight: 'Strategic Business Pioneer',
+  },
+  {
+    id: 'speaker-issue-10',
+    name: 'Ashok Pathirage',
+    title: 'Catalyst for Business Excellence',
+    company: 'Chairman / Managing Director, Softlogic Holdings',
+    issue: 'Issue 10',
+    issueLabel: 'Issue 10',
+    image: '/speakers/ashok-pathirage.png',
+    category: 'Corporate Leadership',
+    tags: ['Business Excellence', 'Conglomerate Growth'],
+    quote: 'Driving bold entrepreneurial ventures and building transformative consumer and retail powerhouses.',
+    highlight: 'Catalyst for Business Excellence',
+  },
+  {
+    id: 'speaker-issue-9',
+    name: 'Lalith Weerathunga',
+    title: 'Business Executive & Strategic Leader',
+    company: 'Former Secretary to the President of Sri Lanka',
+    issue: 'Issue 9',
+    issueLabel: 'Issue 9',
+    image: '/speakers/lalith-weerathunga.png',
+    category: 'Corporate Leadership',
+    tags: ['Public Policy', 'Strategic Leadership'],
+    quote: 'Executing large-scale strategic initiatives and governance reforms with precision and long-term vision.',
+    highlight: 'Strategic Leader',
   },
 ];
 
-const ALL_SPEAKERS = [...ROW1_SPEAKERS, ...ROW2_SPEAKERS];
+export const ALL_SPEAKERS = [...ROW1_SPEAKERS, ...ROW2_SPEAKERS];
 
-const TESTIMONIALS_DATA: Testimonial[] = ALL_SPEAKERS.slice(0, 6).map((speaker) => ({
-  name: speaker.name,
-  designation: `${speaker.title} • ${speaker.company}`,
-  quote: speaker.quote,
-  src: speaker.image,
-}));
+// Featured Speaker appears first in the Circular 3D Highlights Spotlight
+export const FEATURED_SPEAKER = ROW1_SPEAKERS.find((s) => s.id === 'speaker-issue-19')!;
+
+const TESTIMONIALS_DATA: Testimonial[] = [
+  {
+    name: FEATURED_SPEAKER.name,
+    issue: FEATURED_SPEAKER.issue,
+    designation: `${FEATURED_SPEAKER.title} • ${FEATURED_SPEAKER.subtitle || FEATURED_SPEAKER.company}`,
+    quote: FEATURED_SPEAKER.description || FEATURED_SPEAKER.quote,
+    src: FEATURED_SPEAKER.image,
+  },
+  ...ALL_SPEAKERS.filter((s) => s.id !== 'speaker-issue-19').map((speaker) => ({
+    name: speaker.name,
+    issue: speaker.issue,
+    designation: `${speaker.title} • ${speaker.company}`,
+    quote: speaker.quote,
+    src: speaker.image,
+  })),
+];
 
 function SpeakerLandscapeCard({ speaker }: { speaker: KeynoteSpeaker }) {
   return (
@@ -193,13 +223,13 @@ function SpeakerLandscapeCard({ speaker }: { speaker: KeynoteSpeaker }) {
         <div className="absolute inset-0 bg-gradient-to-r from-[#141414] via-[#141414]/70 to-transparent" />
       </div>
 
-      {/* Top Header Row: Issue Badge & Category Tag */}
-      <div className="relative z-10 flex items-center justify-between gap-2">
+      {/* Top Header Row: Issue Number Badge & Category */}
+      <div className="relative z-10 flex items-start justify-between gap-2">
         <div className="flex items-center gap-2">
-          <span className="rounded-full border border-[#B8894F]/30 bg-[#B8894F]/10 px-3 py-1 text-[0.7rem] font-mono font-bold uppercase tracking-wider text-[#E8C896]">
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[0.7rem] font-mono font-bold tracking-wider uppercase text-[#E8C896] bg-[#E8C896]/10 border border-[#E8C896]/30">
             {speaker.issue}
           </span>
-          <span className="text-[0.7rem] font-semibold uppercase tracking-wider text-[#E8C896]">
+          <span className="text-[0.75rem] font-bold uppercase tracking-wider text-[#9A9A9A]">
             {speaker.category}
           </span>
         </div>
@@ -304,13 +334,6 @@ export default function KeynoteSpeakersSection() {
         <div className="mx-auto max-w-6xl px-[5%]">
           <ScrollReveal delay={0.15} y={30}>
             <div className="bg-transparent border-none p-0 flex flex-col items-center justify-center shadow-none">
-              <div className="flex items-center gap-2 mb-4 self-start">
-                <span className="h-2 w-2 rounded-full bg-[#E8C896] animate-pulse" />
-                <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#9A9A9A]">
-                  Featured Voices Spotlight
-                </span>
-              </div>
-
               <div className="w-full flex justify-center">
                 <CircularTestimonials
                   testimonials={TESTIMONIALS_DATA}
@@ -336,15 +359,6 @@ export default function KeynoteSpeakersSection() {
 
         {/* ================= 2. SCROLL-DRIVEN DUAL-ROW PARALLAX STREAM ================= */}
         <div className="relative w-full overflow-hidden space-y-6 pt-4">
-          <ScrollReveal delay={0.2} className="flex items-center justify-between px-[5%] max-w-7xl mx-auto">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#9A9A9A] flex items-center gap-2">
-              <span className="size-2 rounded-full bg-[#E8C896]" />
-              All Keynote Speakers Roster ({ALL_SPEAKERS.length})
-            </span>
-            <span className="text-[0.65rem] font-mono text-[#9A9A9A]/60 uppercase tracking-wider hidden sm:inline-block">
-              Scroll-reactive parallax stream
-            </span>
-          </ScrollReveal>
 
           {/* Row 1: Flows Left-to-Right on scroll down, Right-to-Left on scroll up */}
           <div className="relative w-full overflow-hidden flex items-center">

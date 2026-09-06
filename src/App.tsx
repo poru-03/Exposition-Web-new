@@ -108,22 +108,29 @@ export default function App() {
       <BackgroundFaceParallax />
 
       {/* Foreground Content Stack */}
-      <div className="relative z-10 w-full bg-[#0C0C0C]">
-        <HeroSection />
-        <AboutSection />
-        <TimelineSection />
-        <TechEventHubSection />
-        <KeynoteSpeakersSection />
-        <InterviewHighlightsSection />
-        <GallerySection />
-        <ReviewsSection />
-        <PartnersSection />
-        <TeamSection />
-        <QASection />
+      <div className="relative z-10 w-full">
+        {/* Transparent Hero reveals fixed magazine background */}
+        <div className="relative z-10 w-full bg-transparent">
+          <HeroSection />
+        </div>
+
+        {/* Every section below Hero has a solid opaque background */}
+        <div className="relative z-20 w-full bg-[#0C0C0C]">
+          <AboutSection />
+          <TimelineSection />
+          <TechEventHubSection />
+          <KeynoteSpeakersSection />
+          <InterviewHighlightsSection />
+          <GallerySection />
+          <ReviewsSection />
+          <PartnersSection />
+          <TeamSection />
+          <QASection />
+        </div>
       </div>
 
       {/* Background Sticky Reveal Footer */}
-      <div className="sticky bottom-0 z-0 w-full bg-black">
+      <div className="sticky bottom-0 z-0 w-full bg-[#0C0C0C]">
         <FooterSection />
       </div>
 

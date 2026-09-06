@@ -72,7 +72,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none hidden md:flex justify-center px-[4%] pt-4 md:pt-6">
+    <header className="fixed top-0 left-0 right-0 z-[100] pointer-events-none hidden md:flex justify-center px-[4%] pt-4 md:pt-5">
       <motion.nav
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
