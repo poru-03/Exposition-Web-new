@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 import BackgroundFaceParallax from './components/BackgroundFaceParallax';
@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import AboutSection from './sections/AboutSection';
 import FooterSection from './sections/FooterSection';
 import HeroSection from './sections/HeroSection';
+import GallerySection from './sections/GallerySection';
 import InterviewHighlightsSection from './sections/InterviewHighlightsSection';
 import KeynoteSpeakersSection from './sections/KeynoteSpeakersSection';
 import PartnersSection from './sections/PartnersSection';
@@ -15,6 +16,8 @@ import ReviewsSection from './sections/ReviewsSection';
 import TeamSection from './sections/TeamSection';
 import TechEventHubSection from './sections/TechEventHubSection';
 import TimelineSection from './sections/TimelineSection';
+import Elite10Page from './pages/Elite10Page';
+import MagazineReaderPage from './pages/MagazineReaderPage';
 
 declare global {
   interface Window {
@@ -22,16 +25,44 @@ declare global {
   }
 }
 
+import {
+  Home,
+  Info,
+  Calendar,
+  Mic,
+  MessageSquareQuote,
+  Star,
+  Handshake,
+  Users,
+} from 'lucide-react';
+import MobileNav, { NavItem } from './components/ui/mobile-nav';
+
 export default function App() {
+  const [currentPath, setCurrentPath] = useState(
+    typeof window !== 'undefined' ? window.location.pathname : '/'
+  );
+
   useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    window.addEventListener('popstate', handleLocationChange);
+    return () => window.removeEventListener('popstate', handleLocationChange);
+  }, []);
+
+  useEffect(() => {
+    if (currentPath === '/elite-10' || currentPath.startsWith('/magazine-reader')) return;
+
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 0.9,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 0.95,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.2,
+      syncTouch: false,
     });
 
     window.__lenis = lenis;
@@ -48,28 +79,63 @@ export default function App() {
       lenis.destroy();
       delete window.__lenis;
     };
-  }, []);
+  }, [currentPath]);
+
+  // Mobile Navigation Section Links Configuration (4 items per side)
+  const mobileNavItems: NavItem[] = [
+    { id: 'hero', label: 'Home', href: '#hero', icon: Home },
+    { id: 'about', label: 'About', href: '#about', icon: Info },
+    { id: 'techevent-hub', label: 'Events', href: '#techevent-hub', icon: Calendar },
+    { id: 'keynote-speakers', label: 'Speakers', href: '#keynote-speakers', icon: Mic },
+    { id: 'interviews', label: 'Interviews', href: '#interviews', icon: MessageSquareQuote },
+    { id: 'reviews', label: 'Reviews', href: '#reviews', icon: Star },
+    { id: 'partners', label: 'Partners', href: '#partners', icon: Handshake },
+    { id: 'team', label: 'Team', href: '#team', icon: Users },
+  ];
+
+  if (currentPath === '/elite-10') {
+    return <Elite10Page />;
+  }
+
+  if (currentPath.startsWith('/magazine-reader')) {
+    return <MagazineReaderPage />;
+  }
 
   return (
     <main className="relative min-h-screen bg-[#0C0C0C] w-full" style={{ overflowX: 'clip' }}>
       <ScrollProgressBar />
       <Navbar />
       <BackgroundFaceParallax />
-      <HeroSection />
-      <AboutSection />
-      <TimelineSection />
-      <TechEventHubSection />
-      <KeynoteSpeakersSection />
-      <InterviewHighlightsSection />
-      <ReviewsSection />
-      <PartnersSection />
-      <TeamSection />
-      <QASection />
-      <FooterSection />
+
+      {/* Foreground Content Stack */}
+      <div className="relative z-10 w-full">
+        {/* Transparent Hero reveals fixed magazine background */}
+        <div className="relative z-10 w-full bg-transparent">
+          <HeroSection />
+        </div>
+
+        {/* Every section below Hero has a solid opaque background */}
+        <div className="relative z-20 w-full bg-[#0C0C0C]">
+          <AboutSection />
+          <TimelineSection />
+          <TechEventHubSection />
+          <KeynoteSpeakersSection />
+          <InterviewHighlightsSection />
+          <GallerySection />
+          <ReviewsSection />
+          <PartnersSection />
+          <TeamSection />
+          <QASection />
+        </div>
+      </div>
+
+      {/* Background Sticky Reveal Footer */}
+      <div className="sticky bottom-0 z-0 w-full bg-[#0C0C0C]">
+        <FooterSection />
+      </div>
+
+      {/* Mobile Floating Bottom Nav Bar */}
+      <MobileNav items={mobileNavItems} />
     </main>
   );
 }
-
-
-
-

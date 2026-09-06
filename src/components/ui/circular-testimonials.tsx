@@ -14,6 +14,7 @@ export interface Testimonial {
   name: string;
   designation: string;
   src: string;
+  issue?: string;
 }
 export interface Colors {
   name?: string;
@@ -54,7 +55,6 @@ export const CircularTestimonials = ({
 }: CircularTestimonialsProps) => {
   // Color & font config
   const colorName = colors.name ?? "#D7E2EA";
-  const colorDesignation = colors.designation ?? "#94a3b8";
   const colorTestimony = colors.testimony ?? "#cbd5e1";
   const fontSizeName = fontSizes.name ?? "1.75rem";
   const fontSizeDesignation = fontSizes.designation ?? "0.95rem";
@@ -214,12 +214,21 @@ export const CircularTestimonials = ({
               >
                 {activeTestimonial.name}
               </h3>
-              <p
-                className="font-medium tracking-wide uppercase text-xs sm:text-sm"
-                style={{ color: colorDesignation, fontSize: fontSizeDesignation }}
-              >
-                {activeTestimonial.designation}
-              </p>
+
+              {/* Gold Issue Badge separated from Position/Company */}
+              <div className="flex flex-wrap items-center gap-2.5 pt-0.5">
+                {activeTestimonial.issue && (
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase text-[#E8C896] bg-[#E8C896]/15 border border-[#E8C896]/35 shadow-[0_0_12px_rgba(232,200,150,0.15)]">
+                    {activeTestimonial.issue}
+                  </span>
+                )}
+                <p
+                  className="font-medium tracking-wide uppercase text-xs sm:text-sm text-[#9A9A9A]"
+                  style={{ fontSize: fontSizeDesignation }}
+                >
+                  {activeTestimonial.designation}
+                </p>
+              </div>
               <motion.p
                 className="leading-relaxed font-light mt-4"
                 style={{ color: colorTestimony, fontSize: fontSizeQuote }}

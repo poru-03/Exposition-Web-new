@@ -1,0 +1,19 @@
+{
+  "typescript.tsserver.maxTsServerMemory": 1024,
+  "typescript.tsserver.experimental.enableProjectDiagnostics": false,
+  "git.autofetch": false,
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "**/public/resources/**": true,
+    "**/public/magazines/**": true,
+    "**/dist/**": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/public/resources": true,
+    "**/public/magazines": true
+  }
+}
