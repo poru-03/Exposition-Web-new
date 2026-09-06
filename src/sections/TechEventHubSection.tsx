@@ -266,15 +266,8 @@ export default function TechEventHubSection() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-[#141414]/50 to-transparent" />
 
-                  {/* Badges on Cover */}
-                  <div className="absolute top-3.5 left-4 right-4 flex items-center justify-between gap-3">
-                    <span
-                      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-0.5 text-[0.65rem] font-bold uppercase tracking-wider backdrop-blur-md ${selectedEvent.statusColor}`}
-                    >
-                      <span className="h-1.5 w-1.5 rounded-full bg-current animate-pulse" />
-                      {selectedEvent.status}
-                    </span>
-
+                  {/* Share Action Button on Cover */}
+                  <div className="absolute top-3.5 right-4 flex justify-end">
                     <button
                       onClick={handleShare}
                       className="rounded-full bg-[#141414]/80 p-1.5 text-[#E8C896] border border-white/15 backdrop-blur-md transition-colors hover:bg-white hover:text-black cursor-pointer"
@@ -286,13 +279,6 @@ export default function TechEventHubSection() {
                         <Share2 className="h-3.5 w-3.5" />
                       )}
                     </button>
-                  </div>
-
-                  {/* University Label on Image Bottom */}
-                  <div className="absolute bottom-3 left-4 right-4">
-                    <span className="text-[0.65rem] font-mono uppercase tracking-widest text-[#9A9A9A] bg-[#0C0C0C]/80 px-2.5 py-0.5 rounded-md border border-white/10 backdrop-blur-md">
-                      {selectedEvent.university}
-                    </span>
                   </div>
                 </div>
 
@@ -514,9 +500,6 @@ export default function TechEventHubSection() {
                               </div>
 
                               <div className="flex-1 min-w-0">
-                                <span className="text-[0.6rem] font-mono uppercase tracking-wider text-[#9A9A9A] block truncate">
-                                  {event.university}
-                                </span>
                                 <h4
                                   className={`text-xs sm:text-sm font-bold uppercase leading-snug tracking-tight transition-colors line-clamp-1 ${isSelected ? 'text-white' : 'text-white/85 group-hover:text-white'
                                     }`}
@@ -543,12 +526,6 @@ export default function TechEventHubSection() {
                               <Clock className="h-2.5 w-2.5 text-[#B8894F]" />
                               <span>{event.duration}</span>
                             </div>
-
-                            <span
-                              className={`rounded-full px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-wider border ${event.statusColor}`}
-                            >
-                              {event.status}
-                            </span>
                           </div>
                         </button>
                       </motion.div>

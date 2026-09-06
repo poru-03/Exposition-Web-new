@@ -206,14 +206,6 @@ export default function InterviewHighlightsSection() {
 
           {/* ================= LEFT COLUMN: Scrollable Interviewees List ================= */}
           <div className="lg:col-span-5 flex flex-col space-y-2">
-            <ScrollReveal delay={0.05} className="flex items-center justify-between px-2 pb-0.5 shrink-0">
-              <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-[#E8C896] animate-ping" />
-                <span className="text-[0.68rem] font-mono font-bold uppercase tracking-widest text-[#9A9A9A]">
-                  Featured Leaders ({INTERVIEWS_DATA.length})
-                </span>
-              </div>
-            </ScrollReveal>
 
             {/* List Container */}
             <StaggerContainer

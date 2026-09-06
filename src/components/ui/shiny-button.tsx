@@ -37,12 +37,11 @@ export function ShinyButton({ children, onClick, className = "" }: ShinyButtonPr
         .shiny-cta {
           --shiny-cta-bg: #0C0C0C;
           --shiny-cta-bg-subtle: #1a1818;
-          --shiny-cta-fg: #E8C896;
-          --shiny-cta-highlight: #B8894F;
-          --shiny-cta-highlight-subtle: #F5C065;
+          --shiny-cta-fg: #c9a25f;
+          --shiny-cta-highlight: #c9a25f;
+          --shiny-cta-highlight-subtle: #e8c896;
           --duration: 2.2s;
           --shadow-size: 2px;
-          --transition: 600ms cubic-bezier(0.25, 1, 0.5, 1);
           
           isolation: isolate;
           position: relative;
@@ -64,13 +63,12 @@ export function ShinyButton({ children, onClick, className = "" }: ShinyButtonPr
               from calc(var(--gradient-angle) - var(--gradient-angle-offset)),
               transparent,
               var(--shiny-cta-highlight) var(--gradient-percent),
-              var(--gradient-shine) calc(var(--gradient-percent) * 1.5),
+              #e8c896 calc(var(--gradient-percent) * 1.5),
               var(--shiny-cta-highlight) calc(var(--gradient-percent) * 2.5),
               transparent calc(var(--gradient-percent) * 3.5)
             ) border-box;
-          box-shadow: 0 0 20px rgba(184, 137, 79, 0.3), inset 0 0 0 1px var(--shiny-cta-bg-subtle);
-          transition: var(--transition);
-          transition-property: --gradient-angle-offset, --gradient-percent, --gradient-shine, transform, color, box-shadow;
+          box-shadow: 0 0 20px rgba(201, 162, 95, 0.3), inset 0 0 0 1px var(--shiny-cta-bg-subtle);
+          transition: background 0.25s ease-out, box-shadow 0.25s ease-out, color 0.25s ease-out, transform 0.25s ease-out;
           animation: gradient-angle var(--duration) linear infinite;
         }
 
@@ -99,7 +97,7 @@ export function ShinyButton({ children, onClick, className = "" }: ShinyButtonPr
           height: var(--size);
           background: radial-gradient(
             circle at var(--position) var(--position),
-            rgba(232, 200, 150, 0.8) calc(var(--position) / 4),
+            rgba(201, 162, 95, 0.8) calc(var(--position) / 4),
             transparent 0
           ) padding-box;
           background-size: var(--space) var(--space);
@@ -145,17 +143,25 @@ export function ShinyButton({ children, onClick, className = "" }: ShinyButtonPr
           height: var(--size);
           box-shadow: inset 0 -1ex 2rem 4px var(--shiny-cta-highlight);
           opacity: 0;
-          transition: opacity var(--transition);
+          transition: opacity 0.25s ease-out;
           animation: calc(var(--duration) * 1.5) breathe linear infinite;
         }
 
         .shiny-cta:is(:hover, :focus-visible) {
           --gradient-percent: 22%;
           --gradient-angle-offset: 95deg;
-          --gradient-shine: #FFFFFF;
-          --shiny-cta-highlight: #F5C065;
+          --shiny-cta-highlight: #d4af66;
+          background: linear-gradient(#181510, #181510) padding-box,
+            conic-gradient(
+              from calc(var(--gradient-angle) - var(--gradient-angle-offset)),
+              transparent,
+              #d4af66 var(--gradient-percent),
+              #f5d78e calc(var(--gradient-percent) * 1.5),
+              #d4af66 calc(var(--gradient-percent) * 2.5),
+              transparent calc(var(--gradient-percent) * 3.5)
+            ) border-box;
           color: #FFFFFF;
-          box-shadow: 0 0 35px rgba(245, 192, 101, 0.55), inset 0 0 0 1px rgba(245, 192, 101, 0.6);
+          box-shadow: 0 0 35px rgba(212, 175, 102, 0.65), inset 0 0 0 1px rgba(212, 175, 102, 0.7);
         }
 
         .shiny-cta:is(:hover, :focus-visible) span::before {

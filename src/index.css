@@ -54,6 +54,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.hero-section {
+  background-color: #0a0a0a;
+}
+
 @layer utilities {
   .hero-heading {
     background: linear-gradient(135deg, #B8894F 0%, #E8C896 100%);
