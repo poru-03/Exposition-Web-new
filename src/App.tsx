@@ -15,6 +15,7 @@ import QASection from './sections/QASection';
 import ReviewsSection from './sections/ReviewsSection';
 import TeamSection from './sections/TeamSection';
 import TechEventHubSection from './sections/TechEventHubSection';
+import YouTubeChannelSection from './sections/YouTubeChannelSection';
 import TimelineSection from './sections/TimelineSection';
 import Elite10Page from './pages/Elite10Page';
 import MagazineReaderPage from './pages/MagazineReaderPage';
@@ -119,6 +120,7 @@ export default function App() {
           <AboutSection />
           <TimelineSection />
           <TechEventHubSection />
+          <YouTubeChannelSection />
           <KeynoteSpeakersSection />
           <InterviewHighlightsSection />
           <GallerySection />

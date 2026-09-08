@@ -24,8 +24,8 @@ export const ROW1_SPEAKERS: KeynoteSpeaker[] = [
   {
     id: 'speaker-issue-20',
     name: 'Deepal Sooriyarachchi',
-    title: 'Leading Corporate Leader',
-    company: 'Management Consultant & Author, Former MD - AVIVA NDB',
+    title: 'Management Consultant & Author',
+    company: 'Former MD - AVIVA NDB',
     issue: 'Issue 20',
     issueLabel: 'Issue 20',
     image: '/speakers/deepal-sooriyarachchi.png',
@@ -37,9 +37,9 @@ export const ROW1_SPEAKERS: KeynoteSpeaker[] = [
   {
     id: 'speaker-issue-19',
     name: 'Dian Gomes',
-    title: 'Business Magnate & Philanthropist',
-    subtitle: 'Former Group Director - MAS Holdings',
-    company: 'Former Group Director, MAS Holdings',
+    title: 'Former Group Director',
+    subtitle: 'MAS Holdings',
+    company: 'MAS Holdings',
     description: 'Influential figure in Sri Lankan business and apparel industry.',
     issue: 'Issue 19',
     issueLabel: 'Issue 19',
@@ -52,8 +52,8 @@ export const ROW1_SPEAKERS: KeynoteSpeaker[] = [
   {
     id: 'speaker-issue-18',
     name: 'Peter De Almeida',
-    title: 'Tech Solutions Innovator & Dynamic Leader',
-    company: 'Managing Director / CEO, N-able',
+    title: 'Managing Director / CEO',
+    company: 'N-able',
     issue: 'Issue 18',
     issueLabel: 'Issue 18',
     image: '/speakers/peter-de-almeida.png',
@@ -65,8 +65,8 @@ export const ROW1_SPEAKERS: KeynoteSpeaker[] = [
   {
     id: 'speaker-issue-17',
     name: 'Dhanika Perera',
-    title: 'Tech Innovator & Entrepreneur',
-    company: 'Founder & CEO, Bhasha / Helakuru',
+    title: 'Founder & CEO',
+    company: 'Bhasha / Helakuru',
     issue: 'Issue 17',
     issueLabel: 'Issue 17',
     image: '/speakers/dhanika-perera.png',
@@ -78,8 +78,8 @@ export const ROW1_SPEAKERS: KeynoteSpeaker[] = [
   {
     id: 'speaker-issue-16',
     name: 'W.K.H. Wegapitiya',
-    title: 'Energy Visionary & Conglomerate Leader',
-    company: 'Chairman, LAUGFS Holdings',
+    title: 'Chairman',
+    company: 'LAUGFS Holdings',
     issue: 'Issue 16',
     issueLabel: 'Issue 16',
     image: '/speakers/w-k-h-wegapitiya.png',
@@ -91,8 +91,8 @@ export const ROW1_SPEAKERS: KeynoteSpeaker[] = [
   {
     id: 'speaker-issue-15',
     name: 'Sushena Ranatunga',
-    title: 'Technology Leader & Innovation Specialist',
-    company: 'Director / Co-Founder, Creative Software',
+    title: 'Director / Co-Founder',
+    company: 'Creative Software',
     issue: 'Issue 15',
     issueLabel: 'Issue 15',
     image: '/speakers/sushena-ranatunga.png',
@@ -107,8 +107,8 @@ export const ROW2_SPEAKERS: KeynoteSpeaker[] = [
   {
     id: 'speaker-issue-14',
     name: 'Mangala Karunarathne',
-    title: 'Economic Strategist & Policy Expert',
-    company: 'Founder & CEO, Calcey Technologies',
+    title: 'Founder & CEO',
+    company: 'Calcey Technologies',
     issue: 'Issue 14',
     issueLabel: 'Issue 14',
     image: '/speakers/mangala-karunarathne.png',
@@ -120,8 +120,8 @@ export const ROW2_SPEAKERS: KeynoteSpeaker[] = [
   {
     id: 'speaker-issue-13',
     name: 'Lakmini Wijesundara',
-    title: 'Sustainability Expert & Corporate Leader',
-    company: 'Co-Founder & CEO, IronOne Technologies & BoardPAC',
+    title: 'Co-Founder & CEO',
+    company: 'IronOne Technologies & BoardPAC',
     issue: 'Issue 13',
     issueLabel: 'Issue 13',
     image: '/speakers/lakmini-wijesundara.png',
@@ -133,8 +133,8 @@ export const ROW2_SPEAKERS: KeynoteSpeaker[] = [
   {
     id: 'speaker-issue-12',
     name: 'Meril Fernando',
-    title: 'Tea Industry Icon & Entrepreneur',
-    company: 'Founder, Dilmah Tea',
+    title: 'Founder',
+    company: 'Dilmah Tea',
     issue: 'Issue 12',
     issueLabel: 'Issue 12',
     image: '/speakers/meril-fernando.png',
@@ -146,8 +146,8 @@ export const ROW2_SPEAKERS: KeynoteSpeaker[] = [
   {
     id: 'speaker-issue-11',
     name: 'Ranjith Pandithage',
-    title: 'Chairman & Strategic Business Pioneer',
-    company: 'Chairman / Managing Director, DIMO',
+    title: 'Chairman / Managing Director',
+    company: 'DIMO',
     issue: 'Issue 11',
     issueLabel: 'Issue 11',
     image: '/speakers/ranjith-pandithage.png',
@@ -159,8 +159,8 @@ export const ROW2_SPEAKERS: KeynoteSpeaker[] = [
   {
     id: 'speaker-issue-10',
     name: 'Ashok Pathirage',
-    title: 'Catalyst for Business Excellence',
-    company: 'Chairman / Managing Director, Softlogic Holdings',
+    title: 'Chairman / Managing Director',
+    company: 'Softlogic Holdings',
     issue: 'Issue 10',
     issueLabel: 'Issue 10',
     image: '/speakers/ashok-pathirage.png',
@@ -172,8 +172,8 @@ export const ROW2_SPEAKERS: KeynoteSpeaker[] = [
   {
     id: 'speaker-issue-9',
     name: 'Lalith Weerathunga',
-    title: 'Business Executive & Strategic Leader',
-    company: 'Former Secretary to the President of Sri Lanka',
+    title: 'Former Secretary to the President',
+    company: 'Government of Sri Lanka',
     issue: 'Issue 9',
     issueLabel: 'Issue 9',
     image: '/speakers/lalith-weerathunga.png',
@@ -211,52 +211,43 @@ function SpeakerLandscapeCard({ speaker }: { speaker: KeynoteSpeaker }) {
     <motion.div
       whileHover={{ scale: 1.03 }}
       transition={{ duration: 0.25 }}
-      className="group relative w-[360px] sm:w-[440px] md:w-[480px] h-[250px] sm:h-[270px] rounded-3xl overflow-hidden border border-white/15 bg-[#141414]/95 shadow-[0_25px_60px_rgba(0,0,0,0.9)] p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:border-[#B8894F]/40 shrink-0"
+      className="group relative w-[280px] sm:w-[330px] h-[170px] sm:h-[185px] rounded-2xl overflow-hidden border border-white/15 bg-[#141414]/95 shadow-[0_20px_50px_rgba(0,0,0,0.9)] p-4 sm:p-5 flex flex-col justify-between transition-all duration-300 hover:border-[#B8894F]/40 shrink-0"
     >
       {/* Background Speaker Photo Artwork Overlay */}
-      <div className="absolute right-0 top-0 bottom-0 w-[55%] opacity-30 group-hover:opacity-45 transition-opacity duration-300 pointer-events-none overflow-hidden">
+      <div className="absolute right-0 top-0 bottom-0 w-[55%] opacity-35 group-hover:opacity-50 transition-opacity duration-300 pointer-events-none overflow-hidden">
         <img
           src={speaker.image}
           alt={speaker.name}
           className="w-full h-full object-cover object-top filter brightness-110 contrast-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#141414] via-[#141414]/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#141414] via-[#141414]/75 to-transparent" />
       </div>
 
       {/* Top Header Row: Issue Number Badge & Category */}
-      <div className="relative z-10 flex items-start justify-between gap-2">
+      <div className="relative z-10 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[0.7rem] font-mono font-bold tracking-wider uppercase text-[#E8C896] bg-[#E8C896]/10 border border-[#E8C896]/30">
+          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[0.65rem] font-mono font-bold tracking-wider uppercase text-[#E8C896] bg-[#E8C896]/10 border border-[#E8C896]/30">
             {speaker.issue}
           </span>
-          <span className="text-[0.75rem] font-bold uppercase tracking-wider text-[#9A9A9A]">
+          <span className="text-[0.68rem] font-bold uppercase tracking-wider text-[#9A9A9A]">
             {speaker.category}
           </span>
         </div>
-
-        {speaker.highlight && (
-          <span className="text-[0.65rem] font-mono text-[#9A9A9A] uppercase tracking-widest hidden sm:inline-block">
-            {speaker.highlight}
-          </span>
-        )}
       </div>
 
       {/* Main Content Body */}
-      <div className="relative z-10 space-y-1.5 pr-12 sm:pr-16">
-        <h4 className="text-lg sm:text-xl md:text-2xl font-black uppercase tracking-tight text-white group-hover:text-[#E8C896] transition-colors truncate">
+      <div className="relative z-10 space-y-1 pr-12">
+        <h4 className="text-base sm:text-lg font-black uppercase tracking-tight text-white group-hover:text-[#E8C896] transition-colors truncate">
           {speaker.name}
         </h4>
-        <p className="text-xs sm:text-sm font-medium text-[#9A9A9A] truncate">
+        <p className="text-xs font-medium text-[#9A9A9A] truncate">
           {speaker.title}
-        </p>
-        <p className="text-xs sm:text-sm text-white/80 font-light line-clamp-2 leading-relaxed mt-1">
-          &ldquo;{speaker.quote}&rdquo;
         </p>
       </div>
 
       {/* Bottom Footer: Company Affiliation + Action Button */}
-      <div className="relative z-10 flex items-center justify-between pt-3 border-t border-white/10">
-        <span className="text-[0.7rem] font-mono text-[#9A9A9A] truncate max-w-[220px]">
+      <div className="relative z-10 flex items-center justify-between pt-2 border-t border-white/10">
+        <span className="text-[0.65rem] font-mono text-[#9A9A9A] truncate max-w-[190px]">
           {speaker.company}
         </span>
         <div className="flex items-center gap-1.5 text-xs font-semibold text-[#E8C896] group-hover:text-white group-hover:translate-x-1 transition-all">
@@ -317,10 +308,6 @@ export default function KeynoteSpeakersSection() {
         >
           Keynote Speakers
         </h2>
-
-        <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#9A9A9A] font-light">
-          Meet the distinguished industry leaders who have been featured through Exposition. Their insights, experiences, and vision continue to inspire meaningful conversations and shape the future of industry and innovation.
-        </p>
       </ScrollReveal>
 
       <div className="space-y-16 sm:space-y-20">

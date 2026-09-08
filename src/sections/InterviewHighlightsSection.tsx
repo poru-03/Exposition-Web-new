@@ -1,9 +1,5 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  ArrowRight,
-  Building,
-} from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
 import { StaggerContainer, StaggerCard } from '../components/StaggerReveal';
 
@@ -184,33 +180,138 @@ export default function InterviewHighlightsSection() {
   return (
     <section
       id="interviews"
-      className="relative z-10 min-h-screen w-full flex flex-col justify-center bg-transparent px-[5%] py-14 sm:py-20 md:py-24 overflow-hidden"
+      className="relative z-10 min-h-screen w-full flex flex-col justify-center bg-[#0c0c0c] px-[5%] py-14 sm:py-20 md:py-24 overflow-hidden"
     >
+      {/* ================= SECTION-LEVEL DYNAMIC SKEWED BACKDROP BANNER (Top Margins on Slices 1, 3, 5) ================= */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 opacity-45">
+        <motion.div
+          className="absolute -inset-x-20 top-0 bottom-0 flex justify-between items-start gap-3 sm:gap-5 -skew-x-12 scale-105"
+          initial={{ opacity: 0.9 }}
+          animate={{ opacity: [0.85, 1, 0.85] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        >
+          {Array.from({ length: 6 }).map((_, idx) => {
+            const item = INTERVIEWS_DATA[idx % INTERVIEWS_DATA.length];
+            // Explicit Margin Top for Slices 1, 3, 5 (idx 0, 2, 4)
+            // Slices 2, 4, 6 (idx 1, 3, 5) have mt-0
+            const sliceMarginClass = idx % 2 === 0 ? 'mt-20 sm:mt-32 md:mt-40' : 'mt-0';
+
+            return (
+              <div
+                key={`bg-slice-${idx}`}
+                className={`relative flex-1 h-[130%] min-w-0 bg-[#0c0c0c] border-r-4 border-[#0c0c0c] ring-1 ring-[#c9a25f]/30 overflow-hidden shadow-2xl ${sliceMarginClass} transition-all duration-700`}
+              >
+                {/* Photo Layer - Properly Centered Image */}
+                <img
+                  src={encodeURI(item.image)}
+                  alt={`Background Slice ${idx + 1}`}
+                  className="absolute inset-0 w-full h-full object-cover object-center filter grayscale contrast-120 brightness-85 opacity-75"
+                />
+
+                {/* Subtle dark gold vignette overlay on each slice */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#0c0c0c]/50 via-[#0c0c0c]/30 to-[#0c0c0c]/70 z-10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#c9a25f]/15 via-transparent to-transparent z-10" />
+              </div>
+            );
+          })}
+        </motion.div>
+
+        {/* Diagonal Gold Streak Accent Lines */}
+        <div className="absolute top-1/3 -left-20 w-[150%] h-[3px] bg-gradient-to-r from-transparent via-[#c9a25f]/60 to-transparent -skew-y-6 pointer-events-none z-30" />
+        <div className="absolute bottom-1/4 -left-20 w-[150%] h-[2px] bg-gradient-to-r from-transparent via-[#e8a33d]/50 to-transparent -skew-y-6 pointer-events-none z-30" />
+      </div>
+
       {/* Section Header */}
-      <ScrollReveal className="flex flex-col items-center justify-center text-center mb-6 sm:mb-8 lg:mb-10">
+      <ScrollReveal className="flex flex-col items-center justify-center text-center pt-4 sm:pt-6 mb-6 sm:mb-8 relative z-20">
         <h2
-          className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
+          className="hero-heading section-title text-center font-black uppercase leading-tight tracking-tight pt-2"
           style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}
         >
           Interview Highlights
         </h2>
-
-        <p className="mt-1 max-w-2xl text-center text-xs sm:text-sm leading-snug text-[#9A9A9A] font-light">
-          Insights from accomplished professionals and industry leaders who are driving change and shaping the future of their respective industries.
-        </p>
       </ScrollReveal>
 
-      {/* Main Two-Column Layout */}
-      <div className="mx-auto max-w-7xl w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
+      {/* Main IPN Conclave Banner Container */}
+      <div className="mx-auto max-w-7xl w-full relative z-20">
+        <div className="rounded-3xl border border-[#c9a25f]/30 bg-black/10 p-6 sm:p-10 shadow-[0_30px_70px_rgba(0,0,0,0.5)] flex flex-col gap-10">
 
-          {/* ================= LEFT COLUMN: Scrollable Interviewees List ================= */}
-          <div className="lg:col-span-5 flex flex-col space-y-2">
+          {/* ================= TOP SECTION: FEATURED KEYNOTE SPOTLIGHT + EVENT DETAILS ================= */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border-b border-[#c9a25f]/20 pb-10">
 
-            {/* List Container */}
+            {/* TOP-LEFT: Keynote Speaker / Featured Interviewee Card */}
+            <div className="lg:col-span-5 flex flex-col sm:flex-row items-center sm:items-start gap-6">
+
+              {/* Featured Photo Card (Clean image without gold reveal background) */}
+              <div className="relative group/photo shrink-0 w-[170px] h-[220px] sm:w-[200px] sm:h-[260px] rounded-xl shadow-2xl border border-white/10 overflow-hidden bg-[#0a0908]">
+                {/* Photo: Full Container */}
+                <img
+                  src={activeItem.image}
+                  alt={activeItem.name}
+                  className="w-full h-full object-cover object-top contrast-110 brightness-105 transition-all duration-500"
+                />
+              </div>
+
+              {/* Speaker Header Info */}
+              <div className="flex flex-col text-center sm:text-left justify-center my-auto space-y-2">
+                <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#c9a25f]">
+                  {activeItem.issue}
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white drop-shadow-md">
+                  {activeItem.name}
+                </h3>
+                <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#c9a25f]">
+                  {activeItem.position}
+                </p>
+                <p className="text-xs font-medium text-[#9a9a9a]">
+                  {activeItem.company}
+                </p>
+              </div>
+            </div>
+
+            {/* TOP-RIGHT: Full Interview Details & Quote Card */}
+            <div className="lg:col-span-7 flex flex-col space-y-4">
+              {/* Featured Quote Card with Large Quotes Layout */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`quote-${activeItem.id}`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="relative w-full p-4 sm:p-6 flex flex-col justify-between items-center text-center overflow-hidden min-h-[200px]"
+                >
+                  {/* Top-Left Large Decorative Quotation Mark */}
+                  <div className="absolute -top-4 -left-2 text-[#c9a25f]/35 font-serif text-8xl sm:text-9xl md:text-[10rem] font-bold leading-none select-none pointer-events-none z-0">
+                    “
+                  </div>
+
+                  {/* Quote Body: Bold, Italicized, Centered Typography */}
+                  <blockquote className="relative z-10 my-auto text-base sm:text-xl font-extrabold italic tracking-tight text-[#f5ebd9] leading-snug sm:leading-normal max-w-xl py-2">
+                    {activeItem.quote}
+                  </blockquote>
+
+                  {/* Bottom-Right Large Decorative Quotation Mark */}
+                  <div className="absolute -bottom-10 -right-2 text-[#c9a25f]/35 font-serif text-8xl sm:text-9xl md:text-[10rem] font-bold leading-none select-none pointer-events-none z-0">
+                    ”
+                  </div>
+
+                  {/* Footer Stats Row */}
+                  <div className="relative z-10 w-full flex items-center justify-end pt-3 border-t border-white/10 text-xs font-mono text-[#9a9a9a]">
+                    <span className="text-[#c9a25f] font-bold">{activeItem.handle}</span>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+          </div>
+
+          {/* ================= BOTTOM SECTION: HORIZONTAL PANEL DISCUSSION ROW ================= */}
+          <div className="flex flex-col space-y-4">
+
+            {/* Horizontal Cards Grid (5-6 Panelist Cards) */}
             <StaggerContainer
               staggerChildren={0.06}
-              className="flex flex-col gap-2"
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 sm:gap-4"
             >
               {INTERVIEWS_DATA.map((interview, index) => {
                 const isSelected = index === selectedIndex;
@@ -221,122 +322,44 @@ export default function InterviewHighlightsSection() {
                         setSelectedIndex(index);
                         setIsAutoPlaying(false);
                       }}
-                      className={`w-full text-left rounded-2xl p-2.5 sm:p-3 transition-all duration-300 flex items-center justify-between gap-3 border cursor-pointer ${isSelected
-                        ? 'bg-[#1e1e1e] border-[#B8894F]/60 shadow-[0_10px_25px_rgba(184,137,79,0.15)] scale-[1.01]'
-                        : 'bg-[#141414]/90 border-white/10 hover:border-[#B8894F]/30 hover:bg-[#181818]'
-                        }`}
+                      className={`group w-full flex flex-col items-center text-center p-2 rounded-xl transition-all duration-300 cursor-pointer ${isSelected ? 'scale-105' : 'hover:scale-[1.02] opacity-80 hover:opacity-100'}`}
                     >
-                      <div className="flex items-center gap-3 min-w-0">
-                        {/* Avatar */}
-                        <div
-                          className={`size-10 sm:size-11 rounded-xl overflow-hidden shrink-0 border-2 transition-all ${isSelected ? 'border-[#E8C896] shadow-md' : 'border-white/10 opacity-75'
-                            }`}
-                        >
-                          <img
-                            src={interview.image}
-                            alt={interview.name}
-                            className="w-full h-full object-cover object-top filter brightness-105"
-                          />
-                        </div>
+                      {/* Panelist Photo Container (Full Color Photos) */}
+                      <div className={`relative w-full aspect-[3/4] rounded-xl overflow-hidden shadow-md border transition-all bg-[#0a0908] ${isSelected ? 'border-[#c9a25f] ring-2 ring-[#c9a25f]/50 shadow-[0_5px_20px_rgba(201,162,95,0.3)]' : 'border-white/10'}`}>
 
-                        {/* Text Info */}
-                        <div className="flex flex-col min-w-0 pr-1">
-                          <h4
-                            className={`text-xs sm:text-sm font-bold uppercase tracking-tight truncate ${isSelected ? 'text-white' : 'text-white/85'
-                              }`}
-                          >
-                            {interview.name}
-                          </h4>
-                          <p className="text-[0.68rem] text-[#9A9A9A] truncate mt-0.5">
-                            {interview.position} • {interview.company}
-                          </p>
-                          <p className="text-[0.65rem] font-mono font-bold text-[#E8C896] uppercase tracking-wider mt-0.5">
-                            {interview.issue}
-                          </p>
+                        {/* Photo: Full Color only when selected/active; Grayscale for others */}
+                        <img
+                          src={interview.image}
+                          alt={interview.name}
+                          className={`w-full h-full object-cover object-top transition-all duration-300 ${
+                            isSelected
+                              ? 'filter grayscale-0 contrast-110 brightness-105'
+                              : 'filter grayscale contrast-125 group-hover:grayscale-0'
+                          }`}
+                        />
+
+                        {/* Top-Left Dark Tag */}
+                        <div className="absolute top-1 left-0 bg-[#0c0c0c]/90 text-white text-[0.42rem] font-mono font-bold uppercase px-1.5 py-0.5 border-y border-r border-white/20 z-10">
+                          {isSelected ? 'ACTIVE' : 'PANELIST'}
                         </div>
                       </div>
 
-                      {/* Active Chevron / Indicator */}
-                      <div className="shrink-0">
-                        {isSelected ? (
-                          <div className="size-6 rounded-full bg-[#B8894F]/20 text-[#E8C896] flex items-center justify-center border border-[#B8894F]/40">
-                            <ArrowRight className="size-3" />
-                          </div>
-                        ) : (
-                          <div className="size-6 rounded-full text-white/20 flex items-center justify-center">
-                            <ArrowRight className="size-3 opacity-40" />
-                          </div>
-                        )}
+                      {/* Name & Role Underneath Card */}
+                      <div className="mt-2.5 flex flex-col items-center w-full px-1">
+                        <h6 className={`text-[0.7rem] sm:text-xs font-extrabold uppercase tracking-tight truncate w-full ${isSelected ? 'text-white' : 'text-white/80'}`}>
+                          {interview.name}
+                        </h6>
+                        <p className="text-[0.6rem] text-[#c9a25f] font-semibold truncate w-full mt-0.5">
+                          {interview.position}
+                        </p>
                       </div>
                     </button>
                   </StaggerCard>
                 );
               })}
             </StaggerContainer>
+
           </div>
-
-          {/* ================= RIGHT COLUMN: Testimonial Spotlight Card ================= */}
-          <ScrollReveal delay={0.15} y={16} className="lg:col-span-7 flex flex-col items-center justify-center">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`testimonial-${activeItem.id}`}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.35, ease: 'easeOut' }}
-                className="w-full flex flex-col items-center justify-center py-4 h-full"
-              >
-                  <div className="group relative w-full rounded-3xl overflow-hidden border border-white/15 bg-[#121215]/95 p-6 sm:p-10 shadow-[0_30px_70px_rgba(0,0,0,0.95)] flex flex-col justify-between min-h-[380px]">
-                    {/* Animated Gold Corner Glow Radial Gradient */}
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-[radial-gradient(ellipse_at_top_right,rgba(232,200,150,0.30)_0%,rgba(184,137,79,0.12)_40%,transparent_75%)] animate-corner-glow pointer-events-none" />
-
-                    {/* Card Content Overlay */}
-                    <div className="relative z-10 flex flex-col items-center text-center space-y-4">
-                      {/* Company Icon on Top */}
-                      <div className="p-3 rounded-2xl bg-black/60 border border-[#B8894F]/40 text-[#E8C896] backdrop-blur-md shadow-lg">
-                        <Building className="size-8 text-[#E8C896]" />
-                      </div>
-
-                      {/* Rounded Person Portrait Image below Top Icon */}
-                      <div className="size-20 sm:size-24 rounded-full overflow-hidden border-2 border-[#E8C896] shadow-xl shrink-0 group-hover:scale-105 transition-transform duration-500">
-                        <img
-                          src={activeItem.image}
-                          alt={activeItem.name}
-                          className="w-full h-full object-cover object-top"
-                        />
-                      </div>
-
-                      {/* Issue Number in Golden Font directly below Image */}
-                      <span className="text-xs font-mono font-extrabold uppercase tracking-widest text-[#E8C896] -mt-1">
-                        {activeItem.issue}
-                      </span>
-
-                      {/* Name and Position directly below Icon, Portrait & Issue */}
-                      <div className="space-y-1 max-w-lg">
-                        <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white drop-shadow-md">
-                          {activeItem.name}
-                        </h3>
-                        <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#E8C896]">
-                          {activeItem.position} • {activeItem.company}
-                        </p>
-                      </div>
-
-                      {/* Quote Text below Name & Position */}
-                      <blockquote className="mt-2 max-w-xl text-sm sm:text-base md:text-lg text-white/90 font-light leading-relaxed italic bg-black/40 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-white/10 shadow-inner">
-                        &ldquo;{activeItem.quote}&rdquo;
-                      </blockquote>
-                    </div>
-
-                    {/* Bottom Tagline */}
-                    <div className="relative z-10 flex items-center justify-end pt-4 mt-4 border-t border-white/10 text-xs font-mono text-[#9A9A9A]">
-                      <span className="text-[0.68rem] uppercase font-semibold tracking-wider text-[#E8C896]">
-                        {activeItem.category}
-                      </span>
-                    </div>
-                  </div>
-                </motion.div>
-            </AnimatePresence>
-          </ScrollReveal>
 
         </div>
       </div>

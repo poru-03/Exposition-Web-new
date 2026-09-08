@@ -173,19 +173,6 @@ function getTierBadgeStyles(tier: PartnerTier) {
   }
 }
 
-function getTierCardGlow(tier: PartnerTier) {
-  switch (tier) {
-    case 'Platinum':
-      return 'hover:border-white/40 hover:shadow-[0_12px_35px_rgba(255,255,255,0.15)]';
-    case 'Gold':
-      return 'hover:border-[#B8894F]/50 hover:shadow-[0_12px_35px_rgba(184,137,79,0.25)]';
-    case 'Silver':
-      return 'hover:border-white/30 hover:shadow-[0_12px_35px_rgba(200,200,200,0.15)]';
-    case 'Bronze':
-      return 'hover:border-[#B8894F]/40 hover:shadow-[0_12px_35px_rgba(184,137,79,0.15)]';
-  }
-}
-
 function getTierIcon(tier: PartnerTier) {
   switch (tier) {
     case 'Platinum':
@@ -212,71 +199,43 @@ export function VerticalPartnerCard({
   return (
     <div
       onClick={() => onSelect?.(partner)}
-      className={`group relative w-[165px] sm:w-[185px] md:w-[200px] h-[225px] sm:h-[245px] rounded-[24px] overflow-hidden border border-white/15 bg-[#141414] shadow-[0_15px_35px_rgba(0,0,0,0.85)] p-3.5 sm:p-4 flex flex-col justify-between items-center text-center transition-all duration-300 ease-out hover:-translate-y-1.5 hover:scale-[1.03] hover:bg-[#1a1a1a] ${getTierCardGlow(
-        partner.tier,
-      )} shrink-0 select-none cursor-pointer will-change-transform`}
-      style={{
-        contain: 'paint layout',
-        transform: 'translateZ(0)',
-      }}
+      className="group relative w-[175px] sm:w-[200px] md:w-[220px] h-[85px] sm:h-[95px] rounded-xl overflow-hidden bg-white border border-slate-150 shadow-[0_4px_15px_rgba(0,0,0,0.15)] p-4 flex items-center justify-center transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.25)] hover:border-indigo-400/50 shrink-0 select-none cursor-pointer will-change-transform"
+      style={{ contain: 'paint layout', transform: 'translateZ(0)' }}
     >
-      {/* Top ambient spotlight glow on hover */}
-      <div
-        className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 w-28 h-20 rounded-full blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-300"
+      {/* Top Subtle Tier Accent Line */}
+      <div 
+        className="absolute top-0 inset-x-0 h-1 opacity-80 group-hover:h-1.5 transition-all duration-300"
         style={{ backgroundColor: partner.accentColor }}
       />
 
-      {/* Top: Tier Badge + Circular Emblem */}
-      <div className="flex flex-col items-center w-full space-y-2.5 z-10">
-        {/* Tier Badge */}
-        <span
-          className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[0.62rem] font-mono font-bold uppercase tracking-wider transition-colors duration-300 ${getTierBadgeStyles(
-            partner.tier,
-          )}`}
-        >
-          {getTierIcon(partner.tier)}
-          <span>{partner.tier}</span>
-        </span>
+      {/* Center Brand Logo / Name Display on Crisp White Card */}
+      <div className="relative w-full h-full flex items-center justify-center p-1">
+        {!imageLoaded && !imageError && (
+          <div className="absolute inset-0 rounded-lg bg-slate-100 animate-pulse" />
+        )}
 
-        {/* Circular Logo Emblem with Progressive Skeleton Loading */}
-        <div className="relative size-18 sm:size-20 rounded-full border-2 border-white/20 bg-white/5 p-1 flex items-center justify-center shrink-0 overflow-hidden shadow-inner group-hover:border-white/50 group-hover:scale-105 transition-all duration-300">
-          {/* Skeleton Shimmer while loading */}
-          {!imageLoaded && !imageError && (
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/5 via-white/20 to-white/5 animate-pulse" />
-          )}
-
-          {imageError ? (
-            <div className="w-full h-full rounded-full bg-gradient-to-br from-indigo-900/60 to-purple-900/60 flex items-center justify-center text-xs font-bold text-white uppercase tracking-wider">
-              {partner.name.slice(0, 2)}
-            </div>
-          ) : (
-            <img
-              src={partner.image}
-              alt={partner.name}
-              loading="lazy"
-              decoding="async"
-              onLoad={() => setImageLoaded(true)}
-              onError={() => setImageError(true)}
-              className={`w-full h-full object-cover object-center rounded-full filter brightness-105 contrast-105 transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'
-                }`}
-            />
-          )}
-        </div>
+        {imageError ? (
+          <span className="text-sm font-black text-slate-800 uppercase tracking-wide truncate px-2">
+            {partner.name}
+          </span>
+        ) : (
+          <img
+            src={partner.image}
+            alt={partner.name}
+            loading="lazy"
+            decoding="async"
+            onLoad={() => setImageLoaded(true)}
+            onError={() => setImageError(true)}
+            className={`max-w-full max-h-full object-contain filter contrast-105 transition-all duration-300 group-hover:scale-105 ${
+              imageLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        )}
       </div>
 
-      {/* Bottom: Company Name & Category */}
-      <div className="w-full pt-2 border-t border-white/10 space-y-0.5 z-10">
-        <h4 className="text-[0.82rem] sm:text-xs font-bold uppercase tracking-tight text-white group-hover:text-[#E8C896] transition-colors truncate">
-          {partner.name}
-        </h4>
-        <p className="text-[0.64rem] font-medium text-[#9A9A9A] group-hover:text-white/70 transition-colors truncate">
-          {partner.category}
-        </p>
-      </div>
-
-      {/* Subtle corner badge icon on hover */}
-      <div className="absolute top-2.5 right-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-        <ArrowUpRight className="size-3.5 text-white/60" />
+      {/* Subtle corner arrow hint on hover */}
+      <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <ArrowUpRight className="size-3.5 text-slate-400" />
       </div>
     </div>
   );
@@ -349,18 +308,13 @@ export default function PartnersSection() {
       className="relative z-10 bg-transparent px-[5%] py-14 sm:py-20 md:py-24 overflow-hidden w-full"
     >
       {/* Section Header */}
-      <ScrollReveal className="flex flex-col items-center justify-center text-center mb-10 sm:mb-14 px-[5%] max-w-5xl mx-auto">
+      <ScrollReveal className="flex flex-col items-center justify-center text-center mb-8 sm:mb-10 px-[5%] max-w-5xl mx-auto">
         <h2
           className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
           style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}
         >
           Our Partners
         </h2>
-
-        <p className="mt-5 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#9A9A9A] font-light">
-          Partner with us to empower the next generation of technological leaders and visionary innovators.
-          Join our ecosystem of 15 industry collaborators across Platinum, Gold, Silver, and Bronze tiers.
-        </p>
 
         {/* CTA Buttons: Download Partnership Guide & Become a Partner */}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
