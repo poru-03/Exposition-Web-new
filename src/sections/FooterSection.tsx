@@ -214,6 +214,7 @@ export default function FooterSection({
 
   return (
     <footer
+      id="contact"
       ref={footerRef}
       className="relative w-full bg-black text-[#9A9A9A] overflow-hidden select-none"
     >
