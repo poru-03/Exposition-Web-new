@@ -1,341 +1,322 @@
-import { useRef } from 'react';
-import { useScroll, useTransform, useSpring, motion, useReducedMotion } from 'framer-motion';
-import ContactButton from '../components/ContactButton';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-export default function CurtainHeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const prefersReducedMotion = useReducedMotion();
+export interface HeroSlideItem {
+  id: number;
+  src: string;
+  title: string;
+  description: string;
+}
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
-
-  // Spring physics for curtains
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 70,
-    damping: 20,
-    restDelta: 0.001,
-  });
-
-  // Curtain Translations and Skew (weight lag)
-  const leftX = useTransform(smoothProgress, [0, 0.6], ['0%', '-100%']);
-  const rightX = useTransform(smoothProgress, [0, 0.6], ['0%', '100%']);
-  const skewLeft = useTransform(smoothProgress, [0, 0.3, 0.6], [0, -3, 0]);
-  const skewRight = useTransform(smoothProgress, [0, 0.3, 0.6], [0, 3, 0]);
-  const innerShadowOpacity = useTransform(smoothProgress, [0, 0.6], [0.3, 0.8]);
-
-  // Spotlight bindings
-  const spotlightOpacity = useTransform(scrollYProgress, [0.3, 0.5, 0.7, 1], [0, 0.8, 1, 1]);
-  const spotlightScale = useTransform(scrollYProgress, [0.3, 0.6], [0.5, 1]);
-  const spotlightY = useTransform(scrollYProgress, [0.3, 0.6], ['-30%', '-10%']);
-
-  // Magazine Translations (3D depth handled by `z` and `perspective`)
-  const centerTranslateY = useTransform(scrollYProgress, [0, 0.6], ['30%', '0%']);
-  const centerScale = useTransform(scrollYProgress, [0, 0.6], [0.8, 1]);
-  const centerOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
-
-  const leftTranslateY = useTransform(scrollYProgress, [0, 0.6], ['40%', '5%']);
-  const leftTranslateX = useTransform(scrollYProgress, [0, 0.6], ['0%', '-45%']);
-  const leftRotate = useTransform(scrollYProgress, [0, 0.6], [0, -8]);
-  const sideOpacity = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
-
-  const rightTranslateY = useTransform(scrollYProgress, [0, 0.6], ['40%', '5%']);
-  const rightTranslateX = useTransform(scrollYProgress, [0, 0.6], ['0%', '45%']);
-  const rightRotate = useTransform(scrollYProgress, [0, 0.6], [0, 8]);
-
-  const fallbackY = prefersReducedMotion ? '0%' : centerTranslateY;
-  const fallbackScale = prefersReducedMotion ? 1 : centerScale;
-
-  // Title & CTA bindings
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-  const titleScale = useTransform(scrollYProgress, [0, 0.25], [1, 1.2]);
-  const ctaOpacity = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
-  const ctaY = useTransform(scrollYProgress, [0.6, 0.8], [30, 0]);
-
-  // Flashbulb Opacities
-  const flash1 = useTransform(scrollYProgress, [0.85, 0.86, 0.87], [0, 1, 0]);
-  const flash2 = useTransform(scrollYProgress, [0.87, 0.88, 0.89], [0, 1, 0]);
-  const flash3 = useTransform(scrollYProgress, [0.89, 0.90, 0.91], [0, 1, 0]);
-  const flash4 = useTransform(scrollYProgress, [0.91, 0.92, 0.93], [0, 1, 0]);
-  const flash5 = useTransform(scrollYProgress, [0.93, 0.94, 0.95], [0, 1, 0]);
-
-  return (
-    <section ref={containerRef} className="relative h-[300vh] bg-[#0C0C0C]" style={{ overflowX: 'clip' }}>
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center items-center">
-        
-        {/* Ambient Gold Background */}
-        <motion.div
-          className="absolute inset-0 z-0 opacity-40 pointer-events-none"
-          animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          style={{
-            background: 'linear-gradient(45deg, #0C0C0C 0%, #2A1F13 30%, #0C0C0C 60%, #1A140D 100%)',
-            backgroundSize: '200% 200%',
-          }}
-        />
-
-        {/* Navbar Spacer */}
-        <div className="absolute top-0 left-0 z-50 w-full px-[5%] pt-6 md:pt-8 h-12 md:h-16 pointer-events-none" />
-
-        {/* --- CURTAINS --- */}
-        <div className="pointer-events-none absolute inset-0 z-40 flex overflow-hidden perspective-[1000px]">
-          {/* Left Panel */}
-          <motion.div
-            style={{ x: leftX, skewX: skewLeft, boxShadow: 'inset -20px 0 50px rgba(0,0,0,0.8), 20px 0 50px rgba(0,0,0,0.9)' }}
-            className="h-full w-1/2 flex justify-end origin-top overflow-hidden"
-          >
-            {/* Waving Physics Layer */}
-            <motion.div 
-              className="absolute inset-0 w-full h-full origin-top"
-              animate={{ rotateZ: [-0.5, 0.5, -0.5] }}
-              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <div 
-                className="absolute inset-0 z-0 opacity-95"
-                style={{ background: 'repeating-linear-gradient(90deg, #0a0805 0%, #1a140d 2%, #2a1f13 4%, #1a140d 6%, #0a0805 8%)' }}
-              />
-              <div className="absolute inset-0 z-10 w-[200%] opacity-20 bg-gold-gradient mix-blend-overlay"></div>
-            </motion.div>
-            <motion.div className="absolute inset-0 z-20 pointer-events-none bg-gradient-to-r from-transparent to-black" style={{ opacity: innerShadowOpacity }} />
-            <div className="absolute right-0 top-0 bottom-0 z-30 w-[4px] bg-gradient-to-b from-transparent via-gold-accent to-transparent opacity-80 blur-[1px]"></div>
-          </motion.div>
-          
-          {/* Right Panel */}
-          <motion.div
-            style={{ x: rightX, skewX: skewRight, boxShadow: 'inset 20px 0 50px rgba(0,0,0,0.8), -20px 0 50px rgba(0,0,0,0.9)' }}
-            className="h-full w-1/2 flex justify-start origin-top overflow-hidden"
-          >
-            <motion.div 
-              className="absolute inset-0 w-full h-full origin-top"
-              animate={{ rotateZ: [0.5, -0.5, 0.5] }}
-              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-            >
-              <div 
-                className="absolute inset-0 z-0 opacity-95"
-                style={{ background: 'repeating-linear-gradient(90deg, #0a0805 0%, #1a140d 2%, #2a1f13 4%, #1a140d 6%, #0a0805 8%)' }}
-              />
-              <div className="absolute inset-0 z-10 w-[200%] opacity-20 bg-gold-gradient mix-blend-overlay"></div>
-            </motion.div>
-            <motion.div className="absolute inset-0 z-20 pointer-events-none bg-gradient-to-l from-transparent to-black" style={{ opacity: innerShadowOpacity }} />
-            <div className="absolute left-0 top-0 bottom-0 z-30 w-[4px] bg-gradient-to-b from-transparent via-gold-accent to-transparent opacity-80 blur-[1px]"></div>
-          </motion.div>
-        </div>
-
-        {/* --- SPOTLIGHT --- */}
-        <motion.div 
-          className="pointer-events-none absolute inset-0 z-25 flex items-center justify-center overflow-hidden mix-blend-screen"
-          style={{ opacity: spotlightOpacity, scale: spotlightScale, y: spotlightY }}
-        >
-          <div 
-            className="w-[120vw] h-[150vh] rounded-full blur-[100px]"
-            style={{ background: 'radial-gradient(circle at 50% 30%, rgba(232, 200, 150, 0.7) 0%, rgba(232, 200, 150, 0.1) 40%, transparent 65%)' }}
-          />
-        </motion.div>
-
-        {/* --- 3D MAGAZINE STACK --- */}
-        <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none" style={{ perspective: '1200px' }}>
-          <div className="relative w-full max-w-5xl flex items-center justify-center preserve-3d">
-            
-            {/* 19th Edition (Deep Back Left) */}
-            <motion.div
-              className="hidden md:flex absolute w-[260px] lg:w-[320px] aspect-[3/4] rounded-lg shadow-2xl bg-zinc-900 border border-zinc-700 flex-col items-center justify-center overflow-hidden"
-              style={{
-                y: leftTranslateY,
-                x: leftTranslateX,
-                z: -300,
-                rotate: prefersReducedMotion ? 0 : leftRotate,
-                opacity: sideOpacity,
-                filter: 'brightness(0.4) blur(3px)',
-              }}
-            >
-              <div className="absolute inset-0 bg-black/60 z-10" />
-              <h3 className="text-zinc-500 font-bold text-2xl z-0">19TH EDITION</h3>
-            </motion.div>
-
-            {/* 20th Edition (Mid Back Right) */}
-            <motion.div
-              className="hidden md:flex absolute w-[260px] lg:w-[320px] aspect-[3/4] rounded-lg shadow-2xl bg-zinc-900 border border-zinc-700 flex-col items-center justify-center overflow-hidden"
-              style={{
-                y: rightTranslateY,
-                x: rightTranslateX,
-                z: -150,
-                rotate: prefersReducedMotion ? 0 : rightRotate,
-                opacity: sideOpacity,
-                filter: 'brightness(0.6) blur(1px)',
-              }}
-            >
-              <div className="absolute inset-0 bg-black/60 z-10" />
-              <h3 className="text-zinc-500 font-bold text-2xl z-0">20TH EDITION</h3>
-            </motion.div>
-
-            {/* 21st Edition (Center Hero pulled forward) */}
-            <motion.div
-              className="relative w-[260px] sm:w-[320px] md:w-[380px] lg:w-[420px] aspect-[3/4] rounded-lg bg-gradient-to-br from-[#1a1a1a] to-[#050505] border border-gold-accent flex flex-col items-center justify-center overflow-hidden pointer-events-auto shadow-[0_20px_50px_rgba(0,0,0,1)]"
-              style={{
-                y: fallbackY,
-                z: 100,
-                scale: fallbackScale,
-                opacity: centerOpacity,
-              }}
-            >
-              <div className="absolute inset-0 bg-gold-gradient opacity-10 mix-blend-overlay"></div>
-              <h2 className="text-transparent bg-clip-text bg-gold-gradient font-black text-4xl lg:text-5xl mb-2 z-10 text-center tracking-wide drop-shadow-lg">EXPOSITION</h2>
-              <p className="text-white font-medium tracking-widest text-xs sm:text-sm lg:text-base z-10 uppercase">21st Edition</p>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 z-0"></div>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* --- HERO TITLE & CTA --- */}
-        <motion.div 
-          className="pointer-events-none absolute inset-0 z-50 flex items-center justify-center"
-          style={{ opacity: titleOpacity, scale: titleScale }}
-        >
-          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-transparent bg-clip-text bg-gold-gradient drop-shadow-[0_0_25px_rgba(232,200,150,0.4)] tracking-wider">
-            EXPOSITION
-          </h1>
-        </motion.div>
-
-        <motion.div
-          className="pointer-events-none absolute inset-x-0 bottom-8 sm:bottom-12 md:bottom-16 z-50 flex flex-col items-center justify-end px-[5%]"
-          style={{ opacity: ctaOpacity, y: ctaY }}
-        >
-          <p className="max-w-[280px] sm:max-w-md text-center font-light uppercase leading-relaxed tracking-widest text-[#9A9A9A] mb-6 sm:mb-8 text-xs sm:text-sm drop-shadow-md">
-            the premier technology symposium & magazine by mit department, university of kelaniya
-          </p>
-          <div className="pointer-events-auto">
-            <ContactButton />
-          </div>
-        </motion.div>
-
-        {/* --- LOCALIZED PAPARAZZI FLASHES --- */}
-        <div className="absolute inset-0 z-[100] pointer-events-none overflow-hidden mix-blend-screen">
-          <motion.div style={{ opacity: flash1 }} className="absolute left-[15%] bottom-[20%] w-[150px] h-[150px] md:w-[300px] md:h-[300px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,1)_0%,rgba(255,255,255,0)_70%)]" />
-          <motion.div style={{ opacity: flash2 }} className="absolute right-[20%] bottom-[35%] w-[180px] h-[180px] md:w-[400px] md:h-[400px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,1)_0%,rgba(255,255,255,0)_70%)]" />
-          <motion.div style={{ opacity: flash3 }} className="absolute left-[30%] bottom-[5%] w-[120px] h-[120px] md:w-[250px] md:h-[250px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,1)_0%,rgba(255,255,255,0)_70%)]" />
-          <motion.div style={{ opacity: flash4 }} className="absolute right-[10%] bottom-[15%] w-[200px] h-[200px] md:w-[350px] md:h-[350px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,1)_0%,rgba(255,255,255,0)_70%)]" />
-          <motion.div style={{ opacity: flash5 }} className="absolute left-[45%] bottom-[25%] w-[160px] h-[160px] md:w-[280px] md:h-[280px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,1)_0%,rgba(255,255,255,0)_70%)]" />
-        </div>
-        
-import { useEffect, useState } from 'react';
-import { FaLinkedinIn, FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa6';
-import ContactButton from '../components/ContactButton';
-import FadeIn from '../components/FadeIn';
-import Magnet from '../components/Magnet';
-import { SocialTooltip, SocialItem } from '../components/ui/social-media';
-import { HeroBackground } from '../components/ui/hero-background';
-
-const HERO_SOCIAL_ITEMS: SocialItem[] = [
+export const HERO_SLIDES: HeroSlideItem[] = [
   {
-    href: 'https://www.linkedin.com/company/exposition-magazine/',
-    ariaLabel: 'LinkedIn',
-    tooltip: 'LinkedIn',
-    color: '#0077b5',
-    icon: <FaLinkedinIn className="size-4" />,
+    id: 1,
+    src: '/resources/hero/1 (0).png',
+    title: 'Exposition 21st Edition',
+    description: 'Premier Technology & Management Symposium',
   },
   {
-    href: 'https://www.facebook.com/Exposition.uok/',
-    ariaLabel: 'Facebook',
-    tooltip: 'Facebook',
-    color: '#1877f2',
-    icon: <FaFacebookF className="size-4" />,
+    id: 2,
+    src: '/resources/hero/1 (1).jpg',
+    title: 'Career Fair Nexus',
+    description: 'Bridging elite talent with industry giants',
   },
   {
-    href: 'https://www.instagram.com/exposition_magazine/',
-    ariaLabel: 'Instagram',
-    tooltip: 'Instagram',
-    color: '#e4405f',
-    icon: <FaInstagram className="size-4" />,
+    id: 3,
+    src: '/resources/hero/1 (2).jpg',
+    title: 'Keynote Conclave',
+    description: 'Visionary insights shaping tomorrow',
   },
   {
-    href: 'https://www.youtube.com/@expositionmagazine',
-    ariaLabel: 'YouTube',
-    tooltip: 'YouTube',
-    color: '#ff0000',
-    icon: <FaYoutube className="size-4" />,
+    id: 4,
+    src: '/resources/hero/1 (2).png',
+    title: 'Innovation Hub',
+    description: 'Pioneering breakthrough tech solutions',
+  },
+  {
+    id: 5,
+    src: '/resources/hero/1 (3).jpg',
+    title: 'Executive Panel',
+    description: 'Conversations with national leaders',
+  },
+  {
+    id: 6,
+    src: '/resources/hero/1 (3).png',
+    title: 'Tech Arena',
+    description: 'Fostering excellence and discovery',
+  },
+  {
+    id: 7,
+    src: '/resources/hero/1 (4).jpg',
+    title: 'Industry Network',
+    description: 'Connecting future corporate leaders',
   },
 ];
 
-export default function HeroSection() {
-  const [fontSize, setFontSize] = useState('85px');
+const easyEaseTransition = {
+  duration: 1.0,
+  ease: [0.42, 0, 0.58, 1] as const, // Cubic-bezier easy-ease tuple
+};
 
+export default function HeroSection() {
+  const containerRef = useRef<HTMLElement>(null);
+  const [step, setStep] = useState(0);
+
+  // Automatically cycle through slides every 4 seconds (cascades top -> middle -> bottom)
   useEffect(() => {
-    const updateSize = () => {
-      const w = window.innerWidth;
-      if (w < 640) {
-        setFontSize(`${Math.max(36, Math.floor(w * 0.1))}px`);
-      } else if (w < 1024) {
-        setFontSize(`${Math.max(56, Math.floor(w * 0.085))}px`);
-      } else {
-        setFontSize(`${Math.min(125, Math.floor(w * 0.08))}px`);
-      }
-    };
-    updateSize();
-    window.addEventListener('resize', updateSize);
-    return () => window.removeEventListener('resize', updateSize);
+    const timer = setInterval(() => {
+      setStep((prev) => prev + 1);
+    }, 4000);
+    return () => clearInterval(timer);
   }, []);
+
+  const total = HERO_SLIDES.length;
+  // Step T: Top has (step + 2), Mid has (step + 1), Bot has (step)
+  // At Step T+1: Top receives (step + 3) [new from top], Mid receives (step + 2) [previous top!], Bot receives (step + 1) [previous mid!]
+  const topSlide = HERO_SLIDES[(step + 2) % total];
+  const midSlide = HERO_SLIDES[(step + 1) % total];
+  const botSlide = HERO_SLIDES[step % total];
+
+  const handleScrollTo = (targetId: string) => {
+    const id = targetId.replace('#', '');
+    const el = document.getElementById(id);
+    if (el) {
+      if ((window as any).__lenis) {
+        (window as any).__lenis.scrollTo(el, { offset: 0, duration: 1.2 });
+      } else {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
 
   return (
     <section
-      className="relative flex h-screen flex-col bg-[#0C0C0C]"
-      style={{ overflowX: 'clip' }}
+      ref={containerRef}
+      className="relative w-full h-screen max-h-[100dvh] bg-[#0a0a08] text-white flex flex-col justify-center px-6 sm:px-12 md:px-16 lg:px-20 xl:px-28 pt-16 sm:pt-20 pb-4 sm:pb-6 select-none overflow-hidden"
     >
-      {/* Animated Magazine Covers & Gold Ambient Background */}
-      <HeroBackground />
+      {/* ----------------- SOFT AMBIENT BACKGROUND GLOWS ----------------- */}
+      {/* 1. Subtle warm gold ambient glow behind the left text content */}
+      <div className="absolute top-1/2 left-[15%] -translate-y-1/2 w-[450px] sm:w-[550px] h-[450px] sm:h-[550px] bg-[radial-gradient(circle,rgba(212,175,55,0.12)_0%,rgba(184,137,79,0.04)_50%,transparent_70%)] pointer-events-none blur-3xl -z-10" />
 
-      {/* Top Navbar Spacer */}
-      <div className="relative z-20 w-full px-[5%] pt-6 md:pt-8 h-12 md:h-16 pointer-events-none" />
+      {/* 2. Soft warm gold/amber ambient glow behind the top-right image stack */}
+      <div className="absolute top-1/2 right-[12%] -translate-y-1/2 w-[550px] sm:w-[680px] h-[550px] sm:h-[680px] bg-[radial-gradient(circle,rgba(212,175,55,0.22)_0%,rgba(184,137,79,0.08)_45%,transparent_70%)] pointer-events-none blur-3xl -z-10" />
 
-      {/* Primary Wordmark & Subtitle Lockup */}
-      <div className="relative z-20 w-full flex flex-col items-center justify-center my-auto px-[5%]">
-        <FadeIn delay={0.2} y={30} className="flex flex-col items-center justify-center text-center">
-          <h1
-            style={{
-              fontFamily: 'Times New Roman, Georgia, serif',
-              fontSize: fontSize,
-              fontWeight: 900,
-            }}
-            className="text-metallic-gold-shine tracking-tight drop-shadow-[0_10px_35px_rgba(0,0,0,0.9)]"
+      {/* ----------------- MAIN TWO-COLUMN CONTENT GRID ----------------- */}
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center my-auto w-full max-w-[1700px] mx-auto h-full max-h-[calc(100dvh-5rem)] flex-1">
+        
+        {/* LEFT CONTENT COLUMN (~50% width) */}
+        <div className="lg:col-span-6 xl:col-span-6 flex flex-col items-start justify-center my-auto pr-0 lg:pr-4 text-left">
+          
+          {/* Brand Logo Image (/resources/ExpositionLogo_original.png) - Optically Aligned with Shimmer */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="relative flex items-center justify-start -ml-2.5 sm:-ml-3.5 md:-ml-4.5 lg:-ml-5.5 p-0 group overflow-hidden"
           >
-            Exposition
-          </h1>
-          <p className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base font-mono font-bold tracking-[0.3em] uppercase text-[#E8C896] drop-shadow-md">
-            21ST EDITION
-          </p>
-        </FadeIn>
+            <div className="relative inline-block overflow-hidden rounded-sm">
+              <img
+                src="/resources/ExpositionLogo_original.png"
+                alt="Exposition"
+                className="h-[95px] sm:h-[120px] md:h-[140px] lg:h-[160px] xl:h-[175px] w-auto max-w-full object-contain object-left select-none pointer-events-none drop-shadow-[0_8px_35px_rgba(212,175,55,0.3)]"
+              />
+              {/* Luxury Diagonal Light Reflection Sweep */}
+              <motion.div
+                initial={{ x: '-120%' }}
+                animate={{ x: '240%' }}
+                transition={{
+                  repeat: Infinity,
+                  repeatDelay: 3.5,
+                  duration: 1.6,
+                  ease: 'easeInOut',
+                }}
+                className="absolute inset-0 w-1/3 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-25deg] pointer-events-none mix-blend-overlay"
+              />
+            </div>
+          </motion.div>
 
-        {/* Social Links Row */}
-        <Magnet
-          padding={120}
-          strength={3}
-          activeTransition="transform 0.3s ease-out"
-          inactiveTransition="transform 0.6s ease-in-out"
-          wrapperClassName="flex items-center justify-center mt-6 sm:mt-8"
-        >
-          <FadeIn delay={0.4} y={20}>
-            <SocialTooltip
-              items={HERO_SOCIAL_ITEMS}
-              borderClass="border border-[#B8894F]/30"
-              iconColorClass="text-[#E8C896] group-hover:text-[#0C0C0C]"
-              containerSizeClass="w-11 h-11 sm:w-12 sm:h-12 bg-black/80 backdrop-blur-md"
-              iconSizeClass="w-5 h-5"
-            />
-          </FadeIn>
-        </Magnet>
+          {/* Brand Description Hierarchy */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-5 sm:mt-6 max-w-[480px]"
+          >
+            <p className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-[1.35rem] leading-snug tracking-tight">
+              Shaping Ideas. Connecting Industry.
+            </p>
+            <p className="text-zinc-300 text-xs sm:text-sm md:text-[0.95rem] font-normal leading-relaxed mt-2 text-zinc-300/90">
+              A platform where the next generation of business leaders, innovators, and industry professionals come together.
+            </p>
+          </motion.div>
 
-        {/* Subtle Gold Divider Line */}
-        <FadeIn delay={0.45} y={10} className="w-full max-w-xs mt-8 sm:mt-10">
-          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#C9A25F]/40 to-transparent" />
-        </FadeIn>
+          {/* Exposure Analytics Stats Grid with Outfit Font & Metallic Gold Shimmer */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-3 gap-3 sm:gap-6 pt-5 sm:pt-6 mt-5 sm:mt-6 border-t border-white/10 max-w-[480px]"
+          >
+            <div className="flex flex-col items-start justify-start text-left">
+              <div className="text-2xl sm:text-3xl lg:text-[2.25rem] font-extrabold font-['Outfit',sans-serif] tracking-tight leading-none animate-shimmer-gold">
+                300+
+              </div>
+              <div className="text-[11px] sm:text-xs text-zinc-400 font-medium leading-tight mt-2 text-left">
+                Career Fair Registrations
+              </div>
+            </div>
+
+            <div className="flex flex-col items-start justify-start text-left">
+              <div className="text-2xl sm:text-3xl lg:text-[2.25rem] font-extrabold font-['Outfit',sans-serif] tracking-tight leading-none animate-shimmer-gold">
+                7,500+
+              </div>
+              <div className="text-[11px] sm:text-xs text-zinc-400 font-medium leading-tight mt-2 text-left">
+                Total Social Followers
+              </div>
+            </div>
+
+            <div className="flex flex-col items-start justify-start text-left">
+              <div className="text-2xl sm:text-3xl lg:text-[2.25rem] font-extrabold font-['Outfit',sans-serif] tracking-tight leading-none animate-shimmer-gold">
+                20+
+              </div>
+              <div className="text-[11px] sm:text-xs text-zinc-400 font-medium leading-tight mt-2 text-left">
+                Universities Reached
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Two Pill-Shaped CTA Buttons Side by Side */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-6 sm:mt-8 flex items-center gap-3 sm:gap-5"
+          >
+            {/* Primary Pill Button */}
+            <a
+              href="#gallery"
+              onClick={(e) => {
+                e.preventDefault();
+                handleScrollTo('gallery');
+              }}
+              className="inline-flex items-center justify-center rounded-full bg-white hover:bg-[#F3E7C4] text-black font-semibold text-xs sm:text-sm md:text-base px-6 sm:px-8 py-2.5 sm:py-3 shadow-[0_10px_30px_rgba(255,255,255,0.18)] transition-all duration-300 min-w-[120px] sm:min-w-[140px] text-center cursor-pointer"
+            >
+              <span>View Gallery</span>
+            </a>
+
+            {/* Secondary Pill Button */}
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                handleScrollTo('contact');
+              }}
+              className="inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white hover:text-[#F3E7C4] border border-white/20 hover:border-[#C9A25F]/60 font-semibold text-xs sm:text-sm md:text-base px-6 sm:px-8 py-2.5 sm:py-3 shadow-[0_10px_30px_rgba(0,0,0,0.4)] backdrop-blur-md transition-all duration-300 min-w-[120px] sm:min-w-[140px] text-center cursor-pointer"
+            >
+              <span>Contact Us</span>
+            </a>
+          </motion.div>
+        </div>
+
+        {/* RIGHT IMAGE COLUMN (~50% width): Vertical Stack of 3 Asymmetric 2048x1367 Slideshow Cards */}
+        <div className="lg:col-span-6 xl:col-span-6 relative w-full max-w-[500px] lg:max-w-[580px] xl:max-w-[640px] mx-auto h-[clamp(520px,80vh,740px)] flex flex-col justify-center items-center gap-3 sm:gap-4 overflow-hidden">
+          
+          {/* 1. TOP IMAGE CARD: Smaller (76%), shifted right, all outer edges softly blurred/feathered */}
+          <div className="relative w-[76%] max-w-[340px] sm:max-w-[380px] lg:max-w-[420px] aspect-[2048/1367] rounded-xl overflow-hidden translate-x-4 sm:translate-x-6 lg:translate-x-8 [mask-image:radial-gradient(ellipse_at_center,black_45%,rgba(0,0,0,0.85)_65%,transparent_96%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_45%,rgba(0,0,0,0.85)_65%,transparent_96%)] bg-black/50 shrink-0">
+            <AnimatePresence mode="popLayout" initial={false}>
+              <motion.div
+                key={topSlide.src + '-top'}
+                initial={{ y: -40, opacity: 0, scale: 0.98 }}
+                animate={{ y: 0, opacity: 1, scale: 1 }}
+                exit={{ y: 40, opacity: 0, scale: 1.02 }}
+                transition={easyEaseTransition}
+                className="relative w-full h-full"
+              >
+                <img
+                  src={topSlide.src}
+                  alt={topSlide.title}
+                  className="w-full h-full object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+                <div className="absolute bottom-2 left-3 sm:bottom-2.5 sm:left-3.5 z-10 text-left pointer-events-none pr-3">
+                  <div className="text-xs sm:text-sm font-bold text-white tracking-wide drop-shadow-md">
+                    {topSlide.title}
+                  </div>
+                  <div className="text-[10px] sm:text-[11px] text-zinc-300 font-normal drop-shadow-sm line-clamp-1">
+                    {topSlide.description}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+            {/* Perimeter soft ambient fade gradients */}
+            <div className="absolute inset-0 pointer-events-none z-20 [background:radial-gradient(ellipse_at_center,transparent_45%,#0a0a08_95%)]" />
+          </div>
+
+          {/* 2. MIDDLE IMAGE CARD: Prominently Large Centerpiece (100%), centered with crisp gold border */}
+          <div className="relative w-full max-w-[460px] sm:max-w-[520px] lg:max-w-[560px] aspect-[2048/1367] rounded-xl overflow-hidden border border-[#C9A25F]/75 shadow-[0_0_40px_rgba(212,175,55,0.25),0_15px_35px_rgba(0,0,0,0.9)] bg-black/60 shrink-0 z-10">
+            <AnimatePresence mode="popLayout" initial={false}>
+              <motion.div
+                key={midSlide.src + '-mid'}
+                initial={{ y: -45, opacity: 0, scale: 0.98 }}
+                animate={{ y: 0, opacity: 1, scale: 1 }}
+                exit={{ y: 45, opacity: 0, scale: 1.02 }}
+                transition={easyEaseTransition}
+                className="relative w-full h-full"
+              >
+                <img
+                  src={midSlide.src}
+                  alt={midSlide.title}
+                  className="w-full h-full object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+                <div className="absolute bottom-2.5 left-3.5 sm:bottom-3 sm:left-4 z-10 text-left pointer-events-none pr-3">
+                  <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white tracking-wide drop-shadow-md">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#E8C896] inline-block animate-pulse shrink-0" />
+                    <span className="truncate">{midSlide.title}</span>
+                  </div>
+                  <div className="text-[10px] sm:text-[11px] text-zinc-300 font-normal drop-shadow-sm line-clamp-1">
+                    {midSlide.description}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* 3. BOTTOM IMAGE CARD: Smaller (76%), shifted right, all outer edges softly blurred/feathered */}
+          <div className="relative w-[76%] max-w-[340px] sm:max-w-[380px] lg:max-w-[420px] aspect-[2048/1367] rounded-xl overflow-hidden translate-x-4 sm:translate-x-6 lg:translate-x-8 [mask-image:radial-gradient(ellipse_at_center,black_45%,rgba(0,0,0,0.85)_65%,transparent_96%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_45%,rgba(0,0,0,0.85)_65%,transparent_96%)] bg-black/50 shrink-0">
+            <AnimatePresence mode="popLayout" initial={false}>
+              <motion.div
+                key={botSlide.src + '-bot'}
+                initial={{ y: -40, opacity: 0, scale: 0.98 }}
+                animate={{ y: 0, opacity: 1, scale: 1 }}
+                exit={{ y: 40, opacity: 0, scale: 1.02 }}
+                transition={easyEaseTransition}
+                className="relative w-full h-full"
+              >
+                <img
+                  src={botSlide.src}
+                  alt={botSlide.title}
+                  className="w-full h-full object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+                <div className="absolute bottom-2 left-3 sm:bottom-2.5 sm:left-3.5 z-10 text-left pointer-events-none pr-3">
+                  <div className="text-xs sm:text-sm font-bold text-white tracking-wide drop-shadow-md">
+                    {botSlide.title}
+                  </div>
+                  <div className="text-[10px] sm:text-[11px] text-zinc-300 font-normal drop-shadow-sm line-clamp-1">
+                    {botSlide.description}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+            {/* Perimeter soft ambient fade gradients */}
+            <div className="absolute inset-0 pointer-events-none z-20 [background:radial-gradient(ellipse_at_center,transparent_45%,#0a0a08_95%)]" />
+          </div>
+
+        </div>
+
       </div>
 
-      {/* Bottom Bar: Contact Us Button on Right */}
-      <div className="relative z-20 mt-auto flex items-end justify-end px-[5%] pb-7 sm:pb-8 md:pb-10">
-        <FadeIn delay={0.5} y={20}>
-          <ContactButton />
-        </FadeIn>
-      </div>
     </section>
   );
 }

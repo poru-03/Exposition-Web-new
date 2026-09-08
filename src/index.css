@@ -320,3 +320,30 @@ body {
   width: 0px;
   height: 0px;
 }
+
+/* Gold Metallic Shimmer Reflection */
+@keyframes shimmerGold {
+  0% {
+    background-position: 250% center;
+  }
+  100% {
+    background-position: -250% center;
+  }
+}
+
+.animate-shimmer-gold {
+  background: linear-gradient(
+    110deg,
+    #E8C896 0%,
+    #C9A25F 20%,
+    #FFFDF7 45%,
+    #E8C896 55%,
+    #B8894F 80%,
+    #E8C896 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmerGold 6s ease-in-out infinite;
+}
