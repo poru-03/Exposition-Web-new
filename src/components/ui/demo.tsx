@@ -11,7 +11,6 @@ import {
   ArrowRight,
   ExternalLink,
 } from "lucide-react"
-import ScrollReveal from "@/components/ScrollReveal"
 import { StaggerContainer, StaggerCard } from "@/components/StaggerReveal"
 
 export type PhaseItem = {
@@ -121,19 +120,6 @@ export const DemoDark = () => {
 
   return (
     <div className="relative w-full py-10 bg-transparent">
-      {/* Intro Header */}
-      <ScrollReveal className="mb-20 space-y-4 max-w-3xl mx-auto text-center flex flex-col items-center px-4">
-        <div className="inline-flex items-center gap-2 rounded-full border border-[#B8894F]/30 bg-[#161616]/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#E8C896] backdrop-blur-md">
-          <Sparkles className="h-3.5 w-3.5 text-[#E8C896]" />
-          INTERACTIVE PROCESS FLOW
-        </div>
-        <p className="max-w-[56ch] text-sm sm:text-base leading-relaxed text-[#9A9A9A]">
-          Exposition is built around a series of initiatives that are
-          thoughtfully designed to encourage knowledge sharing, industry
-          engagement, and professional development.
-        </p>
-      </ScrollReveal>
-
       {/* Vertical Sticky Stack Container */}
       <div ref={timelineRef} className="relative mx-auto max-w-5xl px-4 sm:px-8 pb-32">
         {/* Continuous Vertical Line Track */}

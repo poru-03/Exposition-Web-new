@@ -166,40 +166,33 @@ function ReviewCard({
   img,
   name,
   username,
-  body,
   country,
   tagline,
 }: (typeof REVIEWS_DATA)[number]) {
   return (
-    <Card className="w-[270px] sm:w-[300px] rounded-2xl border border-white/10 bg-[#151515]/95 shadow-xl hover:border-[#B8894F]/35 transition-colors duration-200">
-      <CardContent className="p-4 sm:p-5 flex flex-col justify-between h-full">
-        <div>
-          <div className="flex items-center gap-3">
-            <Avatar className="size-10 border border-white/20 shadow-md shrink-0">
-              <AvatarImage src={img} alt={name} className="object-cover object-top" />
-              <AvatarFallback>{name.substring(0, 2).toUpperCase()}</AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col min-w-0">
-              <div className="flex items-center gap-1.5">
-                <span className="text-xs sm:text-sm font-bold text-white truncate">{name}</span>
-                <span className="text-[0.65rem] shrink-0">{country}</span>
-              </div>
-              <p className="text-[0.65rem] font-mono text-[#9A9A9A] truncate">{username}</p>
+    <Card className="w-[210px] sm:w-[230px] rounded-xl border border-white/10 bg-[#151515]/95 shadow-md hover:border-[#B8894F]/35 transition-all duration-200">
+      <CardContent className="p-3.5 flex flex-col justify-between h-full space-y-2">
+        <div className="flex items-center gap-2.5">
+          <Avatar className="size-9 border border-white/20 shadow-md shrink-0">
+            <AvatarImage src={img} alt={name} className="object-cover object-top" />
+            <AvatarFallback>{name.substring(0, 2).toUpperCase()}</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col min-w-0">
+            <div className="flex items-center gap-1">
+              <span className="text-xs font-bold text-white truncate">{name}</span>
+              <span className="text-[0.6rem] shrink-0">{country}</span>
             </div>
+            <p className="text-[0.6rem] font-mono text-[#9A9A9A] truncate">{username}</p>
           </div>
-
-          <p className="mt-2 text-[0.65rem] font-semibold uppercase tracking-wider text-[#E8C896] truncate">
-            {tagline}
-          </p>
-
-          <blockquote className="mt-2.5 text-xs text-[#9A9A9A] font-light leading-relaxed">
-            &ldquo;{body}&rdquo;
-          </blockquote>
         </div>
 
-        <div className="flex items-center gap-1 pt-2.5 mt-2.5 border-t border-white/5">
+        <p className="text-[0.62rem] font-medium text-[#E8C896] truncate">
+          {tagline}
+        </p>
+
+        <div className="flex items-center gap-1 pt-1.5 border-t border-white/5">
           {Array.from({ length: 5 }).map((_, i) => (
-            <Star key={i} className="h-3 w-3 fill-amber-400 text-amber-400" />
+            <Star key={i} className="h-2.5 w-2.5 fill-amber-400 text-amber-400" />
           ))}
         </div>
       </CardContent>
@@ -287,7 +280,7 @@ export default function ReviewsSection() {
       {/* ================= FOREGROUND: Title, Spotlight Card & Stats (Floating Over Marquee) ================= */}
       <div className="relative z-10 flex flex-col items-center justify-center w-full">
         {/* Section Header */}
-        <ScrollReveal className="flex flex-col items-center justify-center text-center mb-12 sm:mb-16 px-[5%]">
+        <ScrollReveal className="flex flex-col items-center justify-center text-center mb-4 sm:mb-6 px-[5%]">
           <h2
             className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
             style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}
@@ -298,15 +291,10 @@ export default function ReviewsSection() {
           <p className="mt-2 text-base sm:text-lg font-semibold uppercase tracking-widest text-[#E8C896]">
             Our success stories
           </p>
-
-          <p className="mt-4 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-[#9A9A9A] font-light">
-            Industry leaders, tech pioneers, and academic visionaries sharing their transformative
-            experiences and endorsements from the Exposition ecosystem.
-          </p>
         </ScrollReveal>
 
         {/* Spotlight Card in Middle of Review Section */}
-        <ScrollReveal delay={0.15} className="w-full max-w-5xl px-[5%] my-6 sm:my-10 flex flex-col items-center">
+        <ScrollReveal delay={0.15} className="w-full max-w-6xl px-[5%] mt-1 mb-6 sm:mt-2 sm:mb-8 flex flex-col items-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeFeatured.id}
@@ -316,8 +304,8 @@ export default function ReviewsSection() {
               transition={{ duration: 0.35, ease: 'easeOut' }}
               className="relative flex flex-col md:flex-row items-center justify-center w-full"
             >
-              {/* Left Side: Large Rounded Portrait Image */}
-              <div className="w-full sm:w-[380px] md:w-[440px] aspect-square rounded-[36px] overflow-hidden shadow-[0_30px_70px_rgba(0,0,0,0.95)] border border-white/15 shrink-0 bg-[#1a1a1a]">
+              {/* Left Side: Scaled Portrait Image */}
+              <div className="w-[240px] sm:w-[280px] md:w-[320px] aspect-square rounded-[28px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.9)] border border-white/15 shrink-0 bg-[#1a1a1a]">
                 <img
                   src={activeFeatured.image}
                   alt={activeFeatured.name}
@@ -328,22 +316,22 @@ export default function ReviewsSection() {
                 />
               </div>
 
-              {/* Right Side: Overlapping Content Card */}
-              <div className="w-full md:w-[480px] lg:w-[540px] -mt-12 md:mt-0 md:-ml-24 bg-[#141414]/95 border border-white/15 p-6 sm:p-8 md:p-10 rounded-[32px] shadow-[0_35px_80px_rgba(0,0,0,0.95)] backdrop-blur-2xl z-10 flex flex-col justify-between">
-                <div className="space-y-3">
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
+              {/* Right Side: Content Card with Increased Width */}
+              <div className="w-full sm:w-[420px] md:w-[500px] lg:w-[560px] -mt-10 md:mt-0 md:-ml-16 bg-[#141414]/95 border border-white/15 p-5 sm:p-6 md:p-8 rounded-[24px] shadow-[0_25px_60px_rgba(0,0,0,0.95)] backdrop-blur-2xl z-10 flex flex-col justify-between">
+                <div className="space-y-2">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight leading-tight">
                     {activeFeatured.name}
                   </h3>
-                  <p className="text-xs sm:text-sm font-medium text-[#9A9A9A]">
+                  <p className="text-xs font-medium text-[#9A9A9A]">
                     {activeFeatured.title}
                   </p>
-                  <p className="mt-4 text-xs sm:text-sm md:text-base text-white/85 font-light leading-relaxed">
+                  <p className="mt-3 text-xs sm:text-sm text-white/85 font-light leading-relaxed">
                     {activeFeatured.quote}
                   </p>
                 </div>
 
                 {/* Circular Social Icons using SocialTooltip */}
-                <div className="pt-6 mt-4 border-t border-white/10">
+                <div className="pt-4 mt-3 border-t border-white/10">
                   {(() => {
                     const reviewSocialItems: SocialItem[] = [];
                     if (activeFeatured.socials.github) {
@@ -352,7 +340,7 @@ export default function ReviewsSection() {
                         ariaLabel: 'GitHub',
                         tooltip: 'GitHub',
                         color: '#333333',
-                        icon: <Github className="size-5" />,
+                        icon: <Github className="size-4" />,
                       });
                     }
                     if (activeFeatured.socials.twitter) {
@@ -361,7 +349,7 @@ export default function ReviewsSection() {
                         ariaLabel: 'Twitter',
                         tooltip: 'Twitter',
                         color: '#1da1f2',
-                        icon: <Twitter className="size-5" />,
+                        icon: <Twitter className="size-4" />,
                       });
                     }
                     if (activeFeatured.socials.youtube) {
@@ -370,7 +358,7 @@ export default function ReviewsSection() {
                         ariaLabel: 'YouTube',
                         tooltip: 'YouTube',
                         color: '#ff0000',
-                        icon: <Youtube className="size-5" />,
+                        icon: <Youtube className="size-4" />,
                       });
                     }
                     if (activeFeatured.socials.linkedin) {
@@ -379,15 +367,15 @@ export default function ReviewsSection() {
                         ariaLabel: 'LinkedIn',
                         tooltip: 'LinkedIn',
                         color: '#0077b5',
-                        icon: <Linkedin className="size-5" />,
+                        icon: <Linkedin className="size-4" />,
                       });
                     }
                     return (
                       <SocialTooltip
                         items={reviewSocialItems}
-                        containerSizeClass="w-11 h-11"
-                        iconSizeClass="w-5 h-5"
-                        className="justify-start gap-3"
+                        containerSizeClass="w-9 h-9"
+                        iconSizeClass="w-4 h-4"
+                        className="justify-start gap-2.5"
                       />
                     );
                   })()}

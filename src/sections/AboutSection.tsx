@@ -62,11 +62,6 @@ export default function AboutSection() {
 
           <div className="flex flex-col items-center gap-6 max-w-[720px]">
             <AnimatedText
-              text="Exposition is a flagship industry engagement platform organized by the Industrial Management Science Students' Association at the Department of Industrial Management, University of Kelaniya."
-              className="text-center font-medium leading-relaxed text-[#9A9A9A]"
-              style={{ fontSize: 'clamp(1rem, 1.8vw, 1.25rem)' }}
-            />
-            <AnimatedText
               text="Exposition serves as a bridge between academia and industry, bringing together students, industry leaders, and organizations through meaningful conversations, collaborative experiences, and career-focused opportunities."
               className="text-center font-medium leading-relaxed text-[#9A9A9A]"
               style={{ fontSize: 'clamp(1rem, 1.8vw, 1.25rem)' }}
