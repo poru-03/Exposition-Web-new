@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 
 export const NAV_LINKS = [
   { name: 'About', href: '#about' },
@@ -15,10 +15,10 @@ export const NAV_LINKS = [
 ];
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('#hero');
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollYRef = useRef(0);
 
-  // Throttled scroll listener using requestAnimationFrame for 60fps performance
   useEffect(() => {
     let ticking = false;
 
@@ -26,11 +26,29 @@ export default function Navbar() {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const scrollY = window.scrollY;
-          setIsScrolled(scrollY > 100);
+          const lastScrollY = lastScrollYRef.current;
+          const delta = scrollY - lastScrollY;
 
-          // Find active section based on scroll offset
+          // Hero threshold: When in the top Hero area, always keep navbar visible
+          if (scrollY < 120) {
+            setIsVisible(true);
+          } else {
+            // When in other sections:
+            // If scrolling down, hide navbar
+            if (delta > 6) {
+              setIsVisible(false);
+            }
+            // If scrolling up, show navbar
+            else if (delta < -6) {
+              setIsVisible(true);
+            }
+          }
+
+          lastScrollYRef.current = scrollY;
+
+          // Track active section for link highlight
           const sectionIds = NAV_LINKS.map((link) => link.href.replace('#', ''));
-          let current = '';
+          let current = '#hero';
 
           for (const id of sectionIds) {
             const el = document.getElementById(id);
@@ -72,42 +90,22 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[100] pointer-events-none hidden md:flex justify-center px-[4%] pt-4 md:pt-5">
-      <motion.nav
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className={`pointer-events-auto transition-all duration-500 ease-out flex items-center justify-between w-full max-w-7xl ${isScrolled
-            ? 'rounded-full bg-[#0C0C0C]/85 backdrop-blur-xl border border-[#B8894F]/30 px-5 sm:px-8 py-2.5 sm:py-3 shadow-[0_15px_35px_rgba(0,0,0,0.85),0_0_25px_rgba(184,137,79,0.15)]'
-            : 'bg-transparent border border-transparent px-0 py-0'
-          }`}
+    <motion.header
+      initial={{ y: 0, opacity: 1 }}
+      animate={{
+        y: isVisible ? 0 : -90,
+        opacity: isVisible ? 1 : 0,
+      }}
+      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed top-0 left-0 right-0 z-[100] pointer-events-none hidden md:flex justify-center px-4 sm:px-8 pt-4 sm:pt-5"
+    >
+      <nav
+        className={`transition-all duration-500 ease-out flex items-center justify-between w-full max-w-5xl rounded-full bg-white/[0.03] backdrop-blur-xl border border-white/15 px-6 sm:px-8 py-2.5 sm:py-3 shadow-[0_10px_35px_rgba(0,0,0,0.6)] ${
+          isVisible ? 'pointer-events-auto' : 'pointer-events-none'
+        }`}
       >
-        {/* Brand Crest when scrolled */}
-        <AnimatePresence>
-          {isScrolled && (
-            <motion.a
-              href="#hero"
-              onClick={(e) => handleLinkClick(e, '#hero')}
-              initial={{ opacity: 0, scale: 0.8, x: -10 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              exit={{ opacity: 0, scale: 0.8, x: -10 }}
-              transition={{ duration: 0.25 }}
-              className="hidden lg:flex items-center gap-2 pr-4 shrink-0"
-            >
-              <div className="flex items-center gap-1 h-5">
-                <span className="w-1 h-full bg-[#B8894F] rounded-xs" />
-                <span className="w-1 h-full bg-[#E8C896] rounded-xs" />
-                <span className="w-1 h-full bg-[#B8894F] rounded-xs" />
-              </div>
-              <span className="font-bold text-xs font-mono tracking-wider text-white uppercase">
-                EXPO <span className="text-gold-gradient font-black">21</span>
-              </span>
-            </motion.a>
-          )}
-        </AnimatePresence>
-
-        {/* Nav Links with 3D Perspective Tilt on Hover & Active Glow Indicator */}
-        <div className="flex items-center justify-between w-full [perspective:800px] overflow-x-auto no-scrollbar gap-1 sm:gap-2">
+        {/* Nav Links evenly spaced across the floating capsule */}
+        <div className="flex items-center justify-between w-full overflow-x-auto no-scrollbar gap-2 sm:gap-4">
           {NAV_LINKS.map((link) => {
             const isActive = activeSection === link.href;
 
@@ -116,17 +114,18 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className={`relative px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm md:text-[0.95rem] font-medium uppercase tracking-wider transition-all duration-300 whitespace-nowrap [transform-style:preserve-3d] ${isActive
-                    ? 'text-[#E8C896] font-semibold bg-[#B8894F]/10 border border-[#B8894F]/40 rounded-full shadow-[0_0_15px_rgba(184,137,79,0.25)]'
-                    : 'text-[#9A9A9A] hover:text-white border border-transparent'
-                  }`}
+                className={`relative px-3.5 sm:px-4.5 py-1.5 text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 whitespace-nowrap rounded-full ${
+                  isActive
+                    ? 'text-neutral-950 font-bold bg-gradient-to-r from-[#F5E6C8] via-[#E8C896] to-[#D4AF37] shadow-[0_0_22px_rgba(212,175,55,0.55)] scale-105'
+                    : 'text-zinc-300 hover:text-white hover:bg-white/[0.08]'
+                }`}
               >
-                <span className="relative z-10">{link.name}</span>
+                <span>{link.name}</span>
               </a>
             );
           })}
         </div>
-      </motion.nav>
-    </header>
+      </nav>
+    </motion.header>
   );
 }
