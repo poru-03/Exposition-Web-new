@@ -7,7 +7,6 @@ import {
   CheckCircle2,
   Send,
   Sparkles,
-  Layers,
   Crown,
   Medal,
   Award,
@@ -16,6 +15,7 @@ import {
 } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
 import { Marquee } from '@/components/ui/3d-testimonails';
+import { ShinyButton } from '@/components/ui/shiny-button';
 
 export type PartnerTier = 'Platinum' | 'Gold' | 'Silver' | 'Bronze';
 
@@ -242,7 +242,7 @@ export function VerticalPartnerCard({
 }
 
 export default function PartnersSection() {
-  const [activeTab, setActiveTab] = useState<'stream' | PartnerTier | 'all'>('stream');
+  const [isGridOpen, setIsGridOpen] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null);
@@ -297,11 +297,6 @@ export default function PartnersSection() {
     URL.revokeObjectURL(url);
   };
 
-  const filteredPartners =
-    activeTab === 'stream' || activeTab === 'all'
-      ? ALL_PARTNERS
-      : ALL_PARTNERS.filter((p) => p.tier === activeTab);
-
   return (
     <section
       id="partners"
@@ -316,8 +311,17 @@ export default function PartnersSection() {
           Our Partners
         </h2>
 
+        <div className="mt-4 max-w-2xl text-center space-y-2">
+          <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight">
+            Want to Partner With Us?
+          </h3>
+          <p className="text-xs sm:text-sm text-[#9A9A9A] leading-relaxed font-normal">
+            Let's discuss how we can create a customized partnership that delivers exceptional value for your organization and our university community
+          </p>
+        </div>
+
         {/* CTA Buttons: Download Partnership Guide & Become a Partner */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
           <button
             onClick={handleDownloadGuide}
             className="inline-flex items-center gap-2 rounded-full border border-[#B8894F]/50 bg-[#181818]/90 px-6 py-2.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#E8C896] shadow-xl backdrop-blur-md hover:bg-[#B8894F]/15 hover:border-[#E8C896] transition-all duration-300 active:scale-95"
@@ -334,147 +338,86 @@ export default function PartnersSection() {
             <span>Become a Partner</span>
           </button>
         </div>
-
-        {/* View Mode & Tier Filter Tabs */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-full border border-white/15 bg-black/60 backdrop-blur-lg">
-          <button
-            onClick={() => setActiveTab('stream')}
-            className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 ${activeTab === 'stream'
-              ? 'bg-gradient-to-r from-[#B8894F] to-[#E8C896] text-black shadow-md'
-              : 'text-[#9A9A9A] hover:text-white hover:bg-white/5'
-              }`}
-          >
-            <Layers className="size-3.5" />
-            <span>Live Stream</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('Platinum')}
-            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 ${activeTab === 'Platinum'
-              ? 'bg-white text-black shadow-md'
-              : 'text-white/70 hover:text-white hover:bg-white/5'
-              }`}
-          >
-            <Crown className="size-3" />
-            <span>Platinum (4)</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('Gold')}
-            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 ${activeTab === 'Gold'
-              ? 'bg-gradient-to-r from-[#B8894F] to-[#E8C896] text-black shadow-md'
-              : 'text-[#E8C896]/80 hover:text-[#E8C896] hover:bg-white/5'
-              }`}
-          >
-            <Medal className="size-3" />
-            <span>Gold (4)</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('Silver')}
-            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 ${activeTab === 'Silver'
-              ? 'bg-[#D8D8D8] text-black shadow-md'
-              : 'text-[#D8D8D8]/70 hover:text-white hover:bg-white/5'
-              }`}
-          >
-            <Award className="size-3" />
-            <span>Silver (4)</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('Bronze')}
-            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 ${activeTab === 'Bronze'
-              ? 'bg-[#B8894F] text-black shadow-md'
-              : 'text-[#B8894F]/80 hover:text-[#E8C896] hover:bg-white/5'
-              }`}
-          >
-            <Shield className="size-3" />
-            <span>Bronze (3)</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('all')}
-            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 ${activeTab === 'all'
-              ? 'bg-white text-black shadow-md'
-              : 'text-[#9A9A9A] hover:text-white hover:bg-white/5'
-              }`}
-          >
-            <span>All Grid (15)</span>
-          </button>
-        </div>
       </ScrollReveal>
 
-      {/* ================= SECTION CONTENT: DUAL-ROW MARQUEE STREAM OR FILTERED GRID ================= */}
-      {activeTab === 'stream' ? (
-        <div className="relative w-full overflow-hidden space-y-6 pt-2">
-          {/* Subheader info bar */}
-          <div className="flex items-center justify-between px-[5%] max-w-7xl mx-auto mb-1">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#9A9A9A] flex items-center gap-2">
-              <span className="size-2 rounded-full bg-[#E8C896] animate-pulse" />
-              Strategic Network ({ALL_PARTNERS.length} Partners)
-            </span>
-            <span className="text-[0.68rem] font-mono text-[#9A9A9A]/60 uppercase tracking-wider hidden sm:inline-block">
-              Hover card to pause stream • Click for details
-            </span>
-          </div>
-
-          {/* Row 1: Flows Left smoothly (Platinum & Gold) */}
-          <div className="relative w-full overflow-hidden">
-            <Marquee
-              pauseOnHover
-              repeat={3}
-              className="[--duration:30s] [--gap:1.5rem] py-1"
-            >
-              {ROW1_PARTNERS.map((partner) => (
-                <VerticalPartnerCard
-                  key={partner.id}
-                  partner={partner}
-                  onSelect={(p) => setSelectedPartner(p)}
-                />
-              ))}
-            </Marquee>
-
-            {/* Side Fade Vignettes */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-20 sm:w-32 bg-gradient-to-r from-[#0C0C0C] via-[#0C0C0C]/80 to-transparent z-10" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-20 sm:w-32 bg-gradient-to-l from-[#0C0C0C] via-[#0C0C0C]/80 to-transparent z-10" />
-          </div>
-
-          {/* Row 2: Flows Right (Reverse) smoothly (Silver & Bronze) */}
-          <div className="relative w-full overflow-hidden">
-            <Marquee
-              reverse
-              pauseOnHover
-              repeat={3}
-              className="[--duration:34s] [--gap:1.5rem] py-1"
-            >
-              {ROW2_PARTNERS.map((partner) => (
-                <VerticalPartnerCard
-                  key={partner.id}
-                  partner={partner}
-                  onSelect={(p) => setSelectedPartner(p)}
-                />
-              ))}
-            </Marquee>
-
-            {/* Side Fade Vignettes */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-20 sm:w-32 bg-gradient-to-r from-[#0C0C0C] via-[#0C0C0C]/80 to-transparent z-10" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-20 sm:w-32 bg-gradient-to-l from-[#0C0C0C] via-[#0C0C0C]/80 to-transparent z-10" />
-          </div>
+      {/* Single Continuous Marquee Row of All Partners */}
+      <div className="relative w-full overflow-hidden space-y-6 pt-2">
+        {/* Subheader info bar */}
+        <div className="flex items-center justify-between px-[5%] max-w-7xl mx-auto mb-1">
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#9A9A9A] flex items-center gap-2">
+            <span className="size-2 rounded-full bg-[#E8C896] animate-pulse" />
+            Strategic Network ({ALL_PARTNERS.length} Partners)
+          </span>
+          <span className="text-[0.68rem] font-mono text-[#9A9A9A]/60 uppercase tracking-wider hidden sm:inline-block">
+            Hover card to pause stream • Click for details
+          </span>
         </div>
-      ) : (
-        /* Filtered Grid View */
-        <div className="max-w-7xl mx-auto px-[5%]">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 justify-items-center">
-            {filteredPartners.map((partner) => (
+
+        {/* Single Row: Flows smoothly with all partners */}
+        <div className="relative w-full overflow-hidden">
+          <Marquee
+            pauseOnHover
+            repeat={3}
+            className="[--duration:35s] [--gap:1.5rem] py-1"
+          >
+            {ALL_PARTNERS.map((partner) => (
               <VerticalPartnerCard
                 key={partner.id}
                 partner={partner}
                 onSelect={(p) => setSelectedPartner(p)}
               />
             ))}
-          </div>
+          </Marquee>
+
+          {/* Side Fade Vignettes */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-20 sm:w-32 bg-gradient-to-r from-[#0C0C0C] via-[#0C0C0C]/80 to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-20 sm:w-32 bg-gradient-to-l from-[#0C0C0C] via-[#0C0C0C]/80 to-transparent z-10" />
         </div>
-      )}
+
+        {/* View All / Hide Grid Button Right Below the Row */}
+        <div className="flex justify-center pt-6">
+          <ShinyButton
+            onClick={() => setIsGridOpen((prev) => !prev)}
+          >
+            <span>{isGridOpen ? 'Collapse Partner Grid' : 'View All Partners'}</span>
+            <ArrowUpRight className={`size-4 inline-block ml-1 transition-transform duration-300 ${isGridOpen ? 'rotate-180' : ''}`} />
+          </ShinyButton>
+        </div>
+
+        {/* Inline Grid Expansion (within the section itself, not a separate modal) */}
+        <AnimatePresence>
+          {isGridOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+              className="overflow-hidden pt-8 border-t border-white/10 mt-8"
+            >
+              <div className="max-w-7xl mx-auto px-[5%] space-y-6">
+                <div className="text-center">
+                  <h3 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
+                    All Strategic Partners
+                  </h3>
+                  <p className="text-xs text-[#9A9A9A] font-mono mt-1">
+                    Exposition 2025 • Complete Partner Roster ({ALL_PARTNERS.length} Partners)
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 justify-items-center pt-2">
+                  {ALL_PARTNERS.map((partner) => (
+                    <VerticalPartnerCard
+                      key={`inline-${partner.id}`}
+                      partner={partner}
+                      onSelect={(p) => setSelectedPartner(p)}
+                    />
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
       {/* ================= PARTNER DETAILS MODAL ================= */}
       <AnimatePresence>

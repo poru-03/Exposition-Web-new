@@ -33,7 +33,7 @@ export const PROCESS_PHASES: PhaseItem[] = [
     subtitle: "Industry Voices & Insights",
     description:
       "A curated podcast series featuring industry leaders, entrepreneurs and academics sharing the insights, experiences, and perspectives that define modern professional thinking.",
-    image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=800&auto=format&fit=crop",
+    image: "/podcast-logo-v3.png",
     icon: Radio,
     deliverables: ["Industry Voices", "Expert Insights", "Real Stories"],
   },
