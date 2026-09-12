@@ -478,35 +478,31 @@ export default function InterviewHighlightsSection() {
                 <div
                   key={person.id}
                   onClick={() => setActiveIndex(idx)}
-                  className={`group shrink-0 relative w-[130px] sm:w-[150px] flex flex-col cursor-pointer transition-all duration-300 ${
-                    isActive ? 'scale-105' : 'hover:scale-[1.03] opacity-75 hover:opacity-100'
-                  }`}
+                  className={`group shrink-0 relative w-[130px] sm:w-[150px] flex flex-col cursor-pointer transition-all duration-300 ${isActive ? 'scale-105' : 'hover:scale-[1.03] opacity-75 hover:opacity-100'
+                    }`}
                 >
                   <div
-                    className={`relative w-full aspect-[3/4] rounded-xl overflow-hidden border-2 transition-all duration-300 bg-[#0a0908] ${
-                      isActive
+                    className={`relative w-full aspect-[3/4] rounded-xl overflow-hidden border-2 transition-all duration-300 bg-[#0a0908] ${isActive
                         ? 'border-[#c9a25f] ring-4 ring-[#c9a25f]/30 shadow-[0_0_20px_rgba(201,162,95,0.4)]'
                         : 'border-white/10 group-hover:border-white/30'
-                    }`}
+                      }`}
                   >
                     <SpeakerImage
                       src={person.image}
                       alt={person.name}
                       name={person.name}
-                      className={`w-full h-full object-cover object-top transition-all duration-300 ${
-                        isActive
+                      className={`w-full h-full object-cover object-top transition-all duration-300 ${isActive
                           ? 'filter grayscale-0 contrast-110'
                           : 'filter grayscale contrast-125 group-hover:grayscale-0'
-                      }`}
+                        }`}
                     />
 
                     {/* BADGE: "PANELIST" or "ACTIVE" */}
                     <div
-                      className={`absolute top-2 left-2 text-[0.6rem] font-mono uppercase font-bold tracking-wider px-2 py-0.5 rounded shadow-lg transition-colors ${
-                        isActive
+                      className={`absolute top-2 left-2 text-[0.6rem] font-mono uppercase font-bold tracking-wider px-2 py-0.5 rounded shadow-lg transition-colors ${isActive
                           ? 'bg-[#c9a25f] text-black border border-[#c9a25f]'
                           : 'bg-black/80 text-white/90 border border-white/20'
-                      }`}
+                        }`}
                     >
                       {isActive ? 'ACTIVE' : 'PANELIST'}
                     </div>
@@ -518,9 +514,8 @@ export default function InterviewHighlightsSection() {
 
                   <div className="mt-2.5 flex flex-col px-0.5">
                     <h5
-                      className={`text-xs font-bold uppercase truncate transition-colors ${
-                        isActive ? 'text-white' : 'text-white/70 group-hover:text-white'
-                      }`}
+                      className={`text-xs font-bold uppercase truncate transition-colors ${isActive ? 'text-white' : 'text-white/70 group-hover:text-white'
+                        }`}
                     >
                       {person.name}
                     </h5>
