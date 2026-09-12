@@ -95,7 +95,7 @@ export const ROW1_SPEAKERS: KeynoteSpeaker[] = [
     company: 'Creative Software',
     issue: 'Issue 15',
     issueLabel: 'Issue 15',
-    image: '/speakers/sushena-ranatunga.png',
+    image: '/speakers/sushena-ranathunga.png',
     category: 'Tech & AI',
     tags: ['Software Engineering', 'Innovation Strategy'],
     quote: 'Architecting resilient enterprise software solutions and scaling world-class engineering teams across borders.',

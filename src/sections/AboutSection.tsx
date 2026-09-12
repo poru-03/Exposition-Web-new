@@ -46,7 +46,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#0C0C0C] px-[5%] py-14 sm:py-20 md:py-24"
+      className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-transparent px-[5%] py-14 sm:py-20 md:py-24"
     >
       <div className="relative z-10 flex flex-col items-center gap-12 sm:gap-16 md:gap-20 max-w-4xl mx-auto">
         <div className="flex flex-col items-center gap-8 sm:gap-12 md:gap-14">
@@ -54,7 +54,7 @@ export default function AboutSection() {
             as="h2"
             delay={0}
             y={40}
-            className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
+            className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight text-white drop-shadow-[0_4px_25px_rgba(201,162,95,0.25)]"
             style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}
           >
             What is Exposition?

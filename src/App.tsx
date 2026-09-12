@@ -117,8 +117,12 @@ export default function App() {
 
         {/* Every section below Hero has a solid opaque background */}
         <div className="relative z-20 w-full bg-[#0C0C0C]">
-          <AboutSection />
-          <TimelineSection />
+          {/* Shared Container for About & Timeline */}
+          <div className="relative w-full">
+            <AboutSection />
+            <TimelineSection />
+          </div>
+
           <TechEventHubSection />
           <YouTubeChannelSection />
           <KeynoteSpeakersSection />
