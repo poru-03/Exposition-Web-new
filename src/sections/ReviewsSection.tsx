@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
@@ -16,6 +16,85 @@ import {
 } from 'lucide-react';
 
 export const FEATURED_REVIEWS = [
+  {
+    id: 'interview-1',
+    name: 'Dhanika Perera',
+    title: 'Founder & CEO, Bhasha / Helakuru',
+    company: 'Bhasha / Helakuru',
+    quote:
+      'Building native platforms that serve millions requires deep cultural empathy combined with relentless software architecture discipline.',
+    image: '/resources/speakers/dhanika perera.png',
+    socials: {
+      github: 'https://github.com',
+      twitter: 'https://twitter.com',
+      linkedin: 'https://linkedin.com',
+    },
+  },
+  {
+    id: 'interview-2',
+    name: 'Dr. Harsha Subasinghe',
+    title: 'Founder & CEO, CodeGen & Vega Innovations',
+    company: 'CodeGen International & Vega Innovations',
+    quote:
+      'To build world-class electric supercars and autonomous AI algorithms from South Asia, you must foster fearless engineering curiosity without borders.',
+    image: '/resources/speakers/harsha.png',
+    socials: {
+      github: 'https://github.com',
+      linkedin: 'https://linkedin.com',
+    },
+  },
+  {
+    id: 'interview-3',
+    name: 'Deepal Sooriyaarachchi',
+    title: 'Management Consultant & Author',
+    company: 'Former Managing Director, AVIVA NDB',
+    quote:
+      'True corporate leadership is not merely steering financial metrics; it is the mindfulness to unlock the latent creative spirit of your people.',
+    image: '/resources/speakers/deepal sooriyarachchi.png',
+    socials: {
+      twitter: 'https://twitter.com',
+      linkedin: 'https://linkedin.com',
+    },
+  },
+  {
+    id: 'interview-4',
+    name: 'Dian Gomes',
+    title: 'Global Business Leader & Motivational Icon',
+    company: 'Former Managing Director, MAS Holdings',
+    quote:
+      'Winning in the global market demands an uncompromising championship mindset, relentless discipline, and championing homegrown talent.',
+    image: '/resources/speakers/dian gomez.png',
+    socials: {
+      twitter: 'https://twitter.com',
+      linkedin: 'https://linkedin.com',
+    },
+  },
+  {
+    id: 'interview-5',
+    name: 'Peter De Almeida',
+    title: 'Managing Director / CEO, N-able',
+    company: 'N-able',
+    quote:
+      'Digital transformation begins with unlearning obsolete habits and empowering engineers to challenge architectural status quos fearlessly.',
+    image: '/resources/speakers/peterdealmeida.png',
+    socials: {
+      github: 'https://github.com',
+      linkedin: 'https://linkedin.com',
+    },
+  },
+  {
+    id: 'interview-6',
+    name: 'Upendra Pieris',
+    title: 'Director & Co-Founder, Creative Software',
+    company: 'Creative Software',
+    quote:
+      'Scaling international engineering teams across continents hinges on trust, radical engineering transparency, and continuous technological upskilling.',
+    image: '/resources/speakers/upendra pieris.png',
+    socials: {
+      github: 'https://github.com',
+      linkedin: 'https://linkedin.com',
+    },
+  },
   {
     id: 'feat-1',
     name: 'Michael Chen',
@@ -42,19 +121,6 @@ export const FEATURED_REVIEWS = [
     image: '/resources/speakers/asela.jpeg',
     socials: {
       github: 'https://github.com',
-      twitter: 'https://twitter.com',
-      linkedin: 'https://linkedin.com',
-    },
-  },
-  {
-    id: 'feat-3',
-    name: 'Mr. Deepal Sooriyaarachchi',
-    title: 'Management Consultant & Author',
-    company: 'Former Managing Director, AVIVA NDB',
-    quote:
-      'Being part of Exposition was truly a privilege. The meticulous planning and flawless execution left a profound professional impression on all attendees involved across every technical track.',
-    image: '/resources/speakers/deepal sooriyarachchi.png',
-    socials: {
       twitter: 'https://twitter.com',
       linkedin: 'https://linkedin.com',
     },
@@ -205,6 +271,15 @@ export default function ReviewsSection() {
 
   const activeFeatured = FEATURED_REVIEWS[featuredIndex];
 
+  // Automatic 5-second carousel cycle through all reviews
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setFeaturedIndex((prev) => (prev + 1) % FEATURED_REVIEWS.length);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   const handlePrev = () => {
     setFeaturedIndex((prev) => (prev - 1 + FEATURED_REVIEWS.length) % FEATURED_REVIEWS.length);
   };
@@ -316,7 +391,7 @@ export default function ReviewsSection() {
                 />
               </div>
 
-              {/* Right Side: Content Card with Increased Width */}
+              {/* Right Side: Content Card with Large Quote Styling */}
               <div className="w-full sm:w-[420px] md:w-[500px] lg:w-[560px] -mt-10 md:mt-0 md:-ml-16 bg-[#141414]/95 border border-white/15 p-5 sm:p-6 md:p-8 rounded-[24px] shadow-[0_25px_60px_rgba(0,0,0,0.95)] backdrop-blur-2xl z-10 flex flex-col justify-between">
                 <div className="space-y-2">
                   <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight leading-tight">
@@ -325,9 +400,19 @@ export default function ReviewsSection() {
                   <p className="text-xs font-medium text-[#9A9A9A]">
                     {activeFeatured.title}
                   </p>
-                  <p className="mt-3 text-xs sm:text-sm text-white/85 font-light leading-relaxed">
-                    {activeFeatured.quote}
-                  </p>
+
+                  {/* Quote Message styled with Oversized Metallic Gold Quotation Marks */}
+                  <div className="relative py-2 my-2">
+                    <span className="absolute -top-3 -left-2 text-[#c9a25f]/30 font-serif text-5xl sm:text-6xl font-bold leading-none select-none pointer-events-none">
+                      “
+                    </span>
+                    <blockquote className="relative z-10 text-xs sm:text-sm font-extrabold italic text-[#f5ebd9] leading-relaxed px-3">
+                      {activeFeatured.quote}
+                    </blockquote>
+                    <span className="absolute -bottom-4 -right-1 text-[#c9a25f]/30 font-serif text-5xl sm:text-6xl font-bold leading-none select-none pointer-events-none">
+                      ”
+                    </span>
+                  </div>
                 </div>
 
                 {/* Circular Social Icons using SocialTooltip */}
