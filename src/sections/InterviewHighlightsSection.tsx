@@ -310,7 +310,15 @@ export default function InterviewHighlightsSection() {
     if (filmstripRef.current) {
       const activeElement = filmstripRef.current.children[activeIndex] as HTMLElement;
       if (activeElement) {
-        activeElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        // Use scrollLeft on container instead of scrollIntoView to prevent page auto-scrolling on load
+        const container = filmstripRef.current;
+        const elementOffsetLeft = activeElement.offsetLeft;
+        const elementWidth = activeElement.offsetWidth;
+        const containerWidth = container.offsetWidth;
+        container.scrollTo({
+          left: elementOffsetLeft - containerWidth / 2 + elementWidth / 2,
+          behavior: 'smooth',
+        });
       }
     }
   }, [activeIndex]);

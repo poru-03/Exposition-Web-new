@@ -75,6 +75,11 @@ export default function App() {
 
     const rafId = requestAnimationFrame(raf);
 
+    // Ensure site starts at the top (#hero) on fresh page loads
+    if (!window.location.hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+    }
+
     return () => {
       cancelAnimationFrame(rafId);
       lenis.destroy();
