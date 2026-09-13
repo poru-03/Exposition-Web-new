@@ -100,12 +100,25 @@ export default function Navbar() {
       className="fixed top-0 left-0 right-0 z-[100] pointer-events-none hidden md:flex justify-center px-4 sm:px-8 pt-4 sm:pt-5"
     >
       <nav
-        className={`transition-all duration-500 ease-out flex items-center justify-between w-full max-w-5xl rounded-full bg-white/[0.03] backdrop-blur-xl border border-white/15 px-6 sm:px-8 py-2.5 sm:py-3 shadow-[0_10px_35px_rgba(0,0,0,0.6)] ${
+        className={`transition-all duration-500 ease-out flex items-center justify-between w-full max-w-7xl rounded-full bg-[#121212]/80 backdrop-blur-2xl border border-white/15 px-5 sm:px-7 py-2.5 shadow-[0_15px_40px_rgba(0,0,0,0.85)] ${
           isVisible ? 'pointer-events-auto' : 'pointer-events-none'
         }`}
       >
-        {/* Nav Links evenly spaced across the floating capsule */}
-        <div className="flex items-center justify-between w-full overflow-x-auto no-scrollbar gap-2 sm:gap-4">
+        {/* Left Side: Exposition SVG Brand Logo */}
+        <a
+          href="#hero"
+          onClick={(e) => handleLinkClick(e, '#hero')}
+          className="flex items-center pl-1 pr-4 py-0.5 rounded-full group transition-transform duration-300 hover:scale-105 shrink-0 cursor-pointer"
+        >
+          <img
+            src="/resources/Expo_logo.svg"
+            alt="Exposition Logo"
+            className="h-7 sm:h-8 md:h-9 w-auto object-contain filter drop-shadow-[0_0_12px_rgba(201,162,95,0.3)] group-hover:drop-shadow-[0_0_18px_rgba(201,162,95,0.6)] transition-all"
+          />
+        </a>
+
+        {/* Center & Right: Navigation Links with Larger Font Size */}
+        <div className="flex items-center gap-1.5 sm:gap-2.5 overflow-x-auto no-scrollbar py-0.5">
           {NAV_LINKS.map((link) => {
             const isActive = activeSection === link.href;
 
@@ -114,10 +127,10 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className={`relative px-3.5 sm:px-4.5 py-1.5 text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 whitespace-nowrap rounded-full ${
+                className={`relative px-3.5 sm:px-4.5 py-1.5 text-xs sm:text-sm font-bold tracking-wide transition-all duration-300 whitespace-nowrap rounded-full ${
                   isActive
-                    ? 'text-neutral-950 font-bold bg-gradient-to-r from-[#F5E6C8] via-[#E8C896] to-[#D4AF37] shadow-[0_0_22px_rgba(212,175,55,0.55)] scale-105'
-                    : 'text-zinc-300 hover:text-white hover:bg-white/[0.08]'
+                    ? 'text-black font-black bg-gradient-to-r from-[#F5E6C8] via-[#E8C896] to-[#c9a25f] shadow-[0_0_22px_rgba(201,162,95,0.65)] scale-105'
+                    : 'text-zinc-200 hover:text-white hover:bg-white/10'
                 }`}
               >
                 <span>{link.name}</span>

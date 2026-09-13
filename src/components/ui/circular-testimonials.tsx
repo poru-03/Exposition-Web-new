@@ -215,10 +215,10 @@ export const CircularTestimonials = ({
                 {activeTestimonial.name}
               </h3>
 
-              {/* Gold Issue Badge separated from Position/Company */}
+              {/* Gold Issue Label (Plain Text) separated from Position/Company */}
               <div className="flex flex-wrap items-center gap-2.5 pt-0.5">
                 {activeTestimonial.issue && (
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase text-[#E8C896] bg-[#E8C896]/15 border border-[#E8C896]/35 shadow-[0_0_12px_rgba(232,200,150,0.15)]">
+                  <span className="text-xs font-mono font-bold tracking-wider uppercase text-[#E8C896]">
                     {activeTestimonial.issue}
                   </span>
                 )}

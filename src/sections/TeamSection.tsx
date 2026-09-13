@@ -2,12 +2,10 @@ import { useState, useEffect, useCallback } from 'react';
 import {
   ChevronLeft,
   ChevronRight,
-  Mail,
 } from 'lucide-react';
-import { FaLinkedinIn, FaWhatsapp } from 'react-icons/fa6';
 import ScrollReveal from '../components/ScrollReveal';
 import { Button } from '@/components/ui/button';
-import { SocialTooltip } from '@/components/ui/social-media';
+import { TeamMemberCard } from '@/components/ui/team-member-card';
 
 export type TeamMember = {
   id: string;
@@ -258,7 +256,7 @@ export default function TeamSection() {
                 <div
                   key={member.id}
                   onClick={() => setCurrentIndex(index)}
-                  className="group absolute w-[230px] sm:w-[260px] md:w-[290px] h-[340px] sm:h-[380px] md:h-[410px] transition-all duration-500 ease-out cursor-pointer rounded-2xl overflow-hidden border border-white/15 bg-[#141414] shadow-[0_20px_60px_rgba(0,0,0,0.9)] flex flex-col justify-end"
+                  className="absolute transition-all duration-500 ease-out cursor-pointer flex items-center justify-center"
                   style={{
                     transform: `
                       translateX(${pos * 48}%) 
@@ -272,61 +270,18 @@ export default function TeamSection() {
                     visibility: Math.abs(pos) > 2 ? 'hidden' : 'visible',
                   }}
                 >
-                  {/* Member Photo with smooth hover zoom contained in overflow-hidden */}
-                  <div className="absolute inset-0 w-full h-full overflow-hidden bg-[#18181b]">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-110"
-                    />
-                    {/* Bottom-half gradient overlay for text readability */}
-                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#101010] via-[#101010]/70 to-transparent pointer-events-none" />
-                  </div>
-
-                  {/* Member Details Overlay at the Bottom */}
-                  <div className="relative z-10 p-4 sm:p-5 flex flex-col justify-end w-full pointer-events-none">
-                    {/* Name & Role — Shifts upward on hover */}
-                    <div className="transition-transform duration-300 ease-out group-hover:-translate-y-2">
-                      <h3 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight text-white line-clamp-1">
-                        {member.name}
-                      </h3>
-                      <p className="text-[0.72rem] sm:text-xs font-semibold uppercase tracking-wider text-[#E8C896] line-clamp-1 mt-0.5">
-                        {member.position}
-                      </p>
-                    </div>
-
-                    {/* Social & Contact Links — Fades in & slides up from bottom on hover ONLY */}
-                    <div className="pt-2.5 mt-2 border-t border-white/10 flex items-center justify-center opacity-0 translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 ease-out">
-                      <SocialTooltip
-                        items={[
-                          {
-                            href: `mailto:${member.email}`,
-                            ariaLabel: 'Email',
-                            tooltip: 'Email',
-                            color: '#E8C896',
-                            icon: <Mail className="size-3.5" />,
-                          },
-                          {
-                            href: member.linkedin,
-                            ariaLabel: 'LinkedIn',
-                            tooltip: 'LinkedIn',
-                            color: '#0077b5',
-                            icon: <FaLinkedinIn className="size-3.5" />,
-                          },
-                          {
-                            href: member.whatsapp,
-                            ariaLabel: 'WhatsApp',
-                            tooltip: 'WhatsApp',
-                            color: '#25d366',
-                            icon: <FaWhatsapp className="size-3.5" />,
-                          },
-                        ]}
-                        containerSizeClass="w-8 h-8"
-                        iconSizeClass="size-3.5"
-                        className="gap-2"
-                      />
-                    </div>
-                  </div>
+                  <TeamMemberCard
+                    name={member.name}
+                    position={member.position}
+                    image={member.image}
+                    isActive={isCenter}
+                    socials={{
+                      email: member.email,
+                      linkedin: member.linkedin,
+                      whatsapp: member.whatsapp,
+                    }}
+                    className="w-[230px] sm:w-[260px] md:w-[290px] h-[340px] sm:h-[380px] md:h-[410px]"
+                  />
                 </div>
               );
             })}
