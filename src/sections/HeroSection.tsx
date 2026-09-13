@@ -116,7 +116,7 @@ export default function HeroSection() {
           >
             <div className="relative inline-block overflow-hidden rounded-sm">
               <img
-                src="/resources/ExpositionLogo_original.png"
+                src="/resources/Expo_logo.svg"
                 alt="Exposition"
                 className="h-[95px] sm:h-[120px] md:h-[140px] lg:h-[160px] xl:h-[175px] w-auto max-w-full object-contain object-left select-none pointer-events-none drop-shadow-[0_8px_35px_rgba(212,175,55,0.3)]"
               />
