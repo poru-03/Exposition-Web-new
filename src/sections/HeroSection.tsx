@@ -120,18 +120,32 @@ export default function HeroSection() {
                 alt="Exposition"
                 className="h-[95px] sm:h-[120px] md:h-[140px] lg:h-[160px] xl:h-[175px] w-auto max-w-full object-contain object-left select-none pointer-events-none drop-shadow-[0_8px_35px_rgba(212,175,55,0.3)]"
               />
-              {/* Luxury Diagonal Light Reflection Sweep */}
-              <motion.div
-                initial={{ x: '-120%' }}
-                animate={{ x: '240%' }}
-                transition={{
-                  repeat: Infinity,
-                  repeatDelay: 3.5,
-                  duration: 1.6,
-                  ease: 'easeInOut',
+              {/* Luxury Diagonal Light Reflection Sweep (Clipped strictly to logo alpha mask) */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  WebkitMaskImage: 'url(/resources/Expo_logo.svg)',
+                  maskImage: 'url(/resources/Expo_logo.svg)',
+                  WebkitMaskSize: 'contain',
+                  maskSize: 'contain',
+                  WebkitMaskPosition: 'left center',
+                  maskPosition: 'left center',
+                  WebkitMaskRepeat: 'no-repeat',
+                  maskRepeat: 'no-repeat',
                 }}
-                className="absolute inset-0 w-1/3 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-25deg] pointer-events-none mix-blend-overlay"
-              />
+              >
+                <motion.div
+                  initial={{ x: '-120%' }}
+                  animate={{ x: '240%' }}
+                  transition={{
+                    repeat: Infinity,
+                    repeatDelay: 3.5,
+                    duration: 1.6,
+                    ease: 'easeInOut',
+                  }}
+                  className="w-1/3 h-full bg-gradient-to-r from-transparent via-white/70 to-transparent skew-x-[-25deg]"
+                />
+              </div>
             </div>
           </motion.div>
 
