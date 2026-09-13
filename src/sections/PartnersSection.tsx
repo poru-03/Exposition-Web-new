@@ -160,6 +160,19 @@ export const ROW2_PARTNERS: Partner[] = [
 
 export const ALL_PARTNERS = [...ROW1_PARTNERS, ...ROW2_PARTNERS];
 
+function getTierTextColor(tier: PartnerTier) {
+  switch (tier) {
+    case 'Platinum':
+      return 'text-[#38bdf8] drop-shadow-[0_0_10px_rgba(56,189,248,0.3)]'; // Sky Blue
+    case 'Gold':
+      return 'text-[#E8C896] drop-shadow-[0_0_10px_rgba(232,200,150,0.3)]'; // Gold
+    case 'Silver':
+      return 'text-[#D8D8D8] drop-shadow-[0_0_10px_rgba(216,216,216,0.3)]'; // Silver/Platinum White
+    case 'Bronze':
+      return 'text-[#cd7f32] drop-shadow-[0_0_10px_rgba(205,127,50,0.3)]'; // Bronze
+  }
+}
+
 function getTierBadgeStyles(tier: PartnerTier) {
   switch (tier) {
     case 'Platinum':
@@ -199,23 +212,16 @@ export function VerticalPartnerCard({
   return (
     <div
       onClick={() => onSelect?.(partner)}
-      className="group relative w-[175px] sm:w-[200px] md:w-[220px] h-[85px] sm:h-[95px] rounded-xl overflow-hidden bg-white border border-slate-150 shadow-[0_4px_15px_rgba(0,0,0,0.15)] p-4 flex items-center justify-center transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.25)] hover:border-indigo-400/50 shrink-0 select-none cursor-pointer will-change-transform"
-      style={{ contain: 'paint layout', transform: 'translateZ(0)' }}
+      className="group relative w-[200px] sm:w-[220px] md:w-[240px] rounded-2xl overflow-hidden bg-[#121212] border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.8)] p-5 flex flex-col items-center justify-between transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-white/20 hover:shadow-[0_15px_35px_rgba(0,0,0,0.95)] shrink-0 select-none cursor-pointer will-change-transform text-center gap-4"
     >
-      {/* Top Subtle Tier Accent Line */}
-      <div 
-        className="absolute top-0 inset-x-0 h-1 opacity-80 group-hover:h-1.5 transition-all duration-300"
-        style={{ backgroundColor: partner.accentColor }}
-      />
-
-      {/* Center Brand Logo / Name Display on Crisp White Card */}
-      <div className="relative w-full h-full flex items-center justify-center p-1">
+      {/* Top Media / Logo Display Container */}
+      <div className="relative w-full h-28 sm:h-32 flex items-center justify-center p-2 rounded-xl bg-[#181818] border border-white/5 overflow-hidden">
         {!imageLoaded && !imageError && (
-          <div className="absolute inset-0 rounded-lg bg-slate-100 animate-pulse" />
+          <div className="absolute inset-0 rounded-xl bg-white/5 animate-pulse" />
         )}
 
         {imageError ? (
-          <span className="text-sm font-black text-slate-800 uppercase tracking-wide truncate px-2">
+          <span className="text-xs font-black text-white uppercase tracking-wider truncate px-2">
             {partner.name}
           </span>
         ) : (
@@ -226,16 +232,33 @@ export function VerticalPartnerCard({
             decoding="async"
             onLoad={() => setImageLoaded(true)}
             onError={() => setImageError(true)}
-            className={`max-w-full max-h-full object-contain filter contrast-105 transition-all duration-300 group-hover:scale-105 ${
+            className={`max-w-full max-h-full object-contain filter brightness-110 contrast-105 transition-all duration-300 group-hover:scale-105 ${
               imageLoaded ? 'opacity-100' : 'opacity-0'
             }`}
           />
         )}
       </div>
 
-      {/* Subtle corner arrow hint on hover */}
-      <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-        <ArrowUpRight className="size-3.5 text-slate-400" />
+      {/* Center Text Details: Title & Subtitle */}
+      <div className="flex flex-col items-center gap-1 w-full px-1">
+        <h4 className="text-sm sm:text-base font-extrabold text-white tracking-tight leading-snug truncate w-full">
+          {partner.name}
+        </h4>
+        <p className="text-[0.72rem] sm:text-xs font-medium text-[#9A9A9A] tracking-normal truncate w-full">
+          {partner.category}
+        </p>
+      </div>
+
+      {/* Bottom Plain Text Label with Tier-Based Text Color */}
+      <div className="mt-0.5 w-full flex justify-center">
+        <span className={`text-[0.7rem] sm:text-xs font-bold tracking-wider uppercase ${getTierTextColor(partner.tier)}`}>
+          {partner.tier} Partner
+        </span>
+      </div>
+
+      {/* Corner arrow hint on hover */}
+      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <ArrowUpRight className="size-4 text-white/50" />
       </div>
     </div>
   );

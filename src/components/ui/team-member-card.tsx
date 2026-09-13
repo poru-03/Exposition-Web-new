@@ -1,145 +1,176 @@
-'use client'
+import * as React from "react";
+import { Mail, Linkedin } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-/**
- * @author: @emerald-ui
- * @description: Editorial-style team member card with overlapping layers and motion
- * @version: 2.0.0
- * @date: 2026-02-19
- * @license: MIT
- * @website: https://emerald-ui.com
- *
- */
-import { ArrowRight } from 'lucide-react'
-import { motion } from 'framer-motion'
-import { clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
-function cn(...inputs: any[]) { return twMerge(clsx(inputs)) }
-
-interface TeamMemberCardProps {
-  position?: 'left' | 'right'
-  jobPosition?: string
-  firstName?: string
-  lastName?: string
-  imageUrl?: string
-  description?: string
-  className?: string
-  onCtaClick?: () => void
+// Custom SVG component for WhatsApp (matching lucide icon size & style)
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+      <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" />
+    </svg>
+  );
 }
 
-/**
- * Editorial-style team member card with overlapping portrait, large display
- * typography, circular CTA toggle, and staggered entrance animations.
- */
-export default function TeamMemberCard({
-  position = 'left',
-  jobPosition = 'Backend Engineer',
-  firstName = 'Jennie',
-  lastName = 'Garcia',
-  imageUrl = 'https://images.unsplash.com/photo-1526510747491-58f928ec870f?fm=jpg&q=60',
-  description = 'Jennie is a skilled developer with expertise in modern web technologies and a passion for creating seamless user experiences.',
-  className,
-  onCtaClick,
-}: TeamMemberCardProps) {
-  const fullName = `${firstName} ${lastName}`
-  const isPositionRight = position === 'right'
+export interface TeamMemberSocials {
+  mail?: string;
+  email?: string;
+  linkedin?: string;
+  whatsapp?: string;
+  twitter?: string;
+  instagram?: string;
+}
 
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={cn('relative my-6 flex flex-col justify-center w-full', className)}
-    >
-      {/* jobPosition label — editorial uppercase tracking */}
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
+export interface TeamMemberCardProps extends React.HTMLAttributes<HTMLDivElement> {
+  imageUrl?: string;
+  image?: string;
+  name: string;
+  position: string;
+  socials: TeamMemberSocials;
+  themeColor?: string; // HSL value string, default: "43 74% 66%" (warm gold)
+  isActive?: boolean; // Controls whether card photo is full color (e.g. centered in carousel)
+}
+
+const TeamMemberCard = React.forwardRef<HTMLDivElement, TeamMemberCardProps>(
+  (
+    {
+      className,
+      name,
+      position,
+      imageUrl,
+      image,
+      socials,
+      themeColor = "43 74% 66%",
+      isActive = false,
+      ...props
+    },
+    ref
+  ) => {
+    const photoUrl = imageUrl || image || "";
+    const emailLink = socials.mail || socials.email;
+
+    return (
+      <div
+        ref={ref}
+        style={{
+          // @ts-ignore - CSS custom property for themed HSL color
+          "--gold-color": themeColor,
+        } as React.CSSProperties}
+        className={cn(
+          "group relative w-full aspect-[3/4] max-w-[320px] rounded-2xl overflow-hidden shadow-xl select-none cursor-pointer border border-white/10 bg-[#121212] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(212,175,55,0.25)]",
+          className
+        )}
+        {...props}
       >
-        <p
+        {/* 1. Full-Bleed Photo (Grayscale -> Color when Active or Hovered + Scale on Hover) */}
+        <div
           className={cn(
-            'mb-4 text-xs font-medium tracking-[0.3em] text-zinc-400 uppercase dark:text-zinc-500',
-            isPositionRight && 'text-right'
+            "absolute inset-0 w-full h-full bg-cover bg-top filter transition-all duration-700 ease-in-out group-hover:scale-110",
+            isActive
+              ? "grayscale-0 contrast-100"
+              : "grayscale contrast-110 group-hover:grayscale-0 group-hover:contrast-100"
           )}
+          style={{ backgroundImage: `url("${encodeURI(photoUrl)}")` }}
         >
-          {jobPosition}
-        </p>
-      </motion.div>
-
-      <div className='flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-0'>
-        {/* Portrait image with reveal animation */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 30 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className={cn(
-            'relative h-72 sm:h-96 w-full sm:w-72 shrink-0 overflow-hidden rounded-2xl border border-white/10 shadow-2xl',
-            isPositionRight && 'sm:order-1'
-          )}
-        >
-          {/* Subtle grain overlay for texture */}
-          <div className='pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-transparent to-transparent' />
           <img
-            src={imageUrl}
-            alt={fullName}
-            className='h-full w-full object-cover object-top duration-500 ease-[0.22,1,0.36,1] hover:scale-105'
+            src={photoUrl}
+            alt={name}
+            className="w-full h-full object-cover object-top opacity-0"
           />
-        </motion.div>
+        </div>
 
-        {/* Info block — overlaps image via negative margin on sm screens */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className={cn(
-            'relative sm:-left-8 z-2 flex w-full sm:w-[calc(100%-250px)] flex-col gap-6 sm:gap-10 p-4 sm:p-6 bg-[#121215]/90 border border-white/15 rounded-2xl backdrop-blur-xl shadow-2xl',
-            isPositionRight && 'sm:left-8 sm:items-end'
-          )}
-        >
-          {/* Display name — large editorial type */}
-          <div>
-            <p className='text-3xl sm:text-4xl leading-[1.1] font-extralight tracking-tight text-white'>
-              {firstName}
-              <br />
-              <span className='font-normal text-[#E8C896]'>{lastName}</span>
+        {/* 2. Default State Dark Gradient Overlay at Bottom (~25% height) */}
+        <div
+          className="absolute inset-0 pointer-events-none transition-opacity duration-300 ease-in-out group-hover:opacity-0"
+          style={{
+            background: `linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.5) 25%, transparent 50%)`,
+          }}
+        />
+
+        {/* 3. Semi-Transparent Golden Gradient Overlay (Increased height to ~58% reveal) */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-[58%] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out pointer-events-none group-hover:pointer-events-auto"
+          style={{
+            background: `linear-gradient(to top, hsl(var(--gold-color) / 0.88), hsl(var(--gold-color) / 0.55) 45%, transparent 100%)`,
+          }}
+        />
+
+        {/* 4. Name, Position & Staggered Social Icons Container */}
+        <div className="relative z-10 h-full p-6 flex flex-col justify-end items-center text-center pointer-events-none">
+          <div className="w-full flex flex-col items-center justify-center transition-transform duration-400 ease-out group-hover:-translate-y-2">
+            {/* Member Name */}
+            <h3 className="text-xl sm:text-2xl font-extrabold uppercase tracking-tight text-white group-hover:text-neutral-950 transition-colors duration-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] group-hover:drop-shadow-none line-clamp-1 w-full text-center">
+              {name}
+            </h3>
+
+            {/* Member Position */}
+            <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#E8C896] group-hover:text-neutral-900 transition-colors duration-300 mt-1 line-clamp-1 w-full text-center drop-shadow">
+              {position}
             </p>
-          </div>
 
-          {/* Details row — toggle + bio */}
-          <div className={cn('flex flex-col sm:flex-row gap-4 sm:gap-6 items-start sm:items-center', isPositionRight && 'sm:justify-end')}>
-            {/* Circular CTA with hover pulse */}
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={onCtaClick}
-              className={cn(
-                'group flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/20 transition-colors duration-300 hover:border-[#E8C896] hover:bg-[#B8894F]/20 bg-black/60 shadow-lg',
-                isPositionRight && 'sm:order-1'
+            {/* Social Icons Row (Black circular icon buttons, fade in + slide up staggered) */}
+            <div className="mt-4 flex items-center justify-center gap-2.5">
+              {/* Mail / Email Icon (Delay 100ms) */}
+              {emailLink && (
+                <a
+                  href={`mailto:${emailLink}`}
+                  aria-label="Email"
+                  className="size-8 rounded-full bg-neutral-950 text-white flex items-center justify-center shadow-md 
+                             opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0
+                             transition-all duration-300 ease-out delay-100
+                             hover:bg-black hover:scale-110 active:scale-95 pointer-events-none group-hover:pointer-events-auto"
+                >
+                  <Mail className="size-4 text-white" />
+                </a>
               )}
-            >
-              <ArrowRight
-                size={22}
-                className={cn(
-                  'text-[#E8C896] transition-all duration-300 group-hover:-rotate-45 group-hover:text-white',
-                  isPositionRight && 'rotate-180 group-hover:rotate-225'
-                )}
-              />
-            </motion.div>
 
-            {/* Bio copy — restrained body text */}
-            <div className='w-full sm:w-[75%]'>
-              <p
-                className={cn(
-                  'text-xs sm:text-sm leading-[1.7] text-zinc-300 font-light',
-                  isPositionRight && 'sm:text-right'
-                )}
-              >
-                {description}
-              </p>
+              {/* LinkedIn Icon (Delay 200ms) */}
+              {socials.linkedin && (
+                <a
+                  href={socials.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="size-8 rounded-full bg-neutral-950 text-white flex items-center justify-center shadow-md 
+                             opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0
+                             transition-all duration-300 ease-out delay-200
+                             hover:bg-black hover:scale-110 active:scale-95 pointer-events-none group-hover:pointer-events-auto"
+                >
+                  <Linkedin className="size-4 text-white" />
+                </a>
+              )}
+
+              {/* WhatsApp Icon (Delay 300ms) */}
+              {socials.whatsapp && (
+                <a
+                  href={socials.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="WhatsApp"
+                  className="size-8 rounded-full bg-neutral-950 text-white flex items-center justify-center shadow-md 
+                             opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0
+                             transition-all duration-300 ease-out delay-300
+                             hover:bg-black hover:scale-110 active:scale-95 pointer-events-none group-hover:pointer-events-auto"
+                >
+                  <WhatsAppIcon className="size-4 text-white" />
+                </a>
+              )}
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
-    </motion.div>
-  )
-}
+    );
+  }
+);
+TeamMemberCard.displayName = "TeamMemberCard";
+
+export { TeamMemberCard };

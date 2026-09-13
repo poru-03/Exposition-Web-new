@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Youtube, Clock, Sparkles, Bell } from 'lucide-react';
+import { ExternalLink, Youtube, Clock, Bell } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
+import { ShinyButton } from '../components/ui/shiny-button';
 
 export type YouTubeVideo = {
   id: string;
@@ -157,8 +158,8 @@ export default function YouTubeChannelSection() {
         <ScrollReveal delay={0.2} className="w-full max-w-4xl flex flex-col gap-4 mt-4">
           {/* Header Tag for Playlist */}
           <div className="flex items-center justify-between px-1">
-            <h4 className="font-mono text-xs font-black uppercase tracking-[0.2em] text-[#c9a25f] flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#c9a25f] animate-pulse" />
+            <h4 className="font-mono text-xs font-black uppercase tracking-[0.2em] text-white flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
               MORE FROM VOICES OF VISION
             </h4>
             <span className="text-[0.65rem] font-mono text-[#9A9A9A]">SELECT TO PLAY</span>
@@ -188,18 +189,10 @@ export default function YouTubeChannelSection() {
                       }`}
                     />
 
-                    {/* Playing indicator or duration overlay */}
-                    {isSelected ? (
-                      <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px] flex items-center justify-center">
-                        <span className="text-xs font-mono font-bold uppercase text-[#c9a25f] tracking-widest flex items-center gap-1.5">
-                          <Sparkles className="w-4 h-4 animate-spin" /> PLAYING NOW
-                        </span>
-                      </div>
-                    ) : (
-                      <div className="absolute bottom-1.5 right-1.5 bg-black/85 text-white text-[0.65rem] font-mono px-2 py-0.5 rounded-md border border-white/10">
-                        {video.duration}
-                      </div>
-                    )}
+                    {/* Duration Overlay */}
+                    <div className="absolute bottom-1.5 right-1.5 bg-black/85 text-white text-[0.65rem] font-mono px-2 py-0.5 rounded-md border border-white/10">
+                      {video.duration}
+                    </div>
                   </div>
 
                   {/* Video Title & Date */}
@@ -226,10 +219,12 @@ export default function YouTubeChannelSection() {
               href="https://www.youtube.com/@ExpositionMIT"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 py-3 px-8 rounded-full border border-[#c9a25f]/50 bg-gradient-to-r from-[#1c1915] via-[#241e17] to-[#1c1915] text-xs font-mono font-bold uppercase tracking-widest text-[#e8c896] hover:text-white hover:border-[#c9a25f] hover:shadow-[0_0_25px_rgba(201,162,95,0.3)] transition-all duration-300 cursor-pointer active:scale-95"
+              className="inline-block"
             >
-              <span>View All Videos on YouTube</span>
-              <ExternalLink className="w-4 h-4 text-[#c9a25f]" />
+              <ShinyButton className="font-poppins text-xs font-bold uppercase tracking-wider flex items-center gap-2.5">
+                <span>View All Videos on YouTube</span>
+                <ExternalLink className="w-4 h-4 text-current" />
+              </ShinyButton>
             </a>
           </div>
         </ScrollReveal>

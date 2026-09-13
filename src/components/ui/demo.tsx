@@ -112,25 +112,25 @@ export const DemoDark = () => {
     <div className="relative w-full py-10 bg-transparent">
       {/* Vertical Sticky Stack Container */}
       <div ref={timelineRef} className="relative mx-auto max-w-5xl px-4 sm:px-8 pb-32">
-        {/* Top Dot Marker */}
-        <div className="absolute left-8 sm:left-12 top-4 -translate-x-[4px] -translate-y-[4px] h-3 w-3 rounded-full bg-[#E8C896] shadow-[0_0_12px_rgba(232,200,150,0.8)] z-20" />
-
-        {/* Continuous Vertical Line Track */}
-        <div className="absolute left-8 sm:left-12 top-4 bottom-12 w-[2.5px] bg-white/15 rounded-full z-10" />
-
-        {/* Dynamic Glowing Progress Connector Line */}
-        {!shouldReduceMotion && (
-          <motion.div
-            className="absolute left-8 sm:left-12 top-4 w-[2.5px] bg-gradient-to-b from-[#B8894F] via-[#E8C896] to-white shadow-[0_0_18px_rgba(184,137,79,0.7)] rounded-full z-10 origin-top"
-            style={{ height: lineHeight }}
-          />
-        )}
-
-        {/* Bottom Dot Marker */}
-        <div className="absolute left-8 sm:left-12 bottom-12 -translate-x-[4px] translate-y-[4px] h-3 w-3 rounded-full bg-[#E8C896] shadow-[0_0_12px_rgba(232,200,150,0.8)] z-20" />
-
         {/* Stacked Cards adding downwards with top margin headers */}
-        <StaggerContainer staggerChildren={0.12} className="flex flex-col gap-12 sm:gap-16">
+        <StaggerContainer staggerChildren={0.12} className="flex flex-col gap-12 sm:gap-16 relative">
+          {/* Continuous Vertical Line Track centered directly behind the node dots */}
+          <div className="absolute left-2 sm:left-3 top-6 bottom-6 -translate-x-1/2 w-[2.5px] bg-white/20 rounded-full z-10">
+            {/* Top Gold Dot Marker (at exact start of line track) */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 h-3.5 w-3.5 rounded-full bg-[#E8C896] shadow-[0_0_12px_rgba(232,200,150,0.8)] z-20" />
+
+            {/* Dynamic Glowing Progress Connector Line */}
+            {!shouldReduceMotion && (
+              <motion.div
+                className="absolute top-0 left-0 w-full bg-gradient-to-b from-[#B8894F] via-[#E8C896] to-white shadow-[0_0_18px_rgba(184,137,79,0.7)] rounded-full z-10 origin-top"
+                style={{ height: lineHeight }}
+              />
+            )}
+
+            {/* Bottom Gold Dot Marker (at exact end of line track) */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 h-3.5 w-3.5 rounded-full bg-[#E8C896] shadow-[0_0_12px_rgba(232,200,150,0.8)] z-20" />
+          </div>
+
           {PROCESS_PHASES.map((phase, index) => {
             const Icon = phase.icon
             const stickyTop = STICKY_TOP_BASE + index * TAB_MARGIN
@@ -139,11 +139,11 @@ export const DemoDark = () => {
               <div
                 key={phase.id}
                 style={{ top: `${stickyTop}px` }}
-                className="sticky z-20 flex items-start gap-6 sm:gap-10 pl-4 sm:pl-8"
+                className="sticky z-20 flex items-start gap-4 sm:gap-6 pl-0"
               >
-                {/* Glowing White Node Dot on the vertical line */}
-                <div className="relative z-30 shrink-0 mt-6 -ml-[13px] sm:-ml-[17px] h-6 w-6 sm:h-7 sm:w-7 rounded-full bg-white border-4 border-[#0C0C0C] shadow-[0_0_22px_rgba(255,255,255,1)] flex items-center justify-center">
-                  <div className="h-2 w-2 rounded-full bg-[#0C0C0C]" />
+                {/* Glowing White Node Dot strictly on the vertical line */}
+                <div className="relative z-30 shrink-0 mt-5 h-5 w-5 rounded-full bg-white border-2 border-black shadow-[0_0_15px_rgba(255,255,255,0.9)] flex items-center justify-center">
+                  <div className="h-2 w-2 rounded-full bg-black" />
                 </div>
 
                 {/* Sticky Card with Exposed Top Margin Header */}
