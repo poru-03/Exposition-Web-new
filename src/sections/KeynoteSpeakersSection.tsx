@@ -95,7 +95,7 @@ export const ROW1_SPEAKERS: KeynoteSpeaker[] = [
     company: 'Creative Software',
     issue: 'Issue 15',
     issueLabel: 'Issue 15',
-    image: '/speakers/sushena-ranatunga.png',
+    image: '/speakers/sushena-ranathunga.png',
     category: 'Tech & AI',
     tags: ['Software Engineering', 'Innovation Strategy'],
     quote: 'Architecting resilient enterprise software solutions and scaling world-class engineering teams across borders.',
@@ -223,10 +223,10 @@ function SpeakerLandscapeCard({ speaker }: { speaker: KeynoteSpeaker }) {
         <div className="absolute inset-0 bg-gradient-to-r from-[#141414] via-[#141414]/75 to-transparent" />
       </div>
 
-      {/* Top Header Row: Issue Number Badge & Category */}
+      {/* Top Header Row: Issue Number Plain Text & Category */}
       <div className="relative z-10 flex items-center justify-between gap-2">
-        <div className="flex items-center gap-2">
-          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[0.65rem] font-mono font-bold tracking-wider uppercase text-[#E8C896] bg-[#E8C896]/10 border border-[#E8C896]/30">
+        <div className="flex items-center gap-2.5">
+          <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#E8C896]">
             {speaker.issue}
           </span>
           <span className="text-[0.68rem] font-bold uppercase tracking-wider text-[#9A9A9A]">

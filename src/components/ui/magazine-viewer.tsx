@@ -33,7 +33,7 @@ export function usePdfPages(pdfUrl: string, initialPages?: string[]) {
     totalCount = 94;
   } else if (pdfUrl.includes('20')) {
     issueNum = '20';
-    totalCount = 0; // Pre-extracted images not available for issue 20
+    totalCount = 104;
   } else if (pdfUrl.includes('21')) {
     issueNum = '21';
     totalCount = 102;

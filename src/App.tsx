@@ -75,6 +75,11 @@ export default function App() {
 
     const rafId = requestAnimationFrame(raf);
 
+    // Ensure site starts at the top (#hero) on fresh page loads
+    if (!window.location.hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+    }
+
     return () => {
       cancelAnimationFrame(rafId);
       lenis.destroy();
@@ -117,8 +122,12 @@ export default function App() {
 
         {/* Every section below Hero has a solid opaque background */}
         <div className="relative z-20 w-full bg-[#0C0C0C]">
-          <AboutSection />
-          <TimelineSection />
+          {/* Shared Container for About & Timeline */}
+          <div className="relative w-full">
+            <AboutSection />
+            <TimelineSection />
+          </div>
+
           <TechEventHubSection />
           <YouTubeChannelSection />
           <KeynoteSpeakersSection />

@@ -103,10 +103,10 @@ export default function HeroSection() {
 
       {/* ----------------- MAIN TWO-COLUMN CONTENT GRID ----------------- */}
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center my-auto w-full max-w-[1700px] mx-auto h-full max-h-[calc(100dvh-5rem)] flex-1">
-        
+
         {/* LEFT CONTENT COLUMN (~50% width) */}
         <div className="lg:col-span-6 xl:col-span-6 flex flex-col items-start justify-center my-auto pr-0 lg:pr-4 text-left">
-          
+
           {/* Brand Logo Image (/resources/ExpositionLogo_original.png) - Optically Aligned with Shimmer */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -116,22 +116,36 @@ export default function HeroSection() {
           >
             <div className="relative inline-block overflow-hidden rounded-sm">
               <img
-                src="/resources/ExpositionLogo_original.png"
+                src="/resources/Expo_logo.svg"
                 alt="Exposition"
                 className="h-[95px] sm:h-[120px] md:h-[140px] lg:h-[160px] xl:h-[175px] w-auto max-w-full object-contain object-left select-none pointer-events-none drop-shadow-[0_8px_35px_rgba(212,175,55,0.3)]"
               />
-              {/* Luxury Diagonal Light Reflection Sweep */}
-              <motion.div
-                initial={{ x: '-120%' }}
-                animate={{ x: '240%' }}
-                transition={{
-                  repeat: Infinity,
-                  repeatDelay: 3.5,
-                  duration: 1.6,
-                  ease: 'easeInOut',
+              {/* Luxury Diagonal Light Reflection Sweep (Clipped strictly to logo alpha mask) */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  WebkitMaskImage: 'url(/resources/Expo_logo.svg)',
+                  maskImage: 'url(/resources/Expo_logo.svg)',
+                  WebkitMaskSize: 'contain',
+                  maskSize: 'contain',
+                  WebkitMaskPosition: 'left center',
+                  maskPosition: 'left center',
+                  WebkitMaskRepeat: 'no-repeat',
+                  maskRepeat: 'no-repeat',
                 }}
-                className="absolute inset-0 w-1/3 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-25deg] pointer-events-none mix-blend-overlay"
-              />
+              >
+                <motion.div
+                  initial={{ x: '-120%' }}
+                  animate={{ x: '240%' }}
+                  transition={{
+                    repeat: Infinity,
+                    repeatDelay: 3.5,
+                    duration: 1.6,
+                    ease: 'easeInOut',
+                  }}
+                  className="w-1/3 h-full bg-gradient-to-r from-transparent via-white/70 to-transparent skew-x-[-25deg]"
+                />
+              </div>
             </div>
           </motion.div>
 
@@ -220,7 +234,7 @@ export default function HeroSection() {
 
         {/* RIGHT IMAGE COLUMN (~50% width): Vertical Stack of 3 Asymmetric 2048x1367 Slideshow Cards */}
         <div className="lg:col-span-6 xl:col-span-6 relative w-full max-w-[500px] lg:max-w-[580px] xl:max-w-[640px] mx-auto h-[clamp(520px,80vh,740px)] flex flex-col justify-center items-center gap-3 sm:gap-4 overflow-hidden">
-          
+
           {/* 1. TOP IMAGE CARD: Smaller (76%), shifted right, all outer edges softly blurred/feathered */}
           <div className="relative w-[76%] max-w-[340px] sm:max-w-[380px] lg:max-w-[420px] aspect-[2048/1367] rounded-xl overflow-hidden translate-x-4 sm:translate-x-6 lg:translate-x-8 [mask-image:radial-gradient(ellipse_at_center,black_45%,rgba(0,0,0,0.85)_65%,transparent_96%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_45%,rgba(0,0,0,0.85)_65%,transparent_96%)] bg-black/50 shrink-0">
             <AnimatePresence mode="popLayout" initial={false}>
