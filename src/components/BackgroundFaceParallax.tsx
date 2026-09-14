@@ -8,11 +8,11 @@ export default function BackgroundFaceParallax() {
   // Drift downward through the page
   const y = useTransform(scrollYProgress, [0, 1], ['-2vh', '45vh']);
 
-  // Visibility watermark
+  // Visibility watermark - fades out completely before lower sections & footer
   const opacity = useTransform(
     scrollYProgress,
-    [0, 0.08, 0.5, 0.85, 1],
-    [0, 0.14, 0.12, 0.10, 0.08]
+    [0, 0.08, 0.25, 0.45, 0.6],
+    [0, 0.14, 0.10, 0, 0]
   );
 
   // Subtle organic scaling

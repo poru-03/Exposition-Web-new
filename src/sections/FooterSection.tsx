@@ -30,10 +30,14 @@ export interface FooterSectionProps {
   creditText?: string;
 }
 
-export const DEFAULT_NAV_LINKS = [
+export interface FooterNavLink {
+  name: string;
+  href: string;
+  isRoute?: boolean;
+}
+
+export const DEFAULT_NAV_LINKS: FooterNavLink[] = [
   { name: 'ABOUT', href: '#about' },
-  { name: 'INITIATIVES', href: '#timeline' },
-  { name: 'ELITE 10', href: '/elite-10', isRoute: true },
   { name: 'EVENTS', href: '#techevent-hub' },
   { name: 'SPEAKERS', href: '#keynote-speakers' },
   { name: 'INTERVIEWS', href: '#interviews' },
@@ -157,11 +161,13 @@ MagneticButton.displayName = 'MagneticButton';
 // -------------------------------------------------------------------------
 const SymposiumMarqueeTrack = () => (
   <div className="flex items-center space-x-10 px-4">
-    <span>EXPOSITION 21ST EDITION</span> <span className="text-[#B8894F]">✦</span>
-    <span>PREMIER TECH SYMPOSIUM & MAGAZINE</span> <span className="text-[#E8C896]">✦</span>
     <span>DEPARTMENT OF INDUSTRIAL MANAGEMENT</span> <span className="text-[#B8894F]">✦</span>
-    <span>FACULTY OF SCIENCE · UNIVERSITY OF KELANIYA</span> <span className="text-[#E8C896]">✦</span>
-    <span>TECH EVENT HUB & KEYNOTE SESSIONS</span> <span className="text-[#B8894F]">✦</span>
+    <span>EXPOSITION ISSUE 22</span> <span className="text-[#E8C896]">✦</span>
+    <span>VOICES OF VISION PODCAST SERIES</span> <span className="text-[#B8894F]">✦</span>
+    <span>INDUSTRIAL FORUM</span> <span className="text-[#E8C896]">✦</span>
+    <span>CAREER FAIR</span> <span className="text-[#B8894F]">✦</span>
+    <span>1ST EVER UNIVERSITY BUSINESS MAGAZINE</span> <span className="text-[#E8C896]">✦</span>
+    <span>MAGAZINE LAUNCHING CEREMONY</span> <span className="text-[#B8894F]">✦</span>
   </div>
 );
 
@@ -250,13 +256,13 @@ export default function FooterSection({
           <MagneticButton
             as="a"
             href="#partners"
-            className="btn-metallic-gold-shine group gap-3 rounded-full px-8 sm:px-10 py-3.5 sm:py-4 text-xs sm:text-sm font-bold tracking-wide transition-all shadow-[0_0_25px_rgba(184,137,79,0.35)] hover:shadow-[0_0_35px_rgba(184,137,79,0.55)] shrink-0"
+            className="btn-metallic-gold-shine group gap-3.5 sm:gap-4 rounded-full px-8 sm:px-12 py-4 sm:py-4.5 text-sm sm:text-base md:text-lg font-bold tracking-wide transition-all shadow-[0_0_28px_rgba(184,137,79,0.38)] hover:shadow-[0_0_40px_rgba(184,137,79,0.6)] shrink-0"
           >
             <span>Explore Partnership Opportunities</span>
             <img
               src="/handshake.png"
               alt="Handshake"
-              className="size-6 sm:size-7 object-contain transition-transform duration-200 group-hover:scale-115 select-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+              className="size-6 sm:size-7 md:size-8 object-contain transition-transform duration-200 group-hover:scale-115 select-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
               draggable={false}
             />
           </MagneticButton>
@@ -265,20 +271,43 @@ export default function FooterSection({
 
       {/* ================= 3. MAIN FOOTER CONTENT ================= */}
       <div className="relative z-10 mx-auto max-w-7xl px-[5%] pt-6 sm:pt-8 pb-5 space-y-6 sm:space-y-7">
-        {/* 2-Column Responsive Layout: Contact on Left, Brand on Right */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-start justify-between">
-          {/* LEFT COLUMN: Contact Us & Social Icons */}
+        {/* 2-Column Responsive Layout: Brand on Left, Contact on Right */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start justify-between">
+          {/* LEFT COLUMN: Brand Logo & Tagline */}
           <motion.div
             initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-30px' }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-3 will-change-transform max-w-md"
+            className="space-y-3.5 flex flex-col items-start text-left will-change-transform"
           >
-            <h3 className="text-[0.7rem] font-mono uppercase tracking-[0.25em] text-[#E8C896] font-semibold">
+            <div className="flex items-center justify-start">
+              <img
+                src="/ExpoLogo.png"
+                alt="Exposition Logo"
+                className="h-auto w-[170px] sm:w-[210px] md:w-[240px] select-none drop-shadow-[0_0_25px_rgba(184,137,79,0.25)]"
+                draggable={false}
+              />
+            </div>
+
+            {/* Subtitle / Tagline below logo */}
+            <p className="text-sm sm:text-base text-[#9A9A9A] font-light max-w-md leading-relaxed text-left">
+              {tagline}
+            </p>
+          </motion.div>
+
+          {/* RIGHT COLUMN: Contact Us & Social Icons (Increased text size) */}
+          <motion.div
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-30px' }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="space-y-3.5 md:flex md:flex-col md:items-end md:text-right will-change-transform"
+          >
+            <h3 className="text-xs sm:text-sm font-mono uppercase tracking-[0.25em] text-[#E8C896] font-bold">
               CONTACT US
             </h3>
-            <div className="text-xs sm:text-sm text-[#9A9A9A] space-y-1 font-light leading-relaxed">
+            <div className="text-sm sm:text-base text-[#9A9A9A] space-y-1 font-light leading-relaxed md:text-right">
               {addressLines.map((line, idx) => (
                 <p key={idx}>{line}</p>
               ))}
@@ -286,39 +315,16 @@ export default function FooterSection({
             <p className="pt-0.5">
               <a
                 href={`mailto:${contactEmail}`}
-                className="text-xs sm:text-sm text-white hover:text-[#E8C896] transition-colors"
+                className="text-sm sm:text-base text-white hover:text-[#E8C896] font-medium transition-colors"
               >
                 {contactEmail}
               </a>
             </p>
 
             {/* Social Media Links with Brand Hover Fill & Tooltips */}
-            <div className="pt-1.5">
-              <SocialTooltip items={FOOTER_SOCIAL_ITEMS} className="justify-start gap-2.5" />
+            <div className="pt-1.5 flex md:justify-end">
+              <SocialTooltip items={FOOTER_SOCIAL_ITEMS} className="justify-start md:justify-end gap-2.5" />
             </div>
-          </motion.div>
-
-          {/* RIGHT COLUMN: Brand Logo & Tagline */}
-          <motion.div
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-30px' }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-2.5 md:flex md:flex-col md:items-end md:text-right will-change-transform"
-          >
-            <div className="flex items-center md:justify-end">
-              <img
-                src="/ExpoLogo.png"
-                alt="Exposition Logo"
-                className="h-auto w-[160px] sm:w-[200px] md:w-[220px] select-none drop-shadow-[0_0_20px_rgba(184,137,79,0.25)]"
-                draggable={false}
-              />
-            </div>
-
-            {/* Subtitle / Tagline below logo */}
-            <p className="text-xs sm:text-sm md:text-base text-[#9A9A9A] font-light max-w-md leading-relaxed md:text-right">
-              {tagline}
-            </p>
           </motion.div>
         </div>
 
@@ -370,25 +376,22 @@ export default function FooterSection({
             <a href="#partners" className="block hover:text-[#E8C896] transition-colors">
               PARTNERS
             </a>
-            <a href="#privacy" className="block hover:text-[#E8C896] transition-colors">
-              PRIVACY
+            <a href="#faq" className="block hover:text-[#E8C896] transition-colors">
+              FAQ
             </a>
           </div>
           <div className="space-y-2.5">
-            <a href="#timeline" className="block hover:text-[#E8C896] transition-colors">
-              TIMELINE
-            </a>
             <a href="#keynote-speakers" className="block hover:text-[#E8C896] transition-colors">
               SPEAKERS
+            </a>
+            <a href="#gallery" className="block hover:text-[#E8C896] transition-colors">
+              GALLERY
             </a>
             <a href="#reviews" className="block hover:text-[#E8C896] transition-colors">
               REVIEWS
             </a>
             <a href="#team" className="block hover:text-[#E8C896] transition-colors">
               TEAM
-            </a>
-            <a href="#terms" className="block hover:text-[#E8C896] transition-colors">
-              TERMS
             </a>
           </div>
         </motion.div>
