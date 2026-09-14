@@ -11,7 +11,7 @@ export const NAV_LINKS = [
   { name: 'Reviews', href: '#reviews' },
   { name: 'Partners', href: '#partners' },
   { name: 'Team', href: '#team' },
-  { name: 'FAQ', href: '#qa' },
+  { name: 'FAQ', href: '#faq' },
 ];
 
 export default function Navbar() {
@@ -86,6 +86,12 @@ export default function Navbar() {
       } else {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+    } else if (href === '#hero') {
+      if ((window as any).__lenis) {
+        (window as any).__lenis.scrollTo(0, { duration: 1.2 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
   };
 
@@ -111,7 +117,7 @@ export default function Navbar() {
           className="flex items-center pl-1 pr-4 py-0.5 rounded-full group transition-transform duration-300 hover:scale-105 shrink-0 cursor-pointer"
         >
           <img
-            src="/resources/Expo_logo.svg"
+            src="/resources/Expo_Issue_22_logo.svg"
             alt="Exposition Logo"
             className="h-7 sm:h-8 md:h-9 w-auto object-contain filter drop-shadow-[0_0_12px_rgba(201,162,95,0.3)] group-hover:drop-shadow-[0_0_18px_rgba(201,162,95,0.6)] transition-all"
           />
