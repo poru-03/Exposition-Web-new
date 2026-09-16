@@ -392,7 +392,7 @@ export default function InterviewHighlightsSection() {
                     src={activePerson.image}
                     alt={activePerson.name}
                     name={activePerson.name}
-                    className="w-full h-full object-cover object-top filter contrast-105 brightness-105"
+                    className="w-full h-full object-cover object-[center_5%] filter contrast-105 brightness-105"
                   />
                   <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl" />
                 </div>
@@ -473,7 +473,7 @@ export default function InterviewHighlightsSection() {
 
           <div
             ref={filmstripRef}
-            className="flex items-center gap-4 overflow-x-auto pb-4 pt-1 px-1 scroll-smooth select-none scrollbar-thin scrollbar-thumb-[#c9a25f]/40 scrollbar-track-transparent"
+            className="flex items-center gap-4 overflow-x-auto pb-4 pt-4 px-2 scroll-smooth select-none scrollbar-thin scrollbar-thumb-[#c9a25f]/40 scrollbar-track-transparent"
             style={{
               scrollbarWidth: 'thin',
               scrollbarColor: '#c9a25f33 transparent',
@@ -486,12 +486,12 @@ export default function InterviewHighlightsSection() {
                 <div
                   key={person.id}
                   onClick={() => setActiveIndex(idx)}
-                  className={`group shrink-0 relative w-[130px] sm:w-[150px] flex flex-col cursor-pointer transition-all duration-300 ${isActive ? 'scale-105' : 'hover:scale-[1.03] opacity-75 hover:opacity-100'
+                  className={`group shrink-0 relative w-[130px] sm:w-[150px] flex flex-col cursor-pointer transition-all duration-300 origin-bottom ${isActive ? 'scale-105' : 'hover:scale-[1.03] opacity-75 hover:opacity-100'
                     }`}
                 >
                   <div
                     className={`relative w-full aspect-[3/4] rounded-xl overflow-hidden border-2 transition-all duration-300 bg-[#0a0908] ${isActive
-                        ? 'border-[#c9a25f] ring-4 ring-[#c9a25f]/30 shadow-[0_0_20px_rgba(201,162,95,0.4)]'
+                        ? 'border-[#c9a25f] ring-4 ring-inset ring-[#c9a25f]/40 shadow-[0_0_20px_rgba(201,162,95,0.4)]'
                         : 'border-white/10 group-hover:border-white/30'
                       }`}
                   >
@@ -499,7 +499,7 @@ export default function InterviewHighlightsSection() {
                       src={person.image}
                       alt={person.name}
                       name={person.name}
-                      className={`w-full h-full object-cover object-top transition-all duration-300 ${isActive
+                      className={`w-full h-full object-cover object-[center_5%] transition-all duration-300 ${isActive
                           ? 'filter grayscale-0 contrast-110'
                           : 'filter grayscale contrast-125 group-hover:grayscale-0'
                         }`}

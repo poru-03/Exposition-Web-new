@@ -74,7 +74,7 @@ const TeamMemberCard = React.forwardRef<HTMLDivElement, TeamMemberCardProps>(
         {/* 1. Full-Bleed Photo (Grayscale -> Color when Active or Hovered + Scale on Hover) */}
         <div
           className={cn(
-            "absolute inset-0 w-full h-full bg-cover bg-top filter transition-all duration-700 ease-in-out group-hover:scale-110",
+            "absolute inset-0 w-full h-full bg-cover bg-[position:center_5%] origin-top filter transition-all duration-700 ease-in-out group-hover:scale-105",
             isActive
               ? "grayscale-0 contrast-100"
               : "grayscale contrast-110 group-hover:grayscale-0 group-hover:contrast-100"
@@ -84,7 +84,7 @@ const TeamMemberCard = React.forwardRef<HTMLDivElement, TeamMemberCardProps>(
           <img
             src={photoUrl}
             alt={name}
-            className="w-full h-full object-cover object-top opacity-0"
+            className="w-full h-full object-cover object-[center_5%] opacity-0"
           />
         </div>
 
