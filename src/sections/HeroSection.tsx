@@ -91,6 +91,7 @@ export default function HeroSection() {
 
   return (
     <section
+      id="hero"
       ref={containerRef}
       className="relative w-full h-screen max-h-[100dvh] bg-[#0a0a08] text-white flex flex-col justify-center px-6 sm:px-12 md:px-16 lg:px-20 xl:px-28 pt-16 sm:pt-20 pb-4 sm:pb-6 select-none overflow-hidden"
     >
@@ -116,7 +117,7 @@ export default function HeroSection() {
           >
             <div className="relative inline-block overflow-hidden rounded-sm">
               <img
-                src="/resources/Expo_logo.svg"
+                src="/resources/Expo_Issue_22_logo.svg"
                 alt="Exposition"
                 className="h-[95px] sm:h-[120px] md:h-[140px] lg:h-[160px] xl:h-[175px] w-auto max-w-full object-contain object-left select-none pointer-events-none drop-shadow-[0_8px_35px_rgba(212,175,55,0.3)]"
               />
@@ -124,8 +125,8 @@ export default function HeroSection() {
               <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
-                  WebkitMaskImage: 'url(/resources/Expo_logo.svg)',
-                  maskImage: 'url(/resources/Expo_logo.svg)',
+                  WebkitMaskImage: 'url(/resources/Expo_Issue_22_logo.svg)',
+                  maskImage: 'url(/resources/Expo_Issue_22_logo.svg)',
                   WebkitMaskSize: 'contain',
                   maskSize: 'contain',
                   WebkitMaskPosition: 'left center',
@@ -232,11 +233,24 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* RIGHT IMAGE COLUMN (~50% width): Vertical Stack of 3 Asymmetric 2048x1367 Slideshow Cards */}
-        <div className="lg:col-span-6 xl:col-span-6 relative w-full max-w-[500px] lg:max-w-[580px] xl:max-w-[640px] mx-auto h-[clamp(520px,80vh,740px)] flex flex-col justify-center items-center gap-3 sm:gap-4 overflow-hidden">
+        {/* RIGHT IMAGE COLUMN (~50% width): Vertical Stack of 3 Asymmetric Slideshow Cards */}
+        <div
+          className="lg:col-span-6 xl:col-span-6 relative w-full max-w-[500px] lg:max-w-[580px] xl:max-w-[640px] mx-auto min-h-[560px] lg:min-h-[640px] h-auto flex flex-col justify-center items-center gap-2.5 sm:gap-3.5 py-4"
+          style={{
+            WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+            maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+          }}
+        >
 
-          {/* 1. TOP IMAGE CARD: Smaller (76%), shifted right, all outer edges softly blurred/feathered */}
-          <div className="relative w-[76%] max-w-[340px] sm:max-w-[380px] lg:max-w-[420px] aspect-[2048/1367] rounded-xl overflow-hidden translate-x-4 sm:translate-x-6 lg:translate-x-8 [mask-image:radial-gradient(ellipse_at_center,black_45%,rgba(0,0,0,0.85)_65%,transparent_96%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_45%,rgba(0,0,0,0.85)_65%,transparent_96%)] bg-black/50 shrink-0">
+          {/* 1. TOP IMAGE CARD: Dedicated Placeholder with Edge Blur & Feathering */}
+          <div
+            className="relative w-[78%] sm:w-[82%] max-w-[360px] sm:max-w-[400px] lg:max-w-[440px] h-[115px] sm:h-[135px] lg:h-[150px] rounded-2xl overflow-hidden translate-x-4 sm:translate-x-6 lg:translate-x-8 bg-transparent shrink-0"
+            style={{
+              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 14%, black 38%, black 78%, transparent 100%)',
+              maskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 14%, black 38%, black 78%, transparent 100%)',
+            }}
+          >
+            {/* Animated Slide Content */}
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.div
                 key={topSlide.src + '-top'}
@@ -249,9 +263,9 @@ export default function HeroSection() {
                 <img
                   src={topSlide.src}
                   alt={topSlide.title}
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-cover object-center opacity-85 blur-[0.8px]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                 <div className="absolute bottom-2 left-3 sm:bottom-2.5 sm:left-3.5 z-10 text-left pointer-events-none pr-3">
                   <div className="text-xs sm:text-sm font-bold text-white tracking-wide drop-shadow-md">
                     {topSlide.title}
@@ -262,8 +276,12 @@ export default function HeroSection() {
                 </div>
               </motion.div>
             </AnimatePresence>
-            {/* Perimeter soft ambient fade gradients */}
-            <div className="absolute inset-0 pointer-events-none z-20 [background:radial-gradient(ellipse_at_center,transparent_45%,#0a0a08_95%)]" />
+
+            {/* Edge Dissolve Gradients ensuring top melts softly into #0a0a08 */}
+            <div className="absolute top-0 inset-x-0 h-12 pointer-events-none z-20 bg-gradient-to-b from-[#0a0a08] via-[#0a0a08]/50 to-transparent" />
+            <div className="absolute bottom-0 inset-x-0 h-8 pointer-events-none z-20 bg-gradient-to-t from-[#0a0a08]/80 to-transparent" />
+            <div className="absolute inset-y-0 left-0 w-8 pointer-events-none z-20 bg-gradient-to-r from-[#0a0a08]/60 to-transparent" />
+            <div className="absolute inset-y-0 right-0 w-8 pointer-events-none z-20 bg-gradient-to-l from-[#0a0a08]/60 to-transparent" />
           </div>
 
           {/* 2. MIDDLE IMAGE CARD: Prominently Large Centerpiece (100%), centered with crisp gold border */}
@@ -296,8 +314,15 @@ export default function HeroSection() {
             </AnimatePresence>
           </div>
 
-          {/* 3. BOTTOM IMAGE CARD: Smaller (76%), shifted right, all outer edges softly blurred/feathered */}
-          <div className="relative w-[76%] max-w-[340px] sm:max-w-[380px] lg:max-w-[420px] aspect-[2048/1367] rounded-xl overflow-hidden translate-x-4 sm:translate-x-6 lg:translate-x-8 [mask-image:radial-gradient(ellipse_at_center,black_45%,rgba(0,0,0,0.85)_65%,transparent_96%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_45%,rgba(0,0,0,0.85)_65%,transparent_96%)] bg-black/50 shrink-0">
+          {/* 3. BOTTOM IMAGE CARD: Dedicated Placeholder with Edge Blur & Feathering */}
+          <div
+            className="relative w-[78%] sm:w-[82%] max-w-[360px] sm:max-w-[400px] lg:max-w-[440px] h-[115px] sm:h-[135px] lg:h-[150px] rounded-2xl overflow-hidden translate-x-4 sm:translate-x-6 lg:translate-x-8 bg-transparent shrink-0"
+            style={{
+              WebkitMaskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.3) 14%, black 38%, black 78%, transparent 100%)',
+              maskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.3) 14%, black 38%, black 78%, transparent 100%)',
+            }}
+          >
+            {/* Animated Slide Content */}
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.div
                 key={botSlide.src + '-bot'}
@@ -310,9 +335,9 @@ export default function HeroSection() {
                 <img
                   src={botSlide.src}
                   alt={botSlide.title}
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-cover object-center opacity-85 blur-[0.8px]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                 <div className="absolute bottom-2 left-3 sm:bottom-2.5 sm:left-3.5 z-10 text-left pointer-events-none pr-3">
                   <div className="text-xs sm:text-sm font-bold text-white tracking-wide drop-shadow-md">
                     {botSlide.title}
@@ -323,8 +348,12 @@ export default function HeroSection() {
                 </div>
               </motion.div>
             </AnimatePresence>
-            {/* Perimeter soft ambient fade gradients */}
-            <div className="absolute inset-0 pointer-events-none z-20 [background:radial-gradient(ellipse_at_center,transparent_45%,#0a0a08_95%)]" />
+
+            {/* Edge Dissolve Gradients ensuring bottom melts softly into #0a0a08 */}
+            <div className="absolute top-0 inset-x-0 h-8 pointer-events-none z-20 bg-gradient-to-b from-[#0a0a08]/80 to-transparent" />
+            <div className="absolute bottom-0 inset-x-0 h-12 pointer-events-none z-20 bg-gradient-to-t from-[#0a0a08] via-[#0a0a08]/50 to-transparent" />
+            <div className="absolute inset-y-0 left-0 w-8 pointer-events-none z-20 bg-gradient-to-r from-[#0a0a08]/60 to-transparent" />
+            <div className="absolute inset-y-0 right-0 w-8 pointer-events-none z-20 bg-gradient-to-l from-[#0a0a08]/60 to-transparent" />
           </div>
 
         </div>
