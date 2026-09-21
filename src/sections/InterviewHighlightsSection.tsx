@@ -360,12 +360,12 @@ export default function InterviewHighlightsSection() {
         {/* 1. TITLE: "INTERVIEW HIGHLIGHTS" */}
         <ScrollReveal className="flex flex-col items-center justify-center text-center">
           <h2
-            className="font-black uppercase tracking-tight text-[#E5C287] drop-shadow-[0_4px_30px_rgba(229,194,135,0.2)]"
+            className="hero-heading font-black uppercase text-[#E5C287] drop-shadow-[0_4px_30px_rgba(229,194,135,0.2)]"
             style={{
-              fontFamily: 'Anton, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-              fontSize: 'clamp(2.8rem, 6.5vw, 5rem)',
-              lineHeight: 1.05,
-              letterSpacing: '0.03em',
+              fontFamily: 'var(--font-heading), "Fraunces", "Operetta 52", "Seraphine Display", serif',
+              fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+              lineHeight: 1.15,
+              letterSpacing: '-0.015em',
             }}
           >
             INTERVIEW HIGHLIGHTS
@@ -399,17 +399,33 @@ export default function InterviewHighlightsSection() {
 
                 {/* Profile Details */}
                 <div className="flex flex-col justify-center text-center sm:text-left lg:text-center xl:text-left space-y-2">
-                  <span className="font-mono text-xs font-extrabold uppercase tracking-[0.25em] text-[#c9a25f]">
+                  <span
+                    className="eyebrow font-mono text-xs font-extrabold uppercase text-[#c9a25f]"
+                    style={{ fontFamily: 'var(--font-accent), "Space Mono", monospace', letterSpacing: '0.08em' }}
+                  >
                     ISSUE {activePerson.issue}
                   </span>
-                  <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white leading-tight">
+                  <h3
+                    className="text-2xl sm:text-3xl font-black uppercase text-white"
+                    style={{
+                      fontFamily: 'var(--font-heading), "Fraunces", "Operetta 52", "Seraphine Display", serif',
+                      letterSpacing: '-0.01em',
+                      lineHeight: 1.2
+                    }}
+                  >
                     {activePerson.name}
                   </h3>
-                  <p className="text-sm font-semibold uppercase tracking-wider text-[#c9a25f]">
+                  <p
+                    className="text-sm font-semibold uppercase text-[#c9a25f]"
+                    style={{ fontFamily: 'var(--font-body), "Satoshi", sans-serif', letterSpacing: '0.01em' }}
+                  >
                     {activePerson.role}
                   </p>
                   {activePerson.company && (
-                    <p className="text-xs font-medium text-gray-400">
+                    <p
+                      className="text-xs font-medium text-gray-400"
+                      style={{ fontFamily: 'var(--font-body), "Satoshi", sans-serif', letterSpacing: '0' }}
+                    >
                       {activePerson.company}
                     </p>
                   )}
@@ -424,24 +440,41 @@ export default function InterviewHighlightsSection() {
 
               {/* RIGHT PULL-QUOTE BLOCK */}
               <div className="lg:col-span-6 flex flex-col justify-between relative pl-0 lg:pl-2">
-                <div className="relative py-4 px-2 sm:px-6">
-                  {/* Oversized Gold Quotation Marks */}
-                  <span className="absolute -top-8 -left-3 text-[#c9a25f]/25 font-serif text-8xl sm:text-9xl font-black leading-none select-none pointer-events-none">
+                <div className="relative flex items-center justify-between gap-3 sm:gap-6 py-6 px-3 sm:px-6 min-h-[160px] my-auto">
+                  {/* Opening Quotation Mark Vertically Centered */}
+                  <span
+                    className="text-[#c9a25f]/35 font-serif text-6xl sm:text-7xl md:text-8xl font-black leading-none select-none pointer-events-none shrink-0 self-center"
+                    style={{ fontFamily: 'var(--font-heading), "Operetta 52", "Seraphine Display", "Fraunces", serif' }}
+                  >
                     “
                   </span>
 
-                  <blockquote className="relative z-10 text-lg sm:text-xl md:text-2xl font-semibold italic text-white/95 leading-relaxed tracking-wide">
+                  <blockquote
+                    className="relative z-10 text-center text-lg sm:text-xl md:text-2xl font-bold italic text-white/95 mx-auto"
+                    style={{
+                      fontFamily: '"Operetta 52", "Seraphine Display", "Fraunces", "Playfair Display", serif',
+                      letterSpacing: '0',
+                      lineHeight: 1.6
+                    }}
+                  >
                     {activePerson.quote}
                   </blockquote>
 
-                  <span className="absolute -bottom-12 right-2 text-[#c9a25f]/25 font-serif text-8xl sm:text-9xl font-black leading-none select-none pointer-events-none">
+                  {/* Closing Quotation Mark Vertically Centered */}
+                  <span
+                    className="text-[#c9a25f]/35 font-serif text-6xl sm:text-7xl md:text-8xl font-black leading-none select-none pointer-events-none shrink-0 self-center"
+                    style={{ fontFamily: 'var(--font-heading), "Operetta 52", "Seraphine Display", "Fraunces", serif' }}
+                  >
                     ”
                   </span>
                 </div>
 
                 {/* Social Handle */}
                 <div className="mt-6 flex justify-end items-center border-t border-white/10 pt-4">
-                  <span className="font-mono text-sm font-bold text-[#c9a25f] tracking-wide hover:underline cursor-pointer">
+                  <span
+                    className="font-mono text-sm font-bold text-[#c9a25f] hover:underline cursor-pointer"
+                    style={{ fontFamily: 'var(--font-accent), "Space Mono", monospace', letterSpacing: '0.08em' }}
+                  >
                     {activePerson.handle}
                   </span>
                 </div>
@@ -505,29 +538,26 @@ export default function InterviewHighlightsSection() {
                         }`}
                     />
 
-                    {/* BADGE: "PANELIST" or "ACTIVE" */}
                     <div
-                      className={`absolute top-2 left-2 text-[0.6rem] font-mono uppercase font-bold tracking-wider px-2 py-0.5 rounded shadow-lg transition-colors ${isActive
-                          ? 'bg-[#c9a25f] text-black border border-[#c9a25f]'
-                          : 'bg-black/80 text-white/90 border border-white/20'
-                        }`}
+                      className="absolute bottom-1 right-1 bg-black/90 text-[#c9a25f] text-[0.55rem] font-mono px-1.5 py-0.5 rounded border border-[#c9a25f]/30"
+                      style={{ fontFamily: 'var(--font-accent), "Space Mono", monospace', letterSpacing: '0.08em' }}
                     >
-                      {isActive ? 'ACTIVE' : 'PANELIST'}
-                    </div>
-
-                    <div className="absolute bottom-1 right-1 bg-black/90 text-[#c9a25f] text-[0.55rem] font-mono px-1.5 py-0.5 rounded border border-[#c9a25f]/30">
                       #{person.issue}
                     </div>
                   </div>
 
                   <div className="mt-2.5 flex flex-col px-0.5">
                     <h5
-                      className={`text-xs font-bold uppercase truncate transition-colors ${isActive ? 'text-white' : 'text-white/70 group-hover:text-white'
+                      className={`text-xs font-bold uppercase transition-colors line-clamp-2 sm:line-clamp-1 leading-tight ${isActive ? 'text-white' : 'text-white/90 group-hover:text-white'
                         }`}
+                      style={{ fontFamily: 'var(--font-heading), "Fraunces", "Operetta 52", "Seraphine Display", serif', letterSpacing: '-0.005em' }}
                     >
                       {person.name}
                     </h5>
-                    <p className="text-[0.65rem] text-[#c9a25f] font-medium truncate mt-0.5">
+                    <p
+                      className="text-[0.65rem] text-[#c9a25f] font-medium truncate mt-0.5"
+                      style={{ fontFamily: 'var(--font-body), "Satoshi", sans-serif', letterSpacing: '0' }}
+                    >
                       {person.role}
                     </p>
                   </div>

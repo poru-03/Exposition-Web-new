@@ -194,6 +194,14 @@ export const TEAM_MEMBERS: TeamMember[] = [
 export default function TeamSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleNext = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % TEAM_MEMBERS.length);
@@ -259,14 +267,14 @@ export default function TeamSection() {
                   className="absolute transition-all duration-500 ease-out cursor-pointer flex items-center justify-center"
                   style={{
                     transform: `
-                      translateX(${pos * 48}%) 
-                      scale(${isCenter ? 1 : isAdjacent ? 0.85 : isSecondAdjacent ? 0.7 : 0.5})
+                      translateX(${pos * (isMobile ? 55 : 48)}%) 
+                      scale(${isCenter ? 1 : isAdjacent ? 0.88 : isSecondAdjacent ? 0.72 : 0.5})
                       rotateY(${pos * -12}deg)
                       translateZ(${isCenter ? 40 : 0}px)
                     `,
                     zIndex: isCenter ? 20 : isAdjacent ? 10 : isSecondAdjacent ? 5 : 1,
-                    opacity: isCenter ? 1 : isAdjacent ? 0.45 : isSecondAdjacent ? 0.2 : 0,
-                    filter: isCenter ? 'blur(0px)' : 'blur(3px)',
+                    opacity: isCenter ? 1 : isAdjacent ? (isMobile ? 0.75 : 0.45) : (isMobile ? 0.35 : 0.2),
+                    filter: isCenter ? 'blur(0px)' : isMobile ? 'blur(1px)' : 'blur(3px)',
                     visibility: Math.abs(pos) > 2 ? 'hidden' : 'visible',
                   }}
                 >

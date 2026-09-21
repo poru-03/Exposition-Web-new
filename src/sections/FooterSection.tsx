@@ -71,7 +71,7 @@ export const FOOTER_SOCIAL_ITEMS: SocialItem[] = [
     icon: <FaInstagram className="size-4" />,
   },
   {
-    href: 'https://www.youtube.com/@expositionmagazine',
+    href: 'https://www.youtube.com/@ExpositionMIT',
     ariaLabel: 'YouTube',
     tooltip: 'YouTube',
     color: '#ff0000',

@@ -1,17 +1,29 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import {
+  Home,
+  Info,
+  Clock,
+  Zap,
+  Mic,
+  Video,
+  Image as ImageIcon,
+  Star,
+  Users,
+  HelpCircle,
+} from 'lucide-react';
 
 export const NAV_LINKS = [
-  { name: 'About', href: '#about' },
-  { name: 'Timeline', href: '#timeline' },
-  { name: 'Events', href: '#techevent-hub' },
-  { name: 'Speakers', href: '#keynote-speakers' },
-  { name: 'Interviews', href: '#interviews' },
-  { name: 'Gallery', href: '#gallery' },
-  { name: 'Reviews', href: '#reviews' },
-  { name: 'Partners', href: '#partners' },
-  { name: 'Team', href: '#team' },
-  { name: 'FAQ', href: '#faq' },
+  { name: 'Home', href: '#hero', icon: Home },
+  { name: 'About', href: '#about', icon: Info },
+  { name: 'Timeline', href: '#timeline', icon: Clock },
+  { name: 'Events', href: '#techevent-hub', icon: Zap },
+  { name: 'Speakers', href: '#keynote-speakers', icon: Mic },
+  { name: 'Interviews', href: '#interviews', icon: Video },
+  { name: 'Gallery', href: '#gallery', icon: ImageIcon },
+  { name: 'Reviews', href: '#reviews', icon: Star },
+  { name: 'Team', href: '#team', icon: Users },
+  { name: 'FAQ', href: '#faq', icon: HelpCircle },
 ];
 
 export default function Navbar() {
@@ -34,12 +46,9 @@ export default function Navbar() {
             setIsVisible(true);
           } else {
             // When in other sections:
-            // If scrolling down, hide navbar
             if (delta > 6) {
               setIsVisible(false);
-            }
-            // If scrolling up, show navbar
-            else if (delta < -6) {
+            } else if (delta < -6) {
               setIsVisible(true);
             }
           }
@@ -96,55 +105,58 @@ export default function Navbar() {
   };
 
   return (
-    <motion.header
-      initial={{ y: 0, opacity: 1 }}
-      animate={{
-        y: isVisible ? 0 : -90,
-        opacity: isVisible ? 1 : 0,
-      }}
-      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed top-0 left-0 right-0 z-[100] pointer-events-none hidden md:flex justify-center px-4 sm:px-8 pt-4 sm:pt-5"
-    >
-      <nav
-        className={`transition-all duration-500 ease-out flex items-center justify-between w-full max-w-7xl rounded-full bg-[#121212]/80 backdrop-blur-2xl border border-white/15 px-5 sm:px-7 py-2.5 shadow-[0_15px_40px_rgba(0,0,0,0.85)] ${
-          isVisible ? 'pointer-events-auto' : 'pointer-events-none'
-        }`}
+    <>
+      {/* DESKTOP TOP NAVBAR */}
+      <motion.header
+        initial={{ y: 0, opacity: 1 }}
+        animate={{
+          y: isVisible ? 0 : -90,
+          opacity: isVisible ? 1 : 0,
+        }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed top-0 left-0 right-0 z-[100] pointer-events-none hidden md:flex justify-center px-4 sm:px-8 pt-4 sm:pt-5"
       >
-        {/* Left Side: Exposition SVG Brand Logo */}
-        <a
-          href="#hero"
-          onClick={(e) => handleLinkClick(e, '#hero')}
-          className="flex items-center pl-1 pr-4 py-0.5 rounded-full group transition-transform duration-300 hover:scale-105 shrink-0 cursor-pointer"
+        <nav
+          className={`transition-all duration-500 ease-out flex items-center justify-between w-full max-w-7xl rounded-full bg-[#121212]/80 backdrop-blur-2xl border border-white/15 px-5 sm:px-7 py-2.5 shadow-[0_15px_40px_rgba(0,0,0,0.85)] ${
+            isVisible ? 'pointer-events-auto' : 'pointer-events-none'
+          }`}
         >
-          <img
-            src="/resources/Expo_Issue_22_logo.svg"
-            alt="Exposition Logo"
-            className="h-7 sm:h-8 md:h-9 w-auto object-contain filter drop-shadow-[0_0_12px_rgba(201,162,95,0.3)] group-hover:drop-shadow-[0_0_18px_rgba(201,162,95,0.6)] transition-all"
-          />
-        </a>
+          {/* Left Side: Exposition SVG Brand Logo */}
+          <a
+            href="#hero"
+            onClick={(e) => handleLinkClick(e, '#hero')}
+            className="flex items-center pl-1 pr-4 py-0.5 rounded-full group transition-transform duration-300 hover:scale-105 shrink-0 cursor-pointer"
+          >
+            <img
+              src="/resources/Expo_Issue_22_logo.svg"
+              alt="Exposition Logo"
+              className="h-7 sm:h-8 md:h-9 w-auto object-contain filter drop-shadow-[0_0_12px_rgba(201,162,95,0.3)] group-hover:drop-shadow-[0_0_18px_rgba(201,162,95,0.6)] transition-all"
+            />
+          </a>
 
-        {/* Center & Right: Navigation Links with Larger Font Size */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5 overflow-x-auto no-scrollbar py-0.5">
-          {NAV_LINKS.map((link) => {
-            const isActive = activeSection === link.href;
+          {/* Center & Right: Navigation Links */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5 overflow-x-auto no-scrollbar [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] py-0.5">
+            {NAV_LINKS.filter((l) => l.name !== 'Home').map((link) => {
+              const isActive = activeSection === link.href;
 
-            return (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => handleLinkClick(e, link.href)}
-                className={`relative px-3.5 sm:px-4.5 py-1.5 text-xs sm:text-sm font-bold tracking-wide transition-all duration-300 whitespace-nowrap rounded-full ${
-                  isActive
-                    ? 'text-black font-black bg-gradient-to-r from-[#F5E6C8] via-[#E8C896] to-[#c9a25f] shadow-[0_0_22px_rgba(201,162,95,0.65)] scale-105'
-                    : 'text-zinc-200 hover:text-white hover:bg-white/10'
-                }`}
-              >
-                <span>{link.name}</span>
-              </a>
-            );
-          })}
-        </div>
-      </nav>
-    </motion.header>
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => handleLinkClick(e, link.href)}
+                  className={`relative px-3.5 sm:px-4.5 py-1.5 text-xs sm:text-sm font-bold tracking-wide transition-all duration-300 whitespace-nowrap rounded-full ${
+                    isActive
+                      ? 'text-black font-black bg-gradient-to-r from-[#F5E6C8] via-[#E8C896] to-[#c9a25f] scale-105'
+                      : 'text-zinc-200 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <span>{link.name}</span>
+                </a>
+              );
+            })}
+          </div>
+        </nav>
+      </motion.header>
+    </>
   );
 }
