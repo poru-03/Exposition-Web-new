@@ -302,7 +302,7 @@ export function MagazineViewer({
   const totalPages = pages.length;
 
   return (
-    <div className="fixed inset-0 z-[100] flex flex-col h-screen w-screen bg-[#050508] overflow-hidden animate-fadeIn select-none">
+    <div className="fixed inset-0 z-[100] flex flex-col h-screen w-screen bg-[#0C0C0C] overflow-hidden animate-fadeIn select-none">
       {/* Animated Ambient Background (Pure CSS Gradient & Floating Glow) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         {/* Animated Gradient Mesh */}

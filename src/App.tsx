@@ -29,12 +29,15 @@ declare global {
 import {
   Home,
   Info,
-  Calendar,
+  Clock,
+  Zap,
   Mic,
-  MessageSquareQuote,
+  Video,
+  Image as ImageIcon,
   Star,
   Handshake,
   Users,
+  HelpCircle,
 } from 'lucide-react';
 import MobileNav, { NavItem } from './components/ui/mobile-nav';
 
@@ -87,16 +90,19 @@ export default function App() {
     };
   }, [currentPath]);
 
-  // Mobile Navigation Section Links Configuration (4 items per side)
+  // Mobile Navigation Section Links Configuration (All 11 sections)
   const mobileNavItems: NavItem[] = [
     { id: 'hero', label: 'Home', href: '#hero', icon: Home },
     { id: 'about', label: 'About', href: '#about', icon: Info },
-    { id: 'techevent-hub', label: 'Events', href: '#techevent-hub', icon: Calendar },
+    { id: 'timeline', label: 'Timeline', href: '#timeline', icon: Clock },
+    { id: 'techevent-hub', label: 'Events', href: '#techevent-hub', icon: Zap },
     { id: 'keynote-speakers', label: 'Speakers', href: '#keynote-speakers', icon: Mic },
-    { id: 'interviews', label: 'Interviews', href: '#interviews', icon: MessageSquareQuote },
+    { id: 'interviews', label: 'Interviews', href: '#interviews', icon: Video },
+    { id: 'gallery', label: 'Gallery', href: '#gallery', icon: ImageIcon },
     { id: 'reviews', label: 'Reviews', href: '#reviews', icon: Star },
     { id: 'partners', label: 'Partners', href: '#partners', icon: Handshake },
     { id: 'team', label: 'Team', href: '#team', icon: Users },
+    { id: 'faq', label: 'FAQ', href: '#faq', icon: HelpCircle },
   ];
 
   if (currentPath === '/elite-10') {

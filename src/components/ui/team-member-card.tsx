@@ -74,7 +74,7 @@ const TeamMemberCard = React.forwardRef<HTMLDivElement, TeamMemberCardProps>(
         {/* 1. Full-Bleed Photo (Grayscale -> Color when Active or Hovered + Scale on Hover) */}
         <div
           className={cn(
-            "absolute inset-0 w-full h-full bg-cover bg-top filter transition-all duration-700 ease-in-out group-hover:scale-110",
+            "absolute inset-0 w-full h-full bg-cover bg-[position:center_5%] origin-top filter transition-all duration-700 ease-in-out group-hover:scale-105",
             isActive
               ? "grayscale-0 contrast-100"
               : "grayscale contrast-110 group-hover:grayscale-0 group-hover:contrast-100"
@@ -84,7 +84,7 @@ const TeamMemberCard = React.forwardRef<HTMLDivElement, TeamMemberCardProps>(
           <img
             src={photoUrl}
             alt={name}
-            className="w-full h-full object-cover object-top opacity-0"
+            className="w-full h-full object-cover object-[center_5%] opacity-0"
           />
         </div>
 
@@ -108,12 +108,12 @@ const TeamMemberCard = React.forwardRef<HTMLDivElement, TeamMemberCardProps>(
         <div className="relative z-10 h-full p-6 flex flex-col justify-end items-center text-center pointer-events-none">
           <div className="w-full flex flex-col items-center justify-center transition-transform duration-400 ease-out group-hover:-translate-y-2">
             {/* Member Name */}
-            <h3 className="text-xl sm:text-2xl font-extrabold uppercase tracking-tight text-white group-hover:text-neutral-950 transition-colors duration-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] group-hover:drop-shadow-none line-clamp-1 w-full text-center">
+            <h3 className="text-lg sm:text-2xl font-extrabold uppercase tracking-tight text-white group-hover:text-neutral-950 transition-colors duration-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] group-hover:drop-shadow-none leading-tight line-clamp-2 sm:line-clamp-1 w-full text-center">
               {name}
             </h3>
 
             {/* Member Position */}
-            <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#E8C896] group-hover:text-neutral-900 transition-colors duration-300 mt-1 line-clamp-1 w-full text-center drop-shadow">
+            <p className="text-[11px] sm:text-sm font-bold uppercase tracking-wider text-[#E8C896] group-hover:text-neutral-900 transition-colors duration-300 mt-1 line-clamp-2 sm:line-clamp-1 w-full text-center drop-shadow">
               {position}
             </p>
 

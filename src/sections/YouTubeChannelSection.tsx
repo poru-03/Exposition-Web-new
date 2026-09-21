@@ -15,40 +15,40 @@ export type YouTubeVideo = {
 
 export const YOUTUBE_VIDEOS: YouTubeVideo[] = [
   {
-    id: 'dQw4w9WgXcQ', // Placeholder Video ID 1
-    title: 'Exposition Issue 22 Official Launch & Keynote Ceremony',
-    views: '12.4K views',
+    id: 'Pc0NPlM6_7Y',
+    title: 'Voices of Vision Ep. 1 | Adapt or Fail: The Yevan David Story',
+    views: '15.2K views',
     uploadedAgo: '2 weeks ago',
-    duration: '14:20',
+    duration: '42:15',
     description:
-      'Highlights from the grand unveiling of Exposition Issue 22 featuring keynote remarks from leading industry leaders.',
+      'Formula 3 driver Yevan David, the first and only Sri Lankan in the official FIA Formula 3 Championship, discusses motorsport discipline, overcoming adversity, and racing strategy.',
   },
   {
-    id: '3JZ_D3ELwOQ', // Placeholder Video ID 2
-    title: 'Digital Transformation & Enterprise AI Panel Discussion',
-    views: '8.1K views',
+    id: 'Pc0NPlM6_7Y',
+    title: 'Voices of Vision Ep. 2 | The Future is Built: Nikin Matharaarachchi',
+    views: '9.8K views',
     uploadedAgo: '1 month ago',
-    duration: '28:45',
+    duration: '38:40',
     description:
-      'Industry experts delve into enterprise cloud architectures, AI policy, and digital strategy for modern organizations.',
+      'Forbes 30 Under 30 Asia honoree & Synapse AI Labs Founder Nikin Matharaarachchi explores AI innovation, startup ecosystems, and tech accessibility.',
   },
   {
-    id: 'L_LUpnjgPso', // Placeholder Video ID 3
-    title: 'Future of Tech Innovation — Industrial Management Forum',
-    views: '15.9K views',
-    uploadedAgo: '2 months ago',
-    duration: '19:10',
+    id: 'Pc0NPlM6_7Y',
+    title: 'Exposition Issue 22 Official Launch & Keynote Ceremony',
+    views: '18.5K views',
+    uploadedAgo: '3 weeks ago',
+    duration: '24:10',
     description:
-      'Exploration of emerging tech trends, software engineering leadership, and academic-industry collaboration.',
+      'Highlights from the grand unveiling of Exposition Issue 22 featuring keynote remarks from corporate executives and academic visionaries.',
   },
   {
-    id: 'fJ9rUzIMcZQ', // Placeholder Video ID 4
-    title: 'Exposition IPN Conclave | Executive Interview Highlights',
-    views: '6.7K views',
-    uploadedAgo: '3 months ago',
-    duration: '22:05',
+    id: 'Pc0NPlM6_7Y',
+    title: 'Exposition Industrial Management Forum | Executive Panel',
+    views: '11.3K views',
+    uploadedAgo: '1 month ago',
+    duration: '45:30',
     description:
-      'Exclusive interviews with visionaries and CEOs sharing insights on leadership and corporate resilience.',
+      'Leading Sri Lankan corporate leaders and tech pioneers gather to discuss enterprise strategy, digital transformation, and industrial innovation.',
   },
 ];
 
@@ -221,9 +221,9 @@ export default function YouTubeChannelSection() {
               rel="noopener noreferrer"
               className="inline-block"
             >
-              <ShinyButton className="font-poppins text-xs font-bold uppercase tracking-wider flex items-center gap-2.5">
-                <span>View All Videos on YouTube</span>
-                <ExternalLink className="w-4 h-4 text-current" />
+              <ShinyButton className="font-poppins text-[11px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-2 whitespace-nowrap">
+                <span className="whitespace-nowrap">View All Videos on YouTube</span>
+                <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-current shrink-0" />
               </ShinyButton>
             </a>
           </div>

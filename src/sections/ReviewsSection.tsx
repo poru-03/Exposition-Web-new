@@ -107,7 +107,7 @@ export const FEATURED_REVIEWS = [
     socials: {
       github: 'https://github.com',
       twitter: 'https://twitter.com',
-      youtube: 'https://youtube.com',
+      youtube: 'https://www.youtube.com/@ExpositionMIT',
       linkedin: 'https://linkedin.com',
     },
   },

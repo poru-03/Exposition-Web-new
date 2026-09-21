@@ -1,4 +1,3 @@
-import { BookOpen } from 'lucide-react';
 import AnimatedText from '../components/AnimatedText';
 import ContactButton from '../components/ContactButton';
 import FadeIn from '../components/FadeIn';
@@ -96,13 +95,7 @@ export default function AboutSection() {
                   {/* Book Spine Highlight Effect */}
                   <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-r from-white/40 via-white/15 to-transparent z-10" />
 
-                  {/* Top Issue Badge */}
-                  <div className="flex items-center justify-between z-20 w-full">
-                    <span className="text-[0.62rem] sm:text-xs font-black uppercase tracking-wider text-[#E8C896] bg-black/80 backdrop-blur-sm px-2 py-0.5 rounded-md border border-[#B8894F]/50 shadow-md">
-                      {mag.issueLabel}
-                    </span>
-                    <BookOpen className="h-4 w-4 text-[#E8C896] drop-shadow opacity-90 group-hover:opacity-100 transition-opacity" />
-                  </div>
+
                 </a>
               ))}
             </div>

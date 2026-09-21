@@ -48,13 +48,14 @@ export function ShinyButton({ children, onClick, className = "" }: ShinyButtonPr
           overflow: hidden;
           cursor: pointer;
           outline-offset: 4px;
-          padding: 0.85rem 2.25rem;
+          padding: 0.65rem 1.75rem;
           font-family: inherit;
-          font-size: 0.875rem;
-          line-height: 1.2;
+          font-size: 0.75rem;
+          line-height: 1;
           font-weight: 700;
           text-transform: uppercase;
-          letter-spacing: 0.15em;
+          letter-spacing: 0.08em;
+          white-space: nowrap;
           border: 1.5px solid transparent;
           border-radius: 360px;
           color: var(--shiny-cta-fg);
