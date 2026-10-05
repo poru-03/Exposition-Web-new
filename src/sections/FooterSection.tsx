@@ -194,7 +194,7 @@ export default function FooterSection({
       if (giantTextRef.current) {
         gsap.fromTo(
           giantTextRef.current,
-          { y: '5vh', scale: 0.88, opacity: 0 },
+          { y: '2vh', scale: 0.95, opacity: 0 },
           {
             y: '0vh',
             scale: 1,
@@ -231,7 +231,7 @@ export default function FooterSection({
       {/* Giant Parallax Background Outlined Text */}
       <div
         ref={giantTextRef}
-        className="footer-giant-bg-text absolute -bottom-[1vh] left-1/2 -translate-x-1/2 w-full px-2 sm:px-4 text-center whitespace-nowrap z-0 pointer-events-none select-none"
+        className="footer-giant-bg-text absolute -bottom-[1vh] left-1/2 -translate-x-1/2 w-full px-2 text-center whitespace-nowrap z-0 pointer-events-none select-none"
       >
         EXPOSITION
       </div>
@@ -279,13 +279,13 @@ export default function FooterSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-30px' }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-3.5 flex flex-col items-start text-left will-change-transform"
+            className="space-y-4 flex flex-col items-start text-left will-change-transform"
           >
             <div className="flex items-center justify-start">
               <img
                 src="/ExpoLogo.png"
                 alt="Exposition Logo"
-                className="h-auto w-[170px] sm:w-[210px] md:w-[240px] select-none drop-shadow-[0_0_25px_rgba(184,137,79,0.25)]"
+                className="h-auto w-[220px] sm:w-[280px] md:w-[320px] lg:w-[350px] select-none drop-shadow-[0_0_25px_rgba(184,137,79,0.25)]"
                 draggable={false}
               />
             </div>
