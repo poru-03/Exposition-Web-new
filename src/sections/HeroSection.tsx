@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { FaLinkedinIn, FaFacebookF, FaInstagram } from 'react-icons/fa6';
 import { ShinyButton } from '../components/ui/shiny-button';
 
 export interface FeaturedHighlight {
@@ -204,6 +205,43 @@ export default function HeroSection() {
             >
               <span>About Exposition</span>
             </button>
+          </motion.div>
+
+          {/* Official Social Media Follow Icons */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.45 }}
+            className="mt-3.5 sm:mt-5 flex items-center gap-2.5"
+          >
+            <span className="text-[10px] sm:text-[11px] font-mono tracking-widest uppercase text-[#9A9A9A]">Follow:</span>
+            <a
+              href="https://www.linkedin.com/company/theexposition"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Exposition LinkedIn"
+              className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-black/50 border border-[#B8894F]/40 flex items-center justify-center text-[#E8C896] hover:bg-[#E8C896] hover:text-black hover:scale-110 transition-all shadow-md cursor-pointer"
+            >
+              <FaLinkedinIn className="size-3 sm:size-3.5" />
+            </a>
+            <a
+              href="https://www.facebook.com/Exposition.MIT"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Exposition Facebook"
+              className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-black/50 border border-[#B8894F]/40 flex items-center justify-center text-[#E8C896] hover:bg-[#E8C896] hover:text-black hover:scale-110 transition-all shadow-md cursor-pointer"
+            >
+              <FaFacebookF className="size-3 sm:size-3.5" />
+            </a>
+            <a
+              href="https://www.instagram.com/exposition_lk/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Exposition Instagram"
+              className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-black/50 border border-[#B8894F]/40 flex items-center justify-center text-[#E8C896] hover:bg-[#E8C896] hover:text-black hover:scale-110 transition-all shadow-md cursor-pointer"
+            >
+              <FaInstagram className="size-3 sm:size-3.5" />
+            </a>
           </motion.div>
         </div>
 

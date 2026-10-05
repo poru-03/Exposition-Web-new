@@ -15,6 +15,7 @@ import {
   HelpCircle,
   LucideIcon,
 } from 'lucide-react';
+import { FaLinkedinIn, FaFacebookF, FaInstagram } from 'react-icons/fa6';
 import { cn } from '@/lib/utils';
 
 export interface NavItem {
@@ -225,6 +226,38 @@ export function MobileNav({
                     </button>
                   );
                 })}
+
+                {/* Social Links Divider & Icons */}
+                <div className="w-7 h-px bg-white/20 my-1 shrink-0" />
+                <div className="flex flex-col items-center gap-1.5 shrink-0">
+                  <a
+                    href="https://www.linkedin.com/company/theexposition"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Exposition LinkedIn"
+                    className="w-7 h-7 rounded-full bg-white/5 border border-[#c9a25f]/40 flex items-center justify-center text-[#c9a25f] hover:bg-[#c9a25f] hover:text-black transition-all"
+                  >
+                    <FaLinkedinIn className="w-3 h-3" />
+                  </a>
+                  <a
+                    href="https://www.facebook.com/Exposition.MIT"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Exposition Facebook"
+                    className="w-7 h-7 rounded-full bg-white/5 border border-[#c9a25f]/40 flex items-center justify-center text-[#c9a25f] hover:bg-[#c9a25f] hover:text-black transition-all"
+                  >
+                    <FaFacebookF className="w-3 h-3" />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/exposition_lk/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Exposition Instagram"
+                    className="w-7 h-7 rounded-full bg-white/5 border border-[#c9a25f]/40 flex items-center justify-center text-[#c9a25f] hover:bg-[#c9a25f] hover:text-black transition-all"
+                  >
+                    <FaInstagram className="w-3 h-3" />
+                  </a>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>

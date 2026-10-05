@@ -299,12 +299,24 @@ export default function HeroIntroAnimation({ onComplete }: HeroIntroAnimationPro
 
               {/* Bottom Social Icons (Left Half) */}
               <div className="relative z-10 flex items-center gap-3.5 self-end pr-2">
-                <div className="w-8.5 h-8.5 rounded-full bg-[#121212] border border-[#c9a25f]/45 flex items-center justify-center text-[#c9a25f] shadow-md">
+                <a
+                  href="https://www.linkedin.com/company/theexposition"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="w-8.5 h-8.5 rounded-full bg-[#121212] border border-[#c9a25f]/45 flex items-center justify-center text-[#c9a25f] shadow-md hover:scale-110 hover:border-[#c9a25f] transition-all cursor-pointer"
+                >
                   <FaLinkedinIn className="size-3.5" />
-                </div>
-                <div className="w-8.5 h-8.5 rounded-full bg-[#121212] border border-[#c9a25f]/45 flex items-center justify-center text-[#c9a25f] shadow-md">
+                </a>
+                <a
+                  href="https://www.facebook.com/Exposition.MIT"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  className="w-8.5 h-8.5 rounded-full bg-[#121212] border border-[#c9a25f]/45 flex items-center justify-center text-[#c9a25f] shadow-md hover:scale-110 hover:border-[#c9a25f] transition-all cursor-pointer"
+                >
                   <FaFacebookF className="size-3.5" />
-                </div>
+                </a>
               </div>
             </div>
 
@@ -341,12 +353,24 @@ export default function HeroIntroAnimation({ onComplete }: HeroIntroAnimationPro
 
               {/* Bottom Social Icons (Right Half) */}
               <div className="relative z-10 flex items-center gap-3.5 self-start pl-2">
-                <div className="w-8.5 h-8.5 rounded-full bg-[#121212] border border-[#c9a25f]/45 flex items-center justify-center text-[#c9a25f] shadow-md">
+                <a
+                  href="https://www.instagram.com/exposition_lk/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="w-8.5 h-8.5 rounded-full bg-[#121212] border border-[#c9a25f]/45 flex items-center justify-center text-[#c9a25f] shadow-md hover:scale-110 hover:border-[#c9a25f] transition-all cursor-pointer"
+                >
                   <FaInstagram className="size-3.5" />
-                </div>
-                <div className="w-8.5 h-8.5 rounded-full bg-[#121212] border border-[#c9a25f]/45 flex items-center justify-center text-[#c9a25f] shadow-md">
+                </a>
+                <a
+                  href="https://www.youtube.com/@ExpositionMIT"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="YouTube"
+                  className="w-8.5 h-8.5 rounded-full bg-[#121212] border border-[#c9a25f]/45 flex items-center justify-center text-[#c9a25f] shadow-md hover:scale-110 hover:border-[#c9a25f] transition-all cursor-pointer"
+                >
                   <FaYoutube className="size-3.5" />
-                </div>
+                </a>
               </div>
             </div>
           </HTMLFlipBook>

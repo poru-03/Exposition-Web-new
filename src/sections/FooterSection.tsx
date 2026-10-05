@@ -50,21 +50,21 @@ export const DEFAULT_NAV_LINKS: FooterNavLink[] = [
 
 export const FOOTER_SOCIAL_ITEMS: SocialItem[] = [
   {
-    href: 'https://www.linkedin.com/company/exposition-magazine/',
+    href: 'https://www.linkedin.com/company/theexposition',
     ariaLabel: 'LinkedIn',
     tooltip: 'LinkedIn',
     color: '#0077b5',
     icon: <FaLinkedinIn className="size-4" />,
   },
   {
-    href: 'https://www.facebook.com/Exposition.uok/',
+    href: 'https://www.facebook.com/Exposition.MIT',
     ariaLabel: 'Facebook',
     tooltip: 'Facebook',
     color: '#1877f2',
     icon: <FaFacebookF className="size-4" />,
   },
   {
-    href: 'https://www.instagram.com/exposition_magazine/',
+    href: 'https://www.instagram.com/exposition_lk/',
     ariaLabel: 'Instagram',
     tooltip: 'Instagram',
     color: '#e4405f',
