@@ -60,8 +60,8 @@ export const ISSUE_22_PARTNERS: Partner[] = [
     name: 'FOS Media',
     tier: 'Media Partner',
     category: 'Official Photography & Media Partner',
-    image: '/resources/partners/fos-media.svg',
-    accentColor: '#00c0f3',
+    image: '/resources/partners/FOS-media.jpg',
+    accentColor: '#8a2be2',
     bgMode: 'dark',
     description:
       'Official photography and media coverage partner documenting key moments and broadcast coverage for Exposition Issue 22.',
@@ -92,7 +92,7 @@ export const LEGACY_PARTNERS: Partner[] = [
     category: 'Global Finance & Leadership',
     image: '/resources/partners/aicpa-cima.png',
     accentColor: '#38bdf8',
-    bgMode: 'dark',
+    bgMode: 'light',
     description: 'Global accounting and strategic finance partner for previous editions.',
   },
   {
@@ -110,7 +110,7 @@ export const LEGACY_PARTNERS: Partner[] = [
     name: 'EFL 3PL',
     tier: 'Gold Partner',
     category: 'Supply Chain & Logistics',
-    image: '/resources/partners/efl-3pl.png',
+    image: '/resources/partners/3PL-efl.jpg',
     accentColor: '#fbbf24',
     bgMode: 'light',
     description: 'Global freight forwarding and supply chain logistics partner.',

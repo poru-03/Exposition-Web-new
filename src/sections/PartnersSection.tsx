@@ -223,45 +223,6 @@ export default function PartnersSection() {
     }, 2500);
   };
 
-  const handleDownloadGuide = () => {
-    // Generate lightweight prospectus document for instant download
-    const prospectusText =
-      `EXPOSITION ISSUE 22 - CORPORATE PARTNERSHIP PROSPECTUS\n\n` +
-      `Thank you for your interest in partnering with Exposition Issue 22.\n` +
-      `Published by the Department of Industrial Management, Faculty of Science, University of Kelaniya.\n\n` +
-      `==================================================================\n` +
-      `PARTNERSHIP TIERS & CORPORATE COLLABORATIONS\n` +
-      `==================================================================\n\n` +
-      `1. TITLE & PLATINUM PARTNER\n` +
-      `   - Main-stage keynote brand prominence & opening ceremony address\n` +
-      `   - TechEvent Hub grand naming rights & primary logo placement\n` +
-      `   - Priority recruitment access to elite engineering and tech undergraduates\n` +
-      `   - Full 2-page spread feature in the Exposition Issue 22 Magazine\n\n` +
-      `2. GOLD & SILVER PARTNERS\n` +
-      `   - Executive panel presence & dedicated technical track host\n` +
-      `   - Premium exhibition pavilion booth & digital platform integration\n` +
-      `   - 1-page full feature in Exposition Issue 22 Magazine\n\n` +
-      `3. OFFICIAL CATEGORY PARTNERS (Studio, Printing, Media, EdTech)\n` +
-      `   - Co-branded category recognition across print and digital media\n` +
-      `   - Direct feature across official podcast, YouTube & social channels\n` +
-      `   - VIP delegate access and corporate accreditation\n\n` +
-      `CONTACT & INQUIRIES:\n` +
-      `Email: exposition@kln.ac.lk\n` +
-      `Web: https://exposition.lk\n` +
-      `Department of Industrial Management, University of Kelaniya, Sri Lanka.`;
-
-    const blob = new Blob([prospectusText], {
-      type: 'text/plain;charset=utf-8',
-    });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'Exposition_Issue_22_Partnership_Prospectus.txt';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  };
 
   return (
     <section
@@ -299,13 +260,16 @@ export default function PartnersSection() {
         {/* Integrated Partnership CTA Block */}
         <ScrollReveal className="mt-8 sm:mt-10 max-w-2xl mx-auto text-center px-4">
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-            <button
-              onClick={handleDownloadGuide}
+            <a
+              href="/resources/partners/Exposition%20Issue%2022%20Partnership%20Proposal.pdf"
+              download="Exposition Issue 22 Partnership Proposal.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-[#B8894F]/50 bg-[#181818]/90 px-6 py-2.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#E8C896] shadow-xl backdrop-blur-md hover:bg-[#B8894F]/15 hover:border-[#E8C896] transition-all duration-300 active:scale-95 cursor-pointer"
             >
               <Download className="h-4 w-4" />
               <span>Partnership Guide</span>
-            </button>
+            </a>
 
             <button
               onClick={() => setIsFormOpen(true)}
