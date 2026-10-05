@@ -227,21 +227,44 @@ export default function FooterSection({
       <div className="footer-aurora absolute left-1/2 top-1/2 h-[50vh] w-[75vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[90px] pointer-events-none z-0" />
       <div className="footer-bg-grid absolute inset-0 z-0 pointer-events-none" />
 
-      {/* Giant Parallax Background Edge-to-Edge Bold Outlined Text */}
+      {/* Giant Parallax Background Edge-to-Edge Bold Outlined Watermark (Zero Letter Gap & Bottom Touching) */}
       <div
         ref={giantTextRef}
-        className="footer-giant-bg-text absolute -bottom-[1vh] left-0 right-0 w-full flex justify-between items-baseline z-0 pointer-events-none select-none px-0"
+        className="footer-giant-bg-text absolute bottom-0 left-0 right-0 w-full z-0 pointer-events-none select-none overflow-hidden flex items-end leading-none"
       >
-        <span>E</span>
-        <span>X</span>
-        <span>P</span>
-        <span>O</span>
-        <span>S</span>
-        <span>I</span>
-        <span>T</span>
-        <span>I</span>
-        <span>O</span>
-        <span>N</span>
+        <svg
+          viewBox="0 0 5381 800"
+          className="w-full h-auto block"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="giantExpoGold" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#F5E6C8" stopOpacity="0.48" />
+              <stop offset="25%" stopColor="#E8C896" stopOpacity="0.35" />
+              <stop offset="55%" stopColor="#B8894F" stopOpacity="0.18" />
+              <stop offset="85%" stopColor="#0C0C0C" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <g
+            transform="translate(0, 788) scale(1, -1.205)"
+            fill="url(#giantExpoGold)"
+            stroke="rgba(232, 200, 150, 0.48)"
+            strokeWidth="16"
+            strokeLinejoin="round"
+          >
+            <path transform="translate(-35, 0)" d="M35 0V644H550V470H277V412H512V232H277V174H550V0Z" />
+            <path transform="translate(488, 0)" d="M15 0 259 329 27 644H316L404 525L493 644H782L550 329L794 0H501L404 131L308 0Z" />
+            <path transform="translate(1235, 0)" d="M35 0V644H397Q480 644 534.0 610.0Q588 576 614.5 519.0Q641 462 641 393Q641 323 610.5 266.5Q580 210 524.5 177.0Q469 144 393 144H277V0ZM277 333H336Q365 333 380.0 349.0Q395 365 395 393Q395 455 340 455H277Z" />
+            <path transform="translate(1849, 0)" d="M360 -10Q251 -10 174.0 22.5Q97 55 56.0 128.0Q15 201 15 322Q15 444 56.0 516.5Q97 589 174.0 621.5Q251 654 360 654Q469 654 546.0 621.5Q623 589 664.0 516.5Q705 444 705 322Q705 201 664.0 128.0Q623 55 546.0 22.5Q469 -10 360 -10ZM360 195Q413 195 435.5 223.5Q458 252 458 322Q458 392 435.5 420.5Q413 449 360 449Q307 449 284.5 420.5Q262 392 262 322Q262 252 284.5 223.5Q307 195 360 195Z" />
+            <path transform="translate(2527, 0)" d="M258 -10Q190 -10 127.0 1.5Q64 13 21 35V216Q68 193 127.0 178.0Q186 163 232 163Q262 163 279.0 170.5Q296 178 296 192Q296 210 264.0 220.0Q232 230 180 249Q118 273 82.0 299.0Q46 325 30.5 361.5Q15 398 15 453Q15 654 298 654Q330 654 369.5 649.5Q409 645 446.5 638.0Q484 631 510 623V441Q455 464 413.0 472.0Q371 480 339 480Q314 480 288.0 475.5Q262 471 262 455Q262 442 285.0 434.5Q308 427 358 413Q438 391 478.0 360.5Q518 330 531.5 288.5Q545 247 545 193Q545 101 473.0 45.5Q401 -10 258 -10Z" />
+            <path transform="translate(3025, 0)" d="M35 0V644H277V0Z" />
+            <path transform="translate(3290, 0)" d="M164 0V470H0V644H570V470H406V0Z" />
+            <path transform="translate(3813, 0)" d="M35 0V644H277V0Z" />
+            <path transform="translate(4063, 0)" d="M360 -10Q251 -10 174.0 22.5Q97 55 56.0 128.0Q15 201 15 322Q15 444 56.0 516.5Q97 589 174.0 621.5Q251 654 360 654Q469 654 546.0 621.5Q623 589 664.0 516.5Q705 444 705 322Q705 201 664.0 128.0Q623 55 546.0 22.5Q469 -10 360 -10ZM360 195Q413 195 435.5 223.5Q458 252 458 322Q458 392 435.5 420.5Q413 449 360 449Q307 449 284.5 420.5Q262 392 262 322Q262 252 284.5 223.5Q307 195 360 195Z" />
+            <path transform="translate(4721, 0)" d="M35 0V644H238L418 392V644H660V0H456L277 252V0Z" />
+          </g>
+        </svg>
       </div>
 
       {/* ================= 1. STRAIGHT MARQUEE STRIP ================= */}
