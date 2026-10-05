@@ -350,12 +350,12 @@ body {
 
 /* Giant Background Parallax Text Masking */
 .footer-giant-bg-text {
-  font-size: clamp(4.5rem, 18.5vw, 20.5vw);
+  font-size: clamp(2.5rem, 10.2vw, 11vw);
   line-height: 1.05;
   padding-top: 0.22em;
   padding-bottom: 0.05em;
   font-weight: 900;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   color: transparent;
   -webkit-text-stroke: 1.2px rgba(184, 137, 79, 0.25);
   background: linear-gradient(

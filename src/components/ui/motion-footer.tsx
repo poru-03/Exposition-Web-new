@@ -108,7 +108,7 @@ const STYLES = `
 
 /* Giant Background Text Masking */
 .footer-giant-bg-text {
-  font-size: 26vw;
+  font-size: clamp(2.5rem, 10.2vw, 11vw);
   line-height: 1.05;
   padding-top: 0.22em;
   padding-bottom: 0.05em;
