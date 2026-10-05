@@ -30,8 +30,8 @@ function getTierTextColor(tier: string) {
   if (t.includes('gold') || t.includes('studio')) {
     return 'text-[#E8C896] drop-shadow-[0_0_10px_rgba(232,200,150,0.3)]';
   }
-  if (t.includes('silver') || t.includes('printing')) {
-    return 'text-[#E8C896] drop-shadow-[0_0_10px_rgba(232,200,150,0.3)]';
+  if (t.includes('silver') || t.includes('printing') || t.includes('media')) {
+    return 'text-[#38bdf8] drop-shadow-[0_0_10px_rgba(56,189,248,0.3)]';
   }
   return 'text-[#cd7f32] drop-shadow-[0_0_10px_rgba(205,127,50,0.3)]';
 }
@@ -46,6 +46,7 @@ export function VerticalPartnerCard({
 }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const isDark = partner.bgMode === 'dark';
 
   return (
     <div
@@ -58,13 +59,27 @@ export function VerticalPartnerCard({
       />
 
       {/* Top Media / Logo Display Container */}
-      <div className="relative w-full h-32 sm:h-36 flex items-center justify-center p-3 rounded-xl bg-white border border-white/10 overflow-hidden shadow-inner">
+      <div
+        className={`relative w-full h-32 sm:h-36 flex items-center justify-center p-3 rounded-xl overflow-hidden transition-colors ${
+          isDark
+            ? 'bg-[#181818] border border-white/10'
+            : 'bg-white border border-white/10 shadow-inner'
+        }`}
+      >
         {!imageLoaded && !imageError && (
-          <div className="absolute inset-0 rounded-xl bg-slate-100 animate-pulse" />
+          <div
+            className={`absolute inset-0 rounded-xl animate-pulse ${
+              isDark ? 'bg-white/5' : 'bg-slate-100'
+            }`}
+          />
         )}
 
         {imageError ? (
-          <span className="text-xs font-black text-slate-800 uppercase tracking-wider truncate px-2">
+          <span
+            className={`text-xs font-black uppercase tracking-wider truncate px-2 ${
+              isDark ? 'text-white' : 'text-slate-800'
+            }`}
+          >
             {partner.name}
           </span>
         ) : (
@@ -116,19 +131,34 @@ export function LegacyPartnerCard({
 }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const isLight = partner.bgMode === 'light';
 
   return (
     <div
       className="group relative w-[175px] sm:w-[195px] md:w-[210px] rounded-xl overflow-hidden bg-[#121212] border border-white/10 shadow-[0_8px_20px_rgba(0,0,0,0.7)] p-4 flex flex-col items-center justify-between transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-white/25 hover:shadow-[0_12px_28px_rgba(0,0,0,0.9)] shrink-0 select-none will-change-transform text-center gap-3"
     >
       {/* Top Media / Logo Display Container */}
-      <div className="relative w-full h-22 sm:h-24 flex items-center justify-center p-2 rounded-lg bg-[#181818] border border-white/5 overflow-hidden">
+      <div
+        className={`relative w-full h-22 sm:h-24 flex items-center justify-center p-2 rounded-lg overflow-hidden transition-colors ${
+          isLight
+            ? 'bg-white border border-white/10 shadow-sm'
+            : 'bg-[#181818] border border-white/5'
+        }`}
+      >
         {!imageLoaded && !imageError && (
-          <div className="absolute inset-0 rounded-lg bg-white/5 animate-pulse" />
+          <div
+            className={`absolute inset-0 rounded-lg animate-pulse ${
+              isLight ? 'bg-slate-200' : 'bg-white/5'
+            }`}
+          />
         )}
 
         {imageError ? (
-          <span className="text-[0.72rem] font-bold text-white uppercase tracking-wider truncate px-1">
+          <span
+            className={`text-[0.72rem] font-bold uppercase tracking-wider truncate px-1 ${
+              isLight ? 'text-slate-800' : 'text-white'
+            }`}
+          >
             {partner.name}
           </span>
         ) : (
@@ -139,7 +169,7 @@ export function LegacyPartnerCard({
             decoding="async"
             onLoad={() => setImageLoaded(true)}
             onError={() => setImageError(true)}
-            className={`max-w-full max-h-full object-contain filter brightness-110 contrast-105 transition-all duration-300 group-hover:scale-105 ${
+            className={`max-w-full max-h-full object-contain filter contrast-105 transition-all duration-300 group-hover:scale-105 ${
               imageLoaded ? 'opacity-100' : 'opacity-0'
             }`}
           />
