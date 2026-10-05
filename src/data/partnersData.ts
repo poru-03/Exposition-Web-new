@@ -62,7 +62,7 @@ export const ISSUE_22_PARTNERS: Partner[] = [
     category: 'Official Photography & Media Partner',
     image: '/resources/partners/FOS-media.jpg',
     accentColor: '#8a2be2',
-    bgMode: 'dark',
+    bgMode: 'light',
     description:
       'Official photography and media coverage partner documenting key moments and broadcast coverage for Exposition Issue 22.',
   },
@@ -82,7 +82,7 @@ export const LEGACY_PARTNERS: Partner[] = [
     category: 'Youth & Brand Collaboration',
     image: '/resources/partners/rexona.png',
     accentColor: '#d97706',
-    bgMode: 'dark',
+    bgMode: 'light',
     description: 'Title partner for previous editions of Exposition magazine.',
   },
   {
@@ -102,7 +102,7 @@ export const LEGACY_PARTNERS: Partner[] = [
     category: 'FinTech Infrastructure',
     image: '/resources/partners/gtn-group.png',
     accentColor: '#38bdf8',
-    bgMode: 'dark',
+    bgMode: 'light',
     description: 'FinTech and institutional investment infrastructure partner.',
   },
   {
@@ -122,7 +122,7 @@ export const LEGACY_PARTNERS: Partner[] = [
     category: 'Enterprise IT Solutions',
     image: '/resources/partners/celsius-it.png',
     accentColor: '#cbd5e1',
-    bgMode: 'dark',
+    bgMode: 'light',
     description: 'Cloud technology and digital engineering solutions partner.',
   },
   {
@@ -132,7 +132,7 @@ export const LEGACY_PARTNERS: Partner[] = [
     category: 'Digital Media & Broadcast',
     image: '/resources/partners/digital-365.png',
     accentColor: '#cbd5e1',
-    bgMode: 'dark',
+    bgMode: 'light',
     description: 'Digital media and modern communications partner.',
   },
   {
@@ -162,7 +162,7 @@ export const LEGACY_PARTNERS: Partner[] = [
     category: 'Visual Media',
     image: '/resources/partners/nowyouseeme.png',
     accentColor: '#cbd5e1',
-    bgMode: 'dark',
+    bgMode: 'light',
     description: 'Official event photography and moment capture partner.',
   },
   {

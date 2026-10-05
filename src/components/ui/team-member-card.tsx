@@ -95,13 +95,13 @@ const TeamMemberCard = React.forwardRef<HTMLDivElement, TeamMemberCardProps>(
           "--gold-color": themeColor,
         } as React.CSSProperties}
         className={cn(
-          "group relative w-full aspect-[3/4] max-w-[320px] rounded-2xl overflow-hidden shadow-xl select-none cursor-pointer border border-white/10 bg-[#121212] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#E8C896]/40 hover:shadow-[0_20px_50px_rgba(0,0,0,0.85)]",
+          "group relative w-full aspect-[3/4] max-w-[320px] rounded-2xl overflow-hidden shadow-xl select-none cursor-pointer border border-white/10 bg-black transition-all duration-300 hover:-translate-y-1.5 hover:border-[#E8C896]/40 hover:shadow-[0_20px_50px_rgba(0,0,0,0.85)]",
           className
         )}
         {...props}
       >
         {/* 1. Full-Bleed Photo with natural realistic color correction & normal blend mode */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden bg-[#121212] flex items-center justify-center">
+        <div className="absolute inset-0 w-full h-full overflow-hidden bg-black flex items-center justify-center">
           {!hasError && imgSrc ? (
             <img
               src={imgSrc}

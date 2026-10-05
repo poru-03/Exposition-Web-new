@@ -46,7 +46,6 @@ export function VerticalPartnerCard({
 }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
-  const isDark = partner.bgMode === 'dark';
 
   return (
     <div
@@ -58,28 +57,14 @@ export function VerticalPartnerCard({
         style={{ backgroundColor: partner.accentColor || '#B8894F' }}
       />
 
-      {/* Top Media / Logo Display Container */}
-      <div
-        className={`relative w-full h-32 sm:h-36 flex items-center justify-center p-3 rounded-xl overflow-hidden transition-colors ${
-          isDark
-            ? 'bg-[#181818] border border-white/10'
-            : 'bg-white border border-white/10 shadow-inner'
-        }`}
-      >
+      {/* Top Media / Logo Display Container - Uniform White Background */}
+      <div className="relative w-full h-32 sm:h-36 flex items-center justify-center p-3 rounded-xl overflow-hidden transition-colors bg-white border border-white/10 shadow-inner">
         {!imageLoaded && !imageError && (
-          <div
-            className={`absolute inset-0 rounded-xl animate-pulse ${
-              isDark ? 'bg-white/5' : 'bg-slate-100'
-            }`}
-          />
+          <div className="absolute inset-0 rounded-xl animate-pulse bg-slate-100" />
         )}
 
         {imageError ? (
-          <span
-            className={`text-xs font-black uppercase tracking-wider truncate px-2 ${
-              isDark ? 'text-white' : 'text-slate-800'
-            }`}
-          >
+          <span className="text-xs font-black uppercase tracking-wider truncate px-2 text-slate-800">
             {partner.name}
           </span>
         ) : (
@@ -131,34 +116,19 @@ export function LegacyPartnerCard({
 }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
-  const isLight = partner.bgMode === 'light';
 
   return (
     <div
       className="group relative w-[175px] sm:w-[195px] md:w-[210px] rounded-xl overflow-hidden bg-[#121212] border border-white/10 shadow-[0_8px_20px_rgba(0,0,0,0.7)] p-4 flex flex-col items-center justify-between transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-white/25 hover:shadow-[0_12px_28px_rgba(0,0,0,0.9)] shrink-0 select-none will-change-transform text-center gap-3"
     >
-      {/* Top Media / Logo Display Container */}
-      <div
-        className={`relative w-full h-22 sm:h-24 flex items-center justify-center p-2 rounded-lg overflow-hidden transition-colors ${
-          isLight
-            ? 'bg-white border border-white/10 shadow-sm'
-            : 'bg-[#181818] border border-white/5'
-        }`}
-      >
+      {/* Top Media / Logo Display Container - Uniform White Background */}
+      <div className="relative w-full h-22 sm:h-24 flex items-center justify-center p-2 rounded-lg overflow-hidden transition-colors bg-white border border-white/10 shadow-sm">
         {!imageLoaded && !imageError && (
-          <div
-            className={`absolute inset-0 rounded-lg animate-pulse ${
-              isLight ? 'bg-slate-200' : 'bg-white/5'
-            }`}
-          />
+          <div className="absolute inset-0 rounded-lg animate-pulse bg-slate-200" />
         )}
 
         {imageError ? (
-          <span
-            className={`text-[0.72rem] font-bold uppercase tracking-wider truncate px-1 ${
-              isLight ? 'text-slate-800' : 'text-white'
-            }`}
-          >
+          <span className="text-[0.72rem] font-bold uppercase tracking-wider truncate px-1 text-slate-800">
             {partner.name}
           </span>
         ) : (
