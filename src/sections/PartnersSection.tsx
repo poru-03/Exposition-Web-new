@@ -30,8 +30,8 @@ function getTierTextColor(tier: string) {
   if (t.includes('gold') || t.includes('studio')) {
     return 'text-[#E8C896] drop-shadow-[0_0_10px_rgba(232,200,150,0.3)]';
   }
-  if (t.includes('silver') || t.includes('printing')) {
-    return 'text-[#E8C896] drop-shadow-[0_0_10px_rgba(232,200,150,0.3)]';
+  if (t.includes('silver') || t.includes('printing') || t.includes('media')) {
+    return 'text-[#38bdf8] drop-shadow-[0_0_10px_rgba(56,189,248,0.3)]';
   }
   return 'text-[#cd7f32] drop-shadow-[0_0_10px_rgba(205,127,50,0.3)]';
 }
@@ -57,14 +57,14 @@ export function VerticalPartnerCard({
         style={{ backgroundColor: partner.accentColor || '#B8894F' }}
       />
 
-      {/* Top Media / Logo Display Container */}
-      <div className="relative w-full h-32 sm:h-36 flex items-center justify-center p-3 rounded-xl bg-white border border-white/10 overflow-hidden shadow-inner">
+      {/* Top Media / Logo Display Container - Uniform White Background */}
+      <div className="relative w-full h-32 sm:h-36 flex items-center justify-center p-3 rounded-xl overflow-hidden transition-colors bg-white border border-white/10 shadow-inner">
         {!imageLoaded && !imageError && (
-          <div className="absolute inset-0 rounded-xl bg-slate-100 animate-pulse" />
+          <div className="absolute inset-0 rounded-xl animate-pulse bg-slate-100" />
         )}
 
         {imageError ? (
-          <span className="text-xs font-black text-slate-800 uppercase tracking-wider truncate px-2">
+          <span className="text-xs font-black uppercase tracking-wider truncate px-2 text-slate-800">
             {partner.name}
           </span>
         ) : (
@@ -121,14 +121,14 @@ export function LegacyPartnerCard({
     <div
       className="group relative w-[175px] sm:w-[195px] md:w-[210px] rounded-xl overflow-hidden bg-[#121212] border border-white/10 shadow-[0_8px_20px_rgba(0,0,0,0.7)] p-4 flex flex-col items-center justify-between transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-white/25 hover:shadow-[0_12px_28px_rgba(0,0,0,0.9)] shrink-0 select-none will-change-transform text-center gap-3"
     >
-      {/* Top Media / Logo Display Container */}
-      <div className="relative w-full h-22 sm:h-24 flex items-center justify-center p-2 rounded-lg bg-[#181818] border border-white/5 overflow-hidden">
+      {/* Top Media / Logo Display Container - Uniform White Background */}
+      <div className="relative w-full h-22 sm:h-24 flex items-center justify-center p-2 rounded-lg overflow-hidden transition-colors bg-white border border-white/10 shadow-sm">
         {!imageLoaded && !imageError && (
-          <div className="absolute inset-0 rounded-lg bg-white/5 animate-pulse" />
+          <div className="absolute inset-0 rounded-lg animate-pulse bg-slate-200" />
         )}
 
         {imageError ? (
-          <span className="text-[0.72rem] font-bold text-white uppercase tracking-wider truncate px-1">
+          <span className="text-[0.72rem] font-bold uppercase tracking-wider truncate px-1 text-slate-800">
             {partner.name}
           </span>
         ) : (
@@ -139,7 +139,7 @@ export function LegacyPartnerCard({
             decoding="async"
             onLoad={() => setImageLoaded(true)}
             onError={() => setImageError(true)}
-            className={`max-w-full max-h-full object-contain filter brightness-110 contrast-105 transition-all duration-300 group-hover:scale-105 ${
+            className={`max-w-full max-h-full object-contain filter contrast-105 transition-all duration-300 group-hover:scale-105 ${
               imageLoaded ? 'opacity-100' : 'opacity-0'
             }`}
           />
@@ -193,45 +193,6 @@ export default function PartnersSection() {
     }, 2500);
   };
 
-  const handleDownloadGuide = () => {
-    // Generate lightweight prospectus document for instant download
-    const prospectusText =
-      `EXPOSITION ISSUE 22 - CORPORATE PARTNERSHIP PROSPECTUS\n\n` +
-      `Thank you for your interest in partnering with Exposition Issue 22.\n` +
-      `Published by the Department of Industrial Management, Faculty of Science, University of Kelaniya.\n\n` +
-      `==================================================================\n` +
-      `PARTNERSHIP TIERS & CORPORATE COLLABORATIONS\n` +
-      `==================================================================\n\n` +
-      `1. TITLE & PLATINUM PARTNER\n` +
-      `   - Main-stage keynote brand prominence & opening ceremony address\n` +
-      `   - TechEvent Hub grand naming rights & primary logo placement\n` +
-      `   - Priority recruitment access to elite engineering and tech undergraduates\n` +
-      `   - Full 2-page spread feature in the Exposition Issue 22 Magazine\n\n` +
-      `2. GOLD & SILVER PARTNERS\n` +
-      `   - Executive panel presence & dedicated technical track host\n` +
-      `   - Premium exhibition pavilion booth & digital platform integration\n` +
-      `   - 1-page full feature in Exposition Issue 22 Magazine\n\n` +
-      `3. OFFICIAL CATEGORY PARTNERS (Studio, Printing, Media, EdTech)\n` +
-      `   - Co-branded category recognition across print and digital media\n` +
-      `   - Direct feature across official podcast, YouTube & social channels\n` +
-      `   - VIP delegate access and corporate accreditation\n\n` +
-      `CONTACT & INQUIRIES:\n` +
-      `Email: exposition@kln.ac.lk\n` +
-      `Web: https://exposition.lk\n` +
-      `Department of Industrial Management, University of Kelaniya, Sri Lanka.`;
-
-    const blob = new Blob([prospectusText], {
-      type: 'text/plain;charset=utf-8',
-    });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'Exposition_Issue_22_Partnership_Prospectus.txt';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  };
 
   return (
     <section
@@ -269,13 +230,16 @@ export default function PartnersSection() {
         {/* Integrated Partnership CTA Block */}
         <ScrollReveal className="mt-8 sm:mt-10 max-w-2xl mx-auto text-center px-4">
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-            <button
-              onClick={handleDownloadGuide}
+            <a
+              href="/resources/partners/Exposition%20Issue%2022%20Partnership%20Proposal.pdf"
+              download="Exposition Issue 22 Partnership Proposal.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-[#B8894F]/50 bg-[#181818]/90 px-6 py-2.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#E8C896] shadow-xl backdrop-blur-md hover:bg-[#B8894F]/15 hover:border-[#E8C896] transition-all duration-300 active:scale-95 cursor-pointer"
             >
               <Download className="h-4 w-4" />
               <span>Partnership Guide</span>
-            </button>
+            </a>
 
             <button
               onClick={() => setIsFormOpen(true)}

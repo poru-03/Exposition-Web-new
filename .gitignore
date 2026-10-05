@@ -8,5 +8,6 @@ dist-ssr
 /Resources/
 public/resources/team/edited/
 *.pdf
+!public/resources/partners/*.pdf
 scratch_*.png
 yt.html

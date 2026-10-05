@@ -40,52 +40,78 @@
   --text-muted-gray-hover: #D8D8D8;
 }
 
-h1, h2, h3 { font-family: var(--font-heading); }
-body { font-family: var(--font-body); }
-code, pre, .font-mono { font-family: var(--font-accent); }
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+code,
+pre,
+.font-mono {
+  font-family: var(--font-accent);
+}
 
 /* Headings — tighter tracking as size increases */
-h1, .text-h1 {
+h1,
+.text-h1 {
   font-size: 3.5rem;
-  letter-spacing: -0.02em;   /* -2% */
+  letter-spacing: -0.02em;
+  /* -2% */
   line-height: 1.1;
 }
 
-h2, .text-h2 {
+h2,
+.text-h2 {
   font-size: 2.5rem;
-  letter-spacing: -0.015em;  /* -1.5% */
+  letter-spacing: -0.015em;
+  /* -1.5% */
   line-height: 1.15;
 }
 
-h3, .text-h3 {
+h3,
+.text-h3 {
   font-size: 1.75rem;
-  letter-spacing: -0.01em;   /* -1% */
+  letter-spacing: -0.01em;
+  /* -1% */
   line-height: 1.2;
 }
 
-h4, .text-h4 {
+h4,
+.text-h4 {
   font-size: 1.25rem;
-  letter-spacing: -0.005em;  /* -0.5% */
+  letter-spacing: -0.005em;
+  /* -0.5% */
   line-height: 1.3;
 }
 
 /* Body text — near zero, don't over-tighten */
-body, p {
+body,
+p {
   font-size: 1rem;
   letter-spacing: 0;
   line-height: 1.6;
 }
 
 /* Small text / labels / eyebrows — needs MORE space, not less */
-.label, .eyebrow, .badge, small {
+.label,
+.eyebrow,
+.badge,
+small {
   font-size: 0.75rem;
-  letter-spacing: 0.08em;    /* +8%, often paired with uppercase */
+  letter-spacing: 0.08em;
+  /* +8%, often paired with uppercase */
   text-transform: uppercase;
   font-weight: 600;
 }
 
 /* Buttons — slightly open, feels more crafted */
-button, .btn {
+button,
+.btn {
   letter-spacing: 0.01em;
 }
 
@@ -350,7 +376,8 @@ body {
 
 /* Giant Background Parallax Text Masking */
 .footer-giant-bg-text {
-  font-size: clamp(4.5rem, 18.5vw, 20.5vw);
+  font-family: 'Kanit', sans-serif;
+  font-size: clamp(4.5rem, 18vw, 20.5vw);
   line-height: 0.72;
   font-weight: 900;
   letter-spacing: -0.03em;
@@ -381,6 +408,7 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
   width: 0px;
