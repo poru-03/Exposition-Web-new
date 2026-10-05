@@ -194,10 +194,9 @@ export default function FooterSection({
       if (giantTextRef.current) {
         gsap.fromTo(
           giantTextRef.current,
-          { y: '2vh', scale: 0.95, opacity: 0 },
+          { y: '3vh', opacity: 0.3 },
           {
             y: '0vh',
-            scale: 1,
             opacity: 1,
             ease: 'power1.out',
             scrollTrigger: {
@@ -228,12 +227,21 @@ export default function FooterSection({
       <div className="footer-aurora absolute left-1/2 top-1/2 h-[50vh] w-[75vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[90px] pointer-events-none z-0" />
       <div className="footer-bg-grid absolute inset-0 z-0 pointer-events-none" />
 
-      {/* Giant Parallax Background Outlined Text */}
+      {/* Giant Parallax Background Edge-to-Edge Bold Outlined Text */}
       <div
         ref={giantTextRef}
-        className="footer-giant-bg-text absolute -bottom-[1vh] left-1/2 -translate-x-1/2 w-full px-2 text-center whitespace-nowrap z-0 pointer-events-none select-none"
+        className="footer-giant-bg-text absolute -bottom-[1vh] left-0 right-0 w-full flex justify-between items-baseline z-0 pointer-events-none select-none px-0"
       >
-        EXPOSITION
+        <span>E</span>
+        <span>X</span>
+        <span>P</span>
+        <span>O</span>
+        <span>S</span>
+        <span>I</span>
+        <span>T</span>
+        <span>I</span>
+        <span>O</span>
+        <span>N</span>
       </div>
 
       {/* ================= 1. STRAIGHT MARQUEE STRIP ================= */}
