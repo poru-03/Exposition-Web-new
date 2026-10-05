@@ -1,6 +1,7 @@
 import AnimatedText from '../components/AnimatedText';
 import ContactButton from '../components/ContactButton';
 import FadeIn from '../components/FadeIn';
+import { PerspectiveBook } from '@/components/ui/perspective-book';
 
 const PAST_MAGAZINES = [
   {
@@ -69,10 +70,17 @@ export default function AboutSection() {
 
           {/* Read Our Previous Publications (3D Magazine Books) */}
           <FadeIn delay={0.1} y={20} className="flex flex-col items-center gap-4 py-4 my-2">
-            <span className="text-xs sm:text-sm font-mono uppercase tracking-[0.25em] text-[#E8C896] font-semibold text-center drop-shadow">
+            <span
+              className="text-sm sm:text-base md:text-lg tracking-wide text-[#E8C896] italic text-center drop-shadow"
+              style={{
+                fontFamily: "'Jost', sans-serif",
+                fontWeight: 500,
+                fontStyle: 'italic',
+              }}
+            >
               Read Our Previous Publications
             </span>
-            <div className="flex items-center justify-center gap-4 sm:gap-6 flex-wrap">
+            <div className="flex items-center justify-center gap-6 sm:gap-10 md:gap-12 flex-wrap pt-2">
               {PAST_MAGAZINES.map((mag) => (
                 <a
                   key={mag.issueNum}
@@ -80,22 +88,21 @@ export default function AboutSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   title={`Open ${mag.issueLabel} (${mag.year}) in new tab`}
-                  className="group relative flex flex-col justify-between w-28 h-40 sm:w-36 sm:h-52 md:w-40 md:h-56 rounded-xl p-3 border border-[#B8894F]/40 bg-[#121212] shadow-[0_15px_35px_rgba(0,0,0,0.95),inset_4px_0_8px_rgba(255,255,255,0.15)] transition-all duration-300 hover:-translate-y-3 hover:rotate-[-4deg] hover:border-[#E8C896] hover:shadow-[0_25px_45px_rgba(184,137,79,0.5)] cursor-pointer overflow-hidden text-left"
+                  className="cursor-pointer block group/book focus:outline-none"
                 >
-                  {/* PDF Cover Image */}
-                  <img
-                    src={mag.coverImg}
-                    alt={`${mag.issueLabel} Cover`}
-                    className="absolute inset-0 w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-300"
-                  />
-
-                  {/* Dark Gradient Overlay on Top Edge */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/70 rounded-xl" />
-
-                  {/* Book Spine Highlight Effect */}
-                  <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-r from-white/40 via-white/15 to-transparent z-10" />
-
-
+                  <PerspectiveBook size="sm" textured className="p-0 border-0 bg-transparent overflow-hidden">
+                    <img
+                      src={mag.coverImg}
+                      alt={`${mag.issueLabel} Cover`}
+                      className="absolute inset-0 w-full h-full object-cover rounded-[inherit]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent rounded-[inherit] pointer-events-none" />
+                    <div className="relative z-10 mt-auto p-2.5">
+                      <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+                        {mag.issueLabel}
+                      </span>
+                    </div>
+                  </PerspectiveBook>
                 </a>
               ))}
             </div>
@@ -119,7 +126,7 @@ export default function AboutSection() {
         </div>
 
         <FadeIn delay={0.15} y={20}>
-          <ContactButton label="Contact Us" />
+          <ContactButton label="Contact Us" href="https://www.imssa.lk/" />
         </FadeIn>
       </div>
     </section>

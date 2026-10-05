@@ -37,7 +37,8 @@ export interface TeamMemberCardProps extends React.HTMLAttributes<HTMLDivElement
   position: string;
   socials: TeamMemberSocials;
   themeColor?: string; // HSL value string, default: "43 74% 66%" (warm gold)
-  isActive?: boolean; // Controls whether card photo is full color (e.g. centered in carousel)
+  isActive?: boolean;
+  imageStyle?: React.CSSProperties;
 }
 
 const TeamMemberCard = React.forwardRef<HTMLDivElement, TeamMemberCardProps>(
@@ -51,6 +52,7 @@ const TeamMemberCard = React.forwardRef<HTMLDivElement, TeamMemberCardProps>(
       socials,
       themeColor = "43 74% 66%",
       isActive = false,
+      imageStyle,
       ...props
     },
     ref
@@ -66,102 +68,92 @@ const TeamMemberCard = React.forwardRef<HTMLDivElement, TeamMemberCardProps>(
           "--gold-color": themeColor,
         } as React.CSSProperties}
         className={cn(
-          "group relative w-full aspect-[3/4] max-w-[320px] rounded-2xl overflow-hidden shadow-xl select-none cursor-pointer border border-white/10 bg-[#121212] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(212,175,55,0.25)]",
+          "group relative w-full aspect-[3/4] max-w-[320px] rounded-2xl overflow-hidden shadow-xl select-none cursor-pointer border border-white/10 bg-[#121212] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#E8C896]/40 hover:shadow-[0_20px_50px_rgba(0,0,0,0.85)]",
           className
         )}
         {...props}
       >
-        {/* 1. Full-Bleed Photo (Grayscale -> Color when Active or Hovered + Scale on Hover) */}
-        <div
-          className={cn(
-            "absolute inset-0 w-full h-full bg-cover bg-[position:center_5%] origin-top filter transition-all duration-700 ease-in-out group-hover:scale-105",
-            isActive
-              ? "grayscale-0 contrast-100"
-              : "grayscale contrast-110 group-hover:grayscale-0 group-hover:contrast-100"
-          )}
-          style={{ backgroundImage: `url("${encodeURI(photoUrl)}")` }}
-        >
+        {/* 1. Full-Bleed Photo with natural realistic color correction & normal blend mode */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden bg-[#121212]">
           <img
             src={photoUrl}
             alt={name}
-            className="w-full h-full object-cover object-[center_5%] opacity-0"
+            className="w-full h-full object-cover object-[center_top] transition-transform duration-500 ease-out group-hover:scale-105"
+            style={{
+              opacity: 1,
+              mixBlendMode: "normal",
+              filter: "brightness(0.95) contrast(1.08) saturate(1.05)",
+              ...imageStyle,
+            }}
           />
         </div>
 
-        {/* 2. Default State Dark Gradient Overlay at Bottom (~25% height) */}
+        {/* 2. Dark Gradient Overlay at Bottom (transparent to rgba(0,0,0,.65)) */}
         <div
-          className="absolute inset-0 pointer-events-none transition-opacity duration-300 ease-in-out group-hover:opacity-0"
+          className="absolute inset-0 pointer-events-none"
           style={{
-            background: `linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.5) 25%, transparent 50%)`,
+            background: "linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.35) 32%, transparent 65%)",
           }}
         />
 
-        {/* 3. Semi-Transparent Golden Gradient Overlay (Increased height to ~58% reveal) */}
-        <div
-          className="absolute inset-x-0 bottom-0 h-[58%] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out pointer-events-none group-hover:pointer-events-auto"
-          style={{
-            background: `linear-gradient(to top, hsl(var(--gold-color) / 0.88), hsl(var(--gold-color) / 0.55) 45%, transparent 100%)`,
-          }}
-        />
-
-        {/* 4. Name, Position & Staggered Social Icons Container */}
-        <div className="relative z-10 h-full p-6 flex flex-col justify-end items-center text-center pointer-events-none">
-          <div className="w-full flex flex-col items-center justify-center transition-transform duration-400 ease-out group-hover:-translate-y-2">
-            {/* Member Name */}
-            <h3 className="text-lg sm:text-2xl font-extrabold uppercase tracking-tight text-white group-hover:text-neutral-950 transition-colors duration-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] group-hover:drop-shadow-none leading-tight line-clamp-2 sm:line-clamp-1 w-full text-center">
+        {/* 3. Name, Role & Social Icons Container */}
+        <div className="relative z-10 h-full p-4 sm:p-5 md:p-6 flex flex-col justify-end items-center text-center pointer-events-none">
+          <div className="w-full flex flex-col items-center justify-end min-h-[4.25rem] sm:min-h-[4.75rem] transition-transform duration-300 ease-out group-hover:-translate-y-2">
+            {/* Full Name: no truncation, wraps onto second line naturally */}
+            <h3 className="text-base sm:text-lg md:text-xl font-extrabold uppercase tracking-tight text-white leading-tight w-full text-center whitespace-normal [overflow-wrap:anywhere] break-words drop-shadow-[0_2px_5px_rgba(0,0,0,0.95)]">
               {name}
             </h3>
 
-            {/* Member Position */}
-            <p className="text-[11px] sm:text-sm font-bold uppercase tracking-wider text-[#E8C896] group-hover:text-neutral-900 transition-colors duration-300 mt-1 line-clamp-2 sm:line-clamp-1 w-full text-center drop-shadow">
+            {/* Role Label */}
+            <p className="text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-wider text-[#E8C896] mt-1.5 w-full text-center whitespace-normal [overflow-wrap:anywhere] break-words drop-shadow-[0_1px_3px_rgba(0,0,0,0.95)]">
               {position}
             </p>
 
-            {/* Social Icons Row (Black circular icon buttons, fade in + slide up staggered) */}
-            <div className="mt-4 flex items-center justify-center gap-2.5">
-              {/* Mail / Email Icon (Delay 100ms) */}
+            {/* Social Icons Row */}
+            <div className="mt-3 flex items-center justify-center gap-2">
+              {/* Mail / Email Icon */}
               {emailLink && (
                 <a
                   href={`mailto:${emailLink}`}
                   aria-label="Email"
-                  className="size-8 rounded-full bg-neutral-950 text-white flex items-center justify-center shadow-md 
+                  className="size-7 sm:size-8 rounded-full bg-neutral-900/90 border border-white/20 text-white flex items-center justify-center shadow-md 
                              opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0
-                             transition-all duration-300 ease-out delay-100
-                             hover:bg-black hover:scale-110 active:scale-95 pointer-events-none group-hover:pointer-events-auto"
+                             transition-all duration-300 ease-out delay-75
+                             hover:bg-[#E8C896] hover:text-black hover:scale-110 active:scale-95 pointer-events-none group-hover:pointer-events-auto"
                 >
-                  <Mail className="size-4 text-white" />
+                  <Mail className="size-3.5 sm:size-4 text-inherit" />
                 </a>
               )}
 
-              {/* LinkedIn Icon (Delay 200ms) */}
+              {/* LinkedIn Icon */}
               {socials.linkedin && (
                 <a
                   href={socials.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="size-8 rounded-full bg-neutral-950 text-white flex items-center justify-center shadow-md 
+                  className="size-7 sm:size-8 rounded-full bg-neutral-900/90 border border-white/20 text-white flex items-center justify-center shadow-md 
                              opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0
-                             transition-all duration-300 ease-out delay-200
-                             hover:bg-black hover:scale-110 active:scale-95 pointer-events-none group-hover:pointer-events-auto"
+                             transition-all duration-300 ease-out delay-150
+                             hover:bg-[#E8C896] hover:text-black hover:scale-110 active:scale-95 pointer-events-none group-hover:pointer-events-auto"
                 >
-                  <Linkedin className="size-4 text-white" />
+                  <Linkedin className="size-3.5 sm:size-4 text-inherit" />
                 </a>
               )}
 
-              {/* WhatsApp Icon (Delay 300ms) */}
+              {/* WhatsApp Icon */}
               {socials.whatsapp && (
                 <a
                   href={socials.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="WhatsApp"
-                  className="size-8 rounded-full bg-neutral-950 text-white flex items-center justify-center shadow-md 
+                  className="size-7 sm:size-8 rounded-full bg-neutral-900/90 border border-white/20 text-white flex items-center justify-center shadow-md 
                              opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0
-                             transition-all duration-300 ease-out delay-300
-                             hover:bg-black hover:scale-110 active:scale-95 pointer-events-none group-hover:pointer-events-auto"
+                             transition-all duration-300 ease-out delay-200
+                             hover:bg-[#E8C896] hover:text-black hover:scale-110 active:scale-95 pointer-events-none group-hover:pointer-events-auto"
                 >
-                  <WhatsAppIcon className="size-4 text-white" />
+                  <WhatsAppIcon className="size-3.5 sm:size-4 text-inherit" />
                 </a>
               )}
             </div>

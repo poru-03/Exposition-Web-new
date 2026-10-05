@@ -13,15 +13,15 @@ import {
 import { cn } from "@/lib/utils"
 
 const processCardVariants = cva(
-  "flex border backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl transition-colors duration-300",
+  "flex border rounded-3xl overflow-hidden shadow-2xl transition-colors duration-300",
   {
     variants: {
       variant: {
         dark:
-          "border-[#D7E2EA]/15 text-[#D7E2EA] bg-[#141414]/95 hover:border-[#D7E2EA]/30 shadow-[0_20px_50px_rgba(0,0,0,0.7)]",
+          "border-white/15 text-white bg-[#121212] hover:border-[#E8C896]/40 shadow-[0_25px_60px_rgba(0,0,0,0.95)]",
         indigo:
-          "border-[#D7E2EA]/15 text-[#D7E2EA] bg-[#141414]/95 hover:border-[#D7E2EA]/30 shadow-[0_20px_50px_rgba(0,0,0,0.7)]",
-        light: "shadow-lg bg-white/90 text-[#0C0C0C] border-black/10",
+          "border-white/15 text-white bg-[#121212] hover:border-[#E8C896]/40 shadow-[0_25px_60px_rgba(0,0,0,0.95)]",
+        light: "shadow-lg bg-white text-[#0C0C0C] border-black/10",
       },
       size: {
         sm: "min-w-[30%] max-w-[30%]",

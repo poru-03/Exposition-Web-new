@@ -4,15 +4,10 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
 import { Marquee } from '@/components/ui/3d-testimonails';
 import ScrollReveal from '../components/ScrollReveal';
-import { SocialTooltip, SocialItem } from '@/components/ui/social-media';
 import {
   Star,
   ChevronLeft,
   ChevronRight,
-  Github,
-  Twitter,
-  Youtube,
-  Linkedin,
 } from 'lucide-react';
 
 export const FEATURED_REVIEWS = [
@@ -92,22 +87,6 @@ export const FEATURED_REVIEWS = [
     image: '/resources/speakers/upendra pieris.png',
     socials: {
       github: 'https://github.com',
-      linkedin: 'https://linkedin.com',
-    },
-  },
-  {
-    id: 'feat-1',
-    name: 'Michael Chen',
-    title: 'Senior Software Engineer, Cloud Infrastructure',
-    company: 'Distributed Systems & Web3D',
-    quote:
-      'Working with this team completely changed our infrastructure game. The support and expertise were incredible. They delivered beyond our expectations and helped us scale to millions of users.',
-    image:
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop',
-    socials: {
-      github: 'https://github.com',
-      twitter: 'https://twitter.com',
-      youtube: 'https://www.youtube.com/@ExpositionMIT',
       linkedin: 'https://linkedin.com',
     },
   },
@@ -415,56 +394,6 @@ export default function ReviewsSection() {
                   </div>
                 </div>
 
-                {/* Circular Social Icons using SocialTooltip */}
-                <div className="pt-4 mt-3 border-t border-white/10">
-                  {(() => {
-                    const reviewSocialItems: SocialItem[] = [];
-                    if (activeFeatured.socials.github) {
-                      reviewSocialItems.push({
-                        href: activeFeatured.socials.github,
-                        ariaLabel: 'GitHub',
-                        tooltip: 'GitHub',
-                        color: '#333333',
-                        icon: <Github className="size-4" />,
-                      });
-                    }
-                    if (activeFeatured.socials.twitter) {
-                      reviewSocialItems.push({
-                        href: activeFeatured.socials.twitter,
-                        ariaLabel: 'Twitter',
-                        tooltip: 'Twitter',
-                        color: '#1da1f2',
-                        icon: <Twitter className="size-4" />,
-                      });
-                    }
-                    if (activeFeatured.socials.youtube) {
-                      reviewSocialItems.push({
-                        href: activeFeatured.socials.youtube,
-                        ariaLabel: 'YouTube',
-                        tooltip: 'YouTube',
-                        color: '#ff0000',
-                        icon: <Youtube className="size-4" />,
-                      });
-                    }
-                    if (activeFeatured.socials.linkedin) {
-                      reviewSocialItems.push({
-                        href: activeFeatured.socials.linkedin,
-                        ariaLabel: 'LinkedIn',
-                        tooltip: 'LinkedIn',
-                        color: '#0077b5',
-                        icon: <Linkedin className="size-4" />,
-                      });
-                    }
-                    return (
-                      <SocialTooltip
-                        items={reviewSocialItems}
-                        containerSizeClass="w-9 h-9"
-                        iconSizeClass="w-4 h-4"
-                        className="justify-start gap-2.5"
-                      />
-                    );
-                  })()}
-                </div>
               </div>
             </motion.div>
           </AnimatePresence>

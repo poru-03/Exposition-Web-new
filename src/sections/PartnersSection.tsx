@@ -6,7 +6,6 @@ import {
   X,
   CheckCircle2,
   Send,
-  Sparkles,
   Crown,
   Medal,
   Award,
@@ -212,7 +211,7 @@ export function VerticalPartnerCard({
   return (
     <div
       onClick={() => onSelect?.(partner)}
-      className="group relative w-[200px] sm:w-[220px] md:w-[240px] rounded-2xl overflow-hidden bg-[#121212] border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.8)] p-5 flex flex-col items-center justify-between transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-white/20 hover:shadow-[0_15px_35px_rgba(0,0,0,0.95)] shrink-0 select-none cursor-pointer will-change-transform text-center gap-4"
+      className="group relative w-[180px] sm:w-[200px] md:w-[215px] rounded-2xl overflow-hidden bg-[#121212] border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.8)] p-4 sm:p-5 flex flex-col items-center justify-between transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-white/20 hover:shadow-[0_15px_35px_rgba(0,0,0,0.95)] shrink-0 select-none cursor-pointer will-change-transform text-center gap-4 m-3 sm:m-4"
     >
       {/* Top Media / Logo Display Container */}
       <div className="relative w-full h-28 sm:h-32 flex items-center justify-center p-2 rounded-xl bg-[#181818] border border-white/5 overflow-hidden">
@@ -365,23 +364,13 @@ export default function PartnersSection() {
 
       {/* Single Continuous Marquee Row of All Partners */}
       <div className="relative w-full overflow-hidden space-y-6 pt-2">
-        {/* Subheader info bar */}
-        <div className="flex items-center justify-between px-[5%] max-w-7xl mx-auto mb-1">
-          <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#9A9A9A] flex items-center gap-2">
-            <span className="size-2 rounded-full bg-[#E8C896] animate-pulse" />
-            Strategic Network ({ALL_PARTNERS.length} Partners)
-          </span>
-          <span className="text-[0.68rem] font-mono text-[#9A9A9A]/60 uppercase tracking-wider hidden sm:inline-block">
-            Hover card to pause stream • Click for details
-          </span>
-        </div>
 
         {/* Single Row: Flows smoothly with all partners */}
         <div className="relative w-full overflow-hidden">
           <Marquee
             pauseOnHover
             repeat={3}
-            className="[--duration:35s] [--gap:1.5rem] py-1"
+            className="[--duration:35s] [--gap:2.25rem] py-4"
           >
             {ALL_PARTNERS.map((partner) => (
               <VerticalPartnerCard
@@ -427,7 +416,7 @@ export default function PartnersSection() {
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 justify-items-center pt-2">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 sm:gap-8 justify-items-center pt-4 pb-6">
                   {ALL_PARTNERS.map((partner) => (
                     <VerticalPartnerCard
                       key={`inline-${partner.id}`}
@@ -504,7 +493,6 @@ export default function PartnersSection() {
                   }}
                   className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#B8894F] to-[#E8C896] py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0C0C0C] shadow-lg hover:brightness-110 transition-all"
                 >
-                  <Sparkles className="size-4" />
                   <span>Explore Partnership Opportunities</span>
                 </button>
               </div>
@@ -556,7 +544,6 @@ export default function PartnersSection() {
                 <>
                   <div className="mb-6 space-y-1">
                     <div className="flex items-center gap-2 text-[#E8C896] text-xs font-semibold uppercase tracking-wider">
-                      <Sparkles className="size-3.5" />
                       Collaborate With Exposition 2025
                     </div>
                     <h3 className="text-2xl sm:text-3xl font-black text-white">Partner Application</h3>

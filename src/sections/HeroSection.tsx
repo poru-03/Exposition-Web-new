@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Sparkles } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+import { ShinyButton } from '../components/ui/shiny-button';
 
 export interface FeaturedHighlight {
   id: string;
@@ -149,14 +150,18 @@ export default function HeroSection() {
             </div>
 
             <h1
-              className="font-black font-serif tracking-tight leading-[1.15] sm:leading-[1.05] italic"
+              className="tracking-tight leading-[1.15] sm:leading-[1.05] italic"
               style={{
-                fontFamily: "'Operetta 52', 'Seraphine Display', 'Fraunces', 'Bodoni Moda', 'Playfair Display', serif",
+                fontFamily: "'Jost', sans-serif",
                 fontSize: 'clamp(1.4rem, 5vw, 4.5rem)',
+                fontWeight: 500,
+                fontStyle: 'italic',
               }}
             >
-              <span className="text-white block">Shaping Ideas.</span>
-              <span className="hero-heading italic block mt-0.5 sm:mt-1">
+              <span className="text-white block italic" style={{ fontWeight: 500, fontStyle: 'italic' }}>
+                Shaping Ideas.
+              </span>
+              <span className="hero-heading italic block mt-0.5 sm:mt-1" style={{ fontWeight: 500, fontStyle: 'italic' }}>
                 Connecting Industry.
               </span>
             </h1>
@@ -185,19 +190,18 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="mt-4 sm:mt-10 flex flex-row items-center gap-2 sm:gap-4 w-full flex-nowrap overflow-x-auto no-scrollbar py-1"
           >
-            <button
+            <ShinyButton
               onClick={() => handleScrollTo(activeItem.targetId)}
-              className="shrink-0 relative inline-flex items-center justify-between gap-1.5 rounded-full border border-[#E8C896]/60 bg-white hover:bg-[#F3E7C4] text-black font-extrabold text-[10px] sm:text-sm uppercase tracking-wider px-3.5 sm:px-7 py-2 sm:py-3.5 shadow-[0_10px_30px_rgba(255,255,255,0.18)] hover:shadow-[0_15px_35px_rgba(232,200,150,0.45)] transition-all duration-300 hover:scale-[1.04] active:scale-95 group cursor-pointer overflow-hidden text-center whitespace-nowrap w-[165px] sm:w-auto"
+              className="shrink-0 w-[165px] sm:w-auto"
             >
               <span className="truncate">Explore {activeItem.title}</span>
-              <ArrowUpRight className="size-3 sm:size-4 shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </button>
+              <ArrowUpRight className="size-3.5 sm:size-4 shrink-0" />
+            </ShinyButton>
 
             <button
               onClick={() => handleScrollTo('about')}
               className="shrink-0 inline-flex items-center justify-center gap-1 sm:gap-2 rounded-full border border-white/20 hover:border-[#E8C896]/60 bg-white/10 hover:bg-white/20 backdrop-blur-md px-3.5 sm:px-7 py-2 sm:py-3.5 text-[10px] sm:text-sm font-semibold uppercase tracking-wider text-white hover:text-[#F3E7C4] shadow-[0_10px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_32px_rgba(184,137,79,0.25)] transition-all duration-300 hover:scale-[1.04] active:scale-95 group cursor-pointer text-center whitespace-nowrap"
             >
-              <Sparkles className="size-3 sm:size-3.5 text-[#E8C896] group-hover:rotate-12 transition-transform duration-300" />
               <span>About Exposition</span>
             </button>
           </motion.div>
@@ -222,16 +226,14 @@ export default function HeroSection() {
                 initial={{ opacity: 0, x: arcOffset + 40 }}
                 animate={{ opacity: 1, x: arcOffset }}
                 transition={{ duration: 0.6, delay: 0.08 * idx }}
-                className={`flex items-center gap-3 sm:gap-4.5 cursor-pointer group transition-opacity transition-scale duration-300 ${
-                  isActive ? 'scale-110 opacity-100' : 'opacity-70 hover:opacity-100 hover:scale-105'
-                }`}
+                className={`flex items-center gap-3 sm:gap-4.5 cursor-pointer group transition-opacity transition-scale duration-300 ${isActive ? 'scale-110 opacity-100' : 'opacity-70 hover:opacity-100 hover:scale-105'
+                  }`}
               >
                 {/* Title & Subtitle next to circle */}
                 <div className="text-right space-y-0.5">
                   <h4
-                    className={`text-xs sm:text-sm font-bold italic tracking-wide transition-colors ${
-                      isActive ? 'text-white' : 'text-zinc-300 group-hover:text-white'
-                    }`}
+                    className={`text-xs sm:text-sm font-bold italic tracking-wide transition-colors ${isActive ? 'text-white' : 'text-zinc-300 group-hover:text-white'
+                      }`}
                     style={{ fontFamily: "'Playfair Display', 'Georgia', serif" }}
                   >
                     {item.title}
@@ -243,11 +245,10 @@ export default function HeroSection() {
 
                 {/* Circular Image Card */}
                 <div
-                  className={`relative rounded-full overflow-hidden transition-all duration-500 shrink-0 shadow-2xl ${
-                    isActive
+                  className={`relative rounded-full overflow-hidden transition-all duration-500 shrink-0 shadow-2xl ${isActive
                       ? 'size-14 sm:size-16 md:size-20 lg:size-[78px] border-2 border-[#E8C896] ring-4 ring-[#B8894F]/30 shadow-[0_0_25px_rgba(232,200,150,0.5)]'
                       : 'size-11 sm:size-13 md:size-15 lg:size-[62px] border border-white/25 group-hover:border-white/60'
-                  }`}
+                    }`}
                 >
                   <img
                     src={item.image}
@@ -271,8 +272,8 @@ export default function HeroSection() {
             key={i}
             onClick={() => setActiveIndex(i)}
             className={`rounded-full transition-all duration-300 ${i === activeIndex
-                ? 'w-2.5 h-6 bg-[#E8C896] shadow-[0_0_12px_rgba(232,200,150,0.8)]'
-                : 'w-2.5 h-2.5 bg-white/30 hover:bg-white/60'
+              ? 'w-2.5 h-6 bg-[#E8C896] shadow-[0_0_12px_rgba(232,200,150,0.8)]'
+              : 'w-2.5 h-2.5 bg-white/30 hover:bg-white/60'
               }`}
             aria-label={`Go to slide ${i + 1}`}
           />

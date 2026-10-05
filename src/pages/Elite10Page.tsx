@@ -5,7 +5,7 @@ import {
   FileCheck,
   Award,
   ArrowLeft,
-  Sparkles,
+  Zap,
   Users,
   Video,
   UserCheck,
@@ -112,7 +112,7 @@ export default function Elite10Page() {
               {
                 title: 'Multi-Disciplinary Excellence',
                 desc: 'Show excellence in leadership, innovation, entrepreneurship, sports, research, or community impact.',
-                icon: Sparkles,
+                icon: Zap,
               },
             ].map((item, idx) => {
               const Icon = item.icon;
