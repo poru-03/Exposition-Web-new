@@ -240,18 +240,16 @@ export default function FooterSection({
         >
           <defs>
             <linearGradient id="giantExpoGold" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#F5E6C8" stopOpacity="0.48" />
-              <stop offset="25%" stopColor="#E8C896" stopOpacity="0.35" />
-              <stop offset="55%" stopColor="#B8894F" stopOpacity="0.18" />
-              <stop offset="85%" stopColor="#0C0C0C" stopOpacity="0" />
+              <stop offset="0%" stopColor="#F5E6C8" stopOpacity="0.55" />
+              <stop offset="30%" stopColor="#E8C896" stopOpacity="0.38" />
+              <stop offset="65%" stopColor="#B8894F" stopOpacity="0.22" />
+              <stop offset="100%" stopColor="#8A6432" stopOpacity="0.10" />
             </linearGradient>
           </defs>
           <g
             transform="translate(0, 788) scale(1, -1.205)"
             fill="url(#giantExpoGold)"
-            stroke="rgba(232, 200, 150, 0.48)"
-            strokeWidth="16"
-            strokeLinejoin="round"
+            stroke="none"
           >
             <path transform="translate(-35, 0)" d="M35 0V644H550V470H277V412H512V232H277V174H550V0Z" />
             <path transform="translate(488, 0)" d="M15 0 259 329 27 644H316L404 525L493 644H782L550 329L794 0H501L404 131L308 0Z" />
