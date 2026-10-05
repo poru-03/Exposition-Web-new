@@ -6,221 +6,129 @@ import {
   X,
   CheckCircle2,
   Send,
-  Crown,
-  Medal,
-  Award,
-  Shield,
-  ArrowUpRight,
+  Sparkles,
 } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
 import { Marquee } from '@/components/ui/3d-testimonails';
-import { ShinyButton } from '@/components/ui/shiny-button';
+import {
+  ISSUE_22_PARTNERS,
+  LEGACY_PARTNERS,
+  type Partner,
+} from '../data/partnersData';
 
-export type PartnerTier = 'Platinum' | 'Gold' | 'Silver' | 'Bronze';
+// Re-export for any external consumers
+export { ISSUE_22_PARTNERS, LEGACY_PARTNERS, type Partner };
+export const ALL_PARTNERS = [...ISSUE_22_PARTNERS, ...LEGACY_PARTNERS];
+export const ROW1_PARTNERS = ISSUE_22_PARTNERS;
+export const ROW2_PARTNERS = LEGACY_PARTNERS;
 
-export type Partner = {
-  id: string;
-  name: string;
-  tier: PartnerTier;
-  category: string;
-  image: string;
-  accentColor: string;
-};
-
-export const ROW1_PARTNERS: Partner[] = [
-  // 1. Platinum (4)
-  {
-    id: 'partner-1',
-    name: 'CodeGen & Vega',
-    tier: 'Platinum',
-    category: 'AI & EV DeepTech',
-    image: '/resources/speakers/harsha.png',
-    accentColor: '#38bdf8',
-  },
-  {
-    id: 'partner-2',
-    name: 'Dialog Axiata',
-    tier: 'Platinum',
-    category: 'Telecommunications & 5G',
-    image: '/resources/speakers/saman perera.png',
-    accentColor: '#38bdf8',
-  },
-  {
-    id: 'partner-3',
-    name: 'Creative Software',
-    tier: 'Platinum',
-    category: 'Global Engineering',
-    image: '/resources/speakers/upendra pieris.png',
-    accentColor: '#38bdf8',
-  },
-  {
-    id: 'partner-4',
-    name: 'GTN Group',
-    tier: 'Platinum',
-    category: 'FinTech Infrastructure',
-    image: '/resources/magazine/GTN Logo_2025-BAwawNw1.png',
-    accentColor: '#38bdf8',
-  },
-  // 2. Gold (4)
-  {
-    id: 'partner-5',
-    name: 'MAS Holdings',
-    tier: 'Gold',
-    category: 'Apparel Tech & Innovation',
-    image: '/resources/speakers/dian gomez.png',
-    accentColor: '#fbbf24',
-  },
-  {
-    id: 'partner-6',
-    name: 'AICPA & CIMA',
-    tier: 'Gold',
-    category: 'Global Finance & Education',
-    image: '/resources/magazine/AICPA_CIMA-BnZ9T7n6.png',
-    accentColor: '#fbbf24',
-  },
-  {
-    id: 'partner-7',
-    name: 'Nestlé',
-    tier: 'Gold',
-    category: 'Sustainable Industry',
-    image: '/resources/magazine/NSTLE-PEELAWAY-A2-R-LS-AW01-DgQ18Hsj.png',
-    accentColor: '#fbbf24',
-  },
-  {
-    id: 'partner-8',
-    name: 'John Keells Holdings',
-    tier: 'Gold',
-    category: 'Corporate Conglomerate',
-    image: '/resources/speakers/dilani alagarathnan.png',
-    accentColor: '#fbbf24',
-  },
-];
-
-export const ROW2_PARTNERS: Partner[] = [
-  // 3. Silver (4)
-  {
-    id: 'partner-9',
-    name: 'N-able',
-    tier: 'Silver',
-    category: 'Enterprise Cloud Systems',
-    image: '/resources/speakers/peterdealmeida.png',
-    accentColor: '#cbd5e1',
-  },
-  {
-    id: 'partner-10',
-    name: 'Bhasha / Helakuru',
-    tier: 'Silver',
-    category: 'Native Tech Ecosystems',
-    image: '/resources/speakers/dhanika perera.png',
-    accentColor: '#cbd5e1',
-  },
-  {
-    id: 'partner-11',
-    name: 'TechLead International',
-    tier: 'Silver',
-    category: 'Core Banking Solutions',
-    image: '/resources/speakers/lasantha.png',
-    accentColor: '#cbd5e1',
-  },
-  {
-    id: 'partner-12',
-    name: 'Digital 365',
-    tier: 'Silver',
-    category: 'Digital Media & Broadcast',
-    image: '/resources/magazine/digital365-ofXxKHub.png',
-    accentColor: '#cbd5e1',
-  },
-  // 4. Bronze (3)
-  {
-    id: 'partner-13',
-    name: 'Kassa Advertising',
-    tier: 'Bronze',
-    category: 'Creative Communications',
-    image: '/resources/magazine/Kassa Advertising Logo White-DIwYGvhd.png',
-    accentColor: '#d97706',
-  },
-  {
-    id: 'partner-14',
-    name: 'Edify Education',
-    tier: 'Bronze',
-    category: 'EdTech & Skills Platform',
-    image: '/resources/magazine/Edify.png',
-    accentColor: '#d97706',
-  },
-  {
-    id: 'partner-15',
-    name: 'Rexona Unilever',
-    tier: 'Bronze',
-    category: 'Youth & Brand Partner',
-    image: '/resources/magazine/rexona-2048-B0Rd5_-Q.png',
-    accentColor: '#d97706',
-  },
-];
-
-export const ALL_PARTNERS = [...ROW1_PARTNERS, ...ROW2_PARTNERS];
-
-function getTierTextColor(tier: PartnerTier) {
-  switch (tier) {
-    case 'Platinum':
-      return 'text-[#38bdf8] drop-shadow-[0_0_10px_rgba(56,189,248,0.3)]'; // Sky Blue
-    case 'Gold':
-      return 'text-[#E8C896] drop-shadow-[0_0_10px_rgba(232,200,150,0.3)]'; // Gold
-    case 'Silver':
-      return 'text-[#D8D8D8] drop-shadow-[0_0_10px_rgba(216,216,216,0.3)]'; // Silver/Platinum White
-    case 'Bronze':
-      return 'text-[#cd7f32] drop-shadow-[0_0_10px_rgba(205,127,50,0.3)]'; // Bronze
+function getTierTextColor(tier: string) {
+  const t = tier.toLowerCase();
+  if (t.includes('platinum') || t.includes('title')) {
+    return 'text-[#38bdf8] drop-shadow-[0_0_10px_rgba(56,189,248,0.3)]';
   }
+  if (t.includes('gold') || t.includes('studio')) {
+    return 'text-[#E8C896] drop-shadow-[0_0_10px_rgba(232,200,150,0.3)]';
+  }
+  if (t.includes('silver') || t.includes('printing')) {
+    return 'text-[#E8C896] drop-shadow-[0_0_10px_rgba(232,200,150,0.3)]';
+  }
+  return 'text-[#cd7f32] drop-shadow-[0_0_10px_rgba(205,127,50,0.3)]';
 }
 
-function getTierBadgeStyles(tier: PartnerTier) {
-  switch (tier) {
-    case 'Platinum':
-      return 'border-white/30 text-white bg-white/10 shadow-[0_0_12px_rgba(255,255,255,0.12)] group-hover:border-white/60 group-hover:bg-white/15';
-    case 'Gold':
-      return 'border-[#B8894F]/40 text-[#E8C896] bg-[#B8894F]/10 shadow-[0_0_12px_rgba(184,137,79,0.15)] group-hover:border-[#B8894F]/70 group-hover:bg-[#B8894F]/20';
-    case 'Silver':
-      return 'border-white/20 text-[#D8D8D8] bg-white/5 shadow-[0_0_12px_rgba(216,216,216,0.1)] group-hover:border-white/40 group-hover:bg-white/10';
-    case 'Bronze':
-      return 'border-[#B8894F]/30 text-[#B8894F] bg-[#B8894F]/5 shadow-[0_0_12px_rgba(184,137,79,0.1)] group-hover:border-[#B8894F]/50 group-hover:bg-[#B8894F]/15';
-  }
-}
-
-function getTierIcon(tier: PartnerTier) {
-  switch (tier) {
-    case 'Platinum':
-      return <Crown className="size-3 text-white" />;
-    case 'Gold':
-      return <Medal className="size-3 text-[#E8C896]" />;
-    case 'Silver':
-      return <Award className="size-3 text-[#D8D8D8]" />;
-    case 'Bronze':
-      return <Shield className="size-3 text-[#B8894F]" />;
-  }
-}
-
+/**
+ * Full-size Card for Exposition Issue 22 Confirmed Partners
+ */
 export function VerticalPartnerCard({
   partner,
-  onSelect,
 }: {
   partner: Partner;
-  onSelect?: (partner: Partner) => void;
 }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
   return (
     <div
-      onClick={() => onSelect?.(partner)}
-      className="group relative w-[180px] sm:w-[200px] md:w-[215px] rounded-2xl overflow-hidden bg-[#121212] border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.8)] p-4 sm:p-5 flex flex-col items-center justify-between transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-white/20 hover:shadow-[0_15px_35px_rgba(0,0,0,0.95)] shrink-0 select-none cursor-pointer will-change-transform text-center gap-4 m-3 sm:m-4"
+      className="group relative w-[250px] sm:w-[270px] md:w-[290px] rounded-2xl overflow-hidden bg-[#121212] border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.8)] p-5 flex flex-col items-center justify-between transition-all duration-300 ease-out hover:-translate-y-2 hover:border-[#E8C896]/50 hover:shadow-[0_20px_40px_rgba(184,137,79,0.2)] shrink-0 select-none will-change-transform text-center gap-4"
     >
+      {/* Top Accent Line */}
+      <div
+        className="absolute top-0 inset-x-0 h-1 opacity-80 group-hover:h-1.5 transition-all duration-300"
+        style={{ backgroundColor: partner.accentColor || '#B8894F' }}
+      />
+
       {/* Top Media / Logo Display Container */}
-      <div className="relative w-full h-28 sm:h-32 flex items-center justify-center p-2 rounded-xl bg-[#181818] border border-white/5 overflow-hidden">
+      <div className="relative w-full h-32 sm:h-36 flex items-center justify-center p-3 rounded-xl bg-white border border-white/10 overflow-hidden shadow-inner">
         {!imageLoaded && !imageError && (
-          <div className="absolute inset-0 rounded-xl bg-white/5 animate-pulse" />
+          <div className="absolute inset-0 rounded-xl bg-slate-100 animate-pulse" />
         )}
 
         {imageError ? (
-          <span className="text-xs font-black text-white uppercase tracking-wider truncate px-2">
+          <span className="text-xs font-black text-slate-800 uppercase tracking-wider truncate px-2">
+            {partner.name}
+          </span>
+        ) : (
+          <img
+            src={partner.image}
+            alt={partner.name}
+            loading="lazy"
+            decoding="async"
+            onLoad={() => setImageLoaded(true)}
+            onError={() => setImageError(true)}
+            className={`max-w-full max-h-full object-contain filter contrast-105 transition-all duration-300 group-hover:scale-105 ${
+              imageLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        )}
+      </div>
+
+      {/* Center Text Details: Title & Subtitle */}
+      <div className="flex flex-col items-center gap-1 w-full px-1">
+        <h4 className="text-base sm:text-lg font-extrabold text-white tracking-tight leading-snug truncate w-full group-hover:text-[#E8C896] transition-colors">
+          {partner.name}
+        </h4>
+        <p className="text-[0.75rem] sm:text-xs font-medium text-[#9A9A9A] tracking-normal truncate w-full">
+          {partner.category}
+        </p>
+      </div>
+
+      {/* Bottom Plain Text Label with Tier-Based Text Color */}
+      <div className="mt-0.5 w-full flex justify-center">
+        <span
+          className={`text-[0.72rem] sm:text-xs font-bold tracking-wider uppercase ${getTierTextColor(
+            partner.tier
+          )}`}
+        >
+          {partner.tier}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Slightly smaller card style for Partnership Legacy section
+ */
+export function LegacyPartnerCard({
+  partner,
+}: {
+  partner: Partner;
+}) {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  return (
+    <div
+      className="group relative w-[175px] sm:w-[195px] md:w-[210px] rounded-xl overflow-hidden bg-[#121212] border border-white/10 shadow-[0_8px_20px_rgba(0,0,0,0.7)] p-4 flex flex-col items-center justify-between transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-white/25 hover:shadow-[0_12px_28px_rgba(0,0,0,0.9)] shrink-0 select-none will-change-transform text-center gap-3"
+    >
+      {/* Top Media / Logo Display Container */}
+      <div className="relative w-full h-22 sm:h-24 flex items-center justify-center p-2 rounded-lg bg-[#181818] border border-white/5 overflow-hidden">
+        {!imageLoaded && !imageError && (
+          <div className="absolute inset-0 rounded-lg bg-white/5 animate-pulse" />
+        )}
+
+        {imageError ? (
+          <span className="text-[0.72rem] font-bold text-white uppercase tracking-wider truncate px-1">
             {partner.name}
           </span>
         ) : (
@@ -238,36 +146,29 @@ export function VerticalPartnerCard({
         )}
       </div>
 
-      {/* Center Text Details: Title & Subtitle */}
-      <div className="flex flex-col items-center gap-1 w-full px-1">
-        <h4 className="text-sm sm:text-base font-extrabold text-white tracking-tight leading-snug truncate w-full">
+      {/* Center Details */}
+      <div className="flex flex-col items-center gap-0.5 w-full px-1">
+        <h5 className="text-xs sm:text-[0.82rem] font-bold text-white tracking-tight truncate w-full group-hover:text-[#E8C896] transition-colors">
           {partner.name}
-        </h4>
-        <p className="text-[0.72rem] sm:text-xs font-medium text-[#9A9A9A] tracking-normal truncate w-full">
+        </h5>
+        <p className="text-[0.66rem] sm:text-[0.7rem] font-medium text-[#9A9A9A] tracking-normal truncate w-full">
           {partner.category}
         </p>
       </div>
 
-      {/* Bottom Plain Text Label with Tier-Based Text Color */}
-      <div className="mt-0.5 w-full flex justify-center">
-        <span className={`text-[0.7rem] sm:text-xs font-bold tracking-wider uppercase ${getTierTextColor(partner.tier)}`}>
-          {partner.tier} Partner
+      {/* Bottom Tier Label */}
+      <div className="w-full flex justify-center">
+        <span className="text-[0.64rem] sm:text-[0.68rem] font-semibold tracking-wider uppercase text-[#B8894F]">
+          {partner.tier}
         </span>
-      </div>
-
-      {/* Corner arrow hint on hover */}
-      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-        <ArrowUpRight className="size-4 text-white/50" />
       </div>
     </div>
   );
 }
 
 export default function PartnersSection() {
-  const [isGridOpen, setIsGridOpen] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null);
   const [formData, setFormData] = useState({
     company: '',
     name: '',
@@ -282,37 +183,50 @@ export default function PartnersSection() {
     setTimeout(() => {
       setIsSubmitted(false);
       setIsFormOpen(false);
-      setFormData({ company: '', name: '', email: '', tier: 'Gold Partner', message: '' });
+      setFormData({
+        company: '',
+        name: '',
+        email: '',
+        tier: 'Gold Partner',
+        message: '',
+      });
     }, 2500);
   };
 
   const handleDownloadGuide = () => {
-    // Generate a lightweight blob for immediate download
-    const prospectusText = `EXPOSITION 2025 - CORPORATE PARTNERSHIP PROSPECTUS\n\n` +
-      `Thank you for your interest in partnering with Exposition 2025.\n\n` +
-      `PARTNERSHIP TIERS & BENEFITS:\n` +
-      `1. PLATINUM PARTNER ($10,000+ / Exclusive Tier)\n` +
-      `   - Keynote main-stage brand prominence\n` +
-      `   - Prime booth location & TechEvent Hub naming rights\n` +
-      `   - Direct recruitment access to top university engineering talent\n` +
-      `   - Full 2-page feature in the Exposition Magazine\n\n` +
-      `2. GOLD PARTNER ($5,000+)\n` +
-      `   - Track sponsorship & dedicated panel seat\n` +
-      `   - Premium booth installation in exhibition pavilion\n` +
-      `   - 1-page feature in the Exposition Magazine\n\n` +
-      `3. SILVER PARTNER ($2,500+)\n` +
-      `   - Technical workshop host & digital platform branding\n` +
-      `   - Career fair VIP access\n\n` +
-      `4. BRONZE PARTNER ($1,000+)\n` +
-      `   - Brand presence in print & digital channels\n` +
-      `   - VIP delegate passes\n\n` +
-      `CONTACT: exposition@kln.ac.lk | Department of Industrial Management, University of Kelaniya.`;
+    // Generate lightweight prospectus document for instant download
+    const prospectusText =
+      `EXPOSITION ISSUE 22 - CORPORATE PARTNERSHIP PROSPECTUS\n\n` +
+      `Thank you for your interest in partnering with Exposition Issue 22.\n` +
+      `Published by the Department of Industrial Management, Faculty of Science, University of Kelaniya.\n\n` +
+      `==================================================================\n` +
+      `PARTNERSHIP TIERS & CORPORATE COLLABORATIONS\n` +
+      `==================================================================\n\n` +
+      `1. TITLE & PLATINUM PARTNER\n` +
+      `   - Main-stage keynote brand prominence & opening ceremony address\n` +
+      `   - TechEvent Hub grand naming rights & primary logo placement\n` +
+      `   - Priority recruitment access to elite engineering and tech undergraduates\n` +
+      `   - Full 2-page spread feature in the Exposition Issue 22 Magazine\n\n` +
+      `2. GOLD & SILVER PARTNERS\n` +
+      `   - Executive panel presence & dedicated technical track host\n` +
+      `   - Premium exhibition pavilion booth & digital platform integration\n` +
+      `   - 1-page full feature in Exposition Issue 22 Magazine\n\n` +
+      `3. OFFICIAL CATEGORY PARTNERS (Studio, Printing, Media, EdTech)\n` +
+      `   - Co-branded category recognition across print and digital media\n` +
+      `   - Direct feature across official podcast, YouTube & social channels\n` +
+      `   - VIP delegate access and corporate accreditation\n\n` +
+      `CONTACT & INQUIRIES:\n` +
+      `Email: exposition@kln.ac.lk\n` +
+      `Web: https://exposition.lk\n` +
+      `Department of Industrial Management, University of Kelaniya, Sri Lanka.`;
 
-    const blob = new Blob([prospectusText], { type: 'text/plain;charset=utf-8' });
+    const blob = new Blob([prospectusText], {
+      type: 'text/plain;charset=utf-8',
+    });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'Exposition_Partnership_Prospectus_2025.txt';
+    link.download = 'Exposition_Issue_22_Partnership_Prospectus.txt';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -324,184 +238,101 @@ export default function PartnersSection() {
       id="partners"
       className="relative z-10 bg-transparent px-[5%] py-14 sm:py-20 md:py-24 overflow-hidden w-full"
     >
-      {/* Section Header */}
-      <ScrollReveal className="flex flex-col items-center justify-center text-center mb-8 sm:mb-10 px-[5%] max-w-5xl mx-auto">
-        <h2
-          className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
-          style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}
-        >
-          Our Partners
-        </h2>
+      {/* ================================================================= */}
+      {/* 1. OUR PARTNERS (Exposition Issue 22 Confirmed Partners)        */}
+      {/* ================================================================= */}
+      <div className="max-w-6xl mx-auto">
+        <ScrollReveal className="flex flex-col items-center justify-center text-center mb-8 sm:mb-10 px-4">
+          <h2
+            className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
+            style={{ fontSize: 'clamp(2.4rem, 5.5vw, 76px)' }}
+          >
+            Our Partners
+          </h2>
 
-        <div className="mt-4 max-w-2xl text-center space-y-2">
-          <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight">
-            Want to Partner With Us?
-          </h3>
-          <p className="text-xs sm:text-sm text-[#9A9A9A] leading-relaxed font-normal">
-            Let's discuss how we can create a customized partnership that delivers exceptional value for your organization and our university community
+          <p className="mt-4 text-xs sm:text-sm md:text-base text-[#9A9A9A] max-w-2xl mx-auto font-light leading-relaxed">
+            Proudly presenting the confirmed corporate partners collaborating with
+            Exposition Issue 22 to drive technological leadership, academic brilliance, and student innovation.
           </p>
+        </ScrollReveal>
+
+        {/* Clean, spacious layout for confirmed Issue 22 partners */}
+        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-10 my-8 sm:my-10">
+          {ISSUE_22_PARTNERS.map((partner) => (
+            <VerticalPartnerCard
+              key={partner.id}
+              partner={partner}
+            />
+          ))}
         </div>
 
-        {/* CTA Buttons: Download Partnership Guide & Become a Partner */}
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-          <button
-            onClick={handleDownloadGuide}
-            className="inline-flex items-center gap-2 rounded-full border border-[#B8894F]/50 bg-[#181818]/90 px-6 py-2.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#E8C896] shadow-xl backdrop-blur-md hover:bg-[#B8894F]/15 hover:border-[#E8C896] transition-all duration-300 active:scale-95"
+        {/* Integrated Partnership CTA Block */}
+        <ScrollReveal className="mt-8 sm:mt-10 max-w-2xl mx-auto text-center px-4">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            <button
+              onClick={handleDownloadGuide}
+              className="inline-flex items-center gap-2 rounded-full border border-[#B8894F]/50 bg-[#181818]/90 px-6 py-2.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#E8C896] shadow-xl backdrop-blur-md hover:bg-[#B8894F]/15 hover:border-[#E8C896] transition-all duration-300 active:scale-95 cursor-pointer"
+            >
+              <Download className="h-4 w-4" />
+              <span>Partnership Guide</span>
+            </button>
+
+            <button
+              onClick={() => setIsFormOpen(true)}
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#B8894F] to-[#E8C896] px-7 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0C0C0C] shadow-[0_0_25px_rgba(184,137,79,0.35)] hover:shadow-[0_0_35px_rgba(184,137,79,0.5)] hover:scale-105 transition-all duration-300 active:scale-95 cursor-pointer"
+            >
+              <FileText className="h-4 w-4" />
+              <span>Become a Partner</span>
+            </button>
+          </div>
+        </ScrollReveal>
+      </div>
+
+      {/* Subtle Luxury Gold Divider */}
+      <div className="w-full max-w-5xl mx-auto my-14 sm:my-20 h-px bg-gradient-to-r from-transparent via-[#B8894F]/30 to-transparent" />
+
+      {/* ================================================================= */}
+      {/* 2. OUR PARTNERSHIP LEGACY (Past Exposition Editions)             */}
+      {/* ================================================================= */}
+      <div className="w-full">
+        <ScrollReveal className="flex flex-col items-center justify-center text-center mb-8 px-4 max-w-4xl mx-auto">
+          <h3
+            className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight"
+            style={{ fontSize: 'clamp(2rem, 4.5vw, 56px)' }}
           >
-            <Download className="h-4 w-4" />
-            <span>Download Partnership Guide</span>
-          </button>
+            Our Partnership Legacy
+          </h3>
 
-          <button
-            onClick={() => setIsFormOpen(true)}
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#B8894F] to-[#E8C896] px-7 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0C0C0C] shadow-[0_0_25px_rgba(184,137,79,0.35)] hover:shadow-[0_0_35px_rgba(184,137,79,0.5)] hover:scale-105 transition-all duration-300 active:scale-95"
-          >
-            <FileText className="h-4 w-4" />
-            <span>Become a Partner</span>
-          </button>
-        </div>
-      </ScrollReveal>
+          <p className="mt-3 text-xs sm:text-sm md:text-base text-[#9A9A9A] max-w-3xl mx-auto leading-relaxed font-light">
+            Over the years, Exposition has built meaningful collaborations with organizations across
+            multiple industries, creating a strong connection between university talent and the professional world.
+          </p>
+        </ScrollReveal>
 
-      {/* Single Continuous Marquee Row of All Partners */}
-      <div className="relative w-full overflow-hidden space-y-6 pt-2">
-
-        {/* Single Row: Flows smoothly with all partners */}
-        <div className="relative w-full overflow-hidden">
+        {/* Constantly flowing marquee ticker with slightly smaller cards */}
+        <div className="relative w-full overflow-hidden mt-4 pt-2">
           <Marquee
             pauseOnHover
-            repeat={3}
-            className="[--duration:35s] [--gap:2.25rem] py-4"
+            repeat={4}
+            className="[--duration:40s] [--gap:1.25rem] py-2"
           >
-            {ALL_PARTNERS.map((partner) => (
-              <VerticalPartnerCard
+            {LEGACY_PARTNERS.map((partner) => (
+              <LegacyPartnerCard
                 key={partner.id}
                 partner={partner}
-                onSelect={(p) => setSelectedPartner(p)}
               />
             ))}
           </Marquee>
 
-          {/* Side Fade Vignettes */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-20 sm:w-32 bg-gradient-to-r from-[#0C0C0C] via-[#0C0C0C]/80 to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-20 sm:w-32 bg-gradient-to-l from-[#0C0C0C] via-[#0C0C0C]/80 to-transparent z-10" />
+          {/* Luxury Side Fade Vignettes */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-20 sm:w-36 bg-gradient-to-r from-[#0C0C0C] via-[#0C0C0C]/80 to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-20 sm:w-36 bg-gradient-to-l from-[#0C0C0C] via-[#0C0C0C]/80 to-transparent z-10" />
         </div>
-
-        {/* View All / Hide Grid Button Right Below the Row */}
-        <div className="flex justify-center pt-6">
-          <ShinyButton
-            onClick={() => setIsGridOpen((prev) => !prev)}
-          >
-            <span>{isGridOpen ? 'Collapse Partner Grid' : 'View All Partners'}</span>
-            <ArrowUpRight className={`size-4 inline-block ml-1 transition-transform duration-300 ${isGridOpen ? 'rotate-180' : ''}`} />
-          </ShinyButton>
-        </div>
-
-        {/* Inline Grid Expansion (within the section itself, not a separate modal) */}
-        <AnimatePresence>
-          {isGridOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className="overflow-hidden pt-8 border-t border-white/10 mt-8"
-            >
-              <div className="max-w-7xl mx-auto px-[5%] space-y-6">
-                <div className="text-center">
-                  <h3 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
-                    All Strategic Partners
-                  </h3>
-                  <p className="text-xs text-[#9A9A9A] font-mono mt-1">
-                    Exposition 2025 • Complete Partner Roster ({ALL_PARTNERS.length} Partners)
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 sm:gap-8 justify-items-center pt-4 pb-6">
-                  {ALL_PARTNERS.map((partner) => (
-                    <VerticalPartnerCard
-                      key={`inline-${partner.id}`}
-                      partner={partner}
-                      onSelect={(p) => setSelectedPartner(p)}
-                    />
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
 
-      {/* ================= PARTNER DETAILS MODAL ================= */}
-      <AnimatePresence>
-        {selectedPartner && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedPartner(null)}
-              className="absolute inset-0 bg-black/85 backdrop-blur-md"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative z-10 w-full max-w-md rounded-3xl border border-white/20 bg-[#161616] p-6 sm:p-8 shadow-2xl text-center space-y-4"
-            >
-              <button
-                onClick={() => setSelectedPartner(null)}
-                className="absolute right-4 top-4 size-8 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white hover:text-black transition-all"
-              >
-                <X className="size-4" />
-              </button>
-
-              <div className="mx-auto size-24 rounded-full border-2 border-white/30 p-1 bg-white/5 overflow-hidden flex items-center justify-center shadow-lg">
-                <img
-                  src={selectedPartner.image}
-                  alt={selectedPartner.name}
-                  className="w-full h-full object-cover object-center rounded-full"
-                />
-              </div>
-
-              <div>
-                <span
-                  className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-mono font-bold uppercase tracking-wider ${getTierBadgeStyles(
-                    selectedPartner.tier,
-                  )}`}
-                >
-                  {getTierIcon(selectedPartner.tier)}
-                  <span>{selectedPartner.tier} Partner</span>
-                </span>
-                <h3 className="text-xl sm:text-2xl font-black text-white mt-2">
-                  {selectedPartner.name}
-                </h3>
-                <p className="text-xs sm:text-sm text-[#E8C896] font-mono mt-0.5">
-                  {selectedPartner.category}
-                </p>
-              </div>
-
-              <p className="text-xs sm:text-sm text-[#9A9A9A] leading-relaxed border-t border-white/10 pt-3 font-light">
-                Official corporate partner collaborating with Exposition 2025 to foster tech
-                leadership, industry knowledge exchange, and student innovation across Sri Lanka.
-              </p>
-
-              <div className="pt-2">
-                <button
-                  onClick={() => {
-                    setSelectedPartner(null);
-                    setIsFormOpen(true);
-                  }}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#B8894F] to-[#E8C896] py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0C0C0C] shadow-lg hover:brightness-110 transition-all"
-                >
-                  <span>Explore Partnership Opportunities</span>
-                </button>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-
-      {/* ================= PARTNER REGISTRATION FORM MODAL ================= */}
+      {/* ================================================================= */}
+      {/* PARTNER REGISTRATION FORM MODAL                                   */}
+      {/* ================================================================= */}
       <AnimatePresence>
         {isFormOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
@@ -525,7 +356,7 @@ export default function PartnersSection() {
               {/* Close Button */}
               <button
                 onClick={() => setIsFormOpen(false)}
-                className="absolute right-5 top-5 size-9 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white hover:text-black transition-all"
+                className="absolute right-5 top-5 size-9 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white hover:text-black transition-all cursor-pointer"
               >
                 <X className="size-4" />
               </button>
@@ -535,18 +366,24 @@ export default function PartnersSection() {
                   <div className="size-16 rounded-full bg-[#B8894F]/20 border border-[#B8894F]/40 text-[#E8C896] flex items-center justify-center">
                     <CheckCircle2 className="size-8" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white">Partnership Request Received!</h3>
+                  <h3 className="text-2xl font-bold text-white">
+                    Partnership Request Received!
+                  </h3>
                   <p className="text-sm text-[#9A9A9A] max-w-md font-light">
-                    Thank you for applying to partner with Exposition. Our corporate relations team will review your details and contact you within 24 hours.
+                    Thank you for applying to partner with Exposition Issue 22.
+                    Our corporate relations team will review your details and contact you within 24 hours.
                   </p>
                 </div>
               ) : (
                 <>
                   <div className="mb-6 space-y-1">
                     <div className="flex items-center gap-2 text-[#E8C896] text-xs font-semibold uppercase tracking-wider">
-                      Collaborate With Exposition 2025
+                      <Sparkles className="size-3.5" />
+                      Collaborate With Exposition Issue 22
                     </div>
-                    <h3 className="text-2xl sm:text-3xl font-black text-white">Partner Application</h3>
+                    <h3 className="text-2xl sm:text-3xl font-black text-white">
+                      Partner Application
+                    </h3>
                     <p className="text-xs sm:text-sm text-[#9A9A9A]">
                       Fill in your company details to join our industry partner network.
                     </p>
@@ -561,7 +398,9 @@ export default function PartnersSection() {
                         type="text"
                         required
                         value={formData.company}
-                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, company: e.target.value })
+                        }
                         placeholder="e.g. Acme Tech Global"
                         className="w-full rounded-xl border border-white/15 bg-black/50 px-4 py-2.5 text-sm text-white placeholder:text-white/30 focus:border-[#E8C896] focus:outline-none"
                       />
@@ -576,7 +415,9 @@ export default function PartnersSection() {
                           type="text"
                           required
                           value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          onChange={(e) =>
+                            setFormData({ ...formData, name: e.target.value })
+                          }
                           placeholder="e.g. Jane Doe"
                           className="w-full rounded-xl border border-white/15 bg-black/50 px-4 py-2.5 text-sm text-white placeholder:text-white/30 focus:border-[#E8C896] focus:outline-none"
                         />
@@ -590,7 +431,9 @@ export default function PartnersSection() {
                           type="email"
                           required
                           value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          onChange={(e) =>
+                            setFormData({ ...formData, email: e.target.value })
+                          }
                           placeholder="name@company.com"
                           className="w-full rounded-xl border border-white/15 bg-black/50 px-4 py-2.5 text-sm text-white placeholder:text-white/30 focus:border-[#E8C896] focus:outline-none"
                         />
@@ -603,13 +446,35 @@ export default function PartnersSection() {
                       </label>
                       <select
                         value={formData.tier}
-                        onChange={(e) => setFormData({ ...formData, tier: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, tier: e.target.value })
+                        }
                         className="w-full rounded-xl border border-white/15 bg-[#1c1c1c] px-4 py-2.5 text-sm text-white focus:border-[#E8C896] focus:outline-none"
                       >
-                        <option value="Platinum Partner">Platinum Partner (Tier 1 Co-Branding)</option>
-                        <option value="Gold Partner">Gold Partner (Corporate Track & Booth)</option>
-                        <option value="Silver Partner">Silver Partner (Technical Sponsor)</option>
-                        <option value="Bronze Partner">Bronze Partner (Brand Partner)</option>
+                        <option value="Title Partner">
+                          Title Partner (Exclusive Naming & Stage)
+                        </option>
+                        <option value="Platinum Partner">
+                          Platinum Partner (Tier 1 Co-Branding)
+                        </option>
+                        <option value="Gold Partner">
+                          Gold Partner (Corporate Track & Booth)
+                        </option>
+                        <option value="Silver Partner">
+                          Silver Partner (Technical Sponsor)
+                        </option>
+                        <option value="Bronze Partner">
+                          Bronze Partner (Brand Sponsor)
+                        </option>
+                        <option value="Printing Partner">
+                          Official Printing Partner
+                        </option>
+                        <option value="Studio Partner">
+                          Official Studio Partner
+                        </option>
+                        <option value="Media Partner">
+                          Official Media / Broadcast Partner
+                        </option>
                       </select>
                     </div>
 
@@ -620,7 +485,9 @@ export default function PartnersSection() {
                       <textarea
                         rows={3}
                         value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, message: e.target.value })
+                        }
                         placeholder="Tell us briefly about your organization's goals for this partnership..."
                         className="w-full rounded-xl border border-white/15 bg-black/50 px-4 py-2.5 text-sm text-white placeholder:text-white/30 focus:border-[#E8C896] focus:outline-none resize-none"
                       />
@@ -628,7 +495,7 @@ export default function PartnersSection() {
 
                     <button
                       type="submit"
-                      className="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#B8894F] to-[#E8C896] py-3 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] shadow-lg hover:brightness-110 transition-all"
+                      className="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#B8894F] to-[#E8C896] py-3 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] shadow-lg hover:brightness-110 transition-all cursor-pointer"
                     >
                       <Send className="size-4" />
                       <span>Submit Partnership Application</span>
