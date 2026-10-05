@@ -59,6 +59,33 @@ const TeamMemberCard = React.forwardRef<HTMLDivElement, TeamMemberCardProps>(
   ) => {
     const photoUrl = imageUrl || image || "";
     const emailLink = socials.mail || socials.email;
+    const [imgSrc, setImgSrc] = React.useState(photoUrl);
+    const [hasError, setHasError] = React.useState(false);
+
+    React.useEffect(() => {
+      setImgSrc(photoUrl);
+      setHasError(false);
+    }, [photoUrl]);
+
+    const handleImageError = () => {
+      if (imgSrc.includes('New folder (2)')) {
+        const filename = imgSrc.split('/').pop()?.toLowerCase();
+        if (filename) {
+          setImgSrc(`/resources/team/members/${filename}`);
+          return;
+        }
+      }
+      setHasError(true);
+    };
+
+    // Get initials for fallback monogram
+    const initials = name
+      .split(" ")
+      .map((part) => part[0])
+      .filter(Boolean)
+      .slice(0, 2)
+      .join("")
+      .toUpperCase();
 
     return (
       <div
@@ -74,18 +101,29 @@ const TeamMemberCard = React.forwardRef<HTMLDivElement, TeamMemberCardProps>(
         {...props}
       >
         {/* 1. Full-Bleed Photo with natural realistic color correction & normal blend mode */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden bg-[#121212]">
-          <img
-            src={photoUrl}
-            alt={name}
-            className="w-full h-full object-cover object-[center_top] transition-transform duration-500 ease-out group-hover:scale-105"
-            style={{
-              opacity: 1,
-              mixBlendMode: "normal",
-              filter: "brightness(0.95) contrast(1.08) saturate(1.05)",
-              ...imageStyle,
-            }}
-          />
+        <div className="absolute inset-0 w-full h-full overflow-hidden bg-[#121212] flex items-center justify-center">
+          {!hasError && imgSrc ? (
+            <img
+              src={imgSrc}
+              alt={name}
+              onError={handleImageError}
+              className="w-full h-full object-cover object-[center_top] transition-transform duration-500 ease-out group-hover:scale-105"
+              style={{
+                opacity: 1,
+                mixBlendMode: "normal",
+                filter: "brightness(0.95) contrast(1.08) saturate(1.05)",
+                ...imageStyle,
+              }}
+            />
+          ) : (
+            <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[#1c1813] to-[#0d0d0d] p-6 text-center">
+              <div className="w-20 h-20 rounded-full border border-[#E8C896]/40 bg-[#161410] flex items-center justify-center shadow-lg mb-3">
+                <span className="font-serif text-2xl font-bold text-[#E8C896] tracking-wider">
+                  {initials}
+                </span>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* 2. Dark Gradient Overlay at Bottom (transparent to rgba(0,0,0,.65)) */}
