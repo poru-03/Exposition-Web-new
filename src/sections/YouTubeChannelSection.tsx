@@ -11,44 +11,63 @@ export type YouTubeVideo = {
   uploadedAgo: string;
   duration: string;
   description?: string;
+  thumbnailUrl?: string;
 };
 
 export const YOUTUBE_VIDEOS: YouTubeVideo[] = [
   {
-    id: 'Pc0NPlM6_7Y',
-    title: 'Voices of Vision Ep. 1 | Adapt or Fail: The Yevan David Story',
-    views: '15.2K views',
-    uploadedAgo: '2 weeks ago',
-    duration: '42:15',
-    description:
-      'Formula 3 driver Yevan David, the first and only Sri Lankan in the official FIA Formula 3 Championship, discusses motorsport discipline, overcoming adversity, and racing strategy.',
-  },
-  {
-    id: 'Pc0NPlM6_7Y',
-    title: 'Voices of Vision Ep. 2 | The Future is Built: Nikin Matharaarachchi',
-    views: '9.8K views',
-    uploadedAgo: '1 month ago',
-    duration: '38:40',
+    id: 'Iueo728JKPE',
+    title: 'Voices of Vision Podcast Series Ep.2 | The Future is Built: The Nikin Matharaarachchi',
+    views: '405 views',
+    uploadedAgo: '8 days ago',
+    duration: '36:27',
     description:
       'Forbes 30 Under 30 Asia honoree & Synapse AI Labs Founder Nikin Matharaarachchi explores AI innovation, startup ecosystems, and tech accessibility.',
   },
   {
-    id: 'Pc0NPlM6_7Y',
-    title: 'Exposition Issue 22 Official Launch & Keynote Ceremony',
-    views: '18.5K views',
-    uploadedAgo: '3 weeks ago',
-    duration: '24:10',
+    id: '1TR9K3amna8',
+    title: 'Voices of Vision Podcast Series Ep.1 | Adapt or Fail: The Yevan David Story',
+    views: '664 views',
+    uploadedAgo: '2 weeks ago',
+    duration: '23:33',
     description:
-      'Highlights from the grand unveiling of Exposition Issue 22 featuring keynote remarks from corporate executives and academic visionaries.',
+      'Formula 3 driver Yevan David, the first and only Sri Lankan in the official FIA Formula 3 Championship, discusses motorsport discipline, overcoming adversity, and racing strategy.',
   },
   {
-    id: 'Pc0NPlM6_7Y',
-    title: 'Exposition Industrial Management Forum | Executive Panel',
-    views: '11.3K views',
-    uploadedAgo: '1 month ago',
-    duration: '45:30',
+    id: 'gD9rdK6cfiw',
+    title: 'EXPOSITION Magazine Interview with Mr.Manoda Gamage',
+    views: '191 views',
+    uploadedAgo: '12 years ago',
+    duration: '56:57',
     description:
-      'Leading Sri Lankan corporate leaders and tech pioneers gather to discuss enterprise strategy, digital transformation, and industrial innovation.',
+      'Exclusive in-depth interview with Mr. Manoda Gamage discussing corporate leadership, industrial management, and strategic growth.',
+  },
+  {
+    id: 'yujsTy-iZ_s',
+    title: 'MIT Documentary',
+    views: '471 views',
+    uploadedAgo: '12 years ago',
+    duration: '12:48',
+    description:
+      'Official documentary on the BSc. (Hons.) in Management and Information Technology degree program at the Department of Industrial Management, University of Kelaniya.',
+  },
+  {
+    id: 'sP9A0o7FfPI',
+    title: 'Exposition Magazine Interview with Mr.Lalith Weerathunga',
+    views: '115 views',
+    uploadedAgo: '12 years ago',
+    duration: '1:05:18',
+    description:
+      'Executive dialogue with Mr. Lalith Weerathunga exploring public sector administration, governance, and national development.',
+  },
+  {
+    id: 'wA03XxLvnBQ',
+    title: 'EXPOSITION Magazine Interview with Mr. Bradlet Emerson',
+    views: '34 views',
+    uploadedAgo: '12 years ago',
+    duration: '48:29',
+    description:
+      'Insightful interview with corporate strategist Mr. Bradlet Emerson on organizational leadership, financial management, and career excellence.',
   },
 ];
 
@@ -114,7 +133,7 @@ export default function YouTubeChannelSection() {
           <div className="relative w-full aspect-video max-w-4xl rounded-2xl overflow-hidden bg-[#121110] border border-[#c9a25f]/25 shadow-[0_25px_60px_rgba(0,0,0,0.9)] group">
             <AnimatePresence mode="wait">
               <motion.iframe
-                key={selectedVideo.id}
+                key={selectedVideo.title}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -156,22 +175,13 @@ export default function YouTubeChannelSection() {
 
         {/* ================= 2. HORIZONTAL SLIDER BELOW MAIN VIDEO ================= */}
         <ScrollReveal delay={0.2} className="w-full max-w-4xl flex flex-col gap-4 mt-4">
-          {/* Header Tag for Playlist */}
-          <div className="flex items-center justify-between px-1">
-            <h4 className="font-mono text-xs font-black uppercase tracking-[0.2em] text-white flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-              MORE FROM VOICES OF VISION
-            </h4>
-            <span className="text-[0.65rem] font-mono text-[#9A9A9A]">SELECT TO PLAY</span>
-          </div>
-
           {/* Horizontal Scrollable Slider Bar */}
           <div className="flex gap-4 overflow-x-auto pb-4 pt-1 px-1 custom-scrollbar w-full">
             {YOUTUBE_VIDEOS.map((video) => {
-              const isSelected = video.id === selectedVideo.id;
+              const isSelected = video.title === selectedVideo.title;
               return (
                 <button
-                  key={video.id}
+                  key={video.title}
                   onClick={() => setSelectedVideo(video)}
                   className={`group shrink-0 w-64 sm:w-72 flex flex-col gap-2.5 p-3 rounded-2xl border text-left transition-all duration-300 cursor-pointer ${
                     isSelected

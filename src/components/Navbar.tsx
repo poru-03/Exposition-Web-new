@@ -17,7 +17,7 @@ export const NAV_LINKS = [
   { name: 'Home', href: '#hero', icon: Home },
   { name: 'About', href: '#about', icon: Info },
   { name: 'Timeline', href: '#timeline', icon: Clock },
-  { name: 'Events', href: '#techevent-hub', icon: Zap },
+  { name: 'Events', href: '#process-card-process-2', icon: Zap },
   { name: 'Speakers', href: '#keynote-speakers', icon: Mic },
   { name: 'Interviews', href: '#interviews', icon: Video },
   { name: 'Gallery', href: '#gallery', icon: ImageIcon },

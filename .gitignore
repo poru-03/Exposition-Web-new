@@ -8,3 +8,5 @@ dist-ssr
 /Resources/
 public/resources/team/edited/
 *.pdf
+scratch_*.png
+yt.html

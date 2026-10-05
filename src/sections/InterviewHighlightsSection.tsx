@@ -524,8 +524,8 @@ export default function InterviewHighlightsSection() {
                 >
                   <div
                     className={`relative w-full aspect-[3/4] rounded-xl overflow-hidden border-2 transition-all duration-300 bg-[#0a0908] ${isActive
-                        ? 'border-[#c9a25f] ring-4 ring-inset ring-[#c9a25f]/40 shadow-[0_0_20px_rgba(201,162,95,0.4)]'
-                        : 'border-white/10 group-hover:border-white/30'
+                      ? 'border-[#c9a25f] ring-4 ring-inset ring-[#c9a25f]/40 shadow-[0_0_20px_rgba(201,162,95,0.4)]'
+                      : 'border-white/10 group-hover:border-white/30'
                       }`}
                   >
                     <SpeakerImage
@@ -533,8 +533,8 @@ export default function InterviewHighlightsSection() {
                       alt={person.name}
                       name={person.name}
                       className={`w-full h-full object-cover object-[center_5%] transition-all duration-300 ${isActive
-                          ? 'filter grayscale-0 contrast-110'
-                          : 'filter grayscale contrast-125 group-hover:grayscale-0'
+                        ? 'filter grayscale-0 contrast-110'
+                        : 'filter grayscale contrast-125 group-hover:grayscale-0'
                         }`}
                     />
 

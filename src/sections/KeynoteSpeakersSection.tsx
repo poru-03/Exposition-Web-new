@@ -211,7 +211,7 @@ function SpeakerLandscapeCard({ speaker }: { speaker: KeynoteSpeaker }) {
     <motion.div
       whileHover={{ scale: 1.03 }}
       transition={{ duration: 0.25 }}
-      className="group relative w-[280px] sm:w-[330px] h-[170px] sm:h-[185px] rounded-2xl overflow-hidden border border-white/15 bg-[#141414]/95 shadow-[0_20px_50px_rgba(0,0,0,0.9)] p-4 sm:p-5 flex flex-col justify-between transition-all duration-300 hover:border-[#B8894F]/40 shrink-0"
+      className="group relative w-[280px] sm:w-[330px] h-[170px] sm:h-[185px] rounded-2xl overflow-hidden border border-white/15 bg-[#141414]/95 shadow-[0_20px_50px_rgba(0,0,0,0.9)] p-4 sm:p-5 flex flex-col justify-between transition-all duration-300 hover:border-[#E8C896]/60 hover:shadow-[0_20px_50px_rgba(184,137,79,0.25)] hover:z-20 shrink-0 cursor-pointer"
     >
       {/* Background Speaker Photo Artwork Overlay */}
       <div className="absolute right-0 top-0 bottom-0 w-[55%] opacity-35 group-hover:opacity-50 transition-opacity duration-300 pointer-events-none overflow-hidden">
@@ -340,13 +340,13 @@ export default function KeynoteSpeakersSection() {
         </div>
 
         {/* ================= 2. SCROLL-DRIVEN DUAL-ROW PARALLAX STREAM ================= */}
-        <div className="relative w-full overflow-hidden space-y-6 pt-4">
+        <div className="relative w-full overflow-hidden space-y-4 pt-2">
 
           {/* Row 1: Flows Left-to-Right on scroll down, Right-to-Left on scroll up */}
-          <div className="relative w-full overflow-hidden flex items-center">
+          <div className="relative w-full overflow-hidden flex items-center py-3 sm:py-4">
             <motion.div
               style={{ x: x1 }}
-              className="flex gap-6 shrink-0 will-change-transform"
+              className="flex gap-6 shrink-0 will-change-transform py-2 px-2"
             >
               {[...ROW1_SPEAKERS, ...ROW1_SPEAKERS].map((speaker, idx) => (
                 <SpeakerLandscapeCard key={`${speaker.id}-r1-${idx}`} speaker={speaker} />
@@ -359,10 +359,10 @@ export default function KeynoteSpeakersSection() {
           </div>
 
           {/* Row 2: Flows Right-to-Left on scroll down, Left-to-Right on scroll up */}
-          <div className="relative w-full overflow-hidden flex items-center">
+          <div className="relative w-full overflow-hidden flex items-center py-3 sm:py-4">
             <motion.div
               style={{ x: x2 }}
-              className="flex gap-6 shrink-0 will-change-transform"
+              className="flex gap-6 shrink-0 will-change-transform py-2 px-2"
             >
               {[...ROW2_SPEAKERS, ...ROW2_SPEAKERS].map((speaker, idx) => (
                 <SpeakerLandscapeCard key={`${speaker.id}-r2-${idx}`} speaker={speaker} />

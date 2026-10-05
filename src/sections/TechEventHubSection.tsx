@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
 
 export default function TechEventHubSection() {
@@ -51,7 +50,6 @@ export default function TechEventHubSection() {
             <div className="absolute -bottom-24 -right-24 w-72 h-72 bg-[#E8C896]/10 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="inline-flex items-center gap-2 rounded-full bg-[#B8894F]/15 px-5 py-2 border border-[#B8894F]/40 text-[#E8C896] text-xs sm:text-sm font-bold uppercase tracking-widest animate-pulse shadow-[0_0_20px_rgba(184,137,79,0.2)]">
-              <Sparkles className="h-4 w-4" />
               <span>Coming Soon</span>
             </div>
 

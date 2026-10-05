@@ -89,69 +89,17 @@ function TorchlightGalleryTile({
   aspectClass?: string;
   borderClass?: string;
 }) {
-  const [pos, setPos] = useState({ x: 50, y: 50, isHovered: false });
-
-  const handleMove = (clientX: number, clientY: number, currentTarget: HTMLElement) => {
-    const rect = currentTarget.getBoundingClientRect();
-    const x = ((clientX - rect.left) / rect.width) * 100;
-    const y = ((clientY - rect.top) / rect.height) * 100;
-    setPos({ x, y, isHovered: true });
-  };
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    handleMove(e.clientX, e.clientY, e.currentTarget);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent<HTMLButtonElement>) => {
-    if (e.touches[0]) {
-      handleMove(e.touches[0].clientX, e.touches[0].clientY, e.currentTarget);
-    }
-  };
-
-  const handleLeave = () => {
-    setPos((prev) => ({ ...prev, isHovered: false }));
-  };
-
   return (
     <button
       onClick={onClick}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleLeave}
-      onTouchStart={handleTouchMove}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleLeave}
       className={`group relative w-full ${aspectClass} rounded-xl overflow-hidden border ${borderClass} bg-[#161514] text-left cursor-pointer transition-all duration-500 hover:border-[#c9a25f] shadow-lg`}
     >
-      {/* Base Layer: Black & White Grayscale Image */}
+      {/* Base Layer: Black & White Grayscale Image on default, transitions to full color on hover */}
       <img
         src={src}
         alt={alt}
-        className="w-full h-full object-cover filter grayscale contrast-125 brightness-90 transition-transform duration-700 group-hover:scale-105"
+        className="w-full h-full object-cover filter grayscale contrast-125 brightness-90 group-hover:grayscale-0 group-hover:contrast-105 group-hover:brightness-105 transition-all duration-500 group-hover:scale-105"
       />
-
-      {/* Top Layer: Extra Vibrant Color Image clipped with circular Spotlight Torchlight Mask */}
-      <img
-        src={src}
-        alt={`${alt} color`}
-        className="absolute inset-0 w-full h-full object-cover filter saturate-[1.65] brightness-110 contrast-110 transition-opacity duration-300 pointer-events-none group-hover:scale-105"
-        style={{
-          opacity: pos.isHovered ? 1 : 0,
-          clipPath: pos.isHovered
-            ? `circle(135px at ${pos.x}% ${pos.y}%)`
-            : 'circle(0px at 50% 50%)',
-          transition: 'clip-path 0.04s ease-out, opacity 0.3s ease',
-        }}
-      />
-
-      {/* Radial Gold Glow Ring around Spotlight Circle */}
-      {pos.isHovered && (
-        <div
-          className="absolute inset-0 pointer-events-none z-10 transition-opacity duration-300"
-          style={{
-            background: `radial-gradient(circle 145px at ${pos.x}% ${pos.y}%, rgba(232, 200, 150, 0.35) 0%, rgba(201, 162, 95, 0.15) 70%, transparent 100%)`,
-          }}
-        />
-      )}
 
       {/* Overlay Vignette Gradient */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none z-10" />

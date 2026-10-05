@@ -14,7 +14,7 @@ import PartnersSection from './sections/PartnersSection';
 import QASection from './sections/QASection';
 import ReviewsSection from './sections/ReviewsSection';
 import TeamSection from './sections/TeamSection';
-import TechEventHubSection from './sections/TechEventHubSection';
+// TechEventHubSection temporarily removed per user request (kept in timeline)
 import YouTubeChannelSection from './sections/YouTubeChannelSection';
 import TimelineSection from './sections/TimelineSection';
 import Elite10Page from './pages/Elite10Page';
@@ -95,7 +95,7 @@ export default function App() {
     { id: 'hero', label: 'Home', href: '#hero', icon: Home },
     { id: 'about', label: 'About', href: '#about', icon: Info },
     { id: 'timeline', label: 'Timeline', href: '#timeline', icon: Clock },
-    { id: 'techevent-hub', label: 'Events', href: '#techevent-hub', icon: Zap },
+    { id: 'techevent-hub', label: 'Events', href: '#process-card-process-2', icon: Zap },
     { id: 'keynote-speakers', label: 'Speakers', href: '#keynote-speakers', icon: Mic },
     { id: 'interviews', label: 'Interviews', href: '#interviews', icon: Video },
     { id: 'gallery', label: 'Gallery', href: '#gallery', icon: ImageIcon },
@@ -134,7 +134,7 @@ export default function App() {
             <TimelineSection />
           </div>
 
-          <TechEventHubSection />
+          {/* Standalone TechEventHubSection removed temporarily - retained in Timeline */}
           <YouTubeChannelSection />
           <KeynoteSpeakersSection />
           <InterviewHighlightsSection />

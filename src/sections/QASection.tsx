@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   HelpCircle,
   ChevronDown,
-  Sparkles,
   Search,
   Send,
 } from 'lucide-react';
@@ -104,17 +103,18 @@ export default function QASection() {
   };
 
   const filteredFAQs = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    const cat = activeCategory.trim().toLowerCase();
+
     return FAQ_DATA.filter((item) => {
       const matchesCategory =
-        activeCategory === 'All' || item.category === activeCategory;
+        cat === 'all' || item.category.toLowerCase() === cat;
       const matchesQuery =
-        searchQuery.trim() === '' ||
-        item.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.answer.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        query === '' ||
+        item.question.toLowerCase().includes(query) ||
+        item.answer.toLowerCase().includes(query) ||
         (item.highlights &&
-          item.highlights.some((h) =>
-            h.toLowerCase().includes(searchQuery.toLowerCase())
-          ));
+          item.highlights.some((h) => h.toLowerCase().includes(query)));
       return matchesCategory && matchesQuery;
     });
   }, [activeCategory, searchQuery]);
@@ -151,8 +151,9 @@ export default function QASection() {
             />
             {searchQuery && (
               <button
+                type="button"
                 onClick={() => setSearchQuery('')}
-                className="absolute right-4 text-xs font-mono text-black/40 hover:text-black"
+                className="absolute right-4 text-xs font-mono text-black/40 hover:text-black cursor-pointer"
               >
                 Clear
               </button>
@@ -166,11 +167,16 @@ export default function QASection() {
             (cat) => (
               <button
                 key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 border ${activeCategory === cat
-                  ? 'bg-black text-white border-black shadow-md'
-                  : 'bg-black/5 text-black/60 border-transparent hover:border-black/20 hover:text-black'
-                  }`}
+                type="button"
+                onClick={() => {
+                  setActiveCategory(cat);
+                  setOpenId(null);
+                }}
+                className={`cursor-pointer rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 border ${
+                  activeCategory.toLowerCase() === cat.toLowerCase()
+                    ? 'bg-black text-white border-black shadow-md'
+                    : 'bg-black/5 text-black/60 border-transparent hover:border-black/20 hover:text-black'
+                }`}
               >
                 {cat}
               </button>
@@ -190,7 +196,7 @@ export default function QASection() {
             </p>
           </div>
         ) : (
-          <StaggerContainer staggerChildren={0.06} className="space-y-4">
+          <StaggerContainer key={`${activeCategory}-${searchQuery}`} staggerChildren={0.06} className="space-y-4">
             {filteredFAQs.map((faq) => {
               const isOpen = openId === faq.id;
               return (
@@ -253,7 +259,6 @@ export default function QASection() {
                                     key={hIdx}
                                     className="inline-flex items-center gap-1 rounded-md bg-black/5 border border-black/10 px-2.5 py-1 text-[0.68rem] font-medium text-black/80"
                                   >
-                                    <Sparkles className="size-2.5 text-[#B8894F]" />
                                     {highlight}
                                   </span>
                                 ))}

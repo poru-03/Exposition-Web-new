@@ -16,6 +16,7 @@ export type TeamMember = {
   linkedin: string;
   whatsapp: string;
   bio?: string;
+  imageStyle?: React.CSSProperties;
 };
 
 export const TEAM_MEMBERS: TeamMember[] = [
@@ -23,7 +24,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-1',
     name: 'Dulaj Malporu',
     position: 'Editors-in-Chief',
-    image: '/resources/team/New folder (2)/Dulaj.png',
+    image: '/resources/team/New folder (2)/poru.png',
     email: 'dulaj.m@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234501',
@@ -33,7 +34,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-2',
     name: 'Andrina Fernando',
     position: 'Editors-in-Chief',
-    image: '/resources/team/New folder (2)/andrina.png',
+    image: '/resources/team/New folder (2)/Andrina.png',
     email: 'andrina.f@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234502',
@@ -43,7 +44,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-3',
     name: 'Sithum Bamunuarachchi',
     position: 'Partnership Coordinator',
-    image: '/resources/team/New folder (2)/Sithum.png',
+    image: '/resources/team/New folder (2)/ciga.png',
     email: 'sithum.b@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234503',
@@ -53,7 +54,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-4',
     name: 'Sasina Maheshi',
     position: 'Partnership Coordinator',
-    image: '/Resources/OurTeam/fox.png',
+    image: '/resources/team/New folder (2)/Sasina.png',
     email: 'sasina.m@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234504',
@@ -63,7 +64,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-5',
     name: 'Oshan Harischandra',
     position: 'Financial Coordinator',
-    image: '/resources/team/New folder (2)/Oshan.png',
+    image: '/resources/team/New folder (2)/oshan.png',
     email: 'oshan.h@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234505',
@@ -73,7 +74,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-6',
     name: 'Himaya Isurandi',
     position: 'Financial Coordinator',
-    image: '/resources/team/New folder (2)/himaya.png',
+    image: '/resources/team/New folder (2)/Himaya.png',
     email: 'himaya.i@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234506',
@@ -93,7 +94,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-8',
     name: 'Ravindu Aththanayake',
     position: 'Marketing Coordinator',
-    image: '/resources/team/New folder (2)/ravindu.png',
+    image: '/resources/team/New folder (2)/RavinduAyya.png',
     email: 'ravindu.a@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234508',
@@ -103,7 +104,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-9',
     name: 'Nadeesha',
     position: 'Marketing Coordinator',
-    image: '/resources/team/New folder (2)/nadeesha.png',
+    image: '/resources/team/New folder (2)/nadeesha01.png',
     email: 'nadeesha@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234509',
@@ -113,7 +114,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-10',
     name: 'Kaveesha Vimukthi',
     position: 'Video Content Coordinator',
-    image: '/resources/team/New folder (2)/Kaveesha.png',
+    image: '/resources/team/New folder (2)/kaveesha.png',
     email: 'kaveesha.v@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234510',
@@ -143,7 +144,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-13',
     name: 'Kasun Rasinidu',
     position: 'Editorial Coordinator',
-    image: '/resources/team/New folder (2)/kasun.png',
+    image: '/resources/team/New folder (2)/kasn.png',
     email: 'kasun.r@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234513',
@@ -153,7 +154,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-14',
     name: 'Binithi Sarithya',
     position: 'Forum Coordinator',
-    image: '/resources/team/New folder (2)/Binithi.png',
+    image: '/resources/team/New folder (2)/binithi.png',
     email: 'binithi.s@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234514',
@@ -163,7 +164,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-15',
     name: 'Pathum Godamunna',
     position: 'Podcast Coordinator',
-    image: '/resources/team/New folder (2)/Pathum.png',
+    image: '/resources/team/New folder (2)/fox.png',
     email: 'pathum.g@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234515',
@@ -173,7 +174,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-16',
     name: 'Sajana Jayawardhana',
     position: 'ER Coordinator',
-    image: '/resources/team/New folder (2)/Sajana.png',
+    image: '/resources/team/New folder (2)/sajana.png',
     email: 'sajana.j@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234516',
@@ -183,7 +184,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-17',
     name: 'Roshini Premathilaka',
     position: 'ER Coordinator',
-    image: '/resources/team/New folder (2)/roshini.png',
+    image: '/resources/team/New folder (2)/Roshini.png',
     email: 'roshini.p@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234517',
@@ -273,8 +274,8 @@ export default function TeamSection() {
                       translateZ(${isCenter ? 40 : 0}px)
                     `,
                     zIndex: isCenter ? 20 : isAdjacent ? 10 : isSecondAdjacent ? 5 : 1,
-                    opacity: isCenter ? 1 : isAdjacent ? (isMobile ? 0.75 : 0.45) : (isMobile ? 0.35 : 0.2),
-                    filter: isCenter ? 'blur(0px)' : isMobile ? 'blur(1px)' : 'blur(3px)',
+                    opacity: isCenter ? 1 : isAdjacent ? 0.85 : 0.45,
+                    filter: isCenter ? 'none' : isMobile ? 'none' : 'blur(1px)',
                     visibility: Math.abs(pos) > 2 ? 'hidden' : 'visible',
                   }}
                 >
@@ -283,6 +284,7 @@ export default function TeamSection() {
                     position={member.position}
                     image={member.image}
                     isActive={isCenter}
+                    imageStyle={member.imageStyle}
                     socials={{
                       email: member.email,
                       linkedin: member.linkedin,
