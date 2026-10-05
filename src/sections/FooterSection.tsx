@@ -178,7 +178,7 @@ export default function FooterSection({
     'Faculty of Science, University of Kelaniya',
     'Kelaniya 11600, Sri Lanka',
   ],
-  contactEmail = 'exposition@kln.ac.lk',
+  contactEmail = 'exposition.mit@gmail.com',
   copyrightText = '© Exposition. All Rights Reserved 2026',
   creditText = 'Faculty of Science, University of Kelaniya',
 }: FooterSectionProps) {

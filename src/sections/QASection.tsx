@@ -88,7 +88,7 @@ export const FAQ_DATA: FAQItem[] = [
     category: 'General',
     question: 'How can I contact the organizing committee or editorial board directly?',
     answer:
-      'You can reach out directly to our 18 department heads (Editor-in-Chief, Event Chair, Tech Leads, Partnership Managers) via their Email, LinkedIn, and WhatsApp links in the Our Team section, or email us at exposition@kln.ac.lk.',
+      'You can reach out directly to our department heads (Editor-in-Chief, Event Chair, Tech Leads, Partnership Managers) via their Email, LinkedIn, and WhatsApp links in the Our Team section, or email us at exposition.mit@gmail.com.',
     highlights: ['Direct WhatsApp & Email', 'Editorial Board Support', 'Rapid Inquiries Response'],
   },
 ];
@@ -97,6 +97,7 @@ export default function QASection() {
   const [openId, setOpenId] = useState<string | null>('faq-1');
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [showAll, setShowAll] = useState(false);
 
   const toggleFAQ = (id: string) => {
     setOpenId((prev) => (prev === id ? null : id));
@@ -119,6 +120,8 @@ export default function QASection() {
     });
   }, [activeCategory, searchQuery]);
 
+  const visibleFAQs = showAll ? filteredFAQs : filteredFAQs.slice(0, 3);
+
   return (
     <section
       id="faq"
@@ -135,7 +138,7 @@ export default function QASection() {
 
         <p className="mt-6 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-black/70 font-light">
           Explore comprehensive answers regarding symposium registration, hackathon tracks,
-          keynote streams, magazine publications, and corporate partnerships for Exposition 21st Edition.
+          keynote streams, magazine publications, and corporate partnerships for Exposition Issue 22.
         </p>
 
         {/* Search Input Bar */}
@@ -196,83 +199,103 @@ export default function QASection() {
             </p>
           </div>
         ) : (
-          <StaggerContainer key={`${activeCategory}-${searchQuery}`} staggerChildren={0.06} className="space-y-4">
-            {filteredFAQs.map((faq) => {
-              const isOpen = openId === faq.id;
-              return (
-                <StaggerCard key={faq.id}>
-                  <div
-                    className={`rounded-2xl sm:rounded-3xl border transition-all duration-300 overflow-hidden ${isOpen
-                      ? 'border-black/20 bg-black/[0.02] shadow-sm'
-                      : 'border-black/10 bg-transparent hover:border-black/25'
-                      }`}
-                  >
-                    {/* Accordion Header Button */}
-                    <button
-                      onClick={() => toggleFAQ(faq.id)}
-                      className="w-full text-left p-5 sm:p-7 flex items-center justify-between gap-4 cursor-pointer"
+          <>
+            <StaggerContainer key={`${activeCategory}-${searchQuery}-${showAll}`} staggerChildren={0.06} className="space-y-4">
+              {visibleFAQs.map((faq) => {
+                const isOpen = openId === faq.id;
+                return (
+                  <StaggerCard key={faq.id}>
+                    <div
+                      className={`rounded-2xl sm:rounded-3xl border transition-all duration-300 overflow-hidden ${isOpen
+                        ? 'border-black/20 bg-black/[0.02] shadow-sm'
+                        : 'border-black/10 bg-transparent hover:border-black/25'
+                        }`}
                     >
-                      <div className="flex items-start sm:items-center gap-3 sm:gap-6 min-w-0">
-                        <span className="font-mono text-sm sm:text-base font-bold text-black/40 tabular-nums shrink-0 pt-0.5 sm:pt-0">
-                          {faq.number}
-                        </span>
-                        <div className="space-y-1">
-                          <span className="text-[0.65rem] font-mono font-semibold uppercase tracking-widest text-[#B8894F]">
-                            {faq.category}
-                          </span>
-                          <h3 className="text-sm sm:text-base md:text-lg font-bold text-black leading-snug">
-                            {faq.question}
-                          </h3>
-                        </div>
-                      </div>
-
-                      <div
-                        className={`size-8 sm:size-9 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 border ${isOpen
-                          ? 'rotate-180 bg-black text-white border-black'
-                          : 'bg-black/5 text-black/60 border-black/10 hover:border-black/30'
-                          }`}
+                      {/* Accordion Header Button */}
+                      <button
+                        onClick={() => toggleFAQ(faq.id)}
+                        className="w-full text-left p-5 sm:p-7 flex items-center justify-between gap-4 cursor-pointer"
                       >
-                        <ChevronDown className="size-4" />
-                      </div>
-                    </button>
-
-                    {/* Accordion Content Body */}
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          key={`content-${faq.id}`}
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.28, ease: 'easeOut' }}
-                          className="overflow-hidden"
-                        >
-                          <div className="px-5 sm:px-7 pb-6 sm:pb-7 pt-1 border-t border-black/10 space-y-4">
-                            <p className="text-xs sm:text-sm md:text-base text-black/75 leading-relaxed font-light pl-6 sm:pl-10">
-                              {faq.answer}
-                            </p>
-
-                            {faq.highlights && (
-                              <div className="flex flex-wrap items-center gap-2 pl-6 sm:pl-10 pt-2">
-                                {faq.highlights.map((highlight, hIdx) => (
-                                  <span
-                                    key={hIdx}
-                                    className="inline-flex items-center gap-1 rounded-md bg-black/5 border border-black/10 px-2.5 py-1 text-[0.68rem] font-medium text-black/80"
-                                  >
-                                    {highlight}
-                                  </span>
-                                ))}
-                              </div>
-                            )}
+                        <div className="flex items-start sm:items-center gap-3 sm:gap-6 min-w-0">
+                          <span className="font-mono text-sm sm:text-base font-bold text-black/40 tabular-nums shrink-0 pt-0.5 sm:pt-0">
+                            {faq.number}
+                          </span>
+                          <div className="space-y-1">
+                            <span className="text-[0.65rem] font-mono font-semibold uppercase tracking-widest text-[#B8894F]">
+                              {faq.category}
+                            </span>
+                            <h3 className="text-sm sm:text-base md:text-lg font-bold text-black leading-snug">
+                              {faq.question}
+                            </h3>
                           </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </StaggerCard>
-              );
-            })}
-          </StaggerContainer>
+                        </div>
+
+                        <div
+                          className={`size-8 sm:size-9 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 border ${isOpen
+                            ? 'rotate-180 bg-black text-white border-black'
+                            : 'bg-black/5 text-black/60 border-black/10 hover:border-black/30'
+                            }`}
+                        >
+                          <ChevronDown className="size-4" />
+                        </div>
+                      </button>
+
+                      {/* Accordion Content Body */}
+                      <AnimatePresence initial={false}>
+                        {isOpen && (
+                          <motion.div
+                            key={`content-${faq.id}`}
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.28, ease: 'easeOut' }}
+                            className="overflow-hidden"
+                          >
+                            <div className="px-5 sm:px-7 pb-6 sm:pb-7 pt-1 border-t border-black/10 space-y-4">
+                              <p className="text-xs sm:text-sm md:text-base text-black/75 leading-relaxed font-light pl-6 sm:pl-10">
+                                {faq.answer}
+                              </p>
+
+                              {faq.highlights && (
+                                <div className="flex flex-wrap items-center gap-2 pl-6 sm:pl-10 pt-2">
+                                  {faq.highlights.map((highlight, hIdx) => (
+                                    <span
+                                      key={hIdx}
+                                      className="inline-flex items-center gap-1 rounded-md bg-black/5 border border-black/10 px-2.5 py-1 text-[0.68rem] font-medium text-black/80"
+                                    >
+                                      {highlight}
+                                    </span>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </StaggerCard>
+                );
+              })}
+            </StaggerContainer>
+
+            {/* See More / Show Less Button after first 3 questions */}
+            {filteredFAQs.length > 3 && (
+              <div className="flex justify-center pt-4 sm:pt-6">
+                <button
+                  type="button"
+                  onClick={() => setShowAll((prev) => !prev)}
+                  className="inline-flex items-center gap-2.5 rounded-full border border-black/20 bg-black/5 hover:bg-black hover:text-white px-7 py-3 text-xs sm:text-sm font-bold uppercase tracking-wider text-black transition-all duration-300 shadow-sm hover:shadow-md active:scale-95 cursor-pointer group"
+                >
+                  <span>{showAll ? 'Show Less' : `See More (${filteredFAQs.length - 3} More)`}</span>
+                  <ChevronDown
+                    className={`size-4 transition-transform duration-300 ${
+                      showAll ? 'rotate-180' : 'group-hover:translate-y-0.5'
+                    }`}
+                  />
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
 
@@ -288,7 +311,7 @@ export default function QASection() {
         </div>
 
         <a
-          href="mailto:exposition@kln.ac.lk"
+          href="mailto:exposition.mit@gmail.com"
           className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#B8894F] to-[#E8C896] px-6 py-3 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0C0C0C] hover:brightness-110 shadow-[0_0_20px_rgba(184,137,79,0.3)] transition-all shrink-0"
         >
           <Send className="size-3.5 text-[#0C0C0C]" />
