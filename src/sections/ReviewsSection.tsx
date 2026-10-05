@@ -213,9 +213,10 @@ function ReviewCard({
   username,
   country,
   tagline,
+  body,
 }: (typeof REVIEWS_DATA)[number]) {
   return (
-    <Card className="w-[210px] sm:w-[230px] rounded-xl border border-white/10 bg-[#151515]/95 shadow-md hover:border-[#B8894F]/35 transition-all duration-200">
+    <Card className="w-[220px] sm:w-[245px] rounded-xl border border-white/10 bg-[#151515]/95 shadow-md hover:border-[#B8894F]/35 transition-all duration-200">
       <CardContent className="p-3.5 flex flex-col justify-between h-full space-y-2">
         <div className="flex items-center gap-2.5">
           <Avatar className="size-9 border border-white/20 shadow-md shrink-0">
@@ -230,6 +231,13 @@ function ReviewCard({
             <p className="text-[0.6rem] font-mono text-[#9A9A9A] truncate">{username}</p>
           </div>
         </div>
+
+        {/* Review body wrapped in gold quotation marks */}
+        <p className="text-[0.68rem] text-zinc-200 font-medium italic line-clamp-3 leading-snug">
+          <span className="text-[#c9a25f] font-serif font-bold text-xs mr-0.5">“</span>
+          {body}
+          <span className="text-[#c9a25f] font-serif font-bold text-xs ml-0.5">”</span>
+        </p>
 
         <p className="text-[0.62rem] font-medium text-[#E8C896] truncate">
           {tagline}
@@ -380,17 +388,17 @@ export default function ReviewsSection() {
                     {activeFeatured.title}
                   </p>
 
-                  {/* Quote Message styled with Oversized Metallic Gold Quotation Marks */}
-                  <div className="relative py-2 my-2">
-                    <span className="absolute -top-3 -left-2 text-[#c9a25f]/30 font-serif text-5xl sm:text-6xl font-bold leading-none select-none pointer-events-none">
-                      “
-                    </span>
-                    <blockquote className="relative z-10 text-xs sm:text-sm font-extrabold italic text-[#f5ebd9] leading-relaxed px-3">
-                      {activeFeatured.quote}
-                    </blockquote>
-                    <span className="absolute -bottom-4 -right-1 text-[#c9a25f]/30 font-serif text-5xl sm:text-6xl font-bold leading-none select-none pointer-events-none">
-                      ”
-                    </span>
+                  {/* Quote Message styled with Metallic Gold Quotation Marks matching design */}
+                  <div className="relative py-2.5 my-2">
+                    <p className="text-sm sm:text-base md:text-[17px] font-bold italic text-white leading-relaxed tracking-wide">
+                      <span className="text-[#c9a25f] font-serif text-3xl sm:text-4xl font-extrabold mr-1.5 select-none inline-block align-top -mt-1">
+                        “
+                      </span>
+                      <span>{activeFeatured.quote}</span>
+                      <span className="text-[#c9a25f] font-serif text-3xl sm:text-4xl font-extrabold ml-1.5 select-none inline-block align-bottom translate-y-1">
+                        ”
+                      </span>
+                    </p>
                   </div>
                 </div>
 

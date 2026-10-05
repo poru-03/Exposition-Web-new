@@ -1,5 +1,5 @@
-import { useRef } from "react"
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion"
+import { useRef, useState, useEffect } from "react"
+import { motion, useScroll, useTransform, useReducedMotion, useMotionValueEvent, MotionValue } from "framer-motion"
 import {
   Radio,
   Globe,
@@ -11,7 +11,6 @@ import {
   ExternalLink,
   Bell,
 } from "lucide-react"
-import { StaggerContainer, StaggerCard } from "@/components/StaggerReveal"
 
 export type PhaseItem = {
   id: string;
@@ -96,219 +95,344 @@ export const PROCESS_PHASES: PhaseItem[] = [
   },
 ]
 
-const STICKY_TOP_BASE = 80
-const TAB_MARGIN = 48
-const RAIL_HEIGHT = (PROCESS_PHASES.length - 1) * TAB_MARGIN // 240px
+const TAB_MARGIN_DESKTOP = 46
+const TAB_MARGIN_MOBILE = 40
+const RAIL_OFFSET_TOP = 22
 
-export const DemoDark = () => {
-  const timelineRef = useRef<HTMLDivElement>(null)
-  const shouldReduceMotion = useReducedMotion()
-  const { scrollYProgress } = useScroll({
-    target: timelineRef,
-    offset: ["start 65%", "end 35%"],
-  })
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0px", `${RAIL_HEIGHT}px`])
+interface ProcessCardItemProps {
+  phase: PhaseItem;
+  index: number;
+  total: number;
+  scrollYProgress: MotionValue<number>;
+  onSelect: (index: number) => void;
+  stickyTop: number;
+  shouldReduceMotion: boolean | null;
+}
+
+function ProcessCardItem({
+  phase,
+  index,
+  total,
+  scrollYProgress,
+  onSelect,
+  stickyTop,
+  shouldReduceMotion,
+}: ProcessCardItemProps) {
+  const Icon = phase.icon
+  const segment = 1 / (total - 1)
+  const start = (index - 1) * segment
+  const end = index * segment
+
+  // Card 0 is always at its resting position.
+  // Cards 1..5 smoothly glide into their exact stacked tab position as scroll progress reaches their range.
+  const y = useTransform(
+    scrollYProgress,
+    index === 0 ? [0, 1] : [start, end],
+    index === 0 || shouldReduceMotion ? [0, 0] : [550, 0],
+    { clamp: true }
+  )
+
+  const opacity = useTransform(
+    scrollYProgress,
+    index === 0 ? [0, 1] : [start, Math.min(start + 0.05, end)],
+    index === 0 ? [1, 1] : [0, 1],
+    { clamp: true }
+  )
 
   return (
-    <div className="relative w-full py-10 bg-transparent">
-      {/* Vertical Sticky Stack Container */}
-      <div ref={timelineRef} className="relative mx-auto max-w-5xl px-4 sm:px-8 pb-48 sm:pb-64">
-        <div className="relative flex items-start gap-3 sm:gap-6">
-          {/* Unified Sticky Indicator Rail: keeps the 6 white circles permanently structured in a perfect vertical ladder */}
-          <div
-            className="sticky z-30 shrink-0 self-start flex flex-col items-center select-none"
-            style={{ top: `${STICKY_TOP_BASE}px` }}
-          >
+    <motion.div
+      id={`process-card-${phase.id}`}
+      style={{
+        top: `${stickyTop}px`,
+        zIndex: 10 + index,
+        y,
+        opacity: shouldReduceMotion && index > 0 ? opacity : 1,
+      }}
+      className="absolute inset-x-0 w-full"
+    >
+      <div className="group relative rounded-2xl sm:rounded-3xl border border-white/15 bg-[#121212] shadow-[0_25px_60px_rgba(0,0,0,0.95)] transition-colors duration-200 hover:border-[#B8894F]/50 overflow-hidden">
+        {/* Top Tab Header Bar (Always cleanly exposed at top margin) */}
+        <div
+          onClick={() => onSelect(index)}
+          className="flex items-center justify-between gap-3 px-4 py-3 sm:px-8 sm:py-4 border-b border-white/10 bg-[#181818] cursor-pointer hover:bg-[#1f1f1f] transition-colors select-none"
+          title={`Click to jump to ${phase.title}`}
+        >
+          <div className="flex items-center gap-2.5 sm:gap-4 min-w-0">
+            <div className="rounded-full size-7 sm:size-9 bg-[#222222] border border-white/15 text-xs sm:text-sm font-black flex justify-center items-center text-[#E8C896] shadow-[0_0_12px_rgba(216,216,216,0.15)] shrink-0">
+              {phase.number}
+            </div>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:gap-3 min-w-0">
+              <h3 className="text-xs sm:text-base md:text-lg font-bold uppercase tracking-tight text-white truncate">
+                {phase.title}
+              </h3>
+              <span className="hidden sm:inline-block text-[0.65rem] sm:text-xs font-semibold uppercase tracking-wider text-neutral-400 truncate">
+                {phase.subtitle}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0">
+            <Icon className="h-4 w-4 sm:h-5 sm:w-5 text-[#E8C896]" />
+          </div>
+        </div>
+
+        {/* Card Body Content */}
+        <div className="p-4 sm:p-7 md:p-9 space-y-4 sm:space-y-6 max-h-[calc(100vh-320px)] sm:max-h-[calc(100vh-360px)] overflow-y-auto">
+          {/* YouTube-style Subscribe Bar for Voices of Vision */}
+          {phase.id === "process-1" && (
+            <div className="flex items-center justify-between gap-3 bg-white rounded-2xl sm:rounded-full px-3 sm:px-4 py-2 sm:py-2.5 text-black shadow-[0_10px_25px_rgba(0,0,0,0.5)] border border-neutral-200 max-w-lg">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="relative size-8 sm:size-10 rounded-full border-2 border-red-600 p-0.5 overflow-hidden shrink-0 bg-neutral-900">
+                  <img
+                    src="/podcast-logo-v3.png"
+                    alt="Voices of Vision Logo"
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
+                <div className="flex flex-col min-w-0 leading-tight">
+                  <span className="text-xs sm:text-sm font-extrabold uppercase tracking-tight text-neutral-900 truncate">
+                    Voices of Vision
+                  </span>
+                  <span className="text-[0.65rem] font-medium text-neutral-500">
+                    Official Podcast Channel
+                  </span>
+                </div>
+              </div>
+
+              <a
+                href="https://www.youtube.com/@VoicesofVision"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 bg-red-600 hover:bg-red-700 active:scale-95 transition-all text-white text-xs font-extrabold uppercase tracking-wider px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-md shrink-0 cursor-pointer"
+              >
+                <span>Subscribe</span>
+                <Bell className="w-3.5 h-3.5 fill-current" />
+              </a>
+            </div>
+          )}
+
+          <p className="text-neutral-200 text-xs sm:text-base leading-relaxed font-normal max-w-2xl">
+            {phase.description}
+          </p>
+
+          {phase.isComingSoon ? (
+            <div className="flex flex-col items-center justify-center py-8 sm:py-10 px-4 sm:px-6 rounded-2xl border border-[#B8894F]/30 bg-gradient-to-br from-[#181818] via-[#121212] to-[#0A0A0A] shadow-inner text-center space-y-3">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#B8894F]/15 px-4 py-1.5 border border-[#B8894F]/40 text-[#E8C896] text-xs sm:text-sm font-bold uppercase tracking-widest animate-pulse">
+                <span>Coming Soon</span>
+              </div>
+              <p className="text-xs sm:text-sm text-neutral-400 max-w-md">
+                We're currently building this platform. Stay tuned for exciting upcoming hackathons, tech events, and robotics challenges!
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 items-center pt-1">
+              <div className="relative overflow-hidden rounded-2xl border border-white/10 h-32 sm:h-44">
+                <img
+                  src={phase.image}
+                  alt={phase.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C]/80 via-transparent to-transparent" />
+              </div>
+
+              <div className="flex flex-col gap-2.5 sm:gap-3">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#E8C896]">
+                  Key Highlights
+                </span>
+                <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-neutral-100 font-medium">
+                  {phase.deliverables.map((item) => (
+                    <li key={item} className="flex items-center gap-2.5">
+                      <ArrowRight className="h-3.5 w-3.5 text-[#E8C896] shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {phase.isElite10 && (
+                  <div className="pt-2">
+                    <a
+                      href="/elite-10"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.history.pushState({}, '', '/elite-10');
+                        window.dispatchEvent(new Event('popstate'));
+                      }}
+                      className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#B8894F] to-[#E8C896] px-5 py-2 text-xs font-bold uppercase tracking-wider text-[#0C0C0C] shadow-[0_0_20px_rgba(184,137,79,0.3)] transition-all hover:scale-105 cursor-pointer"
+                    >
+                      <span>Explore Elite 10</span>
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
+export const DemoDark = () => {
+  const trackRef = useRef<HTMLDivElement>(null)
+  const shouldReduceMotion = useReducedMotion()
+  const [isMobile, setIsMobile] = useState(false)
+  const [activePhaseIndex, setActivePhaseIndex] = useState(0)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640)
+    }
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
+  const tabMargin = isMobile ? TAB_MARGIN_MOBILE : TAB_MARGIN_DESKTOP
+  const railHeight = (PROCESS_PHASES.length - 1) * tabMargin
+
+  const { scrollYProgress } = useScroll({
+    target: trackRef,
+    offset: ["start start", "end end"],
+  })
+
+  // Synchronize active indicator dot with scroll position
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const segment = 1 / (PROCESS_PHASES.length - 1)
+    const idx = Math.min(PROCESS_PHASES.length - 1, Math.max(0, Math.round(latest / segment)))
+    setActivePhaseIndex(idx)
+  })
+
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0px", `${railHeight}px`])
+
+  // Smoothly scroll the container to activate a specific phase
+  const scrollToPhase = (targetIndex: number) => {
+    if (!trackRef.current) return
+    const rect = trackRef.current.getBoundingClientRect()
+    const trackTop = window.scrollY + rect.top
+    const maxScroll = trackRef.current.offsetHeight - window.innerHeight
+    if (maxScroll <= 0) return
+
+    const targetFraction = targetIndex / (PROCESS_PHASES.length - 1)
+    const targetY = trackTop + targetFraction * maxScroll
+
+    if (window.__lenis) {
+      window.__lenis.scrollTo(targetY, { duration: 0.8 })
+    } else {
+      window.scrollTo({ top: targetY, behavior: "smooth" })
+    }
+  }
+
+  // Handle direct hash navigation to specific process cards (e.g. #process-card-process-2)
+  useEffect(() => {
+    const hash = window.location.hash
+    if (!hash) return
+    const matchIdx = PROCESS_PHASES.findIndex((p) => `#process-card-${p.id}` === hash)
+    if (matchIdx !== -1) {
+      const timer = setTimeout(() => {
+        scrollToPhase(matchIdx)
+      }, 200)
+      return () => clearTimeout(timer)
+    }
+  }, [])
+
+  return (
+    <div className="relative w-full py-6 sm:py-10 bg-transparent">
+      {/* Outer Scroll Track: provides predictable, bounded scroll depth */}
+      <div
+        ref={trackRef}
+        className="relative mx-auto max-w-5xl px-3 sm:px-8"
+        style={{ height: "300vh" }}
+      >
+        {/* Pinned Viewport Container: stays pinned while scrolling through cards */}
+        <div className="sticky top-16 sm:top-20 w-full flex items-start gap-2.5 sm:gap-6 pt-2">
+          {/* Unified Left Rail: 6 dots locked to the exact top offset of each card's tab */}
+          <div className="shrink-0 self-start flex flex-col items-center select-none pt-1">
             <div
               className="relative w-7 sm:w-9 flex items-center justify-center"
-              style={{ height: `${RAIL_HEIGHT + 60}px` }}
+              style={{ height: `${railHeight + 48}px` }}
             >
-              {/* Continuous Vertical Line Track spanning between dot 1 and dot 6 */}
+              {/* Vertical Track Line */}
               <div
                 className="absolute left-1/2 -translate-x-1/2 w-[2.5px] bg-white/20 rounded-full z-10"
-                style={{ top: "30px", height: `${RAIL_HEIGHT}px` }}
+                style={{ top: `${RAIL_OFFSET_TOP}px`, height: `${railHeight}px` }}
               />
 
-              {/* Dynamic Glowing Progress Connector Line */}
+              {/* Glowing Dynamic Progress Connector */}
               {!shouldReduceMotion && (
                 <motion.div
                   className="absolute left-1/2 -translate-x-1/2 w-[2.5px] bg-gradient-to-b from-[#B8894F] via-[#E8C896] to-white shadow-[0_0_18px_rgba(184,137,79,0.7)] rounded-full z-10 origin-top"
-                  style={{ top: "30px", height: lineHeight }}
+                  style={{ top: `${RAIL_OFFSET_TOP}px`, height: lineHeight }}
                 />
               )}
 
-              {/* Top Gold Dot Marker (at exact center of dot 01 / start of track) */}
+              {/* Top Gold Marker (center of Dot 01) */}
               <div
                 className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 h-3.5 w-3.5 rounded-full bg-[#E8C896] shadow-[0_0_12px_rgba(232,200,150,0.8)] z-15 pointer-events-none"
-                style={{ top: "30px" }}
+                style={{ top: `${RAIL_OFFSET_TOP}px` }}
               />
 
-              {/* Bottom Gold Dot Marker (at exact center of dot 06 / end of track) */}
+              {/* Bottom Gold Marker (center of Dot 06) */}
               <div
                 className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 h-3.5 w-3.5 rounded-full bg-[#E8C896] shadow-[0_0_12px_rgba(232,200,150,0.8)] z-15 pointer-events-none"
-                style={{ top: `${30 + RAIL_HEIGHT}px` }}
+                style={{ top: `${RAIL_OFFSET_TOP + railHeight}px` }}
               />
 
-              {/* The 6 White Color Circles - ALWAYS in structured order 48px apart even when scrolling! */}
+              {/* 6 Structured Circles — permanently synchronized with card tabs */}
               {PROCESS_PHASES.map((phase, index) => {
-                const dotCenterY = 30 + index * TAB_MARGIN
+                const dotCenterY = RAIL_OFFSET_TOP + index * tabMargin
+                const isActive = activePhaseIndex === index
 
                 return (
                   <button
                     key={phase.id}
                     type="button"
-                    onClick={() => {
-                      const el = document.getElementById(`process-card-${phase.id}`)
-                      el?.scrollIntoView({ behavior: "smooth", block: "start" })
-                    }}
+                    onClick={() => scrollToPhase(index)}
                     style={{ top: `${dotCenterY}px` }}
                     title={`Jump to ${phase.title}`}
                     aria-label={`Scroll to ${phase.title}`}
-                    className="group/dot absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 h-5 w-5 rounded-full bg-white border-2 border-black shadow-[0_0_15px_rgba(255,255,255,0.9)] flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-125 hover:border-[#E8C896] hover:shadow-[0_0_18px_rgba(232,200,150,1)]"
+                    className={`group/dot absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 h-5 w-5 rounded-full bg-white border-2 transition-all duration-300 flex items-center justify-center cursor-pointer ${
+                      isActive
+                        ? "border-[#E8C896] shadow-[0_0_18px_rgba(232,200,150,1)] scale-125"
+                        : "border-black shadow-[0_0_12px_rgba(255,255,255,0.7)] hover:scale-115 hover:border-[#E8C896]"
+                    }`}
                   >
-                    <div className="h-2 w-2 rounded-full bg-black group-hover/dot:bg-[#B8894F] transition-colors" />
+                    <div
+                      className={`h-2 w-2 rounded-full transition-colors ${
+                        isActive ? "bg-[#B8894F]" : "bg-black group-hover/dot:bg-[#B8894F]"
+                      }`}
+                    />
                   </button>
                 )
               })}
             </div>
           </div>
 
-          {/* Stacked Cards Container adding downwards with top margin headers */}
-          <div className="flex-1 min-w-0 w-full">
-            <StaggerContainer staggerChildren={0.12} className="flex flex-col gap-12 sm:gap-16 relative">
-              {PROCESS_PHASES.map((phase, index) => {
-                const Icon = phase.icon
-                const stickyTop = STICKY_TOP_BASE + index * TAB_MARGIN
+          {/* Cards Stack Stage: tabs permanently stand in their assigned positions */}
+          <div
+            className="relative flex-1 min-w-0 w-full"
+            style={{ height: isMobile ? "540px" : "620px" }}
+          >
+            {PROCESS_PHASES.map((phase, index) => {
+              const stickyTop = index * tabMargin
 
-                return (
-                  <div
-                    key={phase.id}
-                    id={`process-card-${phase.id}`}
-                    style={{ top: `${stickyTop}px` }}
-                    className="sticky z-20 w-full"
-                  >
-                    {/* Sticky Card with Exposed Top Margin Header */}
-                    <StaggerCard className="w-full">
-                      <div className="group relative rounded-3xl border border-white/15 bg-[#121212] shadow-[0_25px_60px_rgba(0,0,0,0.95)] transition-all duration-300 hover:border-[#B8894F]/50 overflow-hidden">
-                        {/* Top Tab Header Bar (Visible when stacked at top margin) */}
-                        <div className="flex items-center justify-between gap-4 px-6 py-4 sm:px-8 sm:py-5 border-b border-white/10 bg-[#181818]">
-                          <div className="flex items-center gap-3 sm:gap-4">
-                            <div className="rounded-full size-8 sm:size-9 bg-[#222222] border border-white/15 text-xs sm:text-sm font-black flex justify-center items-center text-silver-gradient shadow-[0_0_12px_rgba(216,216,216,0.15)] shrink-0">
-                              {phase.number}
-                            </div>
-                            <div className="flex flex-col sm:flex-row sm:items-center sm:gap-3">
-                              <h3 className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-tight text-white">
-                                {phase.title}
-                              </h3>
-                              <span className="text-[0.65rem] sm:text-xs font-semibold uppercase tracking-wider text-neutral-300">
-                                {phase.subtitle}
-                              </span>
-                            </div>
-                          </div>
-
-                          <div className="flex items-center gap-2">
-                            <Icon className="h-4 w-4 sm:h-5 sm:w-5 text-[#E8C896]" />
-                          </div>
-                        </div>
-
-                        {/* Card Body Content */}
-                        <div className="p-6 sm:p-8 md:p-10 space-y-6">
-                          {/* YouTube-style Subscribe Bar directly below Voices of Vision Title */}
-                          {phase.id === "process-1" && (
-                            <div className="flex items-center justify-between gap-3 bg-white rounded-2xl sm:rounded-full px-3 sm:px-4 py-2 sm:py-2.5 text-black shadow-[0_10px_25px_rgba(0,0,0,0.5)] border border-neutral-200 max-w-lg">
-                              <div className="flex items-center gap-3 min-w-0">
-                                <div className="relative size-9 sm:size-10 rounded-full border-2 border-red-600 p-0.5 overflow-hidden shrink-0 bg-neutral-900">
-                                  <img
-                                    src="/podcast-logo-v3.png"
-                                    alt="Voices of Vision Logo"
-                                    className="w-full h-full object-cover rounded-full"
-                                  />
-                                </div>
-                                <div className="flex flex-col min-w-0 leading-tight">
-                                  <span className="text-xs sm:text-sm font-extrabold uppercase tracking-tight text-neutral-900 truncate">
-                                    Voices of Vision
-                                  </span>
-                                  <span className="text-[0.65rem] font-medium text-neutral-500">
-                                    Official Podcast Channel
-                                  </span>
-                                </div>
-                              </div>
-
-                              <button className="flex items-center gap-1.5 bg-red-600 hover:bg-red-700 active:scale-95 transition-all text-white text-xs font-extrabold uppercase tracking-wider px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-md shrink-0 cursor-pointer">
-                                <span>Subscribe</span>
-                                <Bell className="w-3.5 h-3.5 fill-current" />
-                              </button>
-                            </div>
-                          )}
-
-                          <p className="text-neutral-200 text-sm sm:text-base md:text-lg leading-relaxed font-normal max-w-2xl">
-                            {phase.description}
-                          </p>
-
-                          {phase.isComingSoon ? (
-                            <div className="flex flex-col items-center justify-center py-10 px-6 rounded-2xl border border-[#B8894F]/30 bg-gradient-to-br from-[#181818] via-[#121212] to-[#0A0A0A] shadow-inner text-center space-y-3">
-                              <div className="inline-flex items-center gap-2 rounded-full bg-[#B8894F]/15 px-4 py-1.5 border border-[#B8894F]/40 text-[#E8C896] text-xs sm:text-sm font-bold uppercase tracking-widest animate-pulse">
-                                <span>Coming Soon</span>
-                              </div>
-                              <p className="text-xs sm:text-sm text-neutral-400 max-w-md">
-                                We're currently building this platform. Stay tuned for exciting upcoming hackathons, tech events, and robotics challenges!
-                              </p>
-                            </div>
-                          ) : (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 items-center pt-2">
-                              <div className="relative overflow-hidden rounded-2xl border border-white/10 h-36 sm:h-44">
-                                <img
-                                  src={phase.image}
-                                  alt={phase.title}
-                                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                  loading="lazy"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C]/80 via-transparent to-transparent" />
-                              </div>
-
-                              <div className="flex flex-col gap-3">
-                                <span className="text-xs font-bold uppercase tracking-wider text-[#E8C896]">
-                                  Key Highlights
-                                </span>
-                                <ul className="space-y-2 text-xs sm:text-sm text-neutral-100 font-medium">
-                                  {phase.deliverables.map((item) => (
-                                    <li key={item} className="flex items-center gap-2.5">
-                                      <ArrowRight className="h-3.5 w-3.5 text-[#E8C896] shrink-0" />
-                                      <span>{item}</span>
-                                    </li>
-                                  ))}
-                                </ul>
-
-                                {phase.isElite10 && (
-                                  <div className="pt-2">
-                                    <a
-                                      href="/elite-10"
-                                      onClick={(e) => {
-                                        e.preventDefault();
-                                        window.history.pushState({}, '', '/elite-10');
-                                        window.dispatchEvent(new Event('popstate'));
-                                      }}
-                                      className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#B8894F] to-[#E8C896] px-5 py-2 text-xs font-bold uppercase tracking-wider text-[#0C0C0C] shadow-[0_0_20px_rgba(184,137,79,0.3)] transition-all hover:scale-105 cursor-pointer"
-                                    >
-                                      <span>Explore Elite 10</span>
-                                      <ExternalLink className="h-3.5 w-3.5" />
-                                    </a>
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </StaggerCard>
-                  </div>
-                )
-              })}
-            </StaggerContainer>
+              return (
+                <ProcessCardItem
+                  key={phase.id}
+                  phase={phase}
+                  index={index}
+                  total={PROCESS_PHASES.length}
+                  scrollYProgress={scrollYProgress}
+                  onSelect={scrollToPhase}
+                  stickyTop={stickyTop}
+                  shouldReduceMotion={shouldReduceMotion}
+                />
+              )
+            })}
           </div>
         </div>
       </div>
     </div>
   )
 }
-
