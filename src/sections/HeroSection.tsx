@@ -82,7 +82,7 @@ export default function HeroSection() {
     <section
       id="hero"
       ref={containerRef}
-      className="relative w-full min-h-[100dvh] bg-[#0C0C0C] text-white flex flex-col justify-end sm:justify-between px-5 sm:px-10 md:px-16 lg:px-20 xl:px-28 pt-20 sm:pt-28 lg:pt-32 pt-[calc(4.5rem+env(safe-area-inset-top))] pb-20 sm:pb-12 pb-[calc(4.5rem+env(safe-area-inset-bottom))] select-none overflow-hidden"
+      className="relative w-full min-h-[100dvh] bg-[#0C0C0C] text-white flex flex-col justify-end sm:justify-between px-5 sm:px-10 md:px-16 lg:px-20 xl:px-28 pt-16 sm:pt-24 lg:pt-32 pb-8 sm:pb-12 lg:pb-14 pb-[calc(2.5rem+env(safe-area-inset-bottom))] select-none overflow-hidden"
     >
       {/* ----------------- MOBILE TOP LEFT BRAND LOGO ----------------- */}
       <div className="absolute top-5 left-5 pt-[env(safe-area-inset-top)] z-40 sm:hidden flex items-center">
@@ -129,7 +129,7 @@ export default function HeroSection() {
       <div className="absolute inset-y-0 right-0 w-16 sm:w-40 bg-gradient-to-l from-[#0C0C0C]/80 to-transparent pointer-events-none z-10" />
 
       {/* ----------------- MAIN CONTENT CONTAINER ----------------- */}
-      <div className="relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center mt-auto mb-10 sm:my-auto w-full max-w-[1700px] mx-auto">
+      <div className="relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-end lg:items-center mt-auto mb-2 sm:mb-4 lg:my-auto w-full max-w-[1700px] mx-auto">
 
         {/* LEFT COLUMN: Logo, Headline, Paragraph & Pill CTA Buttons */}
         <div className="lg:col-span-7 flex flex-col items-start text-left max-w-2xl">

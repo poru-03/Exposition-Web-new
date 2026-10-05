@@ -12,7 +12,6 @@ import {
   Users,
   HelpCircle,
 } from 'lucide-react';
-import { FaLinkedinIn, FaFacebookF, FaInstagram } from 'react-icons/fa6';
 
 export const NAV_LINKS = [
   { name: 'Home', href: '#hero', icon: Home },
@@ -155,37 +154,6 @@ export default function Navbar() {
                 </a>
               );
             })}
-
-            {/* Official Social Media Links */}
-            <div className="hidden xl:flex items-center pl-2.5 ml-1 border-l border-white/20 gap-2 shrink-0">
-              <a
-                href="https://www.linkedin.com/company/theexposition"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Exposition LinkedIn"
-                className="w-7 h-7 rounded-full bg-white/5 border border-[#c9a25f]/30 flex items-center justify-center text-[#c9a25f] hover:bg-[#c9a25f] hover:text-black transition-all duration-300 hover:scale-110"
-              >
-                <FaLinkedinIn className="size-3" />
-              </a>
-              <a
-                href="https://www.facebook.com/Exposition.MIT"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Exposition Facebook"
-                className="w-7 h-7 rounded-full bg-white/5 border border-[#c9a25f]/30 flex items-center justify-center text-[#c9a25f] hover:bg-[#c9a25f] hover:text-black transition-all duration-300 hover:scale-110"
-              >
-                <FaFacebookF className="size-3" />
-              </a>
-              <a
-                href="https://www.instagram.com/exposition_lk/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Exposition Instagram"
-                className="w-7 h-7 rounded-full bg-white/5 border border-[#c9a25f]/30 flex items-center justify-center text-[#c9a25f] hover:bg-[#c9a25f] hover:text-black transition-all duration-300 hover:scale-110"
-              >
-                <FaInstagram className="size-3" />
-              </a>
-            </div>
           </div>
         </nav>
       </motion.header>
