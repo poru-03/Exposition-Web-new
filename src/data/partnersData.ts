@@ -51,7 +51,7 @@ export const ISSUE_22_PARTNERS: Partner[] = [
     category: 'Official Studio Partner',
     image: '/resources/partners/studio-kassa.png',
     accentColor: '#d97706',
-    bgMode: 'dark',
+    bgMode: 'light',
     description:
       'Official studio partner collaborating with Exposition Issue 22 for creative multimedia production and broadcasting.',
   },
