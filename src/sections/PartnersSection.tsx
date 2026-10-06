@@ -363,7 +363,7 @@ export default function PartnersSection() {
       </ScrollReveal>
 
       {/* Single Continuous Marquee Row of All Partners */}
-      <div className="relative w-full overflow-hidden space-y-6 pt-2">
+      <ScrollReveal delay={0.15} y={50} className="relative w-full overflow-hidden space-y-6 pt-2">
 
         {/* Single Row: Flows smoothly with all partners */}
         <div className="relative w-full overflow-hidden">
@@ -429,7 +429,7 @@ export default function PartnersSection() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </ScrollReveal>
 
       {/* ================= PARTNER DETAILS MODAL ================= */}
       <AnimatePresence>
@@ -459,6 +459,8 @@ export default function PartnersSection() {
                 <img
                   src={selectedPartner.image}
                   alt={selectedPartner.name}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-center rounded-full"
                 />
               </div>

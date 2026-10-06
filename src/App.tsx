@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 import BackgroundFaceParallax from './components/BackgroundFaceParallax';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import Navbar from './components/Navbar';
@@ -19,6 +25,7 @@ import YouTubeChannelSection from './sections/YouTubeChannelSection';
 import TimelineSection from './sections/TimelineSection';
 import Elite10Page from './pages/Elite10Page';
 import MagazineReaderPage from './pages/MagazineReaderPage';
+import SiteLoadingScreen from './components/SiteLoadingScreen';
 
 declare global {
   interface Window {
@@ -45,6 +52,7 @@ export default function App() {
   const [currentPath, setCurrentPath] = useState(
     typeof window !== 'undefined' ? window.location.pathname : '/'
   );
+  const [isSiteLoaded, setIsSiteLoaded] = useState(false);
 
   useEffect(() => {
     const handleLocationChange = () => {
@@ -54,6 +62,16 @@ export default function App() {
     window.addEventListener('popstate', handleLocationChange);
     return () => window.removeEventListener('popstate', handleLocationChange);
   }, []);
+
+  useEffect(() => {
+    if (window.__lenis) {
+      if (!isSiteLoaded) {
+        window.__lenis.stop();
+      } else {
+        window.__lenis.start();
+      }
+    }
+  }, [isSiteLoaded]);
 
   useEffect(() => {
     if (currentPath === '/elite-10' || currentPath.startsWith('/magazine-reader')) return;
@@ -71,12 +89,15 @@ export default function App() {
 
     window.__lenis = lenis;
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    // Sync Lenis scroll events with GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
 
-    const rafId = requestAnimationFrame(raf);
+    // Drive Lenis RAF loop through GSAP's ticker to eliminate frame collisions & lag
+    const updateLenis = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+    gsap.ticker.add(updateLenis);
+    gsap.ticker.lagSmoothing(0);
 
     // Ensure site starts at the top (#hero) on fresh page loads
     if (!window.location.hash) {
@@ -84,7 +105,8 @@ export default function App() {
     }
 
     return () => {
-      cancelAnimationFrame(rafId);
+      lenis.off('scroll', ScrollTrigger.update);
+      gsap.ticker.remove(updateLenis);
       lenis.destroy();
       delete window.__lenis;
     };
@@ -115,6 +137,9 @@ export default function App() {
 
   return (
     <main className="relative min-h-screen bg-[#0C0C0C] w-full" style={{ overflowX: 'clip' }}>
+      {!isSiteLoaded && (
+        <SiteLoadingScreen onComplete={() => setIsSiteLoaded(true)} />
+      )}
       <ScrollProgressBar />
       <Navbar />
       <BackgroundFaceParallax />

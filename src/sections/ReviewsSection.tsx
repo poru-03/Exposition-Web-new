@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
 import { Marquee } from '@/components/ui/3d-testimonails';
 import ScrollReveal from '../components/ScrollReveal';
+import { useBatchReveal } from '../hooks/useBatchReveal';
 import {
   Star,
   ChevronLeft,
@@ -97,7 +98,7 @@ export const FEATURED_REVIEWS = [
     company: 'Educator & Global Tech Speaker',
     quote:
       'Data democracy and universal access in the digital age was an exceptional forum. Our discussion highlighted crucial topics around data democratization and competitive advantage for organizations navigating the modern digital frontier.',
-    image: '/resources/speakers/asela.jpeg',
+    image: '/resources/speakers/asela.jpg',
     socials: {
       github: 'https://github.com',
       twitter: 'https://twitter.com',
@@ -137,7 +138,7 @@ export const REVIEWS_DATA = [
     name: 'Mr. Asela Waidyalankara',
     username: '@asela_cyber',
     body: 'Data democracy and universal access in the digital age was an exceptional forum addressing industrial milestones realistically.',
-    img: '/resources/speakers/asela.jpeg',
+    img: '/resources/speakers/asela.jpg',
     country: '🇱🇰 Sri Lanka',
     tagline: 'Cyber Security & AI Policy Leader',
   },
@@ -258,6 +259,12 @@ export default function ReviewsSection() {
 
   const activeFeatured = FEATURED_REVIEWS[featuredIndex];
 
+  const statsRef = useBatchReveal<HTMLDivElement>({
+    selector: '.stat-counter-batch',
+    stagger: 0.08,
+    y: 40,
+  });
+
   // Automatic 5-second carousel cycle through all reviews
   useEffect(() => {
     const timer = setInterval(() => {
@@ -371,9 +378,20 @@ export default function ReviewsSection() {
                 <img
                   src={activeFeatured.image}
                   alt={activeFeatured.name}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-top filter brightness-105 contrast-105"
                   onError={(e) => {
-                    (e.target as HTMLElement).style.display = 'none';
+                    const target = e.currentTarget;
+                    if (target.src.endsWith('.jpeg')) {
+                      target.src = target.src.replace(/\.jpeg$/, '.jpg');
+                    } else if (target.src.endsWith('.jpg')) {
+                      target.src = target.src.replace(/\.jpg$/, '.jpeg');
+                    } else if (target.src.endsWith('.png')) {
+                      target.src = target.src.replace(/\.png$/, '.jpg');
+                    } else {
+                      target.style.display = 'none';
+                    }
                   }}
                 />
               </div>
@@ -440,26 +458,26 @@ export default function ReviewsSection() {
         </ScrollReveal>
 
         {/* Stats Counter Row (Silver Gradient Numerals Accent) */}
-        <ScrollReveal delay={0.25} y={20} className="w-full max-w-6xl mt-12 px-5 sm:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center border-t border-white/10 pt-10">
-            <div className="p-4 rounded-2xl bg-[#141414]/80 border border-white/5 backdrop-blur-md">
+        <div className="w-full max-w-6xl mt-12 px-5 sm:px-8">
+          <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center border-t border-white/10 pt-10">
+            <div className="stat-counter-batch p-4 rounded-2xl bg-[#141414]/80 border border-white/5 backdrop-blur-md">
               <h3 className="text-3xl sm:text-4xl font-black text-silver-gradient">20+</h3>
               <p className="text-xs font-mono uppercase tracking-widest text-[#9A9A9A] mt-1">Years of Legacy</p>
             </div>
-            <div className="p-4 rounded-2xl bg-[#141414]/80 border border-white/5 backdrop-blur-md">
+            <div className="stat-counter-batch p-4 rounded-2xl bg-[#141414]/80 border border-white/5 backdrop-blur-md">
               <h3 className="text-3xl sm:text-4xl font-black text-silver-gradient">5+</h3>
               <p className="text-xs font-mono uppercase tracking-widest text-[#9A9A9A] mt-1">Tech Segments</p>
             </div>
-            <div className="p-4 rounded-2xl bg-[#141414]/80 border border-white/5 backdrop-blur-md">
+            <div className="stat-counter-batch p-4 rounded-2xl bg-[#141414]/80 border border-white/5 backdrop-blur-md">
               <h3 className="text-3xl sm:text-4xl font-black text-silver-gradient">100+</h3>
               <p className="text-xs font-mono uppercase tracking-widest text-[#9A9A9A] mt-1">Corporate Partners</p>
             </div>
-            <div className="p-4 rounded-2xl bg-[#141414]/80 border border-white/5 backdrop-blur-md">
+            <div className="stat-counter-batch p-4 rounded-2xl bg-[#141414]/80 border border-white/5 backdrop-blur-md">
               <h3 className="text-3xl sm:text-4xl font-black text-silver-gradient">20+</h3>
               <p className="text-xs font-mono uppercase tracking-widest text-[#9A9A9A] mt-1">Published Issues</p>
             </div>
           </div>
-        </ScrollReveal>
+        </div>
       </div>
     </section>
   );

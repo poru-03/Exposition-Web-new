@@ -18,7 +18,7 @@ export const FEATURED_HIGHLIGHTS: FeaturedHighlight[] = [
     id: 'h-1',
     title: 'Exposition Issue 21',
     subtitle: 'Official Annual Magazine',
-    image: '/resources/hero/1 (0).png',
+    image: '/resources/hero/1 (0).webp',
     targetId: 'about',
   },
   {
@@ -112,6 +112,7 @@ export default function HeroSection() {
       {/* ----------------- MOBILE TOP LEFT BRAND LOGO ----------------- */}
       <div className="absolute top-5 left-5 pt-[env(safe-area-inset-top)] z-40 sm:hidden flex items-center">
         <img
+          id="hero-mobile-logo"
           src="/resources/Expo_Issue_22_logo.svg"
           alt="Exposition Logo"
           className="h-7 w-auto object-contain filter drop-shadow-[0_4px_18px_rgba(232,200,150,0.4)]"
@@ -131,6 +132,7 @@ export default function HeroSection() {
           <img
             src={activeItem.image}
             alt={activeItem.title}
+            decoding="async"
             className="w-full h-full object-cover object-[center_28%] sm:object-[center_25%] filter brightness-[0.7] sm:brightness-[0.55] contrast-[1.08]"
           />
         </motion.div>
@@ -169,6 +171,7 @@ export default function HeroSection() {
             {/* Desktop Brand Logo */}
             <div className="hidden sm:flex items-center gap-3 mb-1">
               <img
+                id="hero-desktop-logo"
                 src="/resources/Expo_Issue_22_logo.svg"
                 alt="Exposition Logo"
                 className="h-11 md:h-14 w-auto object-contain filter drop-shadow-[0_4px_20px_rgba(232,200,150,0.3)]"
@@ -330,6 +333,7 @@ export default function HeroSection() {
                   <img
                     src={item.image}
                     alt={item.title}
+                    decoding="async"
                     className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
                   />
                   {!isActive && (

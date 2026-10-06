@@ -104,6 +104,8 @@ export default function YouTubeChannelSection() {
               <img
                 src="/podcast-logo-v3.png"
                 alt="Voices of Vision Channel Logo"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover rounded-full"
               />
             </div>
@@ -194,6 +196,8 @@ export default function YouTubeChannelSection() {
                     <img
                       src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
                       alt={video.title}
+                      loading="lazy"
+                      decoding="async"
                       className={`w-full h-full object-cover transition-all duration-300 ${
                         isSelected ? 'brightness-105 contrast-105' : 'opacity-80 group-hover:opacity-100'
                       }`}

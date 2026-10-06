@@ -30,9 +30,26 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState('#hero');
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollYRef = useRef(0);
+  const isVisibleRef = useRef(true);
+  const activeSectionRef = useRef('#hero');
 
   useEffect(() => {
     let ticking = false;
+
+    // Cache section bounding offsets to avoid querying layout on every RAF tick
+    let sectionPositions: { id: string; top: number; height: number }[] = [];
+    const measureSections = () => {
+      const sectionIds = NAV_LINKS.map((link) => link.href.replace('#', ''));
+      sectionPositions = sectionIds
+        .map((id) => {
+          const el = document.getElementById(id);
+          if (!el) return null;
+          return { id, top: el.offsetTop - 180, height: el.offsetHeight };
+        })
+        .filter(Boolean) as { id: string; top: number; height: number }[];
+    };
+
+    measureSections();
 
     const handleScroll = () => {
       if (!ticking) {
@@ -42,36 +59,35 @@ export default function Navbar() {
           const delta = scrollY - lastScrollY;
 
           // Hero threshold: When in the top Hero area, always keep navbar visible
+          let nextVisible = isVisibleRef.current;
           if (scrollY < 120) {
-            setIsVisible(true);
+            nextVisible = true;
           } else {
-            // When in other sections:
             if (delta > 6) {
-              setIsVisible(false);
+              nextVisible = false;
             } else if (delta < -6) {
-              setIsVisible(true);
+              nextVisible = true;
             }
+          }
+
+          if (nextVisible !== isVisibleRef.current) {
+            isVisibleRef.current = nextVisible;
+            setIsVisible(nextVisible);
           }
 
           lastScrollYRef.current = scrollY;
 
-          // Track active section for link highlight
-          const sectionIds = NAV_LINKS.map((link) => link.href.replace('#', ''));
+          // Determine current active section from cached positions
           let current = '#hero';
-
-          for (const id of sectionIds) {
-            const el = document.getElementById(id);
-            if (el) {
-              const top = el.offsetTop - 180;
-              const height = el.offsetHeight;
-              if (scrollY >= top && scrollY < top + height) {
-                current = `#${id}`;
-                break;
-              }
+          for (const sec of sectionPositions) {
+            if (scrollY >= sec.top && scrollY < sec.top + sec.height) {
+              current = `#${sec.id}`;
+              break;
             }
           }
 
-          if (current !== activeSection) {
+          if (current !== activeSectionRef.current) {
+            activeSectionRef.current = current;
             setActiveSection(current);
           }
           ticking = false;
@@ -81,9 +97,14 @@ export default function Navbar() {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', measureSections, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [activeSection]);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', measureSections);
+    };
+  }, []);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();

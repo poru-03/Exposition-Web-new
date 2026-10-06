@@ -1,34 +1,74 @@
-import { motion, useReducedMotion } from 'framer-motion';
-import type { ReactNode } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-interface ScrollRevealProps {
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+export interface ScrollRevealProps {
   children: ReactNode;
   delay?: number;
   y?: number;
   duration?: number;
   className?: string;
+  ease?: string;
+  start?: string;
 }
-
-const EASE = [0.22, 1, 0.36, 1] as const;
 
 export default function ScrollReveal({
   children,
   delay = 0,
-  y = 32,
-  duration = 0.6,
+  y = 50,
+  duration = 0.8,
   className,
+  ease = 'power2.out',
+  start = 'top 85%',
 }: ScrollRevealProps) {
-  const reducedMotion = useReducedMotion();
+  const elRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = elRef.current;
+    if (!el || typeof window === 'undefined') return;
+
+    // Respect user's OS prefers-reduced-motion setting
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      gsap.set(el, { opacity: 1, y: 0 });
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        el,
+        { opacity: 0, y },
+        {
+          opacity: 1,
+          y: 0,
+          duration,
+          delay,
+          ease,
+          scrollTrigger: {
+            trigger: el,
+            start,
+            once: true,
+          },
+          onStart: () => {
+            el.style.willChange = 'transform, opacity';
+          },
+          onComplete: () => {
+            el.style.willChange = 'auto';
+          },
+        }
+      );
+    });
+
+    return () => ctx.revert();
+  }, [delay, y, duration, ease, start]);
 
   return (
-    <motion.div
-      className={className}
-      initial={reducedMotion ? false : { opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.05, margin: '0px 0px -40px 0px' }}
-      transition={{ duration, delay, ease: EASE }}
-    >
+    <div ref={elRef} className={className}>
       {children}
-    </motion.div>
+    </div>
   );
 }

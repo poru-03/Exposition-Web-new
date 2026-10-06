@@ -31,6 +31,8 @@ export default function AboutBackgroundPills() {
           <img
             src="/resources/unilogos.png"
             alt="University & Department Partner Crests"
+            loading="lazy"
+            decoding="async"
             className="w-full max-w-4xl h-auto object-contain filter brightness-150 contrast-125 drop-shadow-[0_0_40px_rgba(255,255,255,0.45)]"
           />
         </motion.div>

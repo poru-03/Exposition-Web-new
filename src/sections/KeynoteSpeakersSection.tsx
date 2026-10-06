@@ -28,7 +28,7 @@ export const ROW1_SPEAKERS: KeynoteSpeaker[] = [
     company: 'Former MD - AVIVA NDB',
     issue: 'Issue 20',
     issueLabel: 'Issue 20',
-    image: '/speakers/deepal-sooriyarachchi.png',
+    image: '/speakers/deepal-sooriyarachchi.webp',
     category: 'Corporate Leadership',
     tags: ['Corporate Governance', 'Strategic Management'],
     quote: 'Sustaining corporate governance and unlocking human potential in volatile, evolving global markets.',
@@ -43,7 +43,7 @@ export const ROW1_SPEAKERS: KeynoteSpeaker[] = [
     description: 'Influential figure in Sri Lankan business and apparel industry.',
     issue: 'Issue 19',
     issueLabel: 'Issue 19',
-    image: '/speakers/dian-gomes.png',
+    image: '/speakers/dian-gomes.webp',
     category: 'Corporate Leadership',
     tags: ['Business Development', 'Leadership', 'Apparel Industry'],
     quote: 'Influential figure in Sri Lankan business and apparel industry, championing high-performance team cultures.',
@@ -56,7 +56,7 @@ export const ROW1_SPEAKERS: KeynoteSpeaker[] = [
     company: 'N-able',
     issue: 'Issue 18',
     issueLabel: 'Issue 18',
-    image: '/speakers/peter-de-almeida.png',
+    image: '/speakers/peter-de-almeida.webp',
     category: 'Tech & AI',
     tags: ['Enterprise Tech', 'Digital Transformation'],
     quote: 'Transforming enterprise architectures and digital cultures through fearless creative software thinking.',
@@ -69,7 +69,7 @@ export const ROW1_SPEAKERS: KeynoteSpeaker[] = [
     company: 'Bhasha / Helakuru',
     issue: 'Issue 17',
     issueLabel: 'Issue 17',
-    image: '/speakers/dhanika-perera.png',
+    image: '/speakers/dhanika-perera.webp',
     category: 'Tech & AI',
     tags: ['Tech Innovation', 'Digital Platforms'],
     quote: 'Disrupting ecosystems through digital engineering platforms and empowering millions with native tech.',
@@ -82,7 +82,7 @@ export const ROW1_SPEAKERS: KeynoteSpeaker[] = [
     company: 'LAUGFS Holdings',
     issue: 'Issue 16',
     issueLabel: 'Issue 16',
-    image: '/speakers/w-k-h-wegapitiya.png',
+    image: '/speakers/w-k-h-wegapitiya.webp',
     category: 'Corporate Leadership',
     tags: ['Energy Vision', 'Conglomerate Leadership'],
     quote: 'Leading technological advancement and bold industrial transformation initiatives that redefine core industries.',
@@ -95,7 +95,7 @@ export const ROW1_SPEAKERS: KeynoteSpeaker[] = [
     company: 'Creative Software',
     issue: 'Issue 15',
     issueLabel: 'Issue 15',
-    image: '/speakers/sushena-ranathunga.png',
+    image: '/speakers/sushena-ranathunga.webp',
     category: 'Tech & AI',
     tags: ['Software Engineering', 'Innovation Strategy'],
     quote: 'Architecting resilient enterprise software solutions and scaling world-class engineering teams across borders.',
@@ -111,7 +111,7 @@ export const ROW2_SPEAKERS: KeynoteSpeaker[] = [
     company: 'Calcey Technologies',
     issue: 'Issue 14',
     issueLabel: 'Issue 14',
-    image: '/speakers/mangala-karunarathne.png',
+    image: '/speakers/mangala-karunarathne.webp',
     category: 'Innovation',
     tags: ['Economic Policy', 'Global Tech Services'],
     quote: 'Unlocking high-value knowledge services and driving economic growth through global technology integration.',
@@ -124,7 +124,7 @@ export const ROW2_SPEAKERS: KeynoteSpeaker[] = [
     company: 'IronOne Technologies & BoardPAC',
     issue: 'Issue 13',
     issueLabel: 'Issue 13',
-    image: '/speakers/lakmini-wijesundara.png',
+    image: '/speakers/lakmini-wijesundara.webp',
     category: 'Corporate Leadership',
     tags: ['Sustainability', 'Global Enterprise Software'],
     quote: 'Pioneering global SaaS governance solutions and driving sustainable enterprise digital transformation.',
@@ -137,7 +137,7 @@ export const ROW2_SPEAKERS: KeynoteSpeaker[] = [
     company: 'Dilmah Tea',
     issue: 'Issue 12',
     issueLabel: 'Issue 12',
-    image: '/speakers/meril-fernando.png',
+    image: '/speakers/meril-fernando.webp',
     category: 'Corporate Leadership',
     tags: ['Tea Industry Icon', 'Ethical Business'],
     quote: 'Building an authentic global brand founded on uncompromising integrity, highest quality, and human kindness.',
@@ -150,7 +150,7 @@ export const ROW2_SPEAKERS: KeynoteSpeaker[] = [
     company: 'DIMO',
     issue: 'Issue 11',
     issueLabel: 'Issue 11',
-    image: '/speakers/ranjith-pandithage.png',
+    image: '/speakers/ranjith-pandithage.webp',
     category: 'Corporate Leadership',
     tags: ['Strategic Growth', 'Engineering Excellence'],
     quote: 'Spearheading diversification, engineering excellence, and multi-sector industrial advancement across Sri Lanka.',
@@ -163,7 +163,7 @@ export const ROW2_SPEAKERS: KeynoteSpeaker[] = [
     company: 'Softlogic Holdings',
     issue: 'Issue 10',
     issueLabel: 'Issue 10',
-    image: '/speakers/ashok-pathirage.png',
+    image: '/speakers/ashok-pathirage.webp',
     category: 'Corporate Leadership',
     tags: ['Business Excellence', 'Conglomerate Growth'],
     quote: 'Driving bold entrepreneurial ventures and building transformative consumer and retail powerhouses.',
@@ -176,7 +176,7 @@ export const ROW2_SPEAKERS: KeynoteSpeaker[] = [
     company: 'Government of Sri Lanka',
     issue: 'Issue 9',
     issueLabel: 'Issue 9',
-    image: '/speakers/lalith-weerathunga.png',
+    image: '/speakers/lalith-weerathunga.webp',
     category: 'Corporate Leadership',
     tags: ['Public Policy', 'Strategic Leadership'],
     quote: 'Executing large-scale strategic initiatives and governance reforms with precision and long-term vision.',
@@ -218,6 +218,8 @@ function SpeakerLandscapeCard({ speaker }: { speaker: KeynoteSpeaker }) {
         <img
           src={speaker.image}
           alt={speaker.name}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover object-top filter brightness-110 contrast-110"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#141414] via-[#141414]/75 to-transparent" />
@@ -340,7 +342,7 @@ export default function KeynoteSpeakersSection() {
         </div>
 
         {/* ================= 2. SCROLL-DRIVEN DUAL-ROW PARALLAX STREAM ================= */}
-        <div className="relative w-full overflow-hidden space-y-4 pt-2">
+        <ScrollReveal delay={0.2} y={50} className="relative w-full overflow-hidden space-y-4 pt-2">
 
           {/* Row 1: Flows Left-to-Right on scroll down, Right-to-Left on scroll up */}
           <div className="relative w-full overflow-hidden flex items-center py-3 sm:py-4">
@@ -373,7 +375,7 @@ export default function KeynoteSpeakersSection() {
             <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-36 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10" />
             <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-36 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10" />
           </div>
-        </div>
+        </ScrollReveal>
 
       </div>
     </section>
