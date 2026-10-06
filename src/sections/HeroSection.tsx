@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { FaLinkedinIn, FaFacebookF, FaInstagram } from 'react-icons/fa6';
 import { ShinyButton } from '../components/ui/shiny-button';
+import { SocialTooltip, SocialItem } from '../components/ui/social-media';
 
 export interface FeaturedHighlight {
   id: string;
@@ -47,6 +48,30 @@ export const FEATURED_HIGHLIGHTS: FeaturedHighlight[] = [
     subtitle: 'Bridging Talent & Enterprise',
     image: '/resources/hero/1 (4).jpg',
     targetId: 'partners',
+  },
+];
+
+const HERO_SOCIAL_ITEMS: SocialItem[] = [
+  {
+    href: 'https://www.linkedin.com/company/theexposition',
+    ariaLabel: 'Exposition LinkedIn',
+    tooltip: 'LinkedIn',
+    color: '#c9a25f',
+    icon: <FaLinkedinIn className="size-3.5 sm:size-4" />,
+  },
+  {
+    href: 'https://www.facebook.com/Exposition.MIT',
+    ariaLabel: 'Exposition Facebook',
+    tooltip: 'Facebook',
+    color: '#c9a25f',
+    icon: <FaFacebookF className="size-3.5 sm:size-4" />,
+  },
+  {
+    href: 'https://www.instagram.com/exposition_lk/',
+    ariaLabel: 'Exposition Instagram',
+    tooltip: 'Instagram',
+    color: '#c9a25f',
+    icon: <FaInstagram className="size-3.5 sm:size-4" />,
   },
 ];
 
@@ -184,19 +209,48 @@ export default function HeroSection() {
             </p>
           </motion.div>
 
-          {/* Primary Action Buttons (Fixed Width on Mobile to Stop Width Shifting) */}
+          {/* Primary Action Buttons (Fixed Width on Mobile, Full Glow Unclipped) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-4 sm:mt-10 flex flex-row items-center gap-2 sm:gap-4 w-full flex-nowrap overflow-x-auto no-scrollbar py-1"
+            className="mt-4 sm:mt-10 flex flex-row items-center gap-2 sm:gap-4 w-full flex-nowrap overflow-visible py-3 pl-4 -ml-4 pr-3 -my-3"
           >
             <ShinyButton
               onClick={() => handleScrollTo(activeItem.targetId)}
               className="shrink-0 w-[165px] sm:w-auto"
             >
-              <span className="truncate">Explore {activeItem.title}</span>
-              <ArrowUpRight className="size-3.5 sm:size-4 shrink-0" />
+              {/* Mobile View: Smooth sliding text so full title is revealed without altering button dimensions */}
+              <div className="sm:hidden flex items-center justify-between w-full min-w-0 gap-1.5 overflow-hidden">
+                <div
+                  className="flex-1 min-w-0 overflow-hidden relative"
+                  style={{
+                    maskImage: 'linear-gradient(to right, transparent 0%, black 6px, black calc(100% - 6px), transparent 100%)',
+                    WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 6px, black calc(100% - 6px), transparent 100%)',
+                  }}
+                >
+                  <div
+                    key={activeItem.id}
+                    className="hero-btn-marquee flex w-max whitespace-nowrap items-center select-none"
+                  >
+                    <div className="flex items-center gap-3 pr-3 shrink-0">
+                      <span>Explore {activeItem.title}</span>
+                      <span className="opacity-40 text-[9px]">•</span>
+                    </div>
+                    <div className="flex items-center gap-3 pr-3 shrink-0">
+                      <span>Explore {activeItem.title}</span>
+                      <span className="opacity-40 text-[9px]">•</span>
+                    </div>
+                  </div>
+                </div>
+                <ArrowUpRight className="size-3.5 shrink-0 text-[#c9a25f]" />
+              </div>
+
+              {/* Desktop View: Full Static Text */}
+              <div className="hidden sm:flex items-center gap-2 whitespace-nowrap">
+                <span>Explore {activeItem.title}</span>
+                <ArrowUpRight className="size-4 shrink-0" />
+              </div>
             </ShinyButton>
 
             <button
@@ -212,36 +266,21 @@ export default function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.45 }}
-            className="mt-3.5 sm:mt-5 flex items-center gap-2.5"
+            className="mt-3.5 sm:mt-5 flex items-center gap-3 sm:gap-3.5"
           >
-            <span className="text-[10px] sm:text-[11px] font-mono tracking-widest uppercase text-[#9A9A9A]">Follow:</span>
-            <a
-              href="https://www.linkedin.com/company/theexposition"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Exposition LinkedIn"
-              className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-black/50 border border-[#B8894F]/40 flex items-center justify-center text-[#E8C896] hover:bg-[#E8C896] hover:text-black hover:scale-110 transition-all shadow-md cursor-pointer"
-            >
-              <FaLinkedinIn className="size-3 sm:size-3.5" />
-            </a>
-            <a
-              href="https://www.facebook.com/Exposition.MIT"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Exposition Facebook"
-              className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-black/50 border border-[#B8894F]/40 flex items-center justify-center text-[#E8C896] hover:bg-[#E8C896] hover:text-black hover:scale-110 transition-all shadow-md cursor-pointer"
-            >
-              <FaFacebookF className="size-3 sm:size-3.5" />
-            </a>
-            <a
-              href="https://www.instagram.com/exposition_lk/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Exposition Instagram"
-              className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-black/50 border border-[#B8894F]/40 flex items-center justify-center text-[#E8C896] hover:bg-[#E8C896] hover:text-black hover:scale-110 transition-all shadow-md cursor-pointer"
-            >
-              <FaInstagram className="size-3 sm:size-3.5" />
-            </a>
+            <span className="text-[10px] sm:text-[11px] font-mono tracking-widest uppercase text-[#9A9A9A]">
+              Follow us on :
+            </span>
+            <SocialTooltip
+              items={HERO_SOCIAL_ITEMS}
+              className="justify-start gap-2 sm:gap-2.5"
+              containerSizeClass="w-8 h-8 sm:w-8.5 sm:h-8.5 bg-black"
+              borderClass="border border-[#c9a25f]/55 hover:border-transparent"
+              iconColorClass="text-[#E8C896] group-hover:text-black"
+              iconSizeClass="size-3.5 sm:size-4"
+              tooltipPosition="bottom"
+              tooltipTextColorClass="text-black font-semibold"
+            />
           </motion.div>
         </div>
 
