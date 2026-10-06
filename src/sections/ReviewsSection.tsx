@@ -232,11 +232,11 @@ function ReviewCard({
           </div>
         </div>
 
-        {/* Review body wrapped in gold quotation marks */}
+        {/* Review body wrapped in gold quotation marks with uniform line height and spacing */}
         <p className="text-[0.68rem] text-zinc-200 font-medium italic line-clamp-3 leading-snug">
-          <span className="text-[#c9a25f] font-serif font-bold text-xs mr-0.5">“</span>
-          {body}
-          <span className="text-[#c9a25f] font-serif font-bold text-xs ml-0.5">”</span>
+          <span aria-hidden="true" className="text-[#c9a25f] font-serif font-bold mr-0.5 select-none">“</span>
+          <span>{body}</span>
+          <span aria-hidden="true" className="text-[#c9a25f] font-serif font-bold ml-0.5 select-none">”</span>
         </p>
 
         <p className="text-[0.62rem] font-medium text-[#E8C896] truncate">
@@ -388,16 +388,12 @@ export default function ReviewsSection() {
                     {activeFeatured.title}
                   </p>
 
-                  {/* Quote Message styled with Metallic Gold Quotation Marks matching design */}
+                  {/* Quote Message styled with Metallic Gold Quotation Marks matching design with uniform line height and gaps */}
                   <div className="relative py-2.5 my-2">
                     <p className="text-sm sm:text-base md:text-[17px] font-bold italic text-white leading-relaxed tracking-wide">
-                      <span className="text-[#c9a25f] font-serif text-3xl sm:text-4xl font-extrabold mr-1.5 select-none inline-block align-top -mt-1">
-                        “
-                      </span>
-                      <span>{activeFeatured.quote}</span>
-                      <span className="text-[#c9a25f] font-serif text-3xl sm:text-4xl font-extrabold ml-1.5 select-none inline-block align-bottom translate-y-1">
-                        ”
-                      </span>
+                      <span aria-hidden="true" className="text-[#c9a25f] font-serif font-bold mr-1 select-none">“</span>
+                      {activeFeatured.quote}
+                      <span aria-hidden="true" className="text-[#c9a25f] font-serif font-bold ml-1 select-none">”</span>
                     </p>
                   </div>
                 </div>
