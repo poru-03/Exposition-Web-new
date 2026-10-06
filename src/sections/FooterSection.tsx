@@ -178,7 +178,7 @@ export default function FooterSection({
     'Faculty of Science, University of Kelaniya',
     'Kelaniya 11600, Sri Lanka',
   ],
-  contactEmail = 'exposition@kln.ac.lk',
+  contactEmail = 'exposition.mit@gmail.com',
   copyrightText = '© Exposition. All Rights Reserved 2026',
   creditText = 'Faculty of Science, University of Kelaniya',
 }: FooterSectionProps) {
@@ -281,7 +281,7 @@ export default function FooterSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-30px' }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-3.5 flex flex-col items-start text-left"
+            className="space-y-4 flex flex-col items-start text-left will-change-transform"
           >
             <div className="flex items-center justify-start">
               <img
@@ -289,7 +289,7 @@ export default function FooterSection({
                 alt="Exposition Logo"
                 loading="lazy"
                 decoding="async"
-                className="h-auto w-[170px] sm:w-[210px] md:w-[240px] select-none drop-shadow-[0_0_25px_rgba(184,137,79,0.25)]"
+                className="h-auto w-[220px] sm:w-[280px] md:w-[320px] lg:w-[350px] select-none drop-shadow-[0_0_25px_rgba(184,137,79,0.25)]"
                 draggable={false}
               />
             </div>

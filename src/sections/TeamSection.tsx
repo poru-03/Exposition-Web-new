@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import {
   ChevronLeft,
   ChevronRight,
@@ -41,6 +41,16 @@ export const TEAM_MEMBERS: TeamMember[] = [
     bio: 'Leading editorial curation, article pipelines, and publication quality excellence.',
   },
   {
+    id: 'member-7',
+    name: 'Isuru Dharshana',
+    position: 'Creative Director',
+    image: '/resources/team/members/isuru.png',
+    email: 'isuru.d@exposition.lk',
+    linkedin: 'https://linkedin.com',
+    whatsapp: 'https://wa.me/94771234507',
+    bio: 'Shaping visual brand aesthetics, design languages, typography, and art direction.',
+  },
+  {
     id: 'member-3',
     name: 'Sithum Bamunuarachchi',
     position: 'Partnership Coordinator',
@@ -79,16 +89,6 @@ export const TEAM_MEMBERS: TeamMember[] = [
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234506',
     bio: 'Handling resource allocations, financial audits, and fiscal operations.',
-  },
-  {
-    id: 'member-7',
-    name: 'Isuru Dharshana',
-    position: 'Creative Director',
-    image: '/resources/team/members/isuru.webp',
-    email: 'isuru.d@exposition.lk',
-    linkedin: 'https://linkedin.com',
-    whatsapp: 'https://wa.me/94771234507',
-    bio: 'Shaping visual brand aesthetics, design languages, typography, and art direction.',
   },
   {
     id: 'member-8',
@@ -193,15 +193,46 @@ export const TEAM_MEMBERS: TeamMember[] = [
 ];
 
 export default function TeamSection() {
+  const sectionRef = useRef<HTMLElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isInView, setIsInView] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const wasInViewRef = useRef(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Detect when user arrives at the team section
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // When user arrives at team section, ensure they start at chief coordinator (index 0)
+          if (!wasInViewRef.current) {
+            setCurrentIndex(0);
+            wasInViewRef.current = true;
+          }
+          setIsInView(true);
+        } else {
+          wasInViewRef.current = false;
+          setIsInView(false);
+        }
+      },
+      {
+        threshold: 0.2,
+      }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   const handleNext = useCallback(() => {
@@ -212,17 +243,18 @@ export default function TeamSection() {
     setCurrentIndex((prev) => (prev - 1 + TEAM_MEMBERS.length) % TEAM_MEMBERS.length);
   };
 
-  // Auto-play timer
+  // Auto-play timer: only runs when the user is at the team section and not hovering
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    if (!isInView || isHovered) return;
     const timer = setInterval(() => {
       handleNext();
     }, 4000);
     return () => clearInterval(timer);
-  }, [handleNext, isAutoPlaying]);
+  }, [handleNext, isInView, isHovered]);
 
   return (
     <section
+      ref={sectionRef}
       id="team"
       className="relative z-10 min-h-screen bg-transparent px-[5%] py-14 sm:py-20 md:py-24 overflow-hidden w-full"
     >
@@ -244,8 +276,8 @@ export default function TeamSection() {
       <ScrollReveal delay={0.15} y={50}>
         <div
           className="mx-auto max-w-7xl relative my-6"
-          onMouseEnter={() => setIsAutoPlaying(false)}
-          onMouseLeave={() => setIsAutoPlaying(true)}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
           <div className="relative w-full h-[380px] sm:h-[420px] md:h-[450px] flex items-center justify-center">
             {/* 3D Carousel Wrapper */}

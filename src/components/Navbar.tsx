@@ -9,6 +9,7 @@ import {
   Video,
   Image as ImageIcon,
   Star,
+  Handshake,
   Users,
   HelpCircle,
 } from 'lucide-react';
@@ -22,6 +23,7 @@ export const NAV_LINKS = [
   { name: 'Interviews', href: '#interviews', icon: Video },
   { name: 'Gallery', href: '#gallery', icon: ImageIcon },
   { name: 'Reviews', href: '#reviews', icon: Star },
+  { name: 'Partnership', href: '#partners', icon: Handshake },
   { name: 'Team', href: '#team', icon: Users },
   { name: 'FAQ', href: '#faq', icon: HelpCircle },
 ];
