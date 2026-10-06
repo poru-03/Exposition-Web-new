@@ -277,6 +277,24 @@ body {
   backface-visibility: hidden;
 }
 
+@keyframes hero-btn-slide {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.hero-btn-marquee {
+  animation: hero-btn-slide 6s linear infinite;
+  will-change: transform;
+}
+
+.hero-btn-marquee:hover {
+  animation-play-state: paused;
+}
+
 @keyframes metallic-shine {
   0% {
     background-position: 200% center;

@@ -24,7 +24,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-1',
     name: 'Dulaj Malporu',
     position: 'Editors-in-Chief',
-    image: '/resources/team/members/poru.png',
+    image: '/resources/team/members/poru.webp',
     email: 'dulaj.m@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234501',
@@ -34,7 +34,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-2',
     name: 'Andrina Fernando',
     position: 'Editors-in-Chief',
-    image: '/resources/team/members/andrina.png',
+    image: '/resources/team/members/andrina.webp',
     email: 'andrina.f@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234502',
@@ -54,7 +54,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-3',
     name: 'Sithum Bamunuarachchi',
     position: 'Partnership Coordinator',
-    image: '/resources/team/members/ciga.png',
+    image: '/resources/team/members/ciga.webp',
     email: 'sithum.b@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234503',
@@ -64,7 +64,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-4',
     name: 'Sasina Maheshi',
     position: 'Partnership Coordinator',
-    image: '/resources/team/members/sasina.png',
+    image: '/resources/team/members/sasina.webp',
     email: 'sasina.m@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234504',
@@ -74,7 +74,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-5',
     name: 'Oshan Harischandra',
     position: 'Financial Coordinator',
-    image: '/resources/team/members/oshan.png',
+    image: '/resources/team/members/oshan.webp',
     email: 'oshan.h@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234505',
@@ -84,7 +84,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-6',
     name: 'Himaya Isurandi',
     position: 'Financial Coordinator',
-    image: '/resources/team/members/himaya.png',
+    image: '/resources/team/members/himaya.webp',
     email: 'himaya.i@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234506',
@@ -94,7 +94,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-8',
     name: 'Ravindu Aththanayake',
     position: 'Marketing Coordinator',
-    image: '/resources/team/members/ravindu.png',
+    image: '/resources/team/members/ravindu.webp',
     email: 'ravindu.a@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234508',
@@ -104,7 +104,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-9',
     name: 'Nadeesha',
     position: 'Marketing Coordinator',
-    image: '/resources/team/members/nadeesha01.png',
+    image: '/resources/team/members/nadeesha01.webp',
     email: 'nadeesha@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234509',
@@ -114,7 +114,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-10',
     name: 'Kaveesha Vimukthi',
     position: 'Video Content Coordinator',
-    image: '/resources/team/members/kaveesha.png',
+    image: '/resources/team/members/kaveesha.webp',
     email: 'kaveesha.v@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234510',
@@ -124,7 +124,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-11',
     name: 'Kavinda Sathsara',
     position: 'Main Developer',
-    image: '/resources/team/members/kavinda.png',
+    image: '/resources/team/members/kavinda.webp',
     email: 'kavinda.s@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234511',
@@ -134,7 +134,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-12',
     name: 'Nethmi Imesha',
     position: 'Editorial Coordinator',
-    image: '/resources/team/members/nethmi.png',
+    image: '/resources/team/members/nethmi.webp',
     email: 'nethmi.i@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234512',
@@ -144,7 +144,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-13',
     name: 'Kasun Rasinidu',
     position: 'Editorial Coordinator',
-    image: '/resources/team/members/kasn.png',
+    image: '/resources/team/members/kasn.webp',
     email: 'kasun.r@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234513',
@@ -154,7 +154,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-14',
     name: 'Binithi Sarithya',
     position: 'Forum Coordinator',
-    image: '/resources/team/members/binithi.png',
+    image: '/resources/team/members/binithi.webp',
     email: 'binithi.s@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234514',
@@ -164,7 +164,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-15',
     name: 'Pathum Godamunna',
     position: 'Podcast Coordinator',
-    image: '/resources/team/members/fox.png',
+    image: '/resources/team/members/fox.webp',
     email: 'pathum.g@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234515',
@@ -174,7 +174,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-16',
     name: 'Sajana Jayawardhana',
     position: 'ER Coordinator',
-    image: '/resources/team/members/sajana.png',
+    image: '/resources/team/members/sajana.webp',
     email: 'sajana.j@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234516',
@@ -184,7 +184,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'member-17',
     name: 'Roshini Premathilaka',
     position: 'ER Coordinator',
-    image: '/resources/team/members/roshini.png',
+    image: '/resources/team/members/roshini.webp',
     email: 'roshini.p@exposition.lk',
     linkedin: 'https://linkedin.com',
     whatsapp: 'https://wa.me/94771234517',
@@ -273,97 +273,99 @@ export default function TeamSection() {
       </ScrollReveal>
 
       {/* ================= 3D PERSPECTIVE FEATURE CAROUSEL SHOWCASE ================= */}
-      <div
-        className="mx-auto max-w-7xl relative my-6"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <div className="relative w-full h-[380px] sm:h-[420px] md:h-[450px] flex items-center justify-center">
-          {/* 3D Carousel Wrapper */}
-          <div className="relative w-full h-full flex items-center justify-center [perspective:1200px]">
-            {TEAM_MEMBERS.map((member, index) => {
-              const total = TEAM_MEMBERS.length;
-              const offset = index - currentIndex;
-              let pos = (offset + total) % total;
-              if (pos > Math.floor(total / 2)) {
-                pos = pos - total;
-              }
+      <ScrollReveal delay={0.15} y={50}>
+        <div
+          className="mx-auto max-w-7xl relative my-6"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <div className="relative w-full h-[380px] sm:h-[420px] md:h-[450px] flex items-center justify-center">
+            {/* 3D Carousel Wrapper */}
+            <div className="relative w-full h-full flex items-center justify-center [perspective:1200px]">
+              {TEAM_MEMBERS.map((member, index) => {
+                const total = TEAM_MEMBERS.length;
+                const offset = index - currentIndex;
+                let pos = (offset + total) % total;
+                if (pos > Math.floor(total / 2)) {
+                  pos = pos - total;
+                }
 
-              const isCenter = pos === 0;
-              const isAdjacent = Math.abs(pos) === 1;
-              const isSecondAdjacent = Math.abs(pos) === 2;
+                const isCenter = pos === 0;
+                const isAdjacent = Math.abs(pos) === 1;
+                const isSecondAdjacent = Math.abs(pos) === 2;
 
-              return (
-                <div
-                  key={member.id}
-                  onClick={() => setCurrentIndex(index)}
-                  className="absolute transition-all duration-500 ease-out cursor-pointer flex items-center justify-center"
-                  style={{
-                    transform: `
-                      translateX(${pos * (isMobile ? 55 : 48)}%) 
-                      scale(${isCenter ? 1 : isAdjacent ? 0.88 : isSecondAdjacent ? 0.72 : 0.5})
-                      rotateY(${pos * -12}deg)
-                      translateZ(${isCenter ? 40 : 0}px)
-                    `,
-                    zIndex: isCenter ? 20 : isAdjacent ? 10 : isSecondAdjacent ? 5 : 1,
-                    opacity: isCenter ? 1 : isAdjacent ? 0.85 : 0.45,
-                    filter: isCenter ? 'none' : isMobile ? 'none' : 'blur(1px)',
-                    visibility: Math.abs(pos) > 2 ? 'hidden' : 'visible',
-                  }}
-                >
-                  <TeamMemberCard
-                    name={member.name}
-                    position={member.position}
-                    image={member.image}
-                    isActive={isCenter}
-                    imageStyle={member.imageStyle}
-                    socials={{
-                      email: member.email,
-                      linkedin: member.linkedin,
-                      whatsapp: member.whatsapp,
+                return (
+                  <div
+                    key={member.id}
+                    onClick={() => setCurrentIndex(index)}
+                    className="absolute transition-all duration-500 ease-out cursor-pointer flex items-center justify-center"
+                    style={{
+                      transform: `
+                        translateX(${pos * (isMobile ? 55 : 48)}%) 
+                        scale(${isCenter ? 1 : isAdjacent ? 0.88 : isSecondAdjacent ? 0.72 : 0.5})
+                        rotateY(${pos * -12}deg)
+                        translateZ(${isCenter ? 40 : 0}px)
+                      `,
+                      zIndex: isCenter ? 20 : isAdjacent ? 10 : isSecondAdjacent ? 5 : 1,
+                      opacity: isCenter ? 1 : isAdjacent ? 0.85 : 0.45,
+                      filter: isCenter ? 'none' : isMobile ? 'none' : 'blur(1px)',
+                      visibility: Math.abs(pos) > 2 ? 'hidden' : 'visible',
                     }}
-                    className="w-[230px] sm:w-[260px] md:w-[290px] h-[340px] sm:h-[380px] md:h-[410px]"
-                  />
-                </div>
-              );
-            })}
+                  >
+                    <TeamMemberCard
+                      name={member.name}
+                      position={member.position}
+                      image={member.image}
+                      isActive={isCenter}
+                      imageStyle={member.imageStyle}
+                      socials={{
+                        email: member.email,
+                        linkedin: member.linkedin,
+                        whatsapp: member.whatsapp,
+                      }}
+                      className="w-[230px] sm:w-[260px] md:w-[290px] h-[340px] sm:h-[380px] md:h-[410px]"
+                    />
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Previous & Next Navigation Buttons */}
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 rounded-full h-10 w-10 sm:h-11 sm:w-11 z-30 bg-[#161616]/80 border-white/20 text-white hover:bg-white hover:text-black hover:border-white transition-all backdrop-blur-md"
+              onClick={handlePrev}
+              aria-label="Previous Team Member"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </Button>
+
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 rounded-full h-10 w-10 sm:h-11 sm:w-11 z-30 bg-[#161616]/80 border-white/20 text-white hover:bg-white hover:text-black hover:border-white transition-all backdrop-blur-md"
+              onClick={handleNext}
+              aria-label="Next Team Member"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </Button>
           </div>
 
-          {/* Previous & Next Navigation Buttons */}
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 rounded-full h-10 w-10 sm:h-11 sm:w-11 z-30 bg-[#161616]/80 border-white/20 text-white hover:bg-white hover:text-black hover:border-white transition-all backdrop-blur-md"
-            onClick={handlePrev}
-            aria-label="Previous Team Member"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </Button>
-
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 rounded-full h-10 w-10 sm:h-11 sm:w-11 z-30 bg-[#161616]/80 border-white/20 text-white hover:bg-white hover:text-black hover:border-white transition-all backdrop-blur-md"
-            onClick={handleNext}
-            aria-label="Next Team Member"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </Button>
+          {/* Carousel Pagination Dots */}
+          <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-4 flex-wrap max-w-md mx-auto px-4">
+            {TEAM_MEMBERS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentIndex(i)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? 'w-6 sm:w-8 bg-[#E8C896]' : 'w-1.5 sm:w-2 bg-white/20 hover:bg-white/40'
+                  }`}
+                aria-label={`Go to team member ${i + 1}`}
+              />
+            ))}
+          </div>
         </div>
-
-        {/* Carousel Pagination Dots */}
-        <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-4 flex-wrap max-w-md mx-auto px-4">
-          {TEAM_MEMBERS.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentIndex(i)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? 'w-6 sm:w-8 bg-[#E8C896]' : 'w-1.5 sm:w-2 bg-white/20 hover:bg-white/40'
-                }`}
-              aria-label={`Go to team member ${i + 1}`}
-            />
-          ))}
-        </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

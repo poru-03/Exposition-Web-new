@@ -11,6 +11,11 @@ import {
   ExternalLink,
   Bell,
 } from "lucide-react"
+import Loader from "@/components/ui/loader-15"
+
+export function DemoOne() {
+  return <Loader />
+}
 
 export type PhaseItem = {
   id: string;
@@ -177,23 +182,25 @@ function ProcessCardItem({
         </div>
 
         {/* Card Body Content */}
-        <div className="p-4 sm:p-7 md:p-9 space-y-4 sm:space-y-6 max-h-[calc(100vh-320px)] sm:max-h-[calc(100vh-360px)] overflow-y-auto">
+        <div className="p-3.5 sm:p-6 md:p-8 space-y-2.5 sm:space-y-5 max-h-[calc(100vh-200px)] sm:max-h-[calc(100vh-320px)] overflow-y-auto no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {/* YouTube-style Subscribe Bar for Voices of Vision */}
           {phase.id === "process-1" && (
-            <div className="flex items-center justify-between gap-3 bg-white rounded-2xl sm:rounded-full px-3 sm:px-4 py-2 sm:py-2.5 text-black shadow-[0_10px_25px_rgba(0,0,0,0.5)] border border-neutral-200 max-w-lg">
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="relative size-8 sm:size-10 rounded-full border-2 border-red-600 p-0.5 overflow-hidden shrink-0 bg-neutral-900">
+            <div className="flex items-center justify-between gap-2.5 sm:gap-3 bg-white rounded-xl sm:rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2.5 text-black shadow-[0_10px_25px_rgba(0,0,0,0.5)] border border-neutral-200 max-w-lg">
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                <div className="relative size-7 sm:size-10 rounded-full border-2 border-red-600 p-0.5 overflow-hidden shrink-0 bg-neutral-900">
                   <img
                     src="/podcast-logo-v3.png"
                     alt="Voices of Vision Logo"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover rounded-full"
                   />
                 </div>
                 <div className="flex flex-col min-w-0 leading-tight">
-                  <span className="text-xs sm:text-sm font-extrabold uppercase tracking-tight text-neutral-900 truncate">
+                  <span className="text-[0.7rem] sm:text-sm font-extrabold uppercase tracking-tight text-neutral-900 truncate">
                     Voices of Vision
                   </span>
-                  <span className="text-[0.65rem] font-medium text-neutral-500">
+                  <span className="text-[0.6rem] sm:text-[0.65rem] font-medium text-neutral-500 truncate">
                     Official Podcast Channel
                   </span>
                 </div>
@@ -203,10 +210,10 @@ function ProcessCardItem({
                 href="https://www.youtube.com/@VoicesofVision"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 bg-red-600 hover:bg-red-700 active:scale-95 transition-all text-white text-xs font-extrabold uppercase tracking-wider px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-md shrink-0 cursor-pointer"
+                className="flex items-center gap-1 sm:gap-1.5 bg-red-600 hover:bg-red-700 active:scale-95 transition-all text-white text-[0.65rem] sm:text-xs font-extrabold uppercase tracking-wider px-2.5 sm:px-4 py-1 sm:py-2 rounded-full shadow-md shrink-0 cursor-pointer"
               >
                 <span>Subscribe</span>
-                <Bell className="w-3.5 h-3.5 fill-current" />
+                <Bell className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current" />
               </a>
             </div>
           )}
@@ -216,8 +223,8 @@ function ProcessCardItem({
           </p>
 
           {phase.isComingSoon ? (
-            <div className="flex flex-col items-center justify-center py-8 sm:py-10 px-4 sm:px-6 rounded-2xl border border-[#B8894F]/30 bg-gradient-to-br from-[#181818] via-[#121212] to-[#0A0A0A] shadow-inner text-center space-y-3">
-              <div className="inline-flex items-center gap-2 rounded-full bg-[#B8894F]/15 px-4 py-1.5 border border-[#B8894F]/40 text-[#E8C896] text-xs sm:text-sm font-bold uppercase tracking-widest animate-pulse">
+            <div className="flex flex-col items-center justify-center py-6 sm:py-10 px-3 sm:px-6 rounded-2xl border border-[#B8894F]/30 bg-gradient-to-br from-[#181818] via-[#121212] to-[#0A0A0A] shadow-inner text-center space-y-2.5 sm:space-y-3">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#B8894F]/15 px-3.5 py-1 border border-[#B8894F]/40 text-[#E8C896] text-xs sm:text-sm font-bold uppercase tracking-widest animate-pulse">
                 <span>Coming Soon</span>
               </div>
               <p className="text-xs sm:text-sm text-neutral-400 max-w-md">
@@ -225,32 +232,45 @@ function ProcessCardItem({
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 items-center pt-1">
-              <div className="relative overflow-hidden rounded-2xl border border-white/10 h-32 sm:h-44">
+            <div className="flex flex-row sm:grid sm:grid-cols-2 gap-3.5 sm:gap-5 items-center pt-1">
+              <div className="relative overflow-hidden rounded-full sm:rounded-2xl border border-white/10 size-16 sm:size-auto sm:w-full sm:h-36 bg-[#0a0a0a] flex items-center justify-center shrink-0 shadow-md">
                 <img
                   src={phase.image}
                   alt={phase.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (target.src.endsWith('.webp')) {
+                      target.src = target.src.replace(/\.webp$/, '.png');
+                    }
+                  }}
+                  className={`w-full h-full rounded-full sm:rounded-none ${
+                    phase.id === "process-1" || phase.image.includes("podcast") || phase.image.includes("logo")
+                      ? "object-contain p-1.5 sm:p-3"
+                      : "object-cover"
+                  } transition-transform duration-500 group-hover:scale-105`}
                   loading="lazy"
+                  decoding="async"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C]/80 via-transparent to-transparent" />
+                {!(phase.id === "process-1" || phase.image.includes("podcast") || phase.image.includes("logo")) && (
+                  <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-[#0C0C0C]/80 via-transparent to-transparent pointer-events-none" />
+                )}
               </div>
 
-              <div className="flex flex-col gap-2.5 sm:gap-3">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#E8C896]">
+              <div className="flex flex-col gap-1.5 sm:gap-3 flex-1 min-w-0">
+                <span className="text-[0.7rem] sm:text-xs font-bold uppercase tracking-wider text-[#E8C896]">
                   Key Highlights
                 </span>
-                <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-neutral-100 font-medium">
+                <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm text-neutral-100 font-medium">
                   {phase.deliverables.map((item) => (
-                    <li key={item} className="flex items-center gap-2.5">
-                      <ArrowRight className="h-3.5 w-3.5 text-[#E8C896] shrink-0" />
-                      <span>{item}</span>
+                    <li key={item} className="flex items-center gap-2">
+                      <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-[#E8C896] shrink-0" />
+                      <span className="truncate sm:whitespace-normal">{item}</span>
                     </li>
                   ))}
                 </ul>
 
                 {phase.isElite10 && (
-                  <div className="pt-2">
+                  <div className="pt-1 sm:pt-2">
                     <a
                       href="/elite-10"
                       onClick={(e) => {
@@ -258,10 +278,10 @@ function ProcessCardItem({
                         window.history.pushState({}, '', '/elite-10');
                         window.dispatchEvent(new Event('popstate'));
                       }}
-                      className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#B8894F] to-[#E8C896] px-5 py-2 text-xs font-bold uppercase tracking-wider text-[#0C0C0C] shadow-[0_0_20px_rgba(184,137,79,0.3)] transition-all hover:scale-105 cursor-pointer"
+                      className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-gradient-to-r from-[#B8894F] to-[#E8C896] px-3.5 sm:px-5 py-1.5 sm:py-2 text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider text-[#0C0C0C] shadow-[0_0_20px_rgba(184,137,79,0.3)] transition-all hover:scale-105 cursor-pointer"
                     >
                       <span>Explore Elite 10</span>
-                      <ExternalLink className="h-3.5 w-3.5" />
+                      <ExternalLink className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                     </a>
                   </div>
                 )}
@@ -297,14 +317,12 @@ export const DemoDark = () => {
     offset: ["start start", "end end"],
   })
 
-  // Synchronize active indicator dot with scroll position
+  // Synchronize active indicator dot with scroll position without redundant renders
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const segment = 1 / (PROCESS_PHASES.length - 1)
     const idx = Math.min(PROCESS_PHASES.length - 1, Math.max(0, Math.round(latest / segment)))
-    setActivePhaseIndex(idx)
+    setActivePhaseIndex((prev) => (prev !== idx ? idx : prev))
   })
-
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0px", `${railHeight}px`])
 
   // Smoothly scroll the container to activate a specific phase
   const scrollToPhase = (targetIndex: number) => {
@@ -359,11 +377,11 @@ export const DemoDark = () => {
                 style={{ top: `${RAIL_OFFSET_TOP}px`, height: `${railHeight}px` }}
               />
 
-              {/* Glowing Dynamic Progress Connector */}
+              {/* Glowing Dynamic Progress Connector - scaleY transform prevents layout reflows */}
               {!shouldReduceMotion && (
                 <motion.div
-                  className="absolute left-1/2 -translate-x-1/2 w-[2.5px] bg-gradient-to-b from-[#B8894F] via-[#E8C896] to-white shadow-[0_0_18px_rgba(184,137,79,0.7)] rounded-full z-10 origin-top"
-                  style={{ top: `${RAIL_OFFSET_TOP}px`, height: lineHeight }}
+                  className="absolute left-1/2 -translate-x-1/2 w-[2.5px] bg-gradient-to-b from-[#B8894F] via-[#E8C896] to-white shadow-[0_0_18px_rgba(184,137,79,0.7)] rounded-full z-10 origin-top will-change-transform"
+                  style={{ top: `${RAIL_OFFSET_TOP}px`, height: `${railHeight}px`, scaleY: scrollYProgress }}
                 />
               )}
 
@@ -392,16 +410,14 @@ export const DemoDark = () => {
                     style={{ top: `${dotCenterY}px` }}
                     title={`Jump to ${phase.title}`}
                     aria-label={`Scroll to ${phase.title}`}
-                    className={`group/dot absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 h-5 w-5 rounded-full bg-white border-2 transition-all duration-300 flex items-center justify-center cursor-pointer ${
-                      isActive
+                    className={`group/dot absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 h-5 w-5 rounded-full bg-white border-2 transition-all duration-300 flex items-center justify-center cursor-pointer ${isActive
                         ? "border-[#E8C896] shadow-[0_0_18px_rgba(232,200,150,1)] scale-125"
                         : "border-black shadow-[0_0_12px_rgba(255,255,255,0.7)] hover:scale-115 hover:border-[#E8C896]"
-                    }`}
+                      }`}
                   >
                     <div
-                      className={`h-2 w-2 rounded-full transition-colors ${
-                        isActive ? "bg-[#B8894F]" : "bg-black group-hover/dot:bg-[#B8894F]"
-                      }`}
+                      className={`h-2 w-2 rounded-full transition-colors ${isActive ? "bg-[#B8894F]" : "bg-black group-hover/dot:bg-[#B8894F]"
+                        }`}
                     />
                   </button>
                 )

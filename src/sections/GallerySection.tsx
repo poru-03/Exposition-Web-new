@@ -4,6 +4,7 @@ import Captions from 'yet-another-react-lightbox/plugins/captions';
 import 'yet-another-react-lightbox/styles.css';
 import 'yet-another-react-lightbox/plugins/captions.css';
 import ScrollReveal from '../components/ScrollReveal';
+import { useBatchReveal } from '../hooks/useBatchReveal';
 
 export type GalleryItem = {
   id: string;
@@ -19,56 +20,56 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Grand Keynote & Launch',
     subtitle: 'Main Stage',
     description: 'The inauguration ceremony of Exposition Issue 22 featuring keynote remarks from leading industry leaders.',
-    src: '/resources/gallery/ (1).png',
+    src: '/resources/gallery/ (1).webp',
   },
   {
     id: 'hackathon-finals',
     title: 'Hackathon & Tech Arena',
     subtitle: 'Innovation Hub',
     description: 'Teams present under lights and a ticking clock. High-impact software & hardware innovation showcase.',
-    src: '/resources/gallery/ (2).png',
+    src: '/resources/gallery/ (2).webp',
   },
   {
     id: 'innovation-expo',
     title: 'Industrial Forum',
     subtitle: 'Tech & Management',
     description: 'Prototypes, demos, and expert panel discussions bridging academic research with industry practices.',
-    src: '/resources/gallery/ (3).png',
+    src: '/resources/gallery/ (3).webp',
   },
   {
     id: 'award-night',
     title: 'Award Ceremony',
     subtitle: 'Grand Finale',
     description: 'Outstanding undergraduate achievers and competition winners recognized on the grand stage.',
-    src: '/resources/gallery/ (4).png',
+    src: '/resources/gallery/ (4).webp',
   },
   {
     id: 'student-showcase',
     title: 'Exposition Magazine Unveiling',
     subtitle: 'Issue 22 Launch',
     description: 'Official release of Exposition Issue 22 connecting undergraduates with industry, ideas, and opportunity.',
-    src: '/resources/gallery/ (5).png',
+    src: '/resources/gallery/ (5).webp',
   },
   {
     id: 'panel-discussion',
     title: 'Executive Panel Dialogue',
     subtitle: 'IPN Conclave',
     description: 'CEOs, founders, and academics sharing real perspectives on corporate resilience and digital leadership.',
-    src: '/resources/gallery/ (6).png',
+    src: '/resources/gallery/ (6).webp',
   },
   {
     id: 'networking-night',
     title: 'Corporate Networking',
     subtitle: 'Career Fair',
     description: 'Undergraduates and fresh graduates connecting with recruiters and industry pioneers.',
-    src: '/resources/gallery/ (7).png',
+    src: '/resources/gallery/ (7).webp',
   },
   {
     id: 'workshop-lab',
     title: 'Interactive Workshops',
     subtitle: 'Skill Accelerator',
     description: 'Hands-on tech workshops and interactive learning sessions led by domain specialists.',
-    src: '/resources/gallery/ (8).png',
+    src: '/resources/gallery/ (8).webp',
   },
 ];
 
@@ -98,6 +99,8 @@ function TorchlightGalleryTile({
       <img
         src={src}
         alt={alt}
+        loading="lazy"
+        decoding="async"
         className="w-full h-full object-cover filter grayscale contrast-125 brightness-90 group-hover:grayscale-0 group-hover:contrast-105 group-hover:brightness-105 transition-all duration-500 group-hover:scale-105"
       />
 
@@ -133,6 +136,13 @@ export default function GallerySection() {
     [],
   );
 
+  const galleryGridRef = useBatchReveal<HTMLDivElement>({
+    selector: '.gallery-batch-tile',
+    y: 50,
+    stagger: 0.07,
+    duration: 0.8,
+  });
+
   return (
     <section
       id="gallery"
@@ -153,13 +163,13 @@ export default function GallerySection() {
       <div className="relative z-10 max-w-7xl mx-auto">
 
         {/* Desktop Asymmetric Architectural Grid Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
+        <div ref={galleryGridRef} className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
 
           {/* ================= LEFT COLUMN: BIG TITLE BLOCK & HUGE HORIZONTAL PHOTO (lg:col-span-5) ================= */}
           <div className="lg:col-span-5 flex flex-col space-y-6">
 
             {/* Top Left Title Block (Matching HANYOS PRODUCTION & REAL ESTATE PRODUCTS style) */}
-            <ScrollReveal className="flex flex-col space-y-2 pt-2">
+            <ScrollReveal y={50} className="flex flex-col space-y-2 pt-2">
               <span className="font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.3em] text-[#c9a25f]">
                 EXPOSITION ARCHIVE GALLERY
               </span>
@@ -171,7 +181,7 @@ export default function GallerySection() {
             </ScrollReveal>
 
             {/* Photo 1: Large Wide Panoramic Tile */}
-            <ScrollReveal delay={0.1}>
+            <div className="gallery-batch-tile">
               <TorchlightGalleryTile
                 src={GALLERY_ITEMS[0].src}
                 alt={GALLERY_ITEMS[0].title}
@@ -181,11 +191,11 @@ export default function GallerySection() {
                 aspectClass="aspect-[16/9]"
                 borderClass="border-[#c9a25f]/30 shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
               />
-            </ScrollReveal>
+            </div>
 
             {/* Row with Photo 2 + Solid Gold Accent Block */}
             <div className="grid grid-cols-12 gap-4">
-              <ScrollReveal delay={0.15} className="col-span-8">
+              <div className="col-span-8 gallery-batch-tile">
                 <TorchlightGalleryTile
                   src={GALLERY_ITEMS[1].src}
                   alt={GALLERY_ITEMS[1].title}
@@ -194,15 +204,15 @@ export default function GallerySection() {
                   onClick={() => setLightboxIndex(1)}
                   aspectClass="aspect-[4/3]"
                 />
-              </ScrollReveal>
+              </div>
 
               {/* Architectural Gold Accent Box */}
-              <ScrollReveal delay={0.2} className="col-span-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-[#c9a25f]/30 via-[#b8894f]/20 to-[#0c0c0c] border border-[#c9a25f]/40 p-4 shadow-lg">
+              <div className="col-span-4 gallery-batch-tile flex items-center justify-center rounded-xl bg-gradient-to-br from-[#c9a25f]/30 via-[#b8894f]/20 to-[#0c0c0c] border border-[#c9a25f]/40 p-4 shadow-lg">
                 <div className="text-center space-y-1">
                   <span className="text-2xl sm:text-3xl font-black text-[#c9a25f] block">10+</span>
                   <span className="text-[0.6rem] font-mono font-bold uppercase tracking-widest text-white/80">EDITIONS</span>
                 </div>
-              </ScrollReveal>
+              </div>
             </div>
 
           </div>
@@ -211,7 +221,7 @@ export default function GallerySection() {
           <div className="lg:col-span-4 flex flex-col space-y-6 sm:mt-10 lg:mt-0">
 
             {/* Top Middle: Medium Landscape Tile */}
-            <ScrollReveal delay={0.2}>
+            <div className="gallery-batch-tile">
               <TorchlightGalleryTile
                 src={GALLERY_ITEMS[2].src}
                 alt={GALLERY_ITEMS[2].title}
@@ -220,10 +230,10 @@ export default function GallerySection() {
                 onClick={() => setLightboxIndex(2)}
                 aspectClass="aspect-[16/10]"
               />
-            </ScrollReveal>
+            </div>
 
             {/* Middle: Tall Portrait Tile (Key Showcase) */}
-            <ScrollReveal delay={0.25}>
+            <div className="gallery-batch-tile">
               <TorchlightGalleryTile
                 src={GALLERY_ITEMS[3].src}
                 alt={GALLERY_ITEMS[3].title}
@@ -233,10 +243,10 @@ export default function GallerySection() {
                 aspectClass="aspect-[3/4] sm:aspect-[4/5]"
                 borderClass="border-[#c9a25f]/40 shadow-[0_25px_60px_rgba(0,0,0,0.9)]"
               />
-            </ScrollReveal>
+            </div>
 
             {/* Bottom Middle: Photo 4 */}
-            <ScrollReveal delay={0.3}>
+            <div className="gallery-batch-tile">
               <TorchlightGalleryTile
                 src={GALLERY_ITEMS[4].src}
                 alt={GALLERY_ITEMS[4].title}
@@ -245,7 +255,7 @@ export default function GallerySection() {
                 onClick={() => setLightboxIndex(4)}
                 aspectClass="aspect-[16/9]"
               />
-            </ScrollReveal>
+            </div>
 
           </div>
 
@@ -253,7 +263,7 @@ export default function GallerySection() {
           <div className="lg:col-span-3 flex flex-col space-y-5">
 
             {/* Top Right Portrait Tile */}
-            <ScrollReveal delay={0.35}>
+            <div className="gallery-batch-tile">
               <TorchlightGalleryTile
                 src={GALLERY_ITEMS[5].src}
                 alt={GALLERY_ITEMS[5].title}
@@ -262,10 +272,10 @@ export default function GallerySection() {
                 onClick={() => setLightboxIndex(5)}
                 aspectClass="aspect-[3/4]"
               />
-            </ScrollReveal>
+            </div>
 
             {/* Middle Right Landscape Tile */}
-            <ScrollReveal delay={0.4}>
+            <div className="gallery-batch-tile">
               <TorchlightGalleryTile
                 src={GALLERY_ITEMS[6].src}
                 alt={GALLERY_ITEMS[6].title}
@@ -274,11 +284,11 @@ export default function GallerySection() {
                 onClick={() => setLightboxIndex(6)}
                 aspectClass="aspect-[16/10]"
               />
-            </ScrollReveal>
+            </div>
 
             {/* Bottom Right Tile + Accent Card Grid */}
             <div className="grid grid-cols-2 gap-3">
-              <ScrollReveal delay={0.45}>
+              <div className="gallery-batch-tile">
                 <TorchlightGalleryTile
                   src={GALLERY_ITEMS[7].src}
                   alt={GALLERY_ITEMS[7].title}
@@ -287,13 +297,13 @@ export default function GallerySection() {
                   onClick={() => setLightboxIndex(7)}
                   aspectClass="aspect-square"
                 />
-              </ScrollReveal>
+              </div>
 
               {/* Accent Brown/Gold Solid Card matching top-right of image */}
-              <ScrollReveal delay={0.5} className="w-full aspect-square rounded-xl bg-[#b8894f]/25 border border-[#c9a25f]/30 flex flex-col justify-center items-center p-3 text-center">
+              <div className="gallery-batch-tile w-full aspect-square rounded-xl bg-[#b8894f]/25 border border-[#c9a25f]/30 flex flex-col justify-center items-center p-3 text-center">
                 <span className="text-xs font-mono text-[#c9a25f] font-bold">EXPOSITION</span>
                 <span className="text-[0.6rem] font-mono uppercase text-white/70 tracking-widest mt-1">MOMENTS</span>
-              </ScrollReveal>
+              </div>
             </div>
 
           </div>

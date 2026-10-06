@@ -274,7 +274,7 @@ export default function PartnersSection() {
         </ScrollReveal>
 
         {/* Constantly flowing marquee ticker with slightly smaller cards */}
-        <div className="relative w-full overflow-hidden mt-4 pt-2">
+        <ScrollReveal delay={0.15} y={50} className="relative w-full overflow-hidden mt-4 pt-2">
           <Marquee
             pauseOnHover
             repeat={4}
@@ -291,7 +291,7 @@ export default function PartnersSection() {
           {/* Luxury Side Fade Vignettes */}
           <div className="pointer-events-none absolute inset-y-0 left-0 w-20 sm:w-36 bg-gradient-to-r from-[#0C0C0C] via-[#0C0C0C]/80 to-transparent z-10" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-20 sm:w-36 bg-gradient-to-l from-[#0C0C0C] via-[#0C0C0C]/80 to-transparent z-10" />
-        </div>
+        </ScrollReveal>
       </div>
 
       {/* ================================================================= */}

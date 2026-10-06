@@ -53,38 +53,59 @@ export function MobileNav({
   const [activeSection, setActiveSection] = useState('#hero');
   const [isScrolled, setIsScrolled] = useState(false);
   const navContainerRef = useRef<HTMLDivElement>(null);
+  const isScrolledRef = useRef(false);
+  const activeSectionRef = useRef('#hero');
+  const isExpandedRef = useRef(false);
+
+  useEffect(() => {
+    isExpandedRef.current = isExpanded;
+  }, [isExpanded]);
 
   // Track active section and scroll state; auto-close menu on scroll
   useEffect(() => {
     let ticking = false;
 
+    // Cache section bounding offsets to avoid repeated layout queries during scroll
+    let sectionPositions: { id: string; top: number; height: number }[] = [];
+    const measureSections = () => {
+      const sectionIds = items.map((item) => item.href.replace('#', ''));
+      sectionPositions = sectionIds
+        .map((id) => {
+          const el = document.getElementById(id);
+          if (!el) return null;
+          return { id, top: el.offsetTop - 180, height: el.offsetHeight };
+        })
+        .filter(Boolean) as { id: string; top: number; height: number }[];
+    };
+
+    measureSections();
+
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const scrollY = window.scrollY;
-          setIsScrolled(scrollY > 100);
+          const nextScrolled = scrollY > 100;
+          if (nextScrolled !== isScrolledRef.current) {
+            isScrolledRef.current = nextScrolled;
+            setIsScrolled(nextScrolled);
+          }
 
-          // Auto-close menu when scrolling
-          if (scrollY > 50) {
+          // Auto-close menu when scrolling only if currently open
+          if (scrollY > 50 && isExpandedRef.current) {
+            isExpandedRef.current = false;
             setIsExpanded(false);
           }
 
-          const sectionIds = items.map((item) => item.href.replace('#', ''));
           let current = '#hero';
-
-          for (const id of sectionIds) {
-            const el = document.getElementById(id);
-            if (el) {
-              const top = el.offsetTop - 180;
-              const height = el.offsetHeight;
-              if (scrollY >= top && scrollY < top + height) {
-                current = `#${id}`;
-                break;
-              }
+          for (const sec of sectionPositions) {
+            if (scrollY >= sec.top && scrollY < sec.top + sec.height) {
+              current = `#${sec.id}`;
+              break;
             }
           }
 
-          if (current !== activeSection) {
+          if (current !== activeSectionRef.current) {
+            activeSectionRef.current = current;
             setActiveSection(current);
           }
           ticking = false;
@@ -94,9 +115,14 @@ export function MobileNav({
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', measureSections, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [items, activeSection]);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', measureSections);
+    };
+  }, [items]);
 
   // Click outside listener to auto-close menu
   useEffect(() => {

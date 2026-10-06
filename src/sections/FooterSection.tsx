@@ -251,7 +251,7 @@ export default function FooterSection({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-30px' }}
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-10 mx-auto max-w-7xl px-[5%] py-4 sm:py-5 flex items-center justify-center will-change-transform"
+          className="relative z-10 mx-auto max-w-7xl px-[5%] py-4 sm:py-5 flex items-center justify-center"
         >
           <MagneticButton
             as="a"
@@ -262,6 +262,8 @@ export default function FooterSection({
             <img
               src="/handshake.png"
               alt="Handshake"
+              loading="lazy"
+              decoding="async"
               className="size-6 sm:size-7 md:size-8 object-contain transition-transform duration-200 group-hover:scale-115 select-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
               draggable={false}
             />
@@ -285,6 +287,8 @@ export default function FooterSection({
               <img
                 src="/ExpoLogo.png"
                 alt="Exposition Logo"
+                loading="lazy"
+                decoding="async"
                 className="h-auto w-[220px] sm:w-[280px] md:w-[320px] lg:w-[350px] select-none drop-shadow-[0_0_25px_rgba(184,137,79,0.25)]"
                 draggable={false}
               />
@@ -302,7 +306,7 @@ export default function FooterSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-30px' }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-3.5 md:flex md:flex-col md:items-end md:text-right will-change-transform"
+            className="space-y-3.5 md:flex md:flex-col md:items-end md:text-right"
           >
             <h3 className="text-xs sm:text-sm font-mono uppercase tracking-[0.25em] text-[#E8C896] font-bold">
               CONTACT US
@@ -335,7 +339,7 @@ export default function FooterSection({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-20px' }}
           transition={{ duration: 0.65, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden md:flex border-y border-neutral-800/90 py-3 justify-between items-center text-xs font-mono tracking-widest text-[#9A9A9A] overflow-x-auto will-change-transform"
+          className="hidden md:flex border-y border-neutral-800/90 py-3 justify-between items-center text-xs font-mono tracking-widest text-[#9A9A9A] overflow-x-auto"
         >
           {DEFAULT_NAV_LINKS.map((link) => (
             <a
@@ -361,7 +365,7 @@ export default function FooterSection({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-20px' }}
           transition={{ duration: 0.65, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="grid md:hidden grid-cols-2 gap-y-3 gap-x-6 border-y border-neutral-800/90 py-4 text-xs font-mono tracking-widest text-[#9A9A9A] will-change-transform"
+          className="grid md:hidden grid-cols-2 gap-y-3 gap-x-6 border-y border-neutral-800/90 py-4 text-xs font-mono tracking-widest text-[#9A9A9A]"
         >
           <div className="space-y-2.5">
             <a href="#about" className="block hover:text-[#E8C896] transition-colors">
@@ -402,7 +406,7 @@ export default function FooterSection({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-20px' }}
           transition={{ duration: 0.6, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[0.72rem] text-[#9A9A9A] font-light pt-0.5 will-change-transform"
+          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[0.72rem] text-[#9A9A9A] font-light pt-0.5"
         >
           <p>{copyrightText}</p>
 

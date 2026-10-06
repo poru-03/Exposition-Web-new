@@ -23,7 +23,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "",
     quote: "Musician blending traditional and contemporary Sri Lankan sounds.",
     handle: "@kasunkalhara",
-    image: "/resources/interview/kasun.png"
+    image: "/resources/interview/kasun.webp"
   },
   {
     id: "nadeesha-chandrasena",
@@ -33,7 +33,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "",
     quote: "Urban innovator focused on sustainable development and...",
     handle: "@nadeeshachandrasena",
-    image: "/resources/interview/nadeesha.png"
+    image: "/resources/interview/nadeesha.webp"
   },
   {
     id: "sandra-wanduragala",
@@ -43,7 +43,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "Selyn",
     quote: "Pioneering fair-trade handloom enterprise leader since 1992.",
     handle: "@sandrawanduragala",
-    image: "/resources/interview/sandra.png"
+    image: "/resources/interview/sandra.webp"
   },
   {
     id: "dilupa-pathirana",
@@ -53,7 +53,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "Barista Coffee Lanka (Pvt) Ltd",
     quote: "Leader transforming Sri Lanka's largest café chain.",
     handle: "@dilupapathirana",
-    image: "/resources/interview/dilupa.png"
+    image: "/resources/interview/dilupa.webp"
   },
   {
     id: "dilshan-abeygunawadana",
@@ -63,7 +63,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "",
     quote: "Entrepreneur and content creator with 500K+ followers.",
     handle: "@dilshanabey",
-    image: "/resources/interview/dilshan.png"
+    image: "/resources/interview/dilshan.webp"
   },
   {
     id: "kanchana-priyakantha",
@@ -73,7 +73,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "",
     quote: "Award-winning author, publisher, and CEO driving innovation in...",
     handle: "@kanchanap",
-    image: "/resources/interview/kanchana.png"
+    image: "/resources/interview/kanchana.webp"
   },
   {
     id: "santhush-weeraman",
@@ -83,7 +83,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "",
     quote: "Singer and performer with two decades of dynamic music.",
     handle: "@santhushw",
-    image: "/resources/interview/santhush.png"
+    image: "/resources/interview/santhush.webp"
   },
   {
     id: "ananda-handunge",
@@ -93,7 +93,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "Ferentino Tyre",
     quote: "Chartered mechanical engineer with 40+ years' leadership in...",
     handle: "@anandahandunge",
-    image: "/resources/interview/ananda handunge.png"
+    image: "/resources/interview/ananda handunge.webp"
   },
   {
     id: "upendra-pieris",
@@ -103,7 +103,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "Orel IT",
     quote: "IT and AI expert leading Sri Lankan tech growth.",
     handle: "@upendrapieris",
-    image: "/resources/interview/upendra pieris.png"
+    image: "/resources/interview/upendra pieris.webp"
   },
   {
     id: "malinda-alahakoon",
@@ -113,7 +113,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "",
     quote: "Experienced science lecturer and communicator inspiring curiosity...",
     handle: "@malindaalahakoon",
-    image: "/resources/interview/malinda.png"
+    image: "/resources/interview/malinda.webp"
   },
   {
     id: "dhanushka-fernando",
@@ -123,7 +123,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "",
     quote: "Award-winning entrepreneur and visionary business leader.",
     handle: "@dhanushkafernando",
-    image: "/resources/interview/dhanushka.png"
+    image: "/resources/interview/dhanushka.webp"
   },
   {
     id: "viresh-cooray",
@@ -133,7 +133,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "",
     quote: "Audio engineer and musician blending technical skill with...",
     handle: "@vireshcooray",
-    image: "/resources/interview/cooray.png"
+    image: "/resources/interview/cooray.webp"
   },
   {
     id: "roshanie-jayasundara",
@@ -143,7 +143,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "John Keells Holdings PLC",
     quote: "Compassionate leader advancing Sri Lanka's property sector.",
     handle: "@roshaniej",
-    image: "/resources/interview/deshabandu.png"
+    image: "/resources/interview/deshabandu.webp"
   },
   {
     id: "nayomi-hadunnetti",
@@ -153,7 +153,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "Elixir Ceylon (Pvt) Ltd",
     quote: "20+ years in marketing, hospitality, and tourism.",
     handle: "@nayomihadunnetti",
-    image: "/resources/interview/nayomi.png"
+    image: "/resources/interview/nayomi.webp"
   },
   {
     id: "lasantha-wickramasinghe",
@@ -163,7 +163,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "",
     quote: "Innovative tech leader in web, app, and game development.",
     handle: "@lasanthaw",
-    image: "/resources/interview/lasantha.png"
+    image: "/resources/interview/lasantha.webp"
   },
   {
     id: "kasturi-wilson",
@@ -173,7 +173,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "Hemas Holdings PLC",
     quote: "First female CEO of a listed Sri Lankan conglomerate; national...",
     handle: "@kasturiwilson",
-    image: "/resources/interview/kasthuri.png"
+    image: "/resources/interview/kasthuri.webp"
   },
   {
     id: "saman-perera",
@@ -183,7 +183,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "Capital Maharaja Organization",
     quote: "Experienced CIO driving digital transformation and innovation at...",
     handle: "@samanperera",
-    image: "/resources/interview/saman perera.png"
+    image: "/resources/interview/saman perera.webp"
   },
   {
     id: "haritha-thilakarathna",
@@ -193,7 +193,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "",
     quote: "Cloud architect recognized for AI innovation and expertise.",
     handle: "@harithat",
-    image: "/resources/interview/harsha.png"
+    image: "/resources/interview/harsha.webp"
   },
   {
     id: "dilani-alagaratnan",
@@ -203,7 +203,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "John Keells Holdings",
     quote: "Executive committee member at John Keells Holdings leading key...",
     handle: "@dilanialagaratnan",
-    image: "/resources/interview/dilani alagarathnan.png"
+    image: "/resources/interview/dilani alagarathnan.webp"
   },
   {
     id: "dilantha-malagamuwa",
@@ -213,7 +213,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "Dilango Racing Team",
     quote: "Champion Sri Lankan racing driver and founder of Dilango...",
     handle: "@dilanthamalagamuwa",
-    image: "/resources/interview/dilantha.png"
+    image: "/resources/interview/dilantha.webp"
   },
   {
     id: "dulith-herath",
@@ -223,7 +223,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "Kapruka",
     quote: "Innovative entrepreneur in e-commerce, tech, and hospitality...",
     handle: "@dulithherath",
-    image: "/resources/interview/dulith.png"
+    image: "/resources/interview/dulith.webp"
   },
   {
     id: "shakthi-ranathunga",
@@ -233,7 +233,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "MAS Holdings",
     quote: "Board director and leader skilled in HR, operations, and business...",
     handle: "@shakthiranathunga",
-    image: "/resources/interview/shakthi.png"
+    image: "/resources/interview/shakthi.webp"
   },
   {
     id: "dhananjaya-hettiarachchi",
@@ -243,7 +243,7 @@ export const INTERVIEWEE_DATA: InterviewItem[] = [
     company: "",
     quote: "Leadership coach and 2014 Toastmasters World Champion.",
     handle: "@dhananjayahettiarachchi",
-    image: "/resources/interview/dhananjaya.png"
+    image: "/resources/interview/dhananjaya.webp"
   }
 ];
 
@@ -261,7 +261,21 @@ const SpeakerImage = ({
   className?: string;
   name?: string;
 }) => {
+  const [currentSrc, setCurrentSrc] = useState(src);
   const [imgError, setImgError] = useState(false);
+
+  useEffect(() => {
+    setCurrentSrc(src);
+    setImgError(false);
+  }, [src]);
+
+  const handleImgError = () => {
+    if (currentSrc.endsWith('.webp')) {
+      setCurrentSrc(currentSrc.replace(/\.webp$/, '.png'));
+      return;
+    }
+    setImgError(true);
+  };
 
   const getInitials = (personName: string) => {
     if (!personName) return 'EX';
@@ -270,7 +284,7 @@ const SpeakerImage = ({
     return parts[0] ? parts[0].substring(0, 2).toUpperCase() : 'EX';
   };
 
-  if (imgError || !src) {
+  if (imgError || !currentSrc) {
     return (
       <div className={`flex flex-col items-center justify-center bg-gradient-to-br from-[#1c1813] via-[#0d0d0d] to-[#17140f] text-[#c9a25f] font-mono select-none p-4 text-center border border-[#c9a25f]/20 ${className}`}>
         <div className="text-3xl font-black tracking-widest text-[#c9a25f] mb-1 drop-shadow-[0_0_10px_rgba(201,162,95,0.4)]">
@@ -285,9 +299,11 @@ const SpeakerImage = ({
 
   return (
     <img
-      src={src}
+      src={currentSrc}
       alt={alt}
-      onError={() => setImgError(true)}
+      loading="lazy"
+      decoding="async"
+      onError={handleImgError}
       className={className}
     />
   );
@@ -373,118 +389,119 @@ export default function InterviewHighlightsSection() {
         </ScrollReveal>
 
         {/* 2. FEATURED / ACTIVE PANEL */}
-        <div className="relative rounded-2xl bg-black/25 backdrop-blur-md p-6 sm:p-8 lg:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.7)] overflow-hidden">
+        <ScrollReveal delay={0.1} y={50}>
+          <div className="relative rounded-2xl bg-black/25 backdrop-blur-md p-6 sm:p-8 lg:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.7)] overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activePerson.id}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center"
+              >
+                {/* LEFT PROFILE BLOCK */}
+                <div className="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col xl:flex-row items-center sm:items-start lg:items-center xl:items-start gap-6">
+                  {/* Large Photo */}
+                  <div className="relative shrink-0 w-[240px] h-[290px] sm:w-[250px] sm:h-[300px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0a0908]">
+                    <SpeakerImage
+                      src={activePerson.image}
+                      alt={activePerson.name}
+                      name={activePerson.name}
+                      className="w-full h-full object-cover object-[center_5%] filter contrast-105 brightness-105"
+                    />
+                    <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl" />
+                  </div>
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activePerson.id}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.35, ease: 'easeOut' }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center"
-            >
-              {/* LEFT PROFILE BLOCK */}
-              <div className="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col xl:flex-row items-center sm:items-start lg:items-center xl:items-start gap-6">
-                {/* Large Photo */}
-                <div className="relative shrink-0 w-[240px] h-[290px] sm:w-[250px] sm:h-[300px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0a0908]">
-                  <SpeakerImage
-                    src={activePerson.image}
-                    alt={activePerson.name}
-                    name={activePerson.name}
-                    className="w-full h-full object-cover object-[center_5%] filter contrast-105 brightness-105"
-                  />
-                  <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl" />
-                </div>
-
-                {/* Profile Details */}
-                <div className="flex flex-col justify-center text-center sm:text-left lg:text-center xl:text-left space-y-2">
-                  <span
-                    className="eyebrow font-mono text-xs font-extrabold uppercase text-[#c9a25f]"
-                    style={{ fontFamily: 'var(--font-accent), "Space Mono", monospace', letterSpacing: '0.08em' }}
-                  >
-                    ISSUE {activePerson.issue}
-                  </span>
-                  <h3
-                    className="text-2xl sm:text-3xl font-black uppercase text-white"
-                    style={{
-                      fontFamily: 'var(--font-heading), "Fraunces", "Operetta 52", "Seraphine Display", serif',
-                      letterSpacing: '-0.01em',
-                      lineHeight: 1.2
-                    }}
-                  >
-                    {activePerson.name}
-                  </h3>
-                  <p
-                    className="text-sm font-semibold uppercase text-[#c9a25f]"
-                    style={{ fontFamily: 'var(--font-body), "Satoshi", sans-serif', letterSpacing: '0.01em' }}
-                  >
-                    {activePerson.role}
-                  </p>
-                  {activePerson.company && (
-                    <p
-                      className="text-xs font-medium text-gray-400"
-                      style={{ fontFamily: 'var(--font-body), "Satoshi", sans-serif', letterSpacing: '0' }}
+                  {/* Profile Details */}
+                  <div className="flex flex-col justify-center text-center sm:text-left lg:text-center xl:text-left space-y-2">
+                    <span
+                      className="eyebrow font-mono text-xs font-extrabold uppercase text-[#c9a25f]"
+                      style={{ fontFamily: 'var(--font-accent), "Space Mono", monospace', letterSpacing: '0.08em' }}
                     >
-                      {activePerson.company}
+                      ISSUE {activePerson.issue}
+                    </span>
+                    <h3
+                      className="text-2xl sm:text-3xl font-black uppercase text-white"
+                      style={{
+                        fontFamily: 'var(--font-heading), "Fraunces", "Operetta 52", "Seraphine Display", serif',
+                        letterSpacing: '-0.01em',
+                        lineHeight: 1.2
+                      }}
+                    >
+                      {activePerson.name}
+                    </h3>
+                    <p
+                      className="text-sm font-semibold uppercase text-[#c9a25f]"
+                      style={{ fontFamily: 'var(--font-body), "Satoshi", sans-serif', letterSpacing: '0.01em' }}
+                    >
+                      {activePerson.role}
                     </p>
-                  )}
-                </div>
-              </div>
-
-              {/* THIN GOLD DIVIDER LINE */}
-              <div className="hidden lg:block lg:col-span-1 h-full flex justify-center items-center">
-                <div className="w-[1px] h-48 bg-gradient-to-b from-transparent via-[#c9a25f]/50 to-transparent mx-auto" />
-              </div>
-              <div className="block lg:hidden w-full h-[1px] bg-gradient-to-r from-transparent via-[#c9a25f]/40 to-transparent my-2" />
-
-              {/* RIGHT PULL-QUOTE BLOCK */}
-              <div className="lg:col-span-6 flex flex-col justify-between relative pl-0 lg:pl-2">
-                <div className="relative flex items-center justify-between gap-3 sm:gap-6 py-6 px-3 sm:px-6 min-h-[160px] my-auto">
-                  {/* Opening Quotation Mark Vertically Centered */}
-                  <span
-                    className="text-[#c9a25f]/35 font-serif text-6xl sm:text-7xl md:text-8xl font-black leading-none select-none pointer-events-none shrink-0 self-center"
-                    style={{ fontFamily: 'var(--font-heading), "Operetta 52", "Seraphine Display", "Fraunces", serif' }}
-                  >
-                    “
-                  </span>
-
-                  <blockquote
-                    className="relative z-10 text-center text-lg sm:text-xl md:text-2xl font-bold italic text-white/95 mx-auto"
-                    style={{
-                      fontFamily: '"Operetta 52", "Seraphine Display", "Fraunces", "Playfair Display", serif',
-                      letterSpacing: '0',
-                      lineHeight: 1.6
-                    }}
-                  >
-                    {activePerson.quote}
-                  </blockquote>
-
-                  {/* Closing Quotation Mark Vertically Centered */}
-                  <span
-                    className="text-[#c9a25f]/35 font-serif text-6xl sm:text-7xl md:text-8xl font-black leading-none select-none pointer-events-none shrink-0 self-center"
-                    style={{ fontFamily: 'var(--font-heading), "Operetta 52", "Seraphine Display", "Fraunces", serif' }}
-                  >
-                    ”
-                  </span>
+                    {activePerson.company && (
+                      <p
+                        className="text-xs font-medium text-gray-400"
+                        style={{ fontFamily: 'var(--font-body), "Satoshi", sans-serif', letterSpacing: '0' }}
+                      >
+                        {activePerson.company}
+                      </p>
+                    )}
+                  </div>
                 </div>
 
-                {/* Social Handle */}
-                <div className="mt-6 flex justify-end items-center border-t border-white/10 pt-4">
-                  <span
-                    className="font-mono text-sm font-bold text-[#c9a25f] hover:underline cursor-pointer"
-                    style={{ fontFamily: 'var(--font-accent), "Space Mono", monospace', letterSpacing: '0.08em' }}
-                  >
-                    {activePerson.handle}
-                  </span>
+                {/* THIN GOLD DIVIDER LINE */}
+                <div className="hidden lg:block lg:col-span-1 h-full flex justify-center items-center">
+                  <div className="w-[1px] h-48 bg-gradient-to-b from-transparent via-[#c9a25f]/50 to-transparent mx-auto" />
                 </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+                <div className="block lg:hidden w-full h-[1px] bg-gradient-to-r from-transparent via-[#c9a25f]/40 to-transparent my-2" />
+
+                {/* RIGHT PULL-QUOTE BLOCK */}
+                <div className="lg:col-span-6 flex flex-col justify-between relative pl-0 lg:pl-2">
+                  <div className="relative flex items-center justify-between gap-3 sm:gap-6 py-6 px-3 sm:px-6 min-h-[160px] my-auto">
+                    {/* Opening Quotation Mark Vertically Centered */}
+                    <span
+                      className="text-[#c9a25f]/35 font-serif text-6xl sm:text-7xl md:text-8xl font-black leading-none select-none pointer-events-none shrink-0 self-center"
+                      style={{ fontFamily: 'var(--font-heading), "Operetta 52", "Seraphine Display", "Fraunces", serif' }}
+                    >
+                      “
+                    </span>
+
+                    <blockquote
+                      className="relative z-10 text-center text-lg sm:text-xl md:text-2xl font-bold italic text-white/95 mx-auto"
+                      style={{
+                        fontFamily: '"Operetta 52", "Seraphine Display", "Fraunces", "Playfair Display", serif',
+                        letterSpacing: '0',
+                        lineHeight: 1.6
+                      }}
+                    >
+                      {activePerson.quote}
+                    </blockquote>
+
+                    {/* Closing Quotation Mark Vertically Centered */}
+                    <span
+                      className="text-[#c9a25f]/35 font-serif text-6xl sm:text-7xl md:text-8xl font-black leading-none select-none pointer-events-none shrink-0 self-center"
+                      style={{ fontFamily: 'var(--font-heading), "Operetta 52", "Seraphine Display", "Fraunces", serif' }}
+                    >
+                      ”
+                    </span>
+                  </div>
+
+                  {/* Social Handle */}
+                  <div className="mt-6 flex justify-end items-center border-t border-white/10 pt-4">
+                    <span
+                      className="font-mono text-sm font-bold text-[#c9a25f] hover:underline cursor-pointer"
+                      style={{ fontFamily: 'var(--font-accent), "Space Mono", monospace', letterSpacing: '0.08em' }}
+                    >
+                      {activePerson.handle}
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </ScrollReveal>
 
         {/* 3. HORIZONTAL SCROLLABLE FILMSTRIP */}
-        <div className="relative flex flex-col gap-4">
+        <ScrollReveal delay={0.15} y={40} className="relative flex flex-col gap-4">
           <div className="flex items-center justify-end px-1">
             <div className="flex items-center gap-2">
               <button
@@ -565,7 +582,7 @@ export default function InterviewHighlightsSection() {
               );
             })}
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

@@ -68,6 +68,10 @@ const TeamMemberCard = React.forwardRef<HTMLDivElement, TeamMemberCardProps>(
     }, [photoUrl]);
 
     const handleImageError = () => {
+      if (imgSrc.endsWith('.webp')) {
+        setImgSrc(imgSrc.replace(/\.webp$/, '.png'));
+        return;
+      }
       if (imgSrc.includes('New folder (2)')) {
         const filename = imgSrc.split('/').pop()?.toLowerCase();
         if (filename) {
@@ -106,6 +110,8 @@ const TeamMemberCard = React.forwardRef<HTMLDivElement, TeamMemberCardProps>(
             <img
               src={imgSrc}
               alt={name}
+              loading="lazy"
+              decoding="async"
               onError={handleImageError}
               className="w-full h-full object-cover object-[center_top] transition-transform duration-500 ease-out group-hover:scale-105"
               style={{
