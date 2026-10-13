@@ -179,18 +179,17 @@ export default function HeroSection() {
             </div>
 
             <h1
-              className="tracking-tight leading-[1.15] sm:leading-[1.05] italic"
+              className="tracking-tight leading-[1.15] sm:leading-[1.05]"
               style={{
-                fontFamily: "'Jost', sans-serif",
+                fontFamily: 'var(--font-heading)',
                 fontSize: 'clamp(1.4rem, 5vw, 4.5rem)',
-                fontWeight: 500,
-                fontStyle: 'italic',
+                fontWeight: 800,
               }}
             >
-              <span className="text-white block italic" style={{ fontWeight: 500, fontStyle: 'italic' }}>
+              <span className="text-white block" style={{ fontWeight: 800 }}>
                 Shaping Ideas.
               </span>
-              <span className="hero-heading italic block mt-0.5 sm:mt-1" style={{ fontWeight: 500, fontStyle: 'italic' }}>
+              <span className="hero-heading block mt-0.5 sm:mt-1" style={{ fontWeight: 800 }}>
                 Connecting Industry.
               </span>
             </h1>
