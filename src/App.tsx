@@ -13,6 +13,7 @@ import Navbar from './components/Navbar';
 import AboutSection from './sections/AboutSection';
 import FooterSection from './sections/FooterSection';
 import HeroSection from './sections/HeroSection';
+import StatsSection from './sections/StatsSection';
 import GallerySection from './sections/GallerySection';
 import InterviewHighlightsSection from './sections/InterviewHighlightsSection';
 import KeynoteSpeakersSection from './sections/KeynoteSpeakersSection';
@@ -153,6 +154,8 @@ export default function App() {
 
         {/* Every section below Hero has a solid opaque background */}
         <div className="relative z-20 w-full bg-[#0C0C0C]">
+          <StatsSection />
+
           {/* Shared Container for About & Timeline */}
           <div className="relative w-full">
             <AboutSection />

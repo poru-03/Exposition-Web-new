@@ -16,36 +16,36 @@ export interface FeaturedHighlight {
 export const FEATURED_HIGHLIGHTS: FeaturedHighlight[] = [
   {
     id: 'h-1',
-    title: 'Exposition Issue 21',
-    subtitle: 'Official Annual Magazine',
+    title: 'Keynote Address',
+    subtitle: 'Industry Leadership Summit',
     image: '/resources/hero/1 (0).webp',
     targetId: 'about',
   },
   {
     id: 'h-2',
-    title: 'TechEvent Hub',
-    subtitle: 'National Hackathon Series',
+    title: 'Award Presentation',
+    subtitle: 'Recognizing Excellence',
     image: '/resources/hero/1 (1).jpg',
     targetId: 'techevent-hub',
   },
   {
     id: 'h-3',
-    title: 'Keynote Conclave',
-    subtitle: 'Global Industry Luminaries',
+    title: 'Magazine Unveiling',
+    subtitle: 'Exposition Issue Launch',
     image: '/resources/hero/1 (2).jpg',
     targetId: 'keynote-speakers',
   },
   {
     id: 'h-4',
-    title: 'Voices of Vision',
-    subtitle: 'Executive Leadership Dialogues',
+    title: 'Issue 18 Launch',
+    subtitle: 'Connecting Industry & Academia',
     image: '/resources/hero/1 (3).jpg',
     targetId: 'interviews',
   },
   {
     id: 'h-5',
-    title: 'Career Fair Nexus',
-    subtitle: 'Bridging Talent & Enterprise',
+    title: 'Panel Discussion',
+    subtitle: 'Voices of Industry Leaders',
     image: '/resources/hero/1 (4).jpg',
     targetId: 'partners',
   },
@@ -179,18 +179,17 @@ export default function HeroSection() {
             </div>
 
             <h1
-              className="tracking-tight leading-[1.15] sm:leading-[1.05] italic"
+              className="tracking-tight leading-[1.15] sm:leading-[1.05]"
               style={{
-                fontFamily: "'Jost', sans-serif",
+                fontFamily: 'var(--font-heading)',
                 fontSize: 'clamp(1.4rem, 5vw, 4.5rem)',
-                fontWeight: 500,
-                fontStyle: 'italic',
+                fontWeight: 800,
               }}
             >
-              <span className="text-white block italic" style={{ fontWeight: 500, fontStyle: 'italic' }}>
+              <span className="text-white block" style={{ fontWeight: 800 }}>
                 Shaping Ideas.
               </span>
-              <span className="hero-heading italic block mt-0.5 sm:mt-1" style={{ fontWeight: 500, fontStyle: 'italic' }}>
+              <span className="hero-heading block mt-0.5 sm:mt-1" style={{ fontWeight: 800 }}>
                 Connecting Industry.
               </span>
             </h1>

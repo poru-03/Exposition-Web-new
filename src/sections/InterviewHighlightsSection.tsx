@@ -378,7 +378,7 @@ export default function InterviewHighlightsSection() {
           <h2
             className="hero-heading font-black uppercase text-[#E5C287] drop-shadow-[0_4px_30px_rgba(229,194,135,0.2)]"
             style={{
-              fontFamily: 'var(--font-heading), "Fraunces", "Operetta 52", "Seraphine Display", serif',
+              fontFamily: 'var(--font-heading)',
               fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
               lineHeight: 1.15,
               letterSpacing: '-0.015em',
@@ -424,7 +424,7 @@ export default function InterviewHighlightsSection() {
                     <h3
                       className="text-2xl sm:text-3xl font-black uppercase text-white"
                       style={{
-                        fontFamily: 'var(--font-heading), "Fraunces", "Operetta 52", "Seraphine Display", serif',
+                        fontFamily: 'var(--font-heading)',
                         letterSpacing: '-0.01em',
                         lineHeight: 1.2
                       }}
@@ -567,7 +567,7 @@ export default function InterviewHighlightsSection() {
                     <h5
                       className={`text-xs font-bold uppercase transition-colors line-clamp-2 sm:line-clamp-1 leading-tight ${isActive ? 'text-white' : 'text-white/90 group-hover:text-white'
                         }`}
-                      style={{ fontFamily: 'var(--font-heading), "Fraunces", "Operetta 52", "Seraphine Display", serif', letterSpacing: '-0.005em' }}
+                      style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.005em' }}
                     >
                       {person.name}
                     </h5>

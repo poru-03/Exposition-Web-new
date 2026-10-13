@@ -4,7 +4,7 @@
 
 :root {
   /* Brand Typography Stack */
-  --font-heading: "Fraunces", serif;
+  --font-heading: "Satoshi", "General Sans", "Inter", -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-body: "Satoshi", "General Sans", "Inter", -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-accent: "Space Mono", monospace;
   --font-mono: "Space Mono", monospace;
@@ -42,8 +42,12 @@
 
 h1,
 h2,
-h3 {
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
+  font-weight: 800;
 }
 
 body {
@@ -141,6 +145,8 @@ body {
 
 @layer utilities {
   .hero-heading {
+    font-family: var(--font-heading);
+    font-weight: 900;
     background: linear-gradient(135deg, #B8894F 0%, #E8C896 100%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -148,6 +154,7 @@ body {
   }
 
   .section-title {
+    font-family: var(--font-heading);
     font-size: clamp(2.4rem, 5.5vw, 76px);
     line-height: 1;
     font-weight: 900;
