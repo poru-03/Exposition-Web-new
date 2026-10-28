@@ -72,7 +72,7 @@ export const PROCESS_PHASES: PhaseItem[] = [
     subtitle: "Recruitment & Corporate Networking",
     description:
       "A dedicated recruitment platform where top companies meet motivated undergraduates and fresh graduates from faculties across the University of Kelaniya.",
-    image: "/resources/career-fair.jpg",
+    image: "/resources/career-fair-interviews.jpg",
     icon: Briefcase,
     deliverables: ["Career Opportunities", "Industry Connections"],
   },
@@ -94,7 +94,7 @@ export const PROCESS_PHASES: PhaseItem[] = [
     subtitle: "Official Issue 22 Unveiling",
     description:
       "The closing event of Industrial Week and the official launch of Exposition Issue 22.",
-    image: "/resources/magazine/1.png",
+    image: "/resources/magazine-launch.jpg",
     icon: Zap,
     deliverables: ["Issue 22 Launch", "Closing Ceremony", "Grand Unveiling"],
   },
@@ -222,6 +222,16 @@ function ProcessCardItem({
             {phase.description}
           </p>
 
+          {phase.isComingSoon ? (
+            <div className="flex flex-col items-center justify-center py-6 sm:py-10 px-3 sm:px-6 rounded-2xl border border-[#B8894F]/30 bg-gradient-to-br from-[#181818] via-[#121212] to-[#0A0A0A] shadow-inner text-center space-y-2.5 sm:space-y-3">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#B8894F]/15 px-3.5 py-1 border border-[#B8894F]/40 text-[#E8C896] text-xs sm:text-sm font-bold uppercase tracking-widest animate-pulse">
+                <span>Coming Soon</span>
+              </div>
+              <p className="text-xs sm:text-sm text-neutral-400 max-w-md">
+                We're currently building this platform. Stay tuned for exciting upcoming hackathons, tech events, and robotics challenges!
+              </p>
+            </div>
+          ) : (
             <div className="flex flex-row sm:grid sm:grid-cols-2 gap-3.5 sm:gap-5 items-center pt-1">
               <div className="relative overflow-hidden rounded-full sm:rounded-2xl border border-white/10 size-16 sm:size-auto sm:w-full sm:h-36 bg-[#0a0a0a] flex items-center justify-center shrink-0 shadow-md">
                 <img
@@ -244,24 +254,12 @@ function ProcessCardItem({
                   decoding="async"
                 />
                 <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-[#0C0C0C]/80 via-transparent to-transparent pointer-events-none" />
-                {phase.isComingSoon && (
-                  <div className="absolute top-2 right-2 hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[0.6rem] font-bold uppercase tracking-wider bg-[#0C0C0C]/85 text-[#E8C896] border border-[#B8894F]/40 backdrop-blur-sm shadow">
-                    Coming Soon
-                  </div>
-                )}
               </div>
 
               <div className="flex flex-col gap-1.5 sm:gap-3 flex-1 min-w-0">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-[0.7rem] sm:text-xs font-bold uppercase tracking-wider text-[#E8C896]">
-                    Key Highlights
-                  </span>
-                  {phase.isComingSoon && (
-                    <span className="sm:hidden inline-flex items-center px-2 py-0.5 rounded-full text-[0.55rem] font-bold uppercase tracking-wider bg-[#B8894F]/20 text-[#E8C896] border border-[#B8894F]/40 animate-pulse">
-                      Coming Soon
-                    </span>
-                  )}
-                </div>
+                <span className="text-[0.7rem] sm:text-xs font-bold uppercase tracking-wider text-[#E8C896]">
+                  Key Highlights
+                </span>
                 <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm text-neutral-100 font-medium">
                   {phase.deliverables.map((item) => (
                     <li key={item} className="flex items-center gap-2">
@@ -289,6 +287,7 @@ function ProcessCardItem({
                 )}
               </div>
             </div>
+          )}
         </div>
       </div>
     </motion.div>
