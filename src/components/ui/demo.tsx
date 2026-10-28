@@ -83,7 +83,7 @@ export const PROCESS_PHASES: PhaseItem[] = [
     subtitle: "Premier Business & IT Publication",
     description:
       "Sri Lanka's premier university business magazine, bridging the worlds of IT and Management while connecting undergraduates with industry, ideas, and opportunity.",
-    image: "/magazines/issue-21-cover.jpg",
+    image: "/resources/magazine-issue-21-event.jpg",
     icon: BookOpen,
     deliverables: ["IT & Management", "University Publication", "Industry Bridge"],
   },
@@ -246,8 +246,12 @@ function ProcessCardItem({
                   className={`w-full h-full rounded-full sm:rounded-none ${
                     phase.id === "process-1" || phase.image.includes("podcast") || phase.image.includes("logo")
                       ? "object-contain p-2"
+                      : phase.id === "process-4"
+                      ? "object-cover object-[center_18%]"
                       : phase.id === "process-5"
-                      ? "object-cover object-top"
+                      ? "object-cover object-[center_88%]"
+                      : phase.id === "process-6"
+                      ? "object-cover object-[center_18%]"
                       : "object-cover"
                   } transition-transform duration-500 group-hover:scale-105`}
                   loading="lazy"
