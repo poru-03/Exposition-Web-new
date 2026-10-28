@@ -38,7 +38,7 @@ export const PROCESS_PHASES: PhaseItem[] = [
     subtitle: "Industry Voices & Insights",
     description:
       "A curated podcast series featuring industry leaders, entrepreneurs and academics sharing the insights, experiences, and perspectives that define modern professional thinking.",
-    image: "/podcast-logo-v3.png",
+    image: "/podcast-banner.png",
     icon: Radio,
     deliverables: ["Industry Voices", "Expert Insights", "Real Stories"],
   },
@@ -49,7 +49,7 @@ export const PROCESS_PHASES: PhaseItem[] = [
     subtitle: "Innovation Network & Hackathons",
     description:
       "A live digital platform aggregating university-level tech events across Sri Lanka including hackathons, robotics competitions, and innovation challenges.",
-    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop",
+    image: "/resources/magazine/Edify.png",
     icon: Globe,
     deliverables: ["Hackathons", "Robotics Competitions", "Innovation Challenges"],
     isComingSoon: true,
@@ -61,7 +61,7 @@ export const PROCESS_PHASES: PhaseItem[] = [
     subtitle: "Thought Leadership & Expert Dialogue",
     description:
       "A high-impact thought leadership event bringing together industry experts, academics, and students in insightful conversations and real perspectives that equip the next generation for an evolving future.",
-    image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=800&auto=format&fit=crop",
+    image: "/resources/magazine/forum.png",
     icon: Users,
     deliverables: ["Expert Dialogue", "Industry Insights", "Future Thinking"],
   },
@@ -72,7 +72,7 @@ export const PROCESS_PHASES: PhaseItem[] = [
     subtitle: "Recruitment & Corporate Networking",
     description:
       "A dedicated recruitment platform where top companies meet motivated undergraduates and fresh graduates from faculties across the University of Kelaniya.",
-    image: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?q=80&w=800&auto=format&fit=crop",
+    image: "/resources/career-fair.jpg",
     icon: Briefcase,
     deliverables: ["Career Opportunities", "Industry Connections"],
   },
@@ -83,7 +83,7 @@ export const PROCESS_PHASES: PhaseItem[] = [
     subtitle: "Premier Business & IT Publication",
     description:
       "Sri Lanka's premier university business magazine, bridging the worlds of IT and Management while connecting undergraduates with industry, ideas, and opportunity.",
-    image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=800&auto=format&fit=crop",
+    image: "/magazines/issue-21-cover.jpg",
     icon: BookOpen,
     deliverables: ["IT & Management", "University Publication", "Industry Bridge"],
   },
@@ -94,7 +94,7 @@ export const PROCESS_PHASES: PhaseItem[] = [
     subtitle: "Official Issue 22 Unveiling",
     description:
       "The closing event of Industrial Week and the official launch of Exposition Issue 22.",
-    image: "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=800&auto=format&fit=crop",
+    image: "/resources/magazine/1.png",
     icon: Zap,
     deliverables: ["Issue 22 Launch", "Closing Ceremony", "Grand Unveiling"],
   },
@@ -182,7 +182,7 @@ function ProcessCardItem({
         </div>
 
         {/* Card Body Content */}
-        <div className="p-3.5 sm:p-6 md:p-8 space-y-2.5 sm:space-y-5 max-h-[calc(100vh-200px)] sm:max-h-[calc(100vh-320px)] overflow-y-auto no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        <div className="p-3.5 sm:p-6 md:p-8 space-y-2.5 sm:space-y-5 max-h-[calc(100vh-200px)] sm:max-h-[500px] overflow-y-auto no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {/* YouTube-style Subscribe Bar for Voices of Vision */}
           {phase.id === "process-1" && (
             <div className="flex items-center justify-between gap-2.5 sm:gap-3 bg-white rounded-xl sm:rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2.5 text-black shadow-[0_10px_25px_rgba(0,0,0,0.5)] border border-neutral-200 max-w-lg">
@@ -222,16 +222,6 @@ function ProcessCardItem({
             {phase.description}
           </p>
 
-          {phase.isComingSoon ? (
-            <div className="flex flex-col items-center justify-center py-6 sm:py-10 px-3 sm:px-6 rounded-2xl border border-[#B8894F]/30 bg-gradient-to-br from-[#181818] via-[#121212] to-[#0A0A0A] shadow-inner text-center space-y-2.5 sm:space-y-3">
-              <div className="inline-flex items-center gap-2 rounded-full bg-[#B8894F]/15 px-3.5 py-1 border border-[#B8894F]/40 text-[#E8C896] text-xs sm:text-sm font-bold uppercase tracking-widest animate-pulse">
-                <span>Coming Soon</span>
-              </div>
-              <p className="text-xs sm:text-sm text-neutral-400 max-w-md">
-                We're currently building this platform. Stay tuned for exciting upcoming hackathons, tech events, and robotics challenges!
-              </p>
-            </div>
-          ) : (
             <div className="flex flex-row sm:grid sm:grid-cols-2 gap-3.5 sm:gap-5 items-center pt-1">
               <div className="relative overflow-hidden rounded-full sm:rounded-2xl border border-white/10 size-16 sm:size-auto sm:w-full sm:h-36 bg-[#0a0a0a] flex items-center justify-center shrink-0 shadow-md">
                 <img
@@ -245,21 +235,33 @@ function ProcessCardItem({
                   }}
                   className={`w-full h-full rounded-full sm:rounded-none ${
                     phase.id === "process-1" || phase.image.includes("podcast") || phase.image.includes("logo")
-                      ? "object-contain p-1.5 sm:p-3"
+                      ? "object-contain p-2"
+                      : phase.id === "process-5"
+                      ? "object-cover object-top"
                       : "object-cover"
                   } transition-transform duration-500 group-hover:scale-105`}
                   loading="lazy"
                   decoding="async"
                 />
-                {!(phase.id === "process-1" || phase.image.includes("podcast") || phase.image.includes("logo")) && (
-                  <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-[#0C0C0C]/80 via-transparent to-transparent pointer-events-none" />
+                <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-[#0C0C0C]/80 via-transparent to-transparent pointer-events-none" />
+                {phase.isComingSoon && (
+                  <div className="absolute top-2 right-2 hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[0.6rem] font-bold uppercase tracking-wider bg-[#0C0C0C]/85 text-[#E8C896] border border-[#B8894F]/40 backdrop-blur-sm shadow">
+                    Coming Soon
+                  </div>
                 )}
               </div>
 
               <div className="flex flex-col gap-1.5 sm:gap-3 flex-1 min-w-0">
-                <span className="text-[0.7rem] sm:text-xs font-bold uppercase tracking-wider text-[#E8C896]">
-                  Key Highlights
-                </span>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[0.7rem] sm:text-xs font-bold uppercase tracking-wider text-[#E8C896]">
+                    Key Highlights
+                  </span>
+                  {phase.isComingSoon && (
+                    <span className="sm:hidden inline-flex items-center px-2 py-0.5 rounded-full text-[0.55rem] font-bold uppercase tracking-wider bg-[#B8894F]/20 text-[#E8C896] border border-[#B8894F]/40 animate-pulse">
+                      Coming Soon
+                    </span>
+                  )}
+                </div>
                 <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm text-neutral-100 font-medium">
                   {phase.deliverables.map((item) => (
                     <li key={item} className="flex items-center gap-2">
@@ -287,7 +289,6 @@ function ProcessCardItem({
                 )}
               </div>
             </div>
-          )}
         </div>
       </div>
     </motion.div>
