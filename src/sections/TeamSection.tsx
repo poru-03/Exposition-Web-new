@@ -92,12 +92,12 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     id: 'member-8',
-    name: 'Ravindu Aththanayake',
+    name: 'Geethma Nirmani',
     position: 'Marketing Coordinator',
-    image: '/resources/team/members/ravindu.webp',
-    email: 'ravindu.exposition@gmail.com',
+    image: '/resources/team/members/geethma.webp',
+    email: 'geethma.exposition@gmail.com',
     linkedin: 'https://linkedin.com',
-    whatsapp: 'https://wa.me/94773289168',
+    whatsapp: 'https://wa.me/94740951913',
     bio: 'Directing marketing outreach, campaigns, promotional releases, and audience engagement.',
   },
   {
