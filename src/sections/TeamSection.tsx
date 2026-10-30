@@ -102,7 +102,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     id: 'member-9',
-    name: 'Nadeesha',
+    name: 'Nadeesha Kavindi',
     position: 'Marketing Coordinator',
     image: '/resources/team/members/nadeesha01.webp',
     email: 'nadeesha.exposition@gmail.com',

@@ -56,7 +56,7 @@ export default function AboutSection() {
       id="about"
       className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-transparent px-[5%] py-14 sm:py-20 md:py-24"
     >
-      <div className="relative z-10 flex flex-col items-center gap-12 sm:gap-16 md:gap-20 max-w-4xl mx-auto">
+      <div className="relative z-10 flex flex-col items-center gap-12 sm:gap-16 md:gap-20 max-w-5xl mx-auto w-full">
         <div className="flex flex-col items-center gap-8 sm:gap-12 md:gap-14">
           <ScrollReveal
             y={50}
@@ -82,17 +82,17 @@ export default function AboutSection() {
           <div className="flex flex-col items-center gap-4 py-4 my-2 w-full">
             <ScrollReveal y={30}>
               <span
-                className="text-sm sm:text-base md:text-lg tracking-wide text-[#E8C896] italic text-center drop-shadow block"
+                className="text-lg sm:text-xl md:text-2xl lg:text-[26px] tracking-wide text-[#E8C896] italic text-center drop-shadow block"
                 style={{
                   fontFamily: "'Jost', sans-serif",
-                  fontWeight: 500,
+                  fontWeight: 600,
                   fontStyle: 'italic',
                 }}
               >
                 Read Our Previous Publications
               </span>
             </ScrollReveal>
-            <div ref={booksRef} className="flex items-center justify-center gap-6 sm:gap-10 md:gap-12 flex-wrap pt-2">
+            <div ref={booksRef} className="flex items-center justify-center gap-6 sm:gap-8 md:gap-10 lg:gap-12 flex-wrap pt-2">
               {PAST_MAGAZINES.map((mag) => (
                 <a
                   key={mag.issueNum}
@@ -100,21 +100,31 @@ export default function AboutSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   title={`Open ${mag.issueLabel} (${mag.year}) in new tab`}
-                  className="about-mag-book cursor-pointer block group/book focus:outline-none"
+                  className="about-mag-book cursor-pointer block group/book focus:outline-none transition-all duration-500 ease-out hover:-translate-y-3.5"
                 >
-                  <PerspectiveBook size="sm" textured className="p-0 border-0 bg-transparent overflow-hidden">
+                  <PerspectiveBook size="md" textured className="p-0 border-0 bg-transparent overflow-hidden">
+                    {/* 1. Underlying Magazine Cover Image (Clean full bleed) */}
                     <img
                       src={mag.coverImg}
                       alt={`${mag.issueLabel} Cover`}
                       loading="lazy"
                       decoding="async"
-                      className="absolute inset-0 w-full h-full object-cover rounded-[inherit]"
+                      className="absolute inset-0 w-full h-full object-cover rounded-[inherit] transition-transform duration-500 ease-out group-hover/book:scale-[1.03]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent rounded-[inherit] pointer-events-none" />
-                    <div className="relative z-10 mt-auto p-2.5">
-                      <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
-                        {mag.issueLabel}
-                      </span>
+
+                    {/* 2. Frosted Blur Layer & Issue Wordings (Disappears on hover, revealing clean magazine) */}
+                    <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-4 rounded-[inherit] bg-black/25 backdrop-blur-[2px] border border-white/[0.08] transition-all duration-500 ease-out opacity-100 group-hover/book:opacity-0 group-hover/book:pointer-events-none">
+                      {/* Issue Badge & Title */}
+                      <div className="flex flex-col items-center gap-2 text-center transform transition-all duration-500 ease-out group-hover/book:scale-90 group-hover/book:translate-y-2">
+                        <div className="px-3.5 py-1.5 rounded-full bg-black/60 border border-[#E8C896]/50 shadow-[0_4px_16px_rgba(0,0,0,0.8)] backdrop-blur-sm">
+                          <span className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#E8C896] drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+                            {mag.issueLabel}
+                          </span>
+                        </div>
+                        <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+                          {mag.year} Edition
+                        </span>
+                      </div>
                     </div>
                   </PerspectiveBook>
                 </a>

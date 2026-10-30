@@ -6,11 +6,12 @@ import { cn } from "@/lib/utils";
 const sizeMap = {
   sm: { width: "150px", spineTranslation: "122px" },
   default: { width: "196px", spineTranslation: "168px" },
+  md: { width: "216px", spineTranslation: "188px" },
   lg: { width: "300px", spineTranslation: "272px" },
 };
 
 interface PerspectiveBookProps {
-  size?: "sm" | "default" | "lg";
+  size?: "sm" | "default" | "md" | "lg";
   className?: string;
   children: React.ReactNode;
   textured?: boolean;
@@ -34,7 +35,7 @@ export function PerspectiveBook({
           width: sizeMap[size].width,
           borderRadius: "6px 4px 4px 6px",
         }}
-        className={`transition-transform duration-300 ease-out relative [transform-style:preserve-3d] [transform:rotateY(0deg)] group-hover:[transform:rotateY(-20deg)] group-hover:scale-[1.066] group-hover:-translate-x-1 aspect-[49/60]`}
+        className={`transition-all duration-500 ease-out relative [transform-style:preserve-3d] [transform:rotateY(0deg)] group-hover:[transform:rotateY(-20deg)] group-hover:scale-[1.08] group-hover:-translate-y-3 group-hover:-translate-x-1 aspect-[49/60]`}
       >
         {/* Front Side */}
         <div

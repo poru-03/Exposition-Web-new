@@ -124,11 +124,10 @@ export default function StatsSection() {
                   delay: index * 0.08,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className={`group relative flex flex-col items-center justify-center p-6 sm:p-7 md:p-8 rounded-2xl bg-[#121212]/75 border border-white/[0.07] backdrop-blur-md transition-all duration-300 hover:border-[#E8C896]/35 hover:bg-[#161616]/90 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,0.6),0_0_24px_rgba(232,200,150,0.08)] ${
-                  isLastOnMobile
+                className={`group relative flex flex-col items-center justify-center p-6 sm:p-7 md:p-8 rounded-2xl bg-[#121212]/75 border border-white/[0.07] backdrop-blur-md transition-all duration-300 hover:border-[#E8C896]/35 hover:bg-[#161616]/90 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,0.6),0_0_24px_rgba(232,200,150,0.08)] ${isLastOnMobile
                     ? 'col-span-2 md:col-span-1 max-w-[280px] md:max-w-none mx-auto w-full'
                     : ''
-                }`}
+                  }`}
               >
                 {/* Subtle Top Card Glow on Hover */}
                 <div className="absolute top-0 inset-x-6 h-[1.5px] bg-gradient-to-r from-transparent via-[#E8C896]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
@@ -147,7 +146,6 @@ export default function StatsSection() {
                 <p className="mt-2.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-zinc-300 group-hover:text-white transition-colors text-center leading-snug">
                   {item.label}
                 </p>
-
                 {/* Decorative Bottom Dot/Bar on Hover */}
                 <div className="w-5 h-0.5 mt-3 rounded-full bg-transparent group-hover:bg-[#E8C896]/50 transition-colors duration-300" />
               </motion.div>
