@@ -172,7 +172,7 @@ const SymposiumMarqueeTrack = () => (
 );
 
 export default function FooterSection({
-  tagline = 'The premier technology & management symposium and publication of University of Kelaniya.',
+  tagline = 'The university and industry engagement platform organized by the Department of Industrial Management, University of Kelaniya.',
   addressLines = [
     'Department of Industrial Management (MIT)',
     'Faculty of Science, University of Kelaniya',

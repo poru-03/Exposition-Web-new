@@ -55,7 +55,12 @@ export default function YouTubeChannelSection() {
         </h2>
       </ScrollReveal>
 
-      {/* Main Single Column Centered Layout Container */}
+                {/* Voices of Vision Intro */}
+          <p className="text-base md:text-lg text-white/70 max-w-3xl mx-auto text-center leading-relaxed mb-8">
+            Voices of Vision is the official podcast series of Exposition, produced by students from the Department of Industrial Management at the University of Kelaniya. We feature conversations with accomplished corporate leaders, entrepreneurs, and innovators. We are currently sharing episodes from previous recordings, and our newest episodes recorded for Issue 22 will premiere throughout 2027.
+          </p>
+
+          {/* Main Single Column Centered Layout Container */}
       <div className="max-w-5xl mx-auto flex flex-col items-center gap-8 relative z-10 w-full">
         {/* ================= 1. CENTERED MAIN FEATURED VIDEO PLAYER ================= */}
         <ScrollReveal delay={0.1} className="w-full flex flex-col items-center gap-5">

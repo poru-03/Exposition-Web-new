@@ -8,7 +8,6 @@ import {
   BookOpen,
   Zap,
   ArrowRight,
-  ExternalLink,
   Bell,
 } from "lucide-react"
 import Loader from "@/components/ui/loader-15"
@@ -26,7 +25,7 @@ export type PhaseItem = {
   image: string;
   icon: any;
   deliverables: string[];
-  isElite10?: boolean;
+
   isComingSoon?: boolean;
 };
 
@@ -34,13 +33,13 @@ export const PROCESS_PHASES: PhaseItem[] = [
   {
     id: "process-1",
     number: "01",
-    title: "Voices of Vision (Podcast Series)",
-    subtitle: "Industry Voices & Insights",
+    title: "Voices of Vision Podcast Series",
+    subtitle: "Leadership Insights and Industry Conversations",
     description:
-      "A curated podcast series featuring industry leaders, entrepreneurs and academics sharing the insights, experiences, and perspectives that define modern professional thinking.",
+      "Voices of Vision is the official Exposition podcast series produced by the Department of Industrial Management at the University of Kelaniya. It features conversations with industry leaders, founders, and professionals on technology, entrepreneurship, and career growth. Episodes from previous recordings are currently being published, and new episodes recorded for Issue 22 will be released throughout 2027.",
     image: "/podcast-banner.png",
     icon: Radio,
-    deliverables: ["Industry Voices", "Expert Insights", "Real Stories"],
+    deliverables: ["Executive Interviews", "Ongoing Episode Releases", "Issue 22 Episodes in 2027"],
   },
   {
     id: "process-2",
@@ -58,34 +57,34 @@ export const PROCESS_PHASES: PhaseItem[] = [
     id: "process-3",
     number: "03",
     title: "Industrial Forum",
-    subtitle: "Thought Leadership & Expert Dialogue",
+    subtitle: "14 January 2027 thought leadership event",
     description:
-      "A high-impact thought leadership event bringing together industry experts, academics, and students in insightful conversations and real perspectives that equip the next generation for an evolving future.",
+      "Scheduled for 14 January 2027, the Industrial Forum is a thought leadership event bringing together industry experts, academics, and students. The forum focuses on insightful conversations and real perspectives that equip the next generation of graduates for an evolving future.",
     image: "/resources/magazine/forum.png",
     icon: Users,
-    deliverables: ["Expert Dialogue", "Industry Insights", "Future Thinking"],
+    deliverables: ["14 January 2027", "Expert Dialogue", "Industry Perspectives"],
   },
   {
     id: "process-4",
     number: "04",
-    title: "Industrial Week & Career Fair",
-    subtitle: "Recruitment & Corporate Networking",
+    title: "Exposition Career Fair",
+    subtitle: "11 January 2027 recruitment event",
     description:
-      "A dedicated recruitment platform where top companies meet motivated undergraduates and fresh graduates from faculties across the University of Kelaniya.",
+      "The Exposition Career Fair is scheduled for 11 January 2027 at the University of Kelaniya. This event connects undergraduates and fresh graduates with career opportunities across diverse fields. Planned offerings include walk-in interviews and direct networking with leading multinational companies looking to recruit university talent.",
     image: "/resources/career-fair-interviews.jpg",
     icon: Briefcase,
-    deliverables: ["Career Opportunities", "Industry Connections"],
+    deliverables: ["Walk-in Interviews", "Multinational Companies", "11 January 2027"],
   },
   {
     id: "process-5",
     number: "05",
     title: "Exposition Magazine",
-    subtitle: "Premier Business & IT Publication",
+    subtitle: "First University Business Publication",
     description:
-      "Sri Lanka's premier university business magazine, bridging the worlds of IT and Management while connecting undergraduates with industry, ideas, and opportunity.",
+      "Exposition Magazine is the pioneer university business magazine in Sri Lanka, bridging the worlds of information technology and management for over two decades. Produced by the Department of Industrial Management at the University of Kelaniya, Issue 22 is currently in active development to deliver student research and industry thought leadership.",
     image: "/resources/magazine-issue-21-event.jpg",
     icon: BookOpen,
-    deliverables: ["IT & Management", "University Publication", "Industry Bridge"],
+    deliverables: ["First Business Magazine", "Issue 22 in Development", "IT and Management"],
   },
   {
     id: "process-6",
@@ -276,23 +275,6 @@ function ProcessCardItem({
                     </li>
                   ))}
                 </ul>
-
-                {phase.isElite10 && (
-                  <div className="pt-1 sm:pt-2">
-                    <a
-                      href="/elite-10"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        window.history.pushState({}, '', '/elite-10');
-                        window.dispatchEvent(new Event('popstate'));
-                      }}
-                      className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-gradient-to-r from-[#B8894F] to-[#E8C896] px-3.5 sm:px-5 py-1.5 sm:py-2 text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider text-[#0C0C0C] shadow-[0_0_20px_rgba(184,137,79,0.3)] transition-all hover:scale-105 cursor-pointer"
-                    >
-                      <span>Explore Elite 10</span>
-                      <ExternalLink className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
-                    </a>
-                  </div>
-                )}
               </div>
             </div>
           )}

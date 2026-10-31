@@ -23,10 +23,10 @@ export const FAQ_DATA: FAQItem[] = [
     id: 'faq-1',
     number: '01',
     category: 'General',
-    question: 'What is Exposition, and what makes the 21st Edition significant?',
+    question: 'What is Exposition and what are its main initiatives?',
     answer:
-      'Exposition is the premier annual technology symposium and magazine organized and published by the Department of Industrial Management (MIT), Faculty of Science, University of Kelaniya. The 21st Edition commemorates over two decades of bridging academic brilliance with enterprise innovation, featuring spatial computing dialogues, AI summits, and visionary industry keynotes.',
-    highlights: ['21st Milestone Edition', 'University of Kelaniya', 'MIT Department'],
+      'Exposition is the university and industry engagement platform organized by the Industrial Management Science Students Association in the Department of Industrial Management, Faculty of Science, University of Kelaniya. The platform focuses on four main initiatives including the Voices of Vision podcast series, the Exposition Career Fair, the Industrial Forum, and the long-running Exposition Magazine.',
+    highlights: ['University of Kelaniya', 'IMSSA', 'Department of Industrial Management'],
   },
   {
     id: 'faq-2',
@@ -90,6 +90,30 @@ export const FAQ_DATA: FAQItem[] = [
     answer:
       'You can reach out directly to our department heads (Editor-in-Chief, Event Chair, Tech Leads, Partnership Managers) via their Email, LinkedIn, and WhatsApp links in the Our Team section, or email us at exposition.mit@gmail.com.',
     highlights: ['Direct WhatsApp & Email', 'Editorial Board Support', 'Rapid Inquiries Response'],
+  },
+  {
+    id: 'faq-career-fair',
+    number: '05',
+    category: 'General',
+    question: "When is the Exposition Career Fair and what can participants expect?",
+    answer: "The Exposition Career Fair is scheduled for 11 January 2027 at the University of Kelaniya. The event connects undergraduates and recent graduates with employment opportunities. Planned offerings include walk-in interviews and career networking with leading multinational companies.",
+    highlights: ['11 January 2027', 'Walk-in Interviews', 'Multinational Companies'],
+  },
+  {
+    id: 'faq-industrial-forum',
+    number: '06',
+    category: 'General',
+    question: "What is the Industrial Forum and when will it take place?",
+    answer: "The Industrial Forum is scheduled for 14 January 2027. It brings together industry professionals, academics, and university students for structured dialogue on modern technology, business transformation, and career readiness.",
+    highlights: ['14 January 2027', 'Expert Dialogue', 'University of Kelaniya'],
+  },
+  {
+    id: 'faq-podcast',
+    number: '07',
+    category: 'General',
+    question: "What is the Voices of Vision podcast and when are new episodes released?",
+    answer: "Voices of Vision is the official Exposition podcast series exploring leadership and innovation with established professionals. Episodes from previous years are currently being published on our official media channels, and brand new episodes recorded for Issue 22 will be released throughout 2027.",
+    highlights: ['Official Podcast Series', 'Ongoing Episode Releases', 'Issue 22 in 2027'],
   },
 ];
 

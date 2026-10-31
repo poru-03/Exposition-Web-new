@@ -209,8 +209,7 @@ export default function HeroSection() {
               className="text-zinc-300/90 text-[11px] sm:text-base md:text-lg font-medium leading-relaxed max-w-xl"
               style={{ fontFamily: "var(--font-body), 'Satoshi', sans-serif" }}
             >
-              Explore extraordinary student research, compare cutting-edge technological frameworks,
-              and uncover insights that elevate academic innovation. Bridging visionary leaders and future pioneers.
+              Exposition is the premier university and industry engagement platform organized by the Department of Industrial Management, Faculty of Science, University of Kelaniya. We connect students and corporate leaders through the Voices of Vision podcast series, the Exposition Career Fair, the Industrial Forum, and our first university business magazine in Sri Lanka.
             </p>
           </motion.div>
 

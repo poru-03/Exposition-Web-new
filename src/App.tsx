@@ -24,7 +24,7 @@ import TeamSection from './sections/TeamSection';
 // TechEventHubSection temporarily removed per user request (kept in timeline)
 import YouTubeChannelSection from './sections/YouTubeChannelSection';
 import TimelineSection from './sections/TimelineSection';
-import Elite10Page from './pages/Elite10Page';
+
 import MagazineReaderPage from './pages/MagazineReaderPage';
 import SiteLoadingScreen from './components/SiteLoadingScreen';
 
@@ -76,7 +76,7 @@ export default function App() {
   }, [isSiteLoaded]);
 
   useEffect(() => {
-    if (currentPath === '/elite-10' || currentPath.startsWith('/magazine-reader')) return;
+    if (currentPath.startsWith('/magazine-reader')) return;
 
     const lenis = new Lenis({
       duration: 0.9,
@@ -130,9 +130,7 @@ export default function App() {
     { id: 'faq', label: 'FAQ', href: '#faq', icon: HelpCircle },
   ];
 
-  if (currentPath === '/elite-10') {
-    return <Elite10Page />;
-  }
+
 
   if (currentPath.startsWith('/magazine-reader')) {
     return <MagazineReaderPage />;

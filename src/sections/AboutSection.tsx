@@ -72,7 +72,7 @@ export default function AboutSection() {
 
           <ScrollReveal delay={0.1} y={40} className="flex flex-col items-center gap-6 max-w-[720px]">
             <AnimatedText
-              text="Exposition serves as a bridge between academia and industry, bringing together students, industry leaders, and organizations through meaningful conversations, collaborative experiences, and career-focused opportunities."
+              text="Exposition is organized by the Industrial Management Science Students' Association in the Department of Industrial Management at the University of Kelaniya. As an established engagement platform, we connect university talent with corporate leaders through the Voices of Vision podcast, the Exposition Career Fair, and the Industrial Forum. We also take pride in Exposition Magazine, the first university business publication in Sri Lanka, with Issue 22 currently in development."
               className="text-center font-medium leading-relaxed text-[#9A9A9A]"
               style={{ fontSize: 'clamp(1rem, 1.8vw, 1.25rem)' }}
             />
