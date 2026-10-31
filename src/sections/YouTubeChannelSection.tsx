@@ -96,7 +96,7 @@ export default function YouTubeChannelSection() {
                 >
                   <img
                     src="/podcast-logo-v3.png"
-                    alt="Exposition Magazine"
+                    alt="Voices of Vision Podcast — Exposition, University of Kelaniya"
                     className="w-full h-full object-cover"
                   />
                 </a>
@@ -187,7 +187,8 @@ export default function YouTubeChannelSection() {
                     <div className="size-8 rounded-full overflow-hidden shrink-0 border border-white/15 bg-neutral-900 mt-0.5">
                       <img
                         src="/podcast-logo-v3.png"
-                        alt="Channel"
+                        alt=""
+                        aria-hidden="true"
                         className="w-full h-full object-cover"
                       />
                     </div>

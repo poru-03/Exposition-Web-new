@@ -106,7 +106,7 @@ export default function AboutSection() {
                     {/* 1. Underlying Magazine Cover Image (Clean full bleed) */}
                     <img
                       src={mag.coverImg}
-                      alt={`${mag.issueLabel} Cover`}
+                      alt={`Exposition Magazine ${mag.issueLabel} Cover — University of Kelaniya`}
                       loading="lazy"
                       decoding="async"
                       className="absolute inset-0 w-full h-full object-cover rounded-[inherit] transition-transform duration-500 ease-out group-hover/book:scale-[1.03]"

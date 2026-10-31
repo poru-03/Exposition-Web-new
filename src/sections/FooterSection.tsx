@@ -38,7 +38,7 @@ export interface FooterNavLink {
 
 export const DEFAULT_NAV_LINKS: FooterNavLink[] = [
   { name: 'ABOUT', href: '#about' },
-  { name: 'EVENTS', href: '#techevent-hub' },
+  { name: 'EVENTS', href: '#process-card-process-2' },
   { name: 'SPEAKERS', href: '#keynote-speakers' },
   { name: 'INTERVIEWS', href: '#interviews' },
   { name: 'GALLERY', href: '#gallery' },
@@ -261,7 +261,8 @@ export default function FooterSection({
             <span>Explore Partnership Opportunities</span>
             <img
               src="/handshake.png"
-              alt="Handshake"
+              alt=""
+              aria-hidden="true"
               loading="lazy"
               decoding="async"
               className="size-6 sm:size-7 md:size-8 object-contain transition-transform duration-200 group-hover:scale-115 select-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
@@ -286,7 +287,7 @@ export default function FooterSection({
             <div className="flex items-center justify-start">
               <img
                 src="/ExpoLogo.png"
-                alt="Exposition Logo"
+                alt="Exposition — University-Industry Engagement Platform, University of Kelaniya"
                 loading="lazy"
                 decoding="async"
                 className="h-auto w-[220px] sm:w-[280px] md:w-[320px] lg:w-[350px] select-none drop-shadow-[0_0_25px_rgba(184,137,79,0.25)]"
@@ -371,7 +372,7 @@ export default function FooterSection({
             <a href="#about" className="block hover:text-[#E8C896] transition-colors">
               ABOUT
             </a>
-            <a href="#techevent-hub" className="block hover:text-[#E8C896] transition-colors">
+            <a href="#process-card-process-2" className="block hover:text-[#E8C896] transition-colors">
               EVENTS
             </a>
             <a href="#interviews" className="block hover:text-[#E8C896] transition-colors">

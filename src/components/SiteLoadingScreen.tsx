@@ -171,7 +171,7 @@ export default function SiteLoadingScreen({ onComplete }: SiteLoadingScreenProps
           >
             <img
               src="/resources/Expo_Issue_22_logo.svg"
-              alt="Exposition Logo"
+              alt="Exposition — University of Kelaniya"
               className="h-14 sm:h-16 md:h-20 w-auto object-contain filter drop-shadow-[0_4px_25px_rgba(232,200,150,0.45)]"
               draggable={false}
             />

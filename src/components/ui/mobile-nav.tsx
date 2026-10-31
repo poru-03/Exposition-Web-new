@@ -29,7 +29,7 @@ export const ALL_MOBILE_NAV_ITEMS: NavItem[] = [
   { id: 'hero', label: 'Home', href: '#hero', icon: Home },
   { id: 'about', label: 'About', href: '#about', icon: Info },
   { id: 'timeline', label: 'Timeline', href: '#timeline', icon: Clock },
-  { id: 'techevent-hub', label: 'Events', href: '#techevent-hub', icon: Zap },
+  { id: 'techevent-hub', label: 'Events', href: '#process-card-process-2', icon: Zap },
   { id: 'voices-of-vision', label: 'Voices of Vision', href: '#voices-of-vision', icon: Podcast },
   { id: 'keynote-speakers', label: 'Speakers', href: '#keynote-speakers', icon: Mic },
   { id: 'interviews', label: 'Interviews', href: '#interviews', icon: Video },

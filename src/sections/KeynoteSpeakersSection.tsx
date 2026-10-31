@@ -217,7 +217,7 @@ function SpeakerLandscapeCard({ speaker }: { speaker: KeynoteSpeaker }) {
       <div className="absolute right-0 top-0 bottom-0 w-[55%] opacity-35 group-hover:opacity-50 transition-opacity duration-300 pointer-events-none overflow-hidden">
         <img
           src={speaker.image}
-          alt={speaker.name}
+          alt={`${speaker.name} — Keynote Speaker, Exposition, University of Kelaniya`}
           loading="lazy"
           decoding="async"
           className="w-full h-full object-cover object-top filter brightness-110 contrast-110"

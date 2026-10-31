@@ -1,0 +1,7 @@
+# robots.txt for https://exposition.lk/
+User-agent: *
+Allow: /
+
+# Sitemap Location
+Sitemap: https://exposition.lk/sitemap.xml
+

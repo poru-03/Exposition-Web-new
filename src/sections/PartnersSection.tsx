@@ -70,7 +70,7 @@ export function VerticalPartnerCard({
         ) : (
           <img
             src={partner.image}
-            alt={partner.name}
+            alt={`${partner.name} — Partner of Exposition, University of Kelaniya`}
             loading="lazy"
             decoding="async"
             onLoad={() => setImageLoaded(true)}
@@ -134,7 +134,7 @@ export function LegacyPartnerCard({
         ) : (
           <img
             src={partner.image}
-            alt={partner.name}
+            alt={`${partner.name} — Partner of Exposition, University of Kelaniya`}
             loading="lazy"
             decoding="async"
             onLoad={() => setImageLoaded(true)}

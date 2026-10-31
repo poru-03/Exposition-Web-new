@@ -26,7 +26,7 @@ export const FEATURED_HIGHLIGHTS: FeaturedHighlight[] = [
     title: 'Award Presentation',
     subtitle: 'Recognizing Excellence',
     image: '/resources/hero/1 (1).jpg',
-    targetId: 'techevent-hub',
+    targetId: 'process-card-process-2',
   },
   {
     id: 'h-3',
@@ -114,7 +114,7 @@ export default function HeroSection() {
         <img
           id="hero-mobile-logo"
           src="/resources/Expo_Issue_22_logo.svg"
-          alt="Exposition Logo"
+          alt="Exposition — University of Kelaniya"
           className="h-7 w-auto object-contain filter drop-shadow-[0_4px_18px_rgba(232,200,150,0.4)]"
         />
       </div>
@@ -173,7 +173,7 @@ export default function HeroSection() {
               <img
                 id="hero-desktop-logo"
                 src="/resources/Expo_Issue_22_logo.svg"
-                alt="Exposition Logo"
+                alt="Exposition — University of Kelaniya"
                 className="h-11 md:h-14 w-auto object-contain filter drop-shadow-[0_4px_20px_rgba(232,200,150,0.3)]"
               />
             </div>
@@ -186,6 +186,9 @@ export default function HeroSection() {
                 fontWeight: 800,
               }}
             >
+              <span className="block text-xs sm:text-sm md:text-base font-bold uppercase tracking-[0.2em] text-[#E8C896] mb-1.5 sm:mb-2">
+                Exposition • University of Kelaniya
+              </span>
               <span className="text-white block" style={{ fontWeight: 800 }}>
                 Shaping Ideas.
               </span>

@@ -155,6 +155,10 @@ function ProcessCardItem({
       }}
       className="absolute inset-x-0 w-full"
     >
+      {/* Fallback anchor for backward compatibility with #techevent-hub */}
+      {phase.id === "process-2" && (
+        <div id="techevent-hub" className="absolute -top-24 left-0 pointer-events-none" />
+      )}
       <div className="group relative rounded-2xl sm:rounded-3xl border border-white/15 bg-[#121212] shadow-[0_25px_60px_rgba(0,0,0,0.95)] transition-colors duration-200 hover:border-[#B8894F]/50 overflow-hidden">
         {/* Top Tab Header Bar (Always cleanly exposed at top margin) */}
         <div
@@ -190,7 +194,7 @@ function ProcessCardItem({
                 <div className="relative size-7 sm:size-10 rounded-full border-2 border-red-600 p-0.5 overflow-hidden shrink-0 bg-neutral-900">
                   <img
                     src="/podcast-logo-v3.png"
-                    alt="Voices of Vision Logo"
+                    alt="Voices of Vision Podcast Logo — Exposition, University of Kelaniya"
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover rounded-full"
@@ -236,7 +240,7 @@ function ProcessCardItem({
               <div className="relative overflow-hidden rounded-full sm:rounded-2xl border border-white/10 size-16 sm:size-auto sm:w-full sm:h-36 bg-[#0a0a0a] flex items-center justify-center shrink-0 shadow-md">
                 <img
                   src={phase.image}
-                  alt={phase.title}
+                  alt={`${phase.title} — Exposition Initiative, University of Kelaniya`}
                   onError={(e) => {
                     const target = e.currentTarget;
                     if (target.src.endsWith('.webp')) {

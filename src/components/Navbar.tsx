@@ -154,7 +154,7 @@ export default function Navbar() {
           >
             <img
               src="/resources/Expo_Issue_22_logo.svg"
-              alt="Exposition Logo"
+              alt="Exposition — University-Industry Engagement Platform, University of Kelaniya"
               className="h-7 sm:h-8 md:h-9 w-auto object-contain filter drop-shadow-[0_0_12px_rgba(201,162,95,0.3)] group-hover:drop-shadow-[0_0_18px_rgba(201,162,95,0.6)] transition-all"
             />
           </a>
